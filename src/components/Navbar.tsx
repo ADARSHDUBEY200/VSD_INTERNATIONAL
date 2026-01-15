@@ -17,23 +17,24 @@ const Navbar = () => {
 
 
             <nav className="relative w-full md:h-20 sticky top-0 z-100 bg-white shadow-md">
-                <div className="absolute bottom-0 left-0 w-full h-1
-bg-linear-to-r from-transparent via-[#C9A24D] to-transparent
-shadow-[0_0_10px_#C9A24D] animate-pulse">
+                <div className="absolute bottom-0 left-0 w-full h-1 bg-linear-to-r from-transparent via-[#C9A24D] to-transparent shadow-[0_0_10px_#C9A24D] animate-pulse">
                 </div>
                 <div className="flex items-center justify-between px-4 sm:px-8 py-4">
 
-                    <div className="flex items-center justify-between  space-x-2   w-full   lg:w-[50%] xl:w-[48%] 2xl:w-[44%]">
+                    <div className="flex items-center justify-between  space-x-2   w-full   lg:w-[60%] xl:w-[60%] 2xl:w-[55%]">
 
                         <Link href={"/"}>
 
                             <Image
+
                                 src="/images/Home/VSD_LOGO.png"
                                 width={160}
                                 height={20}
                                 alt="logo"
                                 className="cursor-pointer"
+
                             />
+
                         </Link>
 
 
