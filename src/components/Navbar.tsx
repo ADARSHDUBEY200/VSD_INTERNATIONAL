@@ -21,7 +21,7 @@ const Navbar = () => {
                 </div>
                 <div className="flex items-center justify-between px-4 sm:px-8 py-4">
 
-                    <div className="flex items-center justify-between  space-x-2   w-full   lg:w-[60%] xl:w-[60%] 2xl:w-[55%]">
+                    <div className="flex items-center justify-between  space-x-2   w-full   lg:w-[60%] xl:w-[60%] 2xl:w-[60%]">
 
                         <Link href={"/"}>
 
