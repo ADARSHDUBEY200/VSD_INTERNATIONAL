@@ -1,9 +1,546 @@
 @import "tailwindcss";
 
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
+/* ─────────────────────────────────────────────────────────────────────────────
+   DESIGN SYSTEM — VSD International
+   "Industrial Luxury" — Deep Charcoal · Vibrant Gold · Clean White
+   ───────────────────────────────────────────────────────────────────────────── */
+
+:root {
+  /* ── Gold palette — vibrant, warm, not antique ─────────────────────────── */
+  --gold:          #C9A84C;   /* Primary gold — warm & visible           */
+  --gold-bright:   #F0C442;   /* Highlight gold — for glows & shimmers   */
+  --gold-deep:     #A67C32;   /* Deep gold — shadows & depth             */
+  --gold-light:    #E0B454;   /* Light gold — gradients start            */
+  --gold-pale:     #F5E4B0;   /* Pale gold — subtle backgrounds          */
+  --gold-glow:     rgba(201, 168, 76, 0.35);
+  --gold-glow-sm:  rgba(201, 168, 76, 0.15);
+
+  /* ── Dark palette ──────────────────────────────────────────────────────── */
+  --charcoal:       #08080A;   /* Near-black hero base                    */
+  --charcoal-warm:  #0F0D0A;   /* Warm near-black                         */
+  --charcoal-light: #181510;   /* Warm dark sections                      */
+  --charcoal-mid:   #252018;   /* Cards & surfaces in dark sections       */
+  --charcoal-edge:  #2F2A20;   /* Borders in dark sections                */
+
+  /* ── Light palette — pure whites, no grays ─────────────────────────────── */
+  --white:         #FFFFFF;
+  --surface:       #FAFAF8;    /* Barely-off-white for light sections     */
+  --surface-alt:   #F4F1EA;    /* Warm section background variant         */
+  --border:        #E8E4D8;    /* Warm-toned border                       */
+
+  /* ── Text ──────────────────────────────────────────────────────────────── */
+  --text-dark:     #111008;    /* Headings on light                       */
+  --text-body:     #4A4535;    /* Body text on light — warm dark          */
+  --text-muted:    #7A7260;    /* Muted on light                          */
+  --text-on-dark:  #F5F0E8;    /* Main text on dark sections              */
+  --text-dim:      #8A8070;    /* Secondary text on dark                  */
 }
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+
+/* ── Tailwind v4 theme tokens ─────────────────────────────────────────────── */
+@theme inline {
+  --color-gold:          var(--gold);
+  --color-gold-bright:   var(--gold-bright);
+  --color-gold-deep:     var(--gold-deep);
+  --color-gold-light:    var(--gold-light);
+  --color-gold-pale:     var(--gold-pale);
+  --color-charcoal:      var(--charcoal);
+  --color-charcoal-warm: var(--charcoal-warm);
+  --color-charcoal-light:var(--charcoal-light);
+  --color-surface:       var(--surface);
+  --color-surface-alt:   var(--surface-alt);
+  --color-border:        var(--border);
+  --color-text-dark:     var(--text-dark);
+  --color-text-body:     var(--text-body);
+  --color-text-muted:    var(--text-muted);
+  --color-text-on-dark:  var(--text-on-dark);
+  --color-white:         var(--white);
+
+  --font-display: var(--font-playfair);
+  --font-body:    var(--font-inter);
 }
+
+/* ─── Base Reset ──────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background: var(--white);
+  color: var(--text-body);
+  font-family: var(--font-inter), 'Inter', ui-sans-serif, system-ui, sans-serif;
+  font-size: 1rem;
+  line-height: 1.75;
+  overflow-x: hidden;
+}
+
+/* ─── Typography ──────────────────────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--text-dark);
+  letter-spacing: -0.02em;
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────────────────────── */
+::-webkit-scrollbar        { width: 5px; }
+::-webkit-scrollbar-track  { background: var(--charcoal); }
+::-webkit-scrollbar-thumb  {
+  background: linear-gradient(180deg, var(--gold-bright), var(--gold-deep));
+  border-radius: 3px;
+}
+
+/* ─── Selection ──────────────────────────────────────────────────────────── */
+::selection { background: var(--gold); color: var(--charcoal); }
+
+/* ─── Focus ring ─────────────────────────────────────────────────────────── */
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+/* ════════════════════════════════════════════════════════════════════════════
+   BUTTONS — Premium Gold Gradient System
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* Primary — Gold gradient, dark text, glowing shadow */
+.btn-gold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  min-height: 3rem;
+  background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 50%, var(--gold-deep) 100%);
+  color: #1A1508;
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 700;
+  font-size: 0.9375rem;
+  letter-spacing: 0.02em;
+  border-radius: 5px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 20px rgba(201, 168, 76, 0.4), inset 0 1px 0 rgba(255,255,255,0.25);
+}
+.btn-gold::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.18) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.btn-gold:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 36px rgba(201, 168, 76, 0.55), 0 4px 12px rgba(0,0,0,0.2);
+}
+.btn-gold:hover::before { opacity: 1; }
+.btn-gold:active { transform: translateY(0); }
+
+/* Secondary — Gold outline, fills on hover */
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  min-height: 3rem;
+  background: transparent;
+  color: var(--gold);
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  letter-spacing: 0.02em;
+  border: 1.5px solid var(--gold);
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.btn-ghost:hover {
+  background: linear-gradient(135deg, var(--gold-light), var(--gold));
+  color: #1A1508;
+  border-color: transparent;
+  box-shadow: 0 6px 24px rgba(201, 168, 76, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Ghost for dark backgrounds */
+.btn-ghost-dark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  min-height: 3rem;
+  background: rgba(201,168,76,0.08);
+  color: var(--gold-light);
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  border: 1.5px solid rgba(201,168,76,0.35);
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(4px);
+}
+.btn-ghost-dark:hover {
+  background: rgba(201,168,76,0.18);
+  border-color: var(--gold);
+  color: var(--gold-bright);
+  transform: translateY(-2px);
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   LAYOUT UTILITIES
+   ════════════════════════════════════════════════════════════════════════════ */
+
+.container {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+@media (min-width: 640px)  { .container { padding-left: 2rem;   padding-right: 2rem;   } }
+@media (min-width: 1024px) { .container { padding-left: 3rem;   padding-right: 3rem;   } }
+@media (min-width: 1280px) { .container { padding-left: 4rem;   padding-right: 4rem;   } }
+
+/* Utility for white section backgrounds (alias) */
+.section-white { background: #FFFFFF; }
+
+/* ════════════════════════════════════════════════════════════════════════════
+   GOLD VISUAL LANGUAGE
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* Section eyebrow label */
+.section-label {
+  display: inline-block;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* Gold rule — used below section titles */
+.gold-rule {
+  display: block;
+  width: 56px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold-bright), var(--gold-deep));
+  border-radius: 2px;
+  margin: 1.125rem 0 0;
+}
+.gold-rule.centered { margin: 1.125rem auto 0; }
+
+/* Section title gold accent word */
+.accent-gold {
+  color: var(--gold);
+  background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-deep));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* On dark backgrounds — no gradient clip needed */
+.accent-gold-dark {
+  color: var(--gold-bright);
+}
+
+/* Top gold bar accent line */
+.gold-top-bar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, var(--gold-bright) 30%, var(--gold) 60%, var(--gold-deep) 90%, transparent 100%);
+}
+
+/* Gold shimmer keyframe */
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+.gold-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--gold) 0%,
+    var(--gold-bright) 40%,
+    var(--gold-light) 60%,
+    var(--gold) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3.5s linear infinite;
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   CARD SYSTEM
+   ════════════════════════════════════════════════════════════════════════════ */
+
+.card-lift {
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+.card-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.1);
+  border-color: rgba(201, 168, 76, 0.35) !important;
+}
+
+.card-lift-dark {
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+.card-lift-dark:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(201,168,76,0.25);
+}
+
+/* Legacy alias */
+.card-hover { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.card-hover:hover { transform: translateY(-8px); box-shadow: 0 20px 48px rgba(0,0,0,0.12); }
+
+/* ════════════════════════════════════════════════════════════════════════════
+   MARQUEE ANIMATION
+   ════════════════════════════════════════════════════════════════════════════ */
+
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 28s linear infinite;
+}
+.marquee-track:hover { animation-play-state: paused; }
+
+/* ════════════════════════════════════════════════════════════════════════════
+   STAR RATING
+   ════════════════════════════════════════════════════════════════════════════ */
+.stars { color: var(--gold-bright); letter-spacing: 0.04em; }
+
+/* ════════════════════════════════════════════════════════════════════════════
+   HOVER UTILITIES — CSS-only (for Server Components, no JS handlers)
+   ════════════════════════════════════════════════════════════════════════════ */
+
+.link-hover-gold {
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+.link-hover-gold:hover { color: var(--gold); }
+
+.link-hover-gold-dark {
+  color: #5A5248;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+.link-hover-gold-dark:hover { color: var(--gold-light); }
+
+.link-hover-gold-light {
+  color: #3A3628;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+.link-hover-gold-light:hover { color: var(--gold); }
+
+.text-hover-gold {
+  color: #5A5248;
+  transition: color 0.2s ease;
+  user-select: none;
+}
+.text-hover-gold:hover { color: var(--gold); }
+
+/* ════════════════════════════════════════════════════════════════════════════
+   ANNOUNCEMENT BAR
+   ════════════════════════════════════════════════════════════════════════════ */
+.announcement-link:hover { text-decoration: underline; }
+
+/* ════════════════════════════════════════════════════════════════════════════
+   ANIMATIONS
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* Scroll reveal */
+.fade-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.fade-up.is-visible { opacity: 1; transform: translateY(0); }
+
+/* Floating pulse for WhatsApp */
+@keyframes float-pulse {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50%       { transform: translateY(-4px) scale(1.04); }
+}
+
+/* Gold glow pulse */
+@keyframes gold-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(201, 168, 76, 0.5); }
+  50%       { box-shadow: 0 0 0 12px rgba(201, 168, 76, 0); }
+}
+
+/* Scroll line bounce */
+@keyframes scroll-bounce {
+  0%, 100% { transform: translateY(0); opacity: 0.6; }
+  50%       { transform: translateY(8px); opacity: 1; }
+}
+
+/* Hero — kitchen equipment SVG decoratives */
+@keyframes hero-steam {
+  0%   { opacity: 0; }
+  20%  { opacity: 0.85; }
+  80%  { opacity: 0.25; }
+  100% { opacity: 0; }
+}
+@keyframes hero-burner-glow {
+  0%, 100% { opacity: 0.09; }
+  50%       { opacity: 0.15; }
+}
+
+/* Grain overlay — subtle texture on dark sections */
+.grain {
+  position: relative;
+}
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   SECTION DIVIDER SYSTEM
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* Thin gold border at section top */
+.border-gold-top {
+  border-top: 1px solid rgba(201, 168, 76, 0.18);
+}
+.border-gold-top-strong {
+  border-top: 1px solid rgba(201, 168, 76, 0.4);
+}
+
+/* Gold divider — centered short bar below section headings.
+   margin: auto baked in so it works regardless of parent display type.
+   Use .gold-divider-left to left-align in split-header layouts.          */
+.gold-divider {
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold-bright), var(--gold), var(--gold-deep));
+  border-radius: 2px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.gold-divider-left {
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold-bright), var(--gold), var(--gold-deep));
+  border-radius: 2px;
+  margin-left: 0;
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   BACKWARDS-COMPATIBLE ALIASES  (older components use these names)
+   ════════════════════════════════════════════════════════════════════════════ */
+:root {
+  --text-primary:   var(--text-dark);     /* alias for components using --text-primary   */
+  --text-secondary: var(--text-body);     /* alias for components using --text-secondary */
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   GRAIN TEXTURE — dark hero / CTA sections
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* Apply as className="grain-overlay" on the section element */
+.grain-overlay {
+  position: relative;
+}
+.grain-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.022;
+  pointer-events: none;
+  z-index: 0;
+}
+/* Ensure .grain-overlay children render above the pseudo-element grain */
+.grain-overlay > * { position: relative; z-index: 1; }
+
+/* ════════════════════════════════════════════════════════════════════════════
+   PRODUCT CARD — OurProductsShowcase
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* Gold top accent line — slides in on card hover */
+.product-card-top-line {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold-bright), var(--gold), var(--gold-deep));
+  opacity: 0;
+  transition: opacity 0.22s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+.product-card:hover .product-card-top-line { opacity: 1; }
+
+/* View button in product card — border darkens on hover */
+.product-view-btn:hover {
+  border-color: var(--gold) !important;
+  color: var(--gold) !important;
+  background: rgba(201,168,76,0.05) !important;
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   ENQUIRE NOW FORM — EnquireNow section
+   ════════════════════════════════════════════════════════════════════════════ */
+
+.enquire-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 1.5px solid var(--charcoal-edge);
+  background: rgba(255,255,255,0.04);
+  color: var(--text-on-dark);
+  font-family: var(--font-inter), sans-serif;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  outline: none;
+  transition: border-color 0.18s ease, background 0.18s ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.enquire-input::placeholder { color: rgba(245,240,232,0.28); }
+.enquire-input:focus {
+  border-color: var(--gold);
+  background: rgba(201,168,76,0.04);
+}
+
+/* Select — custom arrow */
+.enquire-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C9A84C' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 2.5rem;
+  cursor: pointer;
+}
+.enquire-select option { background: #252018; color: #F5F0E8; }
+
+/* Contact links inside enquire section */
+.enquire-contact-link:hover { color: var(--gold-light) !important; }
