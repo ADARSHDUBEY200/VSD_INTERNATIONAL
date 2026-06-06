@@ -38,17 +38,10 @@ function StatCard({
   label,
   desc,
   startCounting,
-  isLast,
-}: (typeof stats)[0] & { startCounting: boolean; isLast: boolean }) {
+}: (typeof stats)[0] & { startCounting: boolean }) {
   const count = useCountUp(value, 1800, startCounting);
   return (
-    <div
-      className="flex flex-col items-center text-center"
-      style={{
-        padding: '2.5rem 1.5rem',
-        borderRight: isLast ? 'none' : '1px solid rgba(201,168,76,0.12)',
-      }}
-    >
+    <div className="stat-card">
       {/* Animated number */}
       <div
         style={{
@@ -139,16 +132,17 @@ export default function TrustMetrics() {
         ★ ISO 9001:2008 Certified · GSTIN: 07AABFV5120K1ZZ · Two Delhi Factories · Rational &amp; Robot Coupe Authorised Dealer ★
       </div>
 
-      {/* -- Stats grid ------------------------------------------------------ */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
-        {stats.map((stat, index) => (
-          <StatCard
-            key={stat.label}
-            {...stat}
-            startCounting={visible}
-            isLast={index === stats.length - 1}
-          />
-        ))}
+      {/* -- Stats — horizontal scroll on mobile, grid on md+ --------------- */}
+      <div className="stats-scroll-outer">
+        <div className="stats-grid">
+          {stats.map((stat) => (
+            <StatCard
+              key={stat.label}
+              {...stat}
+              startCounting={visible}
+            />
+          ))}
+        </div>
       </div>
 
       {/* -- Bottom trust tagline -------------------------------------------- */}

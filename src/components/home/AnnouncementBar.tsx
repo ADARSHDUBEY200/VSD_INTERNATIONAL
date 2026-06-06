@@ -10,7 +10,7 @@ import { PhoneCall, MessageCircle } from 'lucide-react';
 export default function AnnouncementBar() {
   return (
     <div
-      className="w-full text-sm font-medium text-center"
+      className="hidden sm:block w-full text-sm font-medium text-center relative overflow-hidden"
       style={{
         background: 'var(--charcoal)',
         borderBottom: '1px solid var(--charcoal-mid)',
@@ -19,7 +19,25 @@ export default function AnnouncementBar() {
       role="banner"
       aria-label="Special offer announcement"
     >
-      <div className="container mx-auto flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 text-center">
+      {/* Golden shine sweep */}
+      <span
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          top: '-50%',
+          left: 0,
+          width: '28%',
+          height: '200%',
+          background: 'linear-gradient(90deg, transparent, rgba(240,196,66,0.28), rgba(255,249,220,0.14), rgba(240,196,66,0.28), transparent)',
+          animation: 'bar-shine 5s ease-in-out 1s infinite',
+          pointerEvents: 'none',
+          zIndex: 1,
+        }}
+      />
+      <div
+        className="container mx-auto flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 text-center"
+        style={{ position: 'relative', zIndex: 2 }}
+      >
         {/* Offer text */}
         <span style={{ color: 'var(--gold)', fontFamily: 'var(--font-inter)' }}>
           🎯 FREE KITCHEN LAYOUT CONSULTATION AVAILABLE

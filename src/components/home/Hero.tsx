@@ -2,7 +2,7 @@
 import { useEffect } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ArrowRight, PhoneCall, Shield, Clock, Award, Star } from 'lucide-react';
+import { ArrowRight, Shield, Clock, Award, Star } from 'lucide-react';
 
 /**
  * Hero Section — Section ③
@@ -639,35 +639,17 @@ export default function Hero() {
             <ArrowRight size={15} aria-hidden="true" />
           </Link>
 
-          <Link
-            href="/projects"
-            className="btn-ghost-dark inline-flex items-center justify-center gap-2"
-            style={{ minHeight: '3.125rem', fontSize: '0.9375rem' }}
-            aria-label="View completed VSD International projects"
-          >
-            View Our Projects
-          </Link>
-
-          {/* Phone — mobile only */}
-          <Link
-            href="tel:+919250346370"
-            className="sm:hidden inline-flex items-center justify-center gap-2 rounded"
-            style={{
-              background: 'rgba(201,168,76,0.08)',
-              border: '1px solid rgba(201,168,76,0.22)',
-              color: 'var(--gold-light)',
-              fontSize: '0.9375rem',
-              fontFamily: 'var(--font-inter)',
-              fontWeight: 600,
-              minHeight: '3.125rem',
-              padding: '0 1.75rem',
-              textDecoration: 'none',
-            }}
-            aria-label="Call VSD International"
-          >
-            <PhoneCall size={14} style={{ color: 'var(--gold)' }} aria-hidden="true" />
-            Call +91-9250346370
-          </Link>
+          {/* View Projects — desktop only (mobile uses fixed footer) */}
+          <div className="hidden sm:contents">
+            <Link
+              href="/projects"
+              className="btn-ghost-dark inline-flex items-center justify-center gap-2"
+              style={{ minHeight: '3.125rem', fontSize: '0.9375rem' }}
+              aria-label="View completed VSD International projects"
+            >
+              View Our Projects
+            </Link>
+          </div>
         </motion.div>
 
         {/* ⑦ Price anchor ------------------------------------------------ */}

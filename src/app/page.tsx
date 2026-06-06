@@ -18,6 +18,7 @@ import BlogPreview from '@/components/home/BlogPreview';
 import CitiesWeServe from '@/components/home/CitiesWeServe';
 import CTABanner from '@/components/home/CTABanner';
 import WhatsAppFloat from '@/components/home/WhatsAppFloat';
+import MobileFooterCTA from '@/components/home/MobileFooterCTA';
 import Footer from '@/components/home/Footer';
 
 /* --- Page Metadata ------------------------------------------------------- */
@@ -47,7 +48,7 @@ export default function HomePage() {
       {/* ② Sticky Navbar + Mega Navigation */}
       <Navbar />
 
-      <main id="main-content">
+      <main id="main-content" className="pb-20 sm:pb-0">
 
         <Hero />
 
@@ -105,6 +106,7 @@ export default function HomePage() {
 
 
       <WhatsAppFloat />
+      <MobileFooterCTA />
     </>
   );
 }

@@ -544,3 +544,113 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Contact links inside enquire section */
 .enquire-contact-link:hover { color: var(--gold-light) !important; }
+
+/* ════════════════════════════════════════════════════════════════════════════
+   ANNOUNCEMENT BAR — Desktop Golden Shine Sweep
+   ════════════════════════════════════════════════════════════════════════════ */
+
+@keyframes bar-shine {
+  0%   { transform: translateX(-150%) skewX(-15deg); opacity: 0; }
+  8%   { opacity: 1; }
+  35%  { transform: translateX(500%) skewX(-15deg); opacity: 0; }
+  100% { transform: translateX(500%) skewX(-15deg); opacity: 0; }
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   TRUST METRICS — Mobile Horizontal Scroll + Premium Card Style
+   ════════════════════════════════════════════════════════════════════════════ */
+
+.stats-scroll-outer {
+  position: relative;
+}
+
+/* Right-fade hint — only on mobile */
+@media (max-width: 767px) {
+  .stats-scroll-outer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 3rem;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, var(--charcoal-light));
+    pointer-events: none;
+    z-index: 5;
+  }
+}
+
+.stats-grid {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 1.25rem 1.25rem 1.5rem;
+  gap: 0.875rem;
+}
+.stats-grid::-webkit-scrollbar { display: none; }
+
+@media (min-width: 768px) {
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    overflow-x: visible;
+    padding: 0;
+    gap: 0;
+    scroll-snap-type: none;
+  }
+}
+@media (min-width: 1024px) {
+  .stats-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+/* Individual stat card */
+.stat-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  /* Mobile: standalone premium card */
+  flex-shrink: 0;
+  min-width: 158px;
+  scroll-snap-align: start;
+  background: rgba(30, 26, 18, 0.95);
+  border: 1px solid rgba(201, 168, 76, 0.22);
+  border-radius: 14px;
+  padding: 1.75rem 1.25rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Gold top accent on each mobile card */
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold-deep), var(--gold-bright), var(--gold-deep));
+}
+
+/* Desktop: revert to divider-row layout */
+@media (min-width: 768px) {
+  .stat-card {
+    min-width: 0;
+    flex-shrink: 1;
+    background: transparent;
+    border: none;
+    border-right: 1px solid rgba(201, 168, 76, 0.12);
+    border-radius: 0;
+    padding: 2.5rem 1.5rem;
+    overflow: visible;
+  }
+  .stat-card::before { display: none; }
+  .stat-card:last-child { border-right: none; }
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   PRODUCTS SHOWCASE — Category tab scroll (hide scrollbar cross-browser)
+   ════════════════════════════════════════════════════════════════════════════ */
+
+.cat-tabs-scroll::-webkit-scrollbar { display: none; }
