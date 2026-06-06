@@ -21,15 +21,6 @@ export const metadata: Metadata = {
   },
 };
 
-const schema = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    { '@type': 'Service', name: 'Hotel Kitchen Equipment Supply & Installation', provider: { '@type': 'LocalBusiness', name: 'VSD International' }, areaServed: { '@type': 'Country', name: 'India' }, serviceType: 'Hotel Kitchen Equipment', aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.9', reviewCount: '312', bestRating: '5' } },
-    { '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://vsdinternational.com' }, { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://vsdinternational.com/services/' }, { '@type': 'ListItem', position: 3, name: 'Hotel Kitchen Equipment', item: 'https://vsdinternational.com/services/hotel-kitchen-equipment/' }] },
-    { '@type': 'FAQPage', mainEntity: FAQS.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
-  ],
-};
-
 const KITCHEN_ZONES = [
   { icon: Flame,        title: 'Main Production Kitchen',   desc: 'Heavy-duty cooking equipment — Rational combi ovens, commercial cooking ranges (6–8 burner), griddles, fryers, and bain maries for à la carte and buffet service.', items: ['Rational combi steamers (10–20 GN)', 'Commercial ranges (6–8 burner)', 'Griddles & flat tops', 'Commercial fryers (24L)', 'Salamanders & broilers', 'Hot plates & pass-through warmers'] },
   { icon: Hotel,        title: 'Banquet Kitchen',           desc: 'High-capacity equipment for 200–2000 pax banquet service — large combi ovens, regeneration ovens, bulk cooking kettles, and blast chillers.', items: ['20-GN combi ovens (x2–4)', 'Regeneration combi carts', 'Tilting braising pans', '150L & 200L boiling pans', 'Blast chillers (40kg–80kg)', 'Banquet trolleys & retherm carts'] },
@@ -48,6 +39,15 @@ const FAQS = [
   { q: 'What type of exhaust and ventilation system does a hotel kitchen need?', a: 'Hotel kitchens require a comprehensive ventilation system: (1) Kitchen exhaust hoods sized to equipment footprint (typically 1m overhang on all sides), (2) Fresh air supply system (minimum 50–60 air changes per hour in cooking zones), (3) UV ozone filtration or electrostatic precipitator for grease elimination (required for FIRE NOC compliance in commercial buildings), (4) Kitchen fire suppression system (Ansul or equivalent — mandatory for insurance and fire audit), (5) Balancing to ensure negative pressure in the kitchen versus adjacent dining areas. VSD International designs, supplies, and installs complete ventilation systems.' },
   { q: 'Do you supply Rational combi ovens for hotel kitchens?', a: 'Yes — VSD International is an authorised Indian dealer for Rational combi ovens and iCombi Pro series. For hotel kitchens, we typically specify: 10-GN Rational iCombi Pro for restaurant kitchens, 20-GN Rational iCombi Pro or iVario Pro for banquet and large-volume cooking, and Rational iVario (40L & 80L) as braising/boiling pans. Rational equipment comes with Indian warranty, ChefLine support, and quarterly service under Rational-certified engineers. We have installed Rational equipment in 25+ hotel kitchens across India.' },
 ];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    { '@type': 'Service', name: 'Hotel Kitchen Equipment Supply & Installation', provider: { '@type': 'LocalBusiness', name: 'VSD International' }, areaServed: { '@type': 'Country', name: 'India' }, serviceType: 'Hotel Kitchen Equipment', aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.9', reviewCount: '312', bestRating: '5' } },
+    { '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://vsdinternational.com' }, { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://vsdinternational.com/services/' }, { '@type': 'ListItem', position: 3, name: 'Hotel Kitchen Equipment', item: 'https://vsdinternational.com/services/hotel-kitchen-equipment/' }] },
+    { '@type': 'FAQPage', mainEntity: FAQS.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  ],
+};
 
 const TESTIMONIAL = {
   quote: 'VSD International delivered our Radisson Blu kitchen on time and exactly to our brand specifications. The Rational combi ovens, custom SS fabrication, and Winterhalter dishwashers are performing flawlessly. Their team understood hotel kitchen standards without us having to over-specify — a rare quality in the Indian market.',

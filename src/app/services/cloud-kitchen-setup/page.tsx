@@ -21,15 +21,6 @@ export const metadata: Metadata = {
   },
 };
 
-const schema = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    { '@type': 'Service', name: 'Cloud Kitchen Setup & Equipment', provider: { '@type': 'LocalBusiness', name: 'VSD International' }, areaServed: { '@type': 'Country', name: 'India' }, serviceType: 'Cloud Kitchen Equipment', aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.9', reviewCount: '312', bestRating: '5' } },
-    { '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://vsdinternational.com' }, { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://vsdinternational.com/services/' }, { '@type': 'ListItem', position: 3, name: 'Cloud Kitchen Setup', item: 'https://vsdinternational.com/services/cloud-kitchen-setup/' }] },
-    { '@type': 'FAQPage', mainEntity: FAQS.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
-  ],
-};
-
 /* Cloud Kitchen Equipment Checklist */
 const CHECKLIST = [
   { section: 'Cooking Equipment', items: ['Commercial cooking range (4-burner)', 'Convection oven or deck oven', 'Commercial fryer (8–12L)', 'Salamander / overhead broiler', 'Microwave (commercial grade)', 'Contact grill / plancha'] },
@@ -55,6 +46,15 @@ const FAQS = [
   { q: 'Can I use domestic kitchen equipment in a cloud kitchen?', a: 'No — domestic kitchen equipment is not designed for commercial use and creates serious problems: (1) Safety — domestic appliances don\'t meet commercial fire and gas safety standards; (2) Durability — domestic appliances fail within weeks under commercial workloads; (3) Capacity — domestic burners deliver 4,000–8,000 BTU versus commercial burners at 18,000–35,000 BTU; (4) Compliance — Zomato/Swiggy inspectors check for commercial-grade equipment; (5) Insurance — food business insurance typically requires commercial-grade equipment. A commercial cooking range costs ₹35,000–₹75,000 — a worthwhile investment compared to frequent replacement of failed domestic appliances.' },
   { q: 'Does VSD International provide a cloud kitchen equipment checklist?', a: 'Yes — VSD International provides a free, customised cloud kitchen equipment checklist based on your cuisine type, order volume, and kitchen size. The checklist covers cooking equipment, refrigeration, food prep, SS fabrication, exhaust system, packaging area, and optional equipment. We also provide a complete layout drawing for your space showing optimal equipment placement, workflow zones, and utility connection points. WhatsApp us at +91-9250346370 with your cloud kitchen concept details to receive the free checklist.' },
 ];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    { '@type': 'Service', name: 'Cloud Kitchen Setup & Equipment', provider: { '@type': 'LocalBusiness', name: 'VSD International' }, areaServed: { '@type': 'Country', name: 'India' }, serviceType: 'Cloud Kitchen Equipment', aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.9', reviewCount: '312', bestRating: '5' } },
+    { '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://vsdinternational.com' }, { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://vsdinternational.com/services/' }, { '@type': 'ListItem', position: 3, name: 'Cloud Kitchen Setup', item: 'https://vsdinternational.com/services/cloud-kitchen-setup/' }] },
+    { '@type': 'FAQPage', mainEntity: FAQS.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  ],
+};
 
 const TESTIMONIAL = {
   quote: 'VSD International set up our 6-brand cloud kitchen hub in Mumbai in just 22 days. The layout was perfectly optimised for our Zomato and Swiggy operations — separate cooking zones for each brand, shared cold storage, and a pickup counter designed for delivery riders. Passed the Swiggy kitchen inspection on the first visit.',

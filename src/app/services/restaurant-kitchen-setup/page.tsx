@@ -21,15 +21,6 @@ export const metadata: Metadata = {
   },
 };
 
-const schema = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    { '@type': 'Service', name: 'Restaurant Kitchen Setup & Equipment', provider: { '@type': 'LocalBusiness', name: 'VSD International' }, areaServed: { '@type': 'Country', name: 'India' }, serviceType: 'Restaurant Kitchen Equipment', aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.9', reviewCount: '312', bestRating: '5' } },
-    { '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://vsdinternational.com' }, { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://vsdinternational.com/services/' }, { '@type': 'ListItem', position: 3, name: 'Restaurant Kitchen Setup', item: 'https://vsdinternational.com/services/restaurant-kitchen-setup/' }] },
-    { '@type': 'FAQPage', mainEntity: FAQS.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
-  ],
-};
-
 const RESTAURANT_TYPES = [
   { type: 'Fine-Dine Restaurant', budget: '₹25–60L', items: ['High-precision cooking equipment', 'Rational combi oven', 'Separate prep & plating kitchen', 'Chef\'s table / pass window', 'Professional dish storage'], desc: 'Premium equipment for à la carte service — Rational combi ovens, induction cooking, precision temperature control.' },
   { type: 'QSR / Fast Food (50 sqft kitchen)', budget: '₹12–28L', items: ['Commercial fryers (floor model)', 'Commercial griddle / flat top', 'Holding equipment & hot cases', 'Blast chiller for prep', 'High-capacity dishwasher'], desc: 'High-throughput equipment for 200–500 covers/day — fryers, griddles, holding equipment, and rapid output systems.' },
@@ -46,6 +37,15 @@ const FAQS = [
   { q: 'Can you set up a QSR chain kitchen with consistent specifications across multiple outlets?', a: 'Yes — VSD International specialises in multi-outlet QSR rollouts. We develop a Master Kitchen Specification (MKS) document that standardises equipment specifications, layout templates, and installation standards across all outlets. Benefits of working with one vendor for chain rollouts: (1) Consistent equipment performance across all kitchens; (2) Centralised AMC for all outlets; (3) Volume pricing benefits for 10+ outlet rollouts; (4) Single point of contact for all kitchen equipment issues. We have executed 10+ outlet rollouts for restaurant chains in Delhi NCR and pan-India.' },
   { q: 'Do you supply restaurant kitchen equipment for cloud kitchens and dark kitchens?', a: 'Yes — many of our restaurant kitchen clients are running delivery-first concepts (cloud kitchens). For Zomato and Swiggy-listed restaurants, we design kitchens that are optimised for delivery output: (1) Higher cooking capacity per sqft versus dine-in kitchens; (2) Packaging and dispatch area built into the kitchen flow; (3) No pass-through counter needed — direct packaging from cooking line; (4) Zomato/Swiggy partner inspection compliant exhaust and equipment. We also set up hybrid kitchens — dine-in plus delivery — that serve both dining room and delivery orders without workflow conflicts.' },
 ];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    { '@type': 'Service', name: 'Restaurant Kitchen Setup & Equipment', provider: { '@type': 'LocalBusiness', name: 'VSD International' }, areaServed: { '@type': 'Country', name: 'India' }, serviceType: 'Restaurant Kitchen Equipment', aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.9', reviewCount: '312', bestRating: '5' } },
+    { '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://vsdinternational.com' }, { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://vsdinternational.com/services/' }, { '@type': 'ListItem', position: 3, name: 'Restaurant Kitchen Setup', item: 'https://vsdinternational.com/services/restaurant-kitchen-setup/' }] },
+    { '@type': 'FAQPage', mainEntity: FAQS.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  ],
+};
 
 const TESTIMONIAL = {
   quote: 'VSD International designed and equipped our restaurant kitchen from scratch. The layout is incredibly efficient — our kitchen team produces 120 covers per service without bottlenecks. The Rational combi oven and commercial cooking range have performed flawlessly for 18 months. Post-installation support has been prompt and professional.',

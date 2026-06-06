@@ -21,15 +21,6 @@ export const metadata: Metadata = {
   },
 };
 
-const schema = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    { '@type': 'Service', name: 'Hospital Kitchen Equipment Supply & Installation', provider: { '@type': 'LocalBusiness', name: 'VSD International' }, areaServed: { '@type': 'Country', name: 'India' }, serviceType: 'Hospital Kitchen Equipment', aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.9', reviewCount: '312', bestRating: '5' } },
-    { '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://vsdinternational.com' }, { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://vsdinternational.com/services/' }, { '@type': 'ListItem', position: 3, name: 'Hospital Kitchen Equipment', item: 'https://vsdinternational.com/services/hospital-kitchen-equipment/' }] },
-    { '@type': 'FAQPage', mainEntity: FAQS.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
-  ],
-};
-
 const NABH_REQUIREMENTS = [
   { code: 'NABH NF.1', req: 'Separate dietary and general kitchen', detail: 'Dietary kitchen must be physically separated from staff/visitor kitchen with dedicated access.' },
   { code: 'NABH NF.2', req: 'Menu-based diet planning', detail: 'Kitchen equipment must support therapeutic diet preparation — diabetic, renal, cardiac, and post-surgery diets.' },
@@ -54,6 +45,15 @@ const FAQS = [
   { q: 'What standard stainless steel grade is used for hospital kitchen equipment?', a: 'Hospital kitchen equipment must use SS 304 (18/8) grade stainless steel as a minimum. SS 304 is food-grade, corrosion-resistant, and withstands hospital-grade cleaning chemicals including bleach (sodium hypochlorite) and quaternary ammonium compounds. For specific high-sanitation areas (ICU pantry, operation theatre kitchen support), SS 316 (18/10 with molybdenum) is recommended for higher chloride resistance. VSD International uses SS 304 as standard for all hospital fabrication, with SS 316 available for premium requirements. Weld joints are continuously welded and polished to eliminate bacterial harborage points.' },
   { q: 'Do you provide NABH documentation support for hospital kitchen audits?', a: 'Yes — VSD International provides documentation support for hospital NABH kitchen audits: (1) Equipment specifications documents (make, model, capacity, food-grade certifications), (2) Stainless steel grade certificates (mill certificates for SS 304/316), (3) Dishwasher calibration reports (temperature logs, 82°C sanitise confirmation), (4) Kitchen layout drawings (as-built, with zone demarcation), (5) Refrigerator temperature calibration records, (6) Maintenance schedules and AMC agreements. This documentation package is typically required by NABH assessors. We\'ve supported 30+ hospitals through NABH accreditation or re-accreditation with our equipment.' },
 ];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    { '@type': 'Service', name: 'Hospital Kitchen Equipment Supply & Installation', provider: { '@type': 'LocalBusiness', name: 'VSD International' }, areaServed: { '@type': 'Country', name: 'India' }, serviceType: 'Hospital Kitchen Equipment', aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.9', reviewCount: '312', bestRating: '5' } },
+    { '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://vsdinternational.com' }, { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://vsdinternational.com/services/' }, { '@type': 'ListItem', position: 3, name: 'Hospital Kitchen Equipment', item: 'https://vsdinternational.com/services/hospital-kitchen-equipment/' }] },
+    { '@type': 'FAQPage', mainEntity: FAQS.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  ],
+};
 
 const TESTIMONIAL = {
   quote: 'VSD International equipped our 400-bed hospital dietary kitchen to full NABH compliance standards. Their understanding of NABH NF criteria, HACCP workflow requirements, and hospital-grade SS fabrication standards was exceptional. The NABH assessors specifically commended our kitchen setup during the accreditation visit.',
