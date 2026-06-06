@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+﻿import type { Metadata } from 'next';
 import AnnouncementBar from '@/components/home/AnnouncementBar';
 import Navbar from '@/components/home/Navbar';
 import Hero from '@/components/home/Hero';
@@ -20,7 +20,7 @@ import CTABanner from '@/components/home/CTABanner';
 import WhatsAppFloat from '@/components/home/WhatsAppFloat';
 import Footer from '@/components/home/Footer';
 
-/* ─── Page Metadata ─────────────────────────────────────────────────────── */
+/* --- Page Metadata ------------------------------------------------------- */
 export const metadata: Metadata = {
   title:
     'VSD International — Commercial Kitchen Equipment Manufacturer | ISO 9001 | Hyatt · Radisson · ITC',
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   },
 };
 
-/* ─── HomePage — Server Component ─────────────────────────────────────────── */
+/* --- HomePage — Server Component ------------------------------------------- */
 export default function HomePage() {
   return (
     <>
@@ -109,7 +109,7 @@ export default function HomePage() {
   );
 }
 
-/* ─── Google Reviews Section ──────────────────────────────────────────────── */
+/* --- Google Reviews Section ------------------------------------------------ */
 function GoogleReviewsSection() {
   return (
     <section

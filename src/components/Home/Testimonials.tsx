@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { ExternalLink } from 'lucide-react';
 
@@ -260,7 +260,7 @@ export default function Testimonials() {
 
       <div style={{ maxWidth: '80rem', margin: '0 auto', padding: '0 1.5rem', width: '100%', position: 'relative' }}>
 
-        {/* ── Header ── */}
+        {/* -- Header -- */}
         <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
           <p className="section-label" style={{ marginBottom: '1rem' }}>Client Reviews</p>
 
@@ -332,7 +332,7 @@ export default function Testimonials() {
           </div>
         </div>
 
-        {/* ── Cards ── */}
+        {/* -- Cards -- */}
         <div
           style={{
             display: 'grid',
@@ -345,7 +345,7 @@ export default function Testimonials() {
           ))}
         </div>
 
-        {/* ── Google reviews CTA ── */}
+        {/* -- Google reviews CTA -- */}
         <div style={{ textAlign: 'center', marginTop: '3rem' }}>
           <a
             href="https://g.page/vsd-international-delhi/review"

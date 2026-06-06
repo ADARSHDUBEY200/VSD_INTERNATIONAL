@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useEffect, useRef, useState } from 'react';
 
@@ -121,7 +121,7 @@ export default function TrustMetrics() {
         borderBottom: '1px solid rgba(201,168,76,0.10)',
       }}
     >
-      {/* ── ISO credentials strip ─────────────────────────────────────────── */}
+      {/* -- ISO credentials strip ------------------------------------------- */}
       <div
         className="text-center"
         style={{
@@ -139,7 +139,7 @@ export default function TrustMetrics() {
         ★ ISO 9001:2008 Certified · GSTIN: 07AABFV5120K1ZZ · Two Delhi Factories · Rational &amp; Robot Coupe Authorised Dealer ★
       </div>
 
-      {/* ── Stats grid ────────────────────────────────────────────────────── */}
+      {/* -- Stats grid ------------------------------------------------------ */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
         {stats.map((stat, index) => (
           <StatCard
@@ -151,7 +151,7 @@ export default function TrustMetrics() {
         ))}
       </div>
 
-      {/* ── Bottom trust tagline ──────────────────────────────────────────── */}
+      {/* -- Bottom trust tagline -------------------------------------------- */}
       <div
         className="text-center"
         style={{

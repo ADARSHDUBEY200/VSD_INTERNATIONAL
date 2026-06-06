@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState, FormEvent } from 'react';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
@@ -353,7 +353,7 @@ export default function ContactForm() {
   );
 }
 
-/* ─── Field wrapper ──────────────────────────────────────────────────────── */
+/* --- Field wrapper -------------------------------------------------------- */
 function Field({
   label,
   htmlFor,

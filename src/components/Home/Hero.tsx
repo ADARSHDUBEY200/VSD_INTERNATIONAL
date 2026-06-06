@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 import { useEffect } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -29,7 +29,7 @@ export default function Hero() {
       className="relative flex flex-col justify-center overflow-hidden"
       style={{ minHeight: 'min(86vh, 780px)', background: 'var(--charcoal-warm)' }}
     >
-      {/* ── Top gold line ─────────────────────────────────────────────────── */}
+      {/* -- Top gold line --------------------------------------------------- */}
       <div
         aria-hidden="true"
         className="absolute top-0 left-0 right-0"
@@ -40,7 +40,7 @@ export default function Hero() {
         }}
       />
 
-      {/* ── Golden glow layers (parallax) ─────────────────────────────────── */}
+      {/* -- Golden glow layers (parallax) ----------------------------------- */}
       <div
         id="hero-glow"
         aria-hidden="true"
@@ -70,7 +70,7 @@ export default function Hero() {
         }} />
       </div>
 
-      {/* ── Grid texture ──────────────────────────────────────────────────── */}
+      {/* -- Grid texture ---------------------------------------------------- */}
       <div
         aria-hidden="true"
         className="absolute inset-0 pointer-events-none"
@@ -86,17 +86,17 @@ export default function Hero() {
         }}
       />
 
-      {/* ── Decorative rings ──────────────────────────────────────────────── */}
+      {/* -- Decorative rings ------------------------------------------------ */}
       <div aria-hidden="true" className="hidden lg:block" style={{ zIndex: 1, pointerEvents: 'none' }}>
         <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: '600px', height: '600px', border: '1px solid rgba(201,168,76,0.18)', borderRadius: '50%' }} />
         <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: '420px', height: '420px', border: '1px solid rgba(201,168,76,0.13)', borderRadius: '50%' }} />
         <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: '260px', height: '260px', border: '1px solid rgba(240,196,66,0.20)', borderRadius: '50%' }} />
       </div>
 
-      {/* ── Kitchen Equipment SVG Backgrounds ───────────────────────────────
+      {/* -- Kitchen Equipment SVG Backgrounds -------------------------------
           All decoratives are aria-hidden, pointer-events:none, z-index:1.
           Responsive visibility: md+ burners · lg+ hood/steam/range · xl+ utensils · 2xl+ whisk/tongs
-         ─────────────────────────────────────────────────────────────────── */}
+         ------------------------------------------------------------------- */}
 
       {/* === Large Commercial Gas Burner — bottom-left corner === */}
       <svg
@@ -521,7 +521,7 @@ export default function Hero() {
           </span>
         </motion.div>
 
-        {/* ② H1 — 2 lines exactly ──────────────────────────────────────── */}
+        {/* ② H1 — 2 lines exactly ---------------------------------------- */}
         {/*  Line 1: India's Finest [Commercial Kitchen]                      */}
         {/*  Line 2: Equipment Manufacturer                                   */}
         <motion.h1
@@ -550,7 +550,7 @@ export default function Hero() {
           Equipment Manufacturer
         </motion.h1>
 
-        {/* ③ Gold rule ─────────────────────────────────────────────────── */}
+        {/* ③ Gold rule --------------------------------------------------- */}
         <motion.div
           className="flex justify-center"
           style={{ marginTop: '1.5rem' }}
@@ -593,7 +593,7 @@ export default function Hero() {
           </p>
         </motion.div>
 
-        {/* ⑤ Trust microbadges ─────────────────────────────────────────── */}
+        {/* ⑤ Trust microbadges ------------------------------------------- */}
         <motion.div
           className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2"
           style={{ marginTop: '1.25rem', width: '100%', textAlign: 'center' }}
@@ -621,7 +621,7 @@ export default function Hero() {
           ))}
         </motion.div>
 
-        {/* ⑥ CTA Buttons ───────────────────────────────────────────────── */}
+        {/* ⑥ CTA Buttons ------------------------------------------------- */}
         <motion.div
           className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           style={{ marginTop: '2.5rem' }}
@@ -670,7 +670,7 @@ export default function Hero() {
           </Link>
         </motion.div>
 
-        {/* ⑦ Price anchor ──────────────────────────────────────────────── */}
+        {/* ⑦ Price anchor ------------------------------------------------ */}
         <motion.p
           style={{
             marginTop: '1rem',
@@ -689,7 +689,7 @@ export default function Hero() {
 
       </div>
 
-      {/* ── Scroll indicator ────────────────────────────────────────────── */}
+      {/* -- Scroll indicator ---------------------------------------------- */}
       <motion.div
         className="absolute bottom-7 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5"
         initial={{ opacity: 0 }}

@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
@@ -9,10 +9,10 @@ import {
   Package, PenTool, Wrench, Settings, Layers, Building2,
 } from 'lucide-react';
 
-/* ─── Types ──────────────────────────────────────────────────────────────── */
+/* --- Types ---------------------------------------------------------------- */
 type DropKey = 'products' | 'services' | 'industries';
 
-/* ─── Product category data ─────────────────────────────────────────────── */
+/* --- Product category data ----------------------------------------------- */
 const PRODUCT_CATS = [
   { Icon: Flame,           label: 'Cooking Equipment',  desc: 'Gas ranges, ovens, fryers & tandoors',    href: '/products/cooking'       },
   { Icon: Thermometer,     label: 'Refrigeration',       desc: 'Cold rooms, chillers & reach-in fridges', href: '/products/refrigeration' },
@@ -62,7 +62,7 @@ const NAV_PRODUCTS: Record<string, { name: string; brand: string; tag?: string; 
   ],
 };
 
-/* ─── Service items ──────────────────────────────────────────────────────── */
+/* --- Service items -------------------------------------------------------- */
 const SERVICE_ITEMS = [
   { Icon: Package,   label: 'Equipment Supply',             desc: 'Cooking, refrigeration, bakery & more',   href: '/services/equipment-supply'   },
   { Icon: PenTool,   label: 'Kitchen Design & Layout',      desc: 'CAD drawings & space flow planning',      href: '/services/kitchen-design'     },
@@ -72,7 +72,7 @@ const SERVICE_ITEMS = [
   { Icon: Building2, label: 'Turnkey Kitchen Projects',     desc: 'Complete end-to-end delivery',            href: '/services/turnkey'            },
 ];
 
-/* ─── Industry items ─────────────────────────────────────────────────────── */
+/* --- Industry items ------------------------------------------------------- */
 const INDUSTRY_ITEMS = [
   { label: 'Hotels & Resorts',           desc: '5-star, boutique & heritage hotels',      href: '/industries/hotels'         },
   { label: 'Hospitals & Healthcare',     desc: 'NABH / FSSAI compliant kitchens',         href: '/industries/hospitals'      },
@@ -82,7 +82,7 @@ const INDUSTRY_ITEMS = [
   { label: 'Government & Institutions', desc: 'Defence, education & large institutions',  href: '/industries/government'     },
 ];
 
-/* ─── Nav link list ──────────────────────────────────────────────────────── */
+/* --- Nav link list -------------------------------------------------------- */
 const NAV_LINKS: { label: string; href: string; drop: DropKey | null }[] = [
   { label: 'Products',   href: '/products',   drop: 'products'   },
   { label: 'Services',   href: '/services',   drop: 'services'   },
@@ -92,7 +92,7 @@ const NAV_LINKS: { label: string; href: string; drop: DropKey | null }[] = [
   { label: 'Contact Us', href: '/contact',    drop: null         },
 ];
 
-/* ─── Shared shell ───────────────────────────────────────────────────────── */
+/* --- Shared shell --------------------------------------------------------- */
 const SHELL: React.CSSProperties = {
   position: 'absolute',
   top: '100%',
@@ -118,7 +118,7 @@ function GoldStripe() {
   );
 }
 
-/* ─── TAG BADGE ─────────────────────────────────────────────────────────── */
+/* --- TAG BADGE ----------------------------------------------------------- */
 function TagBadge({ tag }: { tag?: string }) {
   if (!tag) return null;
   const isPremium = tag === 'Premium';
@@ -146,7 +146,7 @@ function TagBadge({ tag }: { tag?: string }) {
   );
 }
 
-/* ─── PRODUCTS MEGA — left category list + right product grid ────────────── */
+/* --- PRODUCTS MEGA — left category list + right product grid -------------- */
 function ProductsMega({ on, off }: { on: () => void; off: () => void }) {
   const [activeCat, setActiveCat] = useState(PRODUCT_CATS[0]);
   const products = NAV_PRODUCTS[activeCat.label] ?? [];
@@ -157,7 +157,7 @@ function ProductsMega({ on, off }: { on: () => void; off: () => void }) {
 
       <div style={{ display: 'grid', gridTemplateColumns: '220px 1fr' }}>
 
-        {/* ── Left: category list ──────────────────────────────────────── */}
+        {/* -- Left: category list ---------------------------------------- */}
         <div
           style={{
             borderRight: '1px solid rgba(201,168,76,0.10)',
@@ -265,7 +265,7 @@ function ProductsMega({ on, off }: { on: () => void; off: () => void }) {
           </div>
         </div>
 
-        {/* ── Right: product cards ─────────────────────────────────────── */}
+        {/* -- Right: product cards --------------------------------------- */}
         <div style={{ padding: '1.125rem 1.5rem 1rem' }}>
           {/* Header row */}
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
@@ -428,7 +428,7 @@ function ProductsMega({ on, off }: { on: () => void; off: () => void }) {
   );
 }
 
-/* ─── SERVICES MEGA ──────────────────────────────────────────────────────── */
+/* --- SERVICES MEGA -------------------------------------------------------- */
 function MegaItem({ href, IconEl, label, desc }: { href: string; IconEl?: React.ReactNode; label: string; desc: string }) {
   return (
     <Link
@@ -495,7 +495,7 @@ function ServicesMega({ on, off }: { on: () => void; off: () => void }) {
   );
 }
 
-/* ─── INDUSTRIES DROPDOWN ────────────────────────────────────────────────── */
+/* --- INDUSTRIES DROPDOWN -------------------------------------------------- */
 function IndustriesDrop({ on, off }: { on: () => void; off: () => void }) {
   return (
     <div style={SHELL} onMouseEnter={on} onMouseLeave={off} role="region" aria-label="Industries menu">
@@ -519,7 +519,7 @@ function IndustriesDrop({ on, off }: { on: () => void; off: () => void }) {
   );
 }
 
-/* ─── MAIN NAVBAR ────────────────────────────────────────────────────────── */
+/* --- MAIN NAVBAR ---------------------------------------------------------- */
 export default function Navbar() {
   const [scrolled,       setScrolled]       = useState(false);
   const [activeDrop,     setActiveDrop]     = useState<DropKey | null>(null);
@@ -551,7 +551,7 @@ export default function Navbar() {
 
   return (
     <>
-      {/* ── Sticky nav bar ───────────────────────────────────────────────── */}
+      {/* -- Sticky nav bar ------------------------------------------------- */}
       <nav
         aria-label="Primary navigation"
         style={{
@@ -567,7 +567,7 @@ export default function Navbar() {
           transition: 'background 0.3s, border-color 0.3s, box-shadow 0.3s',
         }}
       >
-        {/* ── Inner bar ─────────────────────────────────────────────────── */}
+        {/* -- Inner bar --------------------------------------------------- */}
         <div
           style={{
             display: 'flex',
@@ -588,7 +588,7 @@ export default function Navbar() {
             <Image src="/VSD_LOGO.png" width={140} height={120} alt="VSD International Logo" priority />
           </Link>
 
-          {/* ── Desktop nav — hidden below 1024px via CSS class ─────────── */}
+          {/* -- Desktop nav — hidden below 1024px via CSS class ----------- */}
           <div className="hidden lg:flex items-center" style={{ gap: '0.125rem' }}>
             {NAV_LINKS.map((link) => {
               const isActive = activeDrop === link.drop && link.drop !== null;
@@ -638,7 +638,7 @@ export default function Navbar() {
             })}
           </div>
 
-          {/* ── Desktop CTAs — hidden below 1024px via CSS class ────────── */}
+          {/* -- Desktop CTAs — hidden below 1024px via CSS class ---------- */}
           <div className="hidden lg:flex items-center" style={{ gap: '1.25rem', flexShrink: 0 }}>
             <a
               href="tel:+919250346370"
@@ -665,7 +665,7 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* ── Mobile hamburger — hidden at 1024px+ via CSS class ──────── */}
+          {/* -- Mobile hamburger — hidden at 1024px+ via CSS class -------- */}
           {/* NOTE: NO display property in inline style — Tailwind lg:hidden handles visibility */}
           <button
             onClick={() => setMobileOpen((v) => !v)}
@@ -685,13 +685,13 @@ export default function Navbar() {
           </button>
         </div>
 
-        {/* ── Desktop mega menus (rendered inside sticky nav) ────────────── */}
+        {/* -- Desktop mega menus (rendered inside sticky nav) -------------- */}
         {activeDrop === 'products'   && <ProductsMega   on={cancelClose} off={scheduleClose} />}
         {activeDrop === 'services'   && <ServicesMega   on={cancelClose} off={scheduleClose} />}
         {activeDrop === 'industries' && <IndustriesDrop on={cancelClose} off={scheduleClose} />}
       </nav>
 
-      {/* ── Mobile full-screen menu ─────────────────────────────────────── */}
+      {/* -- Mobile full-screen menu --------------------------------------- */}
       {mobileOpen && (
         <div
           className="lg:hidden"

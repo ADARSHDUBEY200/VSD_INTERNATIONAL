@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+﻿import type { Metadata } from 'next';
 import Link from 'next/link';
 import {
   ChefHat, Hotel, UtensilsCrossed, Package, Building2, Cake,
@@ -12,7 +12,7 @@ import ServiceFAQ from '@/components/services/ServiceFAQ';
 
 
 
-/* ─── Metadata ───────────────────────────────────────────────────────────── */
+/* --- Metadata ------------------------------------------------------------- */
 export const metadata: Metadata = {
   title: 'Commercial Kitchen Equipment & Solutions | VSD International India',
   description:
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   },
 };
 
-/* ─── JSON-LD Schema ─────────────────────────────────────────────────────── */
+/* --- JSON-LD Schema ------------------------------------------------------- */
 const schema = {
   '@context': 'https://schema.org',
   '@graph': [
@@ -58,7 +58,7 @@ const schema = {
   ],
 };
 
-/* ─── All 14 Services Data ───────────────────────────────────────────────── */
+/* --- All 14 Services Data ------------------------------------------------- */
 const SERVICES_P1 = [
   {
     icon: Package,
@@ -168,7 +168,7 @@ const SERVICES_P3 = [
 
 const SERVICES_ALL = [...SERVICES_P1, ...SERVICES_P2, ...SERVICES_P3];
 
-/* ─── Industries Data ────────────────────────────────────────────────────── */
+/* --- Industries Data ------------------------------------------------------ */
 const INDUSTRIES = [
   { icon: Hotel,           label: 'Hotels & Resorts',          href: '/industries/hotels',        desc: '5-star, boutique & heritage hotels' },
   { icon: HeartPulse,      label: 'Hospitals & Healthcare',    href: '/industries/hospitals',     desc: 'NABH & FSSAI compliant kitchens' },
@@ -178,7 +178,7 @@ const INDUSTRIES = [
   { icon: Cake,            label: 'Bakeries',                  href: '/industries/bakeries',      desc: 'Retail & wholesale bakery chains' },
 ];
 
-/* ─── Featured Projects ──────────────────────────────────────────────────── */
+/* --- Featured Projects ---------------------------------------------------- */
 const PROJECTS = [
   {
     client:   'Hyatt Regency Delhi',
@@ -200,7 +200,7 @@ const PROJECTS = [
   },
 ];
 
-/* ─── Hub FAQs (5 Questions) ─────────────────────────────────────────────── */
+/* --- Hub FAQs (5 Questions) ----------------------------------------------- */
 const HUB_FAQS = [
   {
     q: 'What services does VSD International provide?',
@@ -236,7 +236,7 @@ export default function ServicesHubPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
 
-      {/* ── §01 HERO ────────────────────────────────────────────────────── */}
+      {/* -- §01 HERO ------------------------------------------------------ */}
       <section
         className="grain-overlay"
         aria-labelledby="hub-h1"
@@ -364,7 +364,7 @@ export default function ServicesHubPage() {
         </div>
       </section>
 
-      {/* ── §02 SERVICES GRID — All 14 pages ────────────────────────────── */}
+      {/* -- §02 SERVICES GRID — All 14 pages ------------------------------ */}
       <section
         aria-labelledby="services-grid-heading"
         style={{ background: '#FFFFFF', padding: '5.5rem 0' }}
@@ -455,7 +455,7 @@ export default function ServicesHubPage() {
         </div>
       </section>
 
-      {/* ── §03 WHY VSD INTERNATIONAL ───────────────────────────────────── */}
+      {/* -- §03 WHY VSD INTERNATIONAL ------------------------------------- */}
       <section
         aria-labelledby="why-vsd-heading"
         className="grain-overlay"
@@ -561,7 +561,7 @@ export default function ServicesHubPage() {
         </div>
       </section>
 
-      {/* ── §04 INDUSTRIES WE SERVE ─────────────────────────────────────── */}
+      {/* -- §04 INDUSTRIES WE SERVE --------------------------------------- */}
       <section
         aria-labelledby="industries-heading"
         style={{ background: '#FFFFFF', padding: '5rem 0', borderTop: '1px solid var(--border)' }}
@@ -644,7 +644,7 @@ export default function ServicesHubPage() {
         </div>
       </section>
 
-      {/* ── §05 FEATURED PROJECTS ───────────────────────────────────────── */}
+      {/* -- §05 FEATURED PROJECTS ----------------------------------------- */}
       <section
         aria-labelledby="projects-heading"
         style={{
@@ -759,7 +759,7 @@ export default function ServicesHubPage() {
         </div>
       </section>
 
-      {/* ── §06 CITIES WE SERVE ─────────────────────────────────────────── */}
+      {/* -- §06 CITIES WE SERVE ------------------------------------------- */}
       <section
         aria-labelledby="cities-hub-heading"
         style={{
@@ -817,14 +817,14 @@ export default function ServicesHubPage() {
         </div>
       </section>
 
-      {/* ── §07 HUB FAQ ─────────────────────────────────────────────────── */}
+      {/* -- §07 HUB FAQ --------------------------------------------------- */}
       <ServiceFAQ
         faqs={HUB_FAQS}
         heading="Frequently Asked Questions"
         dark={false}
       />
 
-      {/* ── §08 FINAL CTA ───────────────────────────────────────────────── */}
+      {/* -- §08 FINAL CTA ------------------------------------------------- */}
       <section
         className="grain-overlay"
         style={{
@@ -915,7 +915,7 @@ export default function ServicesHubPage() {
   );
 }
 
-/* ─── Service Card (local) ───────────────────────────────────────────────── */
+/* --- Service Card (local) ------------------------------------------------- */
 function ServiceCard({ service }: { service: { icon: any; title: string; desc: string; href: string; tag: string | null } }) {
   const Icon = service.icon;
   return (

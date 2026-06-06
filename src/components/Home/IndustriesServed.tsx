@@ -1,4 +1,4 @@
-import Link from 'next/link';
+﻿import Link from 'next/link';
 import { Hotel, Heart, UtensilsCrossed, Truck, Cake, Landmark, ArrowRight } from 'lucide-react';
 
 const industries = [
@@ -76,7 +76,7 @@ function IndustryCard({ industry }: { industry: typeof industries[0] }) {
       }}
       aria-label={`VSD International — ${industry.title}`}
     >
-      {/* ── Gold Header Panel ── */}
+      {/* -- Gold Header Panel -- */}
       <div
         style={{
           background: industry.featured
@@ -178,7 +178,7 @@ function IndustryCard({ industry }: { industry: typeof industries[0] }) {
         </h3>
       </div>
 
-      {/* ── White Content Panel ── */}
+      {/* -- White Content Panel -- */}
       <div style={{ padding: '1.5rem 1.75rem 1.875rem' }}>
         <p
           style={{
@@ -304,7 +304,7 @@ export default function IndustriesServed() {
         className="container mx-auto"
         style={{ maxWidth: '80rem', padding: '0 1.25rem', position: 'relative' }}
       >
-        {/* ── Section Header ── */}
+        {/* -- Section Header -- */}
         <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
 
           {/* Eyebrow with flanking lines */}
@@ -378,14 +378,14 @@ export default function IndustriesServed() {
           </p>
         </div>
 
-        {/* ── 3-Column Grid ── */}
+        {/* -- 3-Column Grid -- */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {industries.map((ind) => (
             <IndustryCard key={ind.title} industry={ind} />
           ))}
         </div>
 
-        {/* ── Bottom CTA ── */}
+        {/* -- Bottom CTA -- */}
         <div style={{ textAlign: 'center', marginTop: '3.75rem' }}>
           <Link
             href="/industries"

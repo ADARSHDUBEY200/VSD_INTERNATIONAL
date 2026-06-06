@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState, FormEvent } from 'react';
 import { ArrowRight, PhoneCall, Mail, MapPin, CheckCircle2 } from 'lucide-react';
@@ -62,7 +62,7 @@ export default function EnquireNow() {
       className="relative overflow-hidden"
       style={{ background: 'var(--charcoal-warm)', padding: '2rem, 0' }}
     >
-      {/* ── Gold top border ──────────────────────────────────────────────── */}
+      {/* -- Gold top border ------------------------------------------------ */}
       <div
         aria-hidden="true"
         style={{
@@ -73,7 +73,7 @@ export default function EnquireNow() {
         }}
       />
 
-      {/* ── Background grid ──────────────────────────────────────────────── */}
+      {/* -- Background grid ------------------------------------------------ */}
       <div
         aria-hidden="true"
         className="absolute inset-0 pointer-events-none"
@@ -89,7 +89,7 @@ export default function EnquireNow() {
         }}
       />
 
-      {/* ── Corner glows ─────────────────────────────────────────────────── */}
+      {/* -- Corner glows --------------------------------------------------- */}
       <div
         aria-hidden="true"
         className="absolute pointer-events-none"
@@ -117,7 +117,7 @@ export default function EnquireNow() {
           style={{ alignItems: 'center' }}
         >
 
-          {/* ── Left — copy ─────────────────────────────────────────────── */}
+          {/* -- Left — copy ----------------------------------------------- */}
           <div className='md:col-span-2'>
             <p className="section-label" style={{ marginBottom: '0.875rem' }}>
               Get In Touch
@@ -226,7 +226,7 @@ export default function EnquireNow() {
             </div>
           </div>
 
-          {/* ── Right — form card ────────────────────────────────────────── */}
+          {/* -- Right — form card ------------------------------------------ */}
           <div
             style={{
               background: 'var(--charcoal-mid)',
@@ -248,7 +248,7 @@ export default function EnquireNow() {
             />
 
             {submitted ? (
-              /* ── Success state ── */
+              /* -- Success state -- */
               <div
                 style={{
                   display: 'flex',
@@ -298,7 +298,7 @@ export default function EnquireNow() {
                 </p>
               </div>
             ) : (
-              /* ── Form ── */
+              /* -- Form -- */
               <form
                 onSubmit={handleSubmit}
                 noValidate
@@ -444,7 +444,7 @@ export default function EnquireNow() {
   );
 }
 
-/* ─── Field wrapper ──────────────────────────────────────────────────────── */
+/* --- Field wrapper -------------------------------------------------------- */
 function Field({
   label,
   htmlFor,

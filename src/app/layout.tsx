@@ -1,9 +1,9 @@
-import type { Metadata } from 'next';
+﻿import type { Metadata } from 'next';
 import { Playfair_Display, Inter } from 'next/font/google';
 import Script from 'next/script';
 import './globals.css';
 
-/* ─── Fonts ──────────────────────────────────────────────────────────────── */
+/* --- Fonts ---------------------------------------------------------------- */
 const playfair = Playfair_Display({
   subsets: ['latin'],
   variable: '--font-playfair',
@@ -18,7 +18,7 @@ const inter = Inter({
   weight: ['300', '400', '500', '600', '700', '800'],
 });
 
-/* ─── SEO Metadata ───────────────────────────────────────────────────────── */
+/* --- SEO Metadata --------------------------------------------------------- */
 export const metadata: Metadata = {
   metadataBase: new URL('https://vsdinternational.com'),
 
@@ -99,7 +99,7 @@ export const metadata: Metadata = {
   },
 };
 
-/* ─── JSON-LD Schema Stack ───────────────────────────────────────────────── */
+/* --- JSON-LD Schema Stack ------------------------------------------------- */
 const schemaGraph = {
   '@context': 'https://schema.org',
   '@graph': [
@@ -226,7 +226,7 @@ const schemaGraph = {
   ],
 };
 
-/* ─── Root Layout ────────────────────────────────────────────────────────── */
+/* --- Root Layout ---------------------------------------------------------- */
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html

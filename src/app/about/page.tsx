@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+﻿import type { Metadata } from 'next';
 import Link from 'next/link';
 import {
   ArrowRight, PhoneCall, Shield, Award, Clock, Star,
@@ -10,7 +10,7 @@ import Footer            from '@/components/home/Footer';
 import WhatsAppFloat     from '@/components/home/WhatsAppFloat';
 import StatsCounter      from '@/components/about/StatsCounter';
 
-/* ─── Metadata ───────────────────────────────────────────────────────────── */
+/* --- Metadata ------------------------------------------------------------- */
 export const metadata: Metadata = {
   title: 'About Us — VSD International | ISO 9001 Kitchen Equipment Manufacturer Since 2009',
   description:
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://vsdinternational.com/about' },
 };
 
-/* ─── Timeline milestones ────────────────────────────────────────────────── */
+/* --- Timeline milestones -------------------------------------------------- */
 const MILESTONES = [
   { year: '2009', title: 'Founded in Delhi',         desc: 'Started with local restaurant equipment supply from a single workshop in Mandawali.'   },
   { year: '2011', title: 'First Hotel Project',       desc: 'Completed first luxury hotel kitchen setup in New Delhi, marking our premium entry.'    },
@@ -30,7 +30,7 @@ const MILESTONES = [
   { year: '2024', title: 'Industry Leader',           desc: 'Trusted by Hyatt, Radisson Blu, ITC Welcomhotel & Crowne Plaza. 312 Google reviews.'   },
 ];
 
-/* ─── Core values ────────────────────────────────────────────────────────── */
+/* --- Core values ---------------------------------------------------------- */
 const VALUES = [
   { Icon: Shield,  title: 'Uncompromising Quality',  desc: 'Every product we supply or fabricate meets ISO 9001 standards. Quality is not a target — it is our culture.' },
   { Icon: Heart,   title: 'Client-First Mindset',    desc: 'We understand that your kitchen is your business. We listen, plan, and deliver solutions that work for you.'  },
@@ -38,7 +38,7 @@ const VALUES = [
   { Icon: Globe,   title: 'Pan-India Reach',          desc: 'From J&K to Kerala, we deliver and commission equipment across India with our own trained service teams.'    },
 ];
 
-/* ─── Why VSD differentiators (on gold background) ──────────────────────── */
+/* --- Why VSD differentiators (on gold background) ------------------------ */
 const DIFFERENTIATORS = [
   { Icon: Award,   title: 'ISO 9001:2015 Certified',       body: 'Internationally recognised quality management system covering manufacturing, supply, and after-sales service.' },
   { Icon: Clock,   title: '15+ Years Track Record',        body: 'Founded in 2009 with a clear mission. A decade and a half of on-time delivery and satisfied clients speak for us.' },
@@ -46,14 +46,14 @@ const DIFFERENTIATORS = [
   { Icon: Users,   title: 'Dedicated After-Sales Team',    body: 'Dedicated AMC engineers, genuine spare parts, and 24/7 support so your kitchen never faces unplanned downtime.'     },
 ];
 
-/* ─── Client names ───────────────────────────────────────────────────────── */
+/* --- Client names --------------------------------------------------------- */
 const CLIENTS = [
   'Hyatt Regency New Delhi', 'Radisson Blu', 'ITC Welcomhotel', 'Crowne Plaza',
   'Fortis Hospitals', 'Metro Hospitals', 'Novotel', 'Holiday Inn',
   'Lemon Tree Hotels', 'AIIMS Delhi', 'Army Wellness Centre', 'DPS Schools',
 ];
 
-/* ─── About Page ─────────────────────────────────────────────────────────── */
+/* --- About Page ----------------------------------------------------------- */
 export default function AboutPage() {
   return (
     <>

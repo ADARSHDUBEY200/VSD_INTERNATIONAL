@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
 import { ChevronDown, Phone, MessageCircle } from 'lucide-react';
@@ -85,7 +85,7 @@ export default function FAQSection() {
 
       <div style={{ maxWidth: '60rem', margin: '0 auto', padding: '0 1.5rem', width: '100%', position: 'relative' }}>
 
-        {/* ── Header ── */}
+        {/* -- Header -- */}
         <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
           <p className="section-label" style={{ marginBottom: '1rem' }}>FAQ</p>
           <h2
@@ -117,7 +117,7 @@ export default function FAQSection() {
           </p>
         </div>
 
-        {/* ── Accordion ── */}
+        {/* -- Accordion -- */}
         <dl style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
           {faqs.map((faq, i) => {
             const isOpen = open === i;
@@ -241,7 +241,7 @@ export default function FAQSection() {
           })}
         </dl>
 
-        {/* ── CTA ── */}
+        {/* -- CTA -- */}
         <div
           style={{
             marginTop: '3rem',

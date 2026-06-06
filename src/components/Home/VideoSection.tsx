@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
 import { Play, Shield, Award, Clock } from 'lucide-react';
@@ -41,7 +41,7 @@ export default function VideoSection() {
 
       <div style={{ maxWidth: '72rem', margin: '0 auto', padding: '0 1.5rem', width: '100%' }}>
 
-        {/* ── Header ── */}
+        {/* -- Header -- */}
         <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
           <p className="section-label" style={{ marginBottom: '1rem' }}>Factory Tour</p>
           <h2
@@ -73,7 +73,7 @@ export default function VideoSection() {
           </p>
         </div>
 
-        {/* ── Video player ── */}
+        {/* -- Video player -- */}
         <div style={{ maxWidth: '60rem', margin: '0 auto', width: '100%' }}>
 
           {/* Gold gradient border frame */}
@@ -299,7 +299,7 @@ export default function VideoSection() {
             </div>
           </div>
 
-          {/* ── Below-video info strip ── */}
+          {/* -- Below-video info strip -- */}
           <div
             style={{
               marginTop: '1.25rem',

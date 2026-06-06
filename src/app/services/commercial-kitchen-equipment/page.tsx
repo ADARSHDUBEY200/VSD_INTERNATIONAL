@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+﻿import type { Metadata } from 'next';
 import Link from 'next/link';
 import {
   Flame, Refrigerator, ChefHat, Droplets, Layers, Wind,
@@ -13,7 +13,7 @@ import BrandsGrid        from '@/components/services/BrandsGrid';
 import CitiesGrid        from '@/components/services/CitiesGrid';
 import ServiceCTA        from '@/components/services/ServiceCTA';
 
-/* ─── Metadata ───────────────────────────────────────────────────────────── */
+/* --- Metadata ------------------------------------------------------------- */
 export const metadata: Metadata = {
   title: 'Commercial Kitchen Equipment Manufacturer India | VSD International',
   description:
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   },
 };
 
-/* ─── JSON-LD ────────────────────────────────────────────────────────────── */
+/* --- JSON-LD -------------------------------------------------------------- */
 const schema = {
   '@context': 'https://schema.org',
   '@graph': [
@@ -59,7 +59,7 @@ const schema = {
   ],
 };
 
-/* ─── Equipment Categories ───────────────────────────────────────────────── */
+/* --- Equipment Categories ------------------------------------------------- */
 const CATEGORIES = [
   {
     icon: Flame,
@@ -93,7 +93,7 @@ const CATEGORIES = [
   },
 ];
 
-/* ─── Equipment Spec Table ───────────────────────────────────────────────── */
+/* --- Equipment Spec Table ------------------------------------------------- */
 const SPEC_TABLE = [
   { category: 'Commercial Cooking Range',       brands: 'Garland, Falcon, Mareno', capacity: '2-burner to 8-burner',  price: '₹45,000 – ₹2,80,000' },
   { category: 'Combi Oven',                     brands: 'Rational, Alto-Shaam',    capacity: '6 GN – 20 GN',          price: '₹2,50,000 – ₹18,00,000' },
@@ -109,7 +109,7 @@ const SPEC_TABLE = [
   { category: 'Undercounter Dishwasher',        brands: 'Winterhalter, Miele Pro', capacity: '60 baskets/hr',         price: '₹85,000 – ₹2,50,000' },
 ];
 
-/* ─── Industries ─────────────────────────────────────────────────────────── */
+/* --- Industries ----------------------------------------------------------- */
 const INDUSTRIES = [
   { icon: Hotel,    label: 'Hotels',         href: '/industries/hotels',         desc: '5-star to budget hotel kitchens' },
   { icon: HeartPulse, label: 'Hospitals',    href: '/industries/hospitals',      desc: 'NABH & FSSAI compliant dietary kitchens' },
@@ -119,7 +119,7 @@ const INDUSTRIES = [
   { icon: Cake,       label: 'Bakeries',     href: '/industries/bakeries',       desc: 'Retail & wholesale bakery chains' },
 ];
 
-/* ─── FAQs ───────────────────────────────────────────────────────────────── */
+/* --- FAQs ----------------------------------------------------------------- */
 const FAQS = [
   {
     q: 'What is the cost of commercial kitchen equipment in India?',
@@ -151,7 +151,7 @@ const FAQS = [
   },
 ];
 
-/* ─── Testimonial ────────────────────────────────────────────────────────── */
+/* --- Testimonial ---------------------------------------------------------- */
 const TESTIMONIAL = {
   quote: 'VSD International handled our complete kitchen setup for Hyatt Regency Delhi — from layout planning to equipment installation across 8 kitchen zones. They delivered on time, met our 5-star specifications down to the last detail, and the post-installation support has been exceptional. We\'ve since engaged them for two other Hyatt properties.',
   name: 'Rajesh Mehta',
@@ -161,7 +161,7 @@ const TESTIMONIAL = {
   rating: 5,
 };
 
-/* ─── Projects ───────────────────────────────────────────────────────────── */
+/* --- Projects ------------------------------------------------------------- */
 const OTHER_PROJECTS = [
   'Crowne Plaza Rohini, Delhi — 5-star hotel kitchen',
   'Radisson Blu Dwarka, Delhi — Full F&B kitchen setup',

@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+﻿import type { Metadata } from 'next';
 import Link from 'next/link';
 import {
   PhoneCall, Mail, MapPin, Clock, MessageCircle,
@@ -11,7 +11,7 @@ import Footer          from '@/components/home/Footer';
 import WhatsAppFloat   from '@/components/home/WhatsAppFloat';
 import ContactForm     from '@/components/contact/ContactForm';
 
-/* ─── Metadata ───────────────────────────────────────────────────────────── */
+/* --- Metadata ------------------------------------------------------------- */
 export const metadata: Metadata = {
   title: 'Contact VSD International | Free Kitchen Consultation — Delhi NCR',
   description:
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://vsdinternational.com/contact' },
 };
 
-/* ─── Contact channel data ───────────────────────────────────────────────── */
+/* --- Contact channel data ------------------------------------------------- */
 const CHANNELS = [
   {
     Icon: PhoneCall,
@@ -55,7 +55,7 @@ const CHANNELS = [
   },
 ];
 
-/* ─── Trust promises ─────────────────────────────────────────────────────── */
+/* --- Trust promises ------------------------------------------------------- */
 const PROMISES = [
   {
     Icon: Zap,
@@ -74,7 +74,7 @@ const PROMISES = [
   },
 ];
 
-/* ─── FAQs ───────────────────────────────────────────────────────────────── */
+/* --- FAQs ----------------------------------------------------------------- */
 const FAQS = [
   {
     q: 'How quickly do you respond to enquiries?',
@@ -102,7 +102,7 @@ const FAQS = [
   },
 ];
 
-/* ─── Contact Page ───────────────────────────────────────────────────────── */
+/* --- Contact Page --------------------------------------------------------- */
 export default function ContactPage() {
   return (
     <>
@@ -515,7 +515,7 @@ export default function ContactPage() {
           >
             <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12" style={{ alignItems: 'start' }}>
 
-              {/* ── Form card (3 cols on LG) ────────────────────────────── */}
+              {/* -- Form card (3 cols on LG) ------------------------------ */}
               <div
                 className="lg:col-span-3"
                 style={{
@@ -580,7 +580,7 @@ export default function ContactPage() {
                 <ContactForm />
               </div>
 
-              {/* ── Info sidebar (2 cols on LG) ─────────────────────────── */}
+              {/* -- Info sidebar (2 cols on LG) --------------------------- */}
               <div className="lg:col-span-2" style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
 
                 {/* Response promise card */}

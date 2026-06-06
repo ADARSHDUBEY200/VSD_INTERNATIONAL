@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useRef, useEffect, useState } from 'react';
 import Link from 'next/link';
@@ -7,7 +7,7 @@ import {
   Flame, Thermometer, Wind, Package,
 } from 'lucide-react';
 
-/* ─── Animated Counter Hook ──────────────────────────────────────────────── */
+/* --- Animated Counter Hook ------------------------------------------------ */
 function useCounter(target: number, started: boolean, duration = 1900) {
   const [count, setCount] = useState(0);
   useEffect(() => {
@@ -27,7 +27,7 @@ function useCounter(target: number, started: boolean, duration = 1900) {
   return count;
 }
 
-/* ─── Kitchen Blueprint SVG ──────────────────────────────────────────────── */
+/* --- Kitchen Blueprint SVG ------------------------------------------------ */
 function KitchenBlueprint() {
   const G = '#C9A84C';
   const gd = (o: number) => `rgba(201,168,76,${o})`;
@@ -69,7 +69,7 @@ function KitchenBlueprint() {
         <line key={`h${i}`} x1="0" y1={(i + 1) * 30} x2="600" y2={(i + 1) * 30} stroke={gd(0.06)} strokeWidth="1" />
       ))}
 
-      {/* ── ZONE A · MAIN KITCHEN ────────────────────────────── */}
+      {/* -- ZONE A · MAIN KITCHEN ------------------------------ */}
       <rect x="24" y="24" width="400" height="148" stroke={G} strokeWidth="1.5" fill={gd(0.025)} rx="2" />
       <text x="36" y="40" fontFamily={mono} fontSize="7.5" fill={G} opacity="0.85" letterSpacing="3">MAIN KITCHEN</text>
 
@@ -97,7 +97,7 @@ function KitchenBlueprint() {
       <ellipse cx="377" cy="128" rx="18" ry="16" stroke={G} strokeWidth="1" fill={gd(0.04)} />
       <text x="377" y="165" textAnchor="middle" fontFamily={mono} fontSize="5.5" fill={G} opacity="0.45">FRYER</text>
 
-      {/* ── ZONE B · PREP AREA ───────────────────────────────── */}
+      {/* -- ZONE B · PREP AREA --------------------------------- */}
       <rect x="24" y="185" width="174" height="117" stroke={G} strokeWidth="1.5" fill={gd(0.02)} rx="2" />
       <text x="36" y="200" fontFamily={mono} fontSize="7" fill={G} opacity="0.85" letterSpacing="2">PREP AREA</text>
       <rect x="34" y="210" width="154" height="52" stroke={G} strokeWidth="1" fill={gd(0.03)} rx="1" />
@@ -106,7 +106,7 @@ function KitchenBlueprint() {
       ))}
       <text x="111" y="277" textAnchor="middle" fontFamily={mono} fontSize="5.5" fill={G} opacity="0.38">WORK TABLE</text>
 
-      {/* ── ZONE C · COLD ROOM ───────────────────────────────── */}
+      {/* -- ZONE C · COLD ROOM --------------------------------- */}
       <rect x="210" y="185" width="118" height="57" stroke={G} strokeWidth="1.5" fill="rgba(80,160,220,0.03)" rx="2" />
       <text x="222" y="200" fontFamily={mono} fontSize="7" fill={G} opacity="0.85" letterSpacing="1.5">COLD ROOM</text>
       {[0, 60, 120].map(deg => {
@@ -116,28 +116,28 @@ function KitchenBlueprint() {
       })}
       <circle cx="269" cy="222" r="4" fill={G} opacity="0.55" />
 
-      {/* ── ZONE D · DISHWASH ────────────────────────────────── */}
+      {/* -- ZONE D · DISHWASH ---------------------------------- */}
       <rect x="210" y="253" width="118" height="49" stroke={G} strokeWidth="1.5" fill="rgba(60,190,180,0.025)" rx="2" />
       <text x="222" y="268" fontFamily={mono} fontSize="7" fill={G} opacity="0.85" letterSpacing="1.5">DISHWASH</text>
       {[279, 285, 291].map(y => (
         <path key={y} d={`M222 ${y} Q234 ${y-4} 246 ${y} Q258 ${y+4} 270 ${y} Q282 ${y-4} 294 ${y} Q306 ${y+4} 318 ${y}`} stroke={G} strokeWidth="0.85" fill="none" opacity="0.4" />
       ))}
 
-      {/* ── ZONE E · BAKERY ──────────────────────────────────── */}
+      {/* -- ZONE E · BAKERY ------------------------------------ */}
       <rect x="340" y="185" width="84" height="117" stroke={G} strokeWidth="1.5" fill="rgba(220,150,60,0.025)" rx="2" />
       <text x="352" y="200" fontFamily={mono} fontSize="7" fill={G} opacity="0.85" letterSpacing="1.5">BAKERY</text>
       <rect x="350" y="208" width="64" height="84" stroke={G} strokeWidth="1" fill={gd(0.04)} rx="1" />
       {[224, 240, 256, 272].map(y => <line key={y} x1="350" y1={y} x2="414" y2={y} stroke={G} strokeWidth="0.7" opacity="0.5" />)}
       <text x="382" y="303" textAnchor="middle" fontFamily={mono} fontSize="5" fill={G} opacity="0.38">DECK OVEN</text>
 
-      {/* ── ZONE F · CAFETERIA ───────────────────────────────── */}
+      {/* -- ZONE F · CAFETERIA --------------------------------- */}
       <rect x="436" y="185" width="140" height="117" stroke={G} strokeWidth="1.5" fill={gd(0.015)} rx="2" />
       <text x="448" y="200" fontFamily={mono} fontSize="7" fill={G} opacity="0.85" letterSpacing="1.5">CAFETERIA</text>
       {[208, 225, 242, 259, 276].map(y => (
         <rect key={y} x="447" y={y} width="120" height="12" stroke={G} strokeWidth="0.6" fill={gd(0.03)} rx="1" />
       ))}
 
-      {/* ── Dimension annotations ─────────────────────────── */}
+      {/* -- Dimension annotations --------------------------- */}
       <line x1="24" y1="13" x2="576" y2="13" stroke={G} strokeWidth="0.6" opacity="0.3" />
       <line x1="24" y1="9"  x2="24"  y2="17" stroke={G} strokeWidth="0.75" opacity="0.3" />
       <line x1="576" y1="9" x2="576" y2="17" stroke={G} strokeWidth="0.75" opacity="0.3" />
@@ -148,14 +148,14 @@ function KitchenBlueprint() {
       <line x1="8" y1="302" x2="16" y2="302" stroke={G} strokeWidth="0.75" opacity="0.3" />
       <text x="7" y="163" textAnchor="middle" fontFamily={mono} fontSize="6" fill={G} opacity="0.5" transform="rotate(-90,7,163)">↕ 8 M</text>
 
-      {/* ── Compass rose ──────────────────────────────────── */}
+      {/* -- Compass rose ------------------------------------ */}
       <circle cx="558" cy="47" r="20" stroke={G} strokeWidth="0.8" fill={gd(0.04)} opacity="0.65" />
       <line x1="558" y1="29" x2="558" y2="65" stroke={G} strokeWidth="0.75" opacity="0.55" />
       <line x1="540" y1="47" x2="576" y2="47" stroke={G} strokeWidth="0.75" opacity="0.55" />
       <polygon points="558,29 553,43 563,43" fill={G} opacity="0.75" />
       <text x="558" y="25" textAnchor="middle" fontFamily={mono} fontSize="7" fill={G} opacity="0.75">N</text>
 
-      {/* ── Title block ───────────────────────────────────── */}
+      {/* -- Title block ------------------------------------- */}
       <rect x="0" y="314" width="600" height="106" fill={gd(0.05)} />
       <line x1="0" y1="314" x2="600" y2="314" stroke={G} strokeWidth="1" opacity="0.45" />
 
@@ -187,7 +187,7 @@ function KitchenBlueprint() {
   );
 }
 
-/* ─── Deliverable Group Card ─────────────────────────────────────────────── */
+/* --- Deliverable Group Card ----------------------------------------------- */
 type DeliverableGroup = {
   Icon: React.ComponentType<{ size?: number; strokeWidth?: number; style?: React.CSSProperties }>;
   category: string;
@@ -266,7 +266,7 @@ function DeliverableCard({ group, delay }: { group: DeliverableGroup; delay: num
   );
 }
 
-/* ─── Main Export ────────────────────────────────────────────────────────── */
+/* --- Main Export ---------------------------------------------------------- */
 const PROJECT_DETAILS = [
   { Icon: MapPin,       label: 'Location',    value: 'Bhikaji Cama Place, New Delhi' },
   { Icon: Clock,        label: 'Timeline',    value: '21 days — order to commissioning' },
@@ -334,7 +334,7 @@ export default function FeaturedProject() {
       className="relative overflow-hidden"
       style={{ background: 'var(--charcoal)', padding: '5.5rem 0' }}
     >
-      {/* ── Gold top bar ─────────────────────────────────────────────────── */}
+      {/* -- Gold top bar --------------------------------------------------- */}
       <div
         aria-hidden="true"
         style={{
@@ -343,7 +343,7 @@ export default function FeaturedProject() {
         }}
       />
 
-      {/* ── Background grid ──────────────────────────────────────────────── */}
+      {/* -- Background grid ------------------------------------------------ */}
       <div
         aria-hidden="true"
         className="absolute inset-0 pointer-events-none"
@@ -359,13 +359,13 @@ export default function FeaturedProject() {
         }}
       />
 
-      {/* ── Corner glows ─────────────────────────────────────────────────── */}
+      {/* -- Corner glows --------------------------------------------------- */}
       <div aria-hidden="true" className="absolute pointer-events-none" style={{ top: '-80px', right: '-80px', width: '500px', height: '500px', background: 'radial-gradient(ellipse, rgba(201,168,76,0.07) 0%, transparent 66%)', filter: 'blur(50px)' }} />
       <div aria-hidden="true" className="absolute pointer-events-none" style={{ bottom: '-60px', left: '-60px', width: '400px', height: '400px', background: 'radial-gradient(ellipse, rgba(201,168,76,0.06) 0%, transparent 66%)', filter: 'blur(42px)' }} />
 
       <div className="container mx-auto" style={{ position: 'relative', zIndex: 1 }}>
 
-        {/* ── Section header ──────────────────────────────────────────────── */}
+        {/* -- Section header ------------------------------------------------ */}
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', marginBottom: '3.5rem' }}>
           <p className="section-label" style={{ marginBottom: '0.75rem' }}>Case Study</p>
           <h2
@@ -389,7 +389,7 @@ export default function FeaturedProject() {
           </p>
         </div>
 
-        {/* ── Main showcase card ───────────────────────────────────────────── */}
+        {/* -- Main showcase card --------------------------------------------- */}
         <div
           className="grid grid-cols-1 lg:grid-cols-5 rounded-2xl overflow-hidden"
           style={{ border: '1px solid rgba(201,168,76,0.18)' }}
@@ -540,7 +540,7 @@ export default function FeaturedProject() {
           </div>
         </div>
 
-        {/* ── Stats band ───────────────────────────────────────────────────── */}
+        {/* -- Stats band ----------------------------------------------------- */}
         <div
           ref={statsRef}
           className="grid grid-cols-2 lg:grid-cols-4 rounded-2xl overflow-hidden"
@@ -595,7 +595,7 @@ export default function FeaturedProject() {
           ))}
         </div>
 
-        {/* ── Deliverables grid ────────────────────────────────────────────── */}
+        {/* -- Deliverables grid ---------------------------------------------- */}
         <div style={{ marginTop: '2.5rem' }}>
           <p
             style={{
@@ -618,7 +618,7 @@ export default function FeaturedProject() {
           </div>
         </div>
 
-        {/* ── Testimonial ──────────────────────────────────────────────────── */}
+        {/* -- Testimonial ---------------------------------------------------- */}
         <div
           style={{
             marginTop: '2.5rem',
@@ -706,7 +706,7 @@ export default function FeaturedProject() {
           </blockquote>
         </div>
 
-        {/* ── CTAs ─────────────────────────────────────────────────────────── */}
+        {/* -- CTAs ----------------------------------------------------------- */}
         <div
           style={{
             display: 'flex',

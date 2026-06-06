@@ -1,4 +1,4 @@
-import Link from 'next/link';
+﻿import Link from 'next/link';
 import { Phone, Mail, MapPin } from 'lucide-react';
 
 /** SOP — Footer
@@ -16,7 +16,7 @@ export default function Footer() {
       role="contentinfo"
       aria-label="VSD International footer"
     >
-      {/* ── Main footer columns ──────────────────────────────────────── */}
+      {/* -- Main footer columns ---------------------------------------- */}
       <div
         className="container mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10"
         style={{ maxWidth: '80rem', padding: '4rem 1.25rem' }}
@@ -272,7 +272,7 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* ── GSTIN / ISO strip ────────────────────────────────────────── */}
+      {/* -- GSTIN / ISO strip ------------------------------------------ */}
       <div
         style={{
           borderTop: '1px solid rgba(200,169,107,0.08)',
@@ -296,7 +296,7 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* ── Legal links ──────────────────────────────────────────────── */}
+      {/* -- Legal links ------------------------------------------------ */}
       <div style={{ borderTop: '1px solid rgba(255,255,255,0.03)', padding: '0.75rem 1.25rem' }}>
         <div
           className="container mx-auto flex flex-wrap items-center justify-center gap-x-5 gap-y-1"

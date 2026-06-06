@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -15,7 +15,7 @@ import {
 } from 'lucide-react';
 import Image from 'next/image';
 
-/* ─── Types ──────────────────────────────────────────────────────────────── */
+/* --- Types ---------------------------------------------------------------- */
 
 type CategoryId = 'cooking' | 'refrigeration' | 'bakery' | 'dishwashing' | 'food-prep' | 'ventilation';
 
@@ -37,7 +37,7 @@ type Product = {
   image: string
 };
 
-/* ─── Data ───────────────────────────────────────────────────────────────── */
+/* --- Data ----------------------------------------------------------------- */
 
 const CATEGORIES: Category[] = [
   { id: 'cooking', label: 'Cooking Equipment', accentFrom: 'rgba(240,120,60,0.12)', accentTo: 'rgba(201,168,76,0.18)', Icon: Flame },
@@ -49,45 +49,45 @@ const CATEGORIES: Category[] = [
 ];
 
 const PRODUCTS: Product[] = [
-  /* ── Cooking ──────────────────────────────────────────────────────────── */
+  /* -- Cooking ------------------------------------------------------------ */
   { id: 1, categoryId: 'cooking', name: 'Heavy Duty Gas Range', brand: 'VSD Pro', specs: ['6 Burners', 'LPG / PNG', 'SS 304 Body'], tag: 'Bestseller', image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
   { id: 2, categoryId: 'cooking', name: 'Rational Combi Steam Oven', brand: 'Rational', specs: ['Steam + Convection', '6 GN 1/1', 'Self-Cleaning'], tag: 'Premium', image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
   { id: 3, categoryId: 'cooking', name: 'Commercial Tandoor', brand: 'VSD Classic', specs: ['Clay Inner Body', 'Gas Fired', 'SS Outer Shell'], image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
   { id: 4, categoryId: 'cooking', name: 'Deep Fat Fryer', brand: 'VSD Pro', specs: ['18 L × 2 Tank', 'Fast Recovery', 'Safety Cutout'], image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
   { id: 5, categoryId: 'cooking', name: 'Tilting Bratt Pan', brand: 'VSD Pro', specs: ['40 L Capacity', 'Gas Heated', 'Tilt Mechanism'], image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
   { id: 6, categoryId: 'cooking', name: 'Salamander Grill', brand: 'VSD Pro', specs: ['Radiant Heat', 'Adjustable Shelf', '800 °C Max'], image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-  /* ── Refrigeration ────────────────────────────────────────────────────── */
+  /* -- Refrigeration ------------------------------------------------------ */
   { id: 7, categoryId: 'refrigeration', name: 'Reach-In Refrigerator', brand: 'VSD Cold', specs: ['600 L / 1200 L', '2 – 8 °C', 'SS Interior'], tag: 'Bestseller', image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
   { id: 8, categoryId: 'refrigeration', name: 'Blast Chiller / Freezer', brand: 'VSD Cold', specs: ['3-Cycle Program', '−40 °C Blast', 'HACCP Probe'], tag: 'Premium', image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
   { id: 9, categoryId: 'refrigeration', name: 'Walk-In Cold Room', brand: 'VSD Custom', specs: ['Any Dimension', 'PUF Panels', 'Custom Layout'], image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
   { id: 10, categoryId: 'refrigeration', name: 'Prep Table Refrigerator', brand: 'VSD Cold', specs: ['Marble Top', 'GN Pans Included', 'SS 304'], image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
   { id: 11, categoryId: 'refrigeration', name: 'Display Chiller Counter', brand: 'VSD Cold', specs: ['1.5 m / 2 m Length', 'Glass Top', 'LED Lit'], image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
   { id: 12, categoryId: 'refrigeration', name: 'Ice Flake Machine', brand: 'Scotsman', specs: ['30 kg / day', 'Water-Cooled', 'Hygienic Ice'], image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-  /* ── Bakery ───────────────────────────────────────────────────────────── */
+  /* -- Bakery ------------------------------------------------------------- */
   { id: 13, categoryId: 'bakery', name: 'Deck Oven', brand: 'VSD Bake', specs: ['2 / 3 Deck', 'Stone Sole Plate', 'Steam Injection'], tag: 'Bestseller', image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
   { id: 14, categoryId: 'bakery', name: 'Spiral Dough Mixer', brand: 'VSD Bake', specs: ['20 L / 40 L Bowl', 'Direct Drive', 'Timer Control'], image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
   { id: 15, categoryId: 'bakery', name: 'Rotary Rack Oven', brand: 'VSD Bake', specs: ['18-Tray Rack', 'Gas / Electric', 'Fan-Forced'], tag: 'Premium', image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
   { id: 16, categoryId: 'bakery', name: 'Bread Proofer', brand: 'VSD Bake', specs: ['16 / 32 Tray', 'Humidity Control', 'Digital Display'], image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
   { id: 17, categoryId: 'bakery', name: 'Dough Sheeter', brand: 'VSD Bake', specs: ['520 mm Wide', 'Adjustable Thickness', 'Reversible'], image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-  /* ── Dishwashing ──────────────────────────────────────────────────────── */
+  /* -- Dishwashing -------------------------------------------------------- */
   { id: 18, categoryId: 'dishwashing', name: 'Rack Conveyor Dishwasher', brand: 'VSD Wash', specs: ['1 200 Racks / hr', 'Hot Water Rinse', 'Auto Dosing'], tag: 'Bestseller', image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
   { id: 19, categoryId: 'dishwashing', name: 'Undercounter Glasswasher', brand: 'VSD Wash', specs: ['40 Cycles / hr', 'Low Water Use', 'SS Body'], image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
   { id: 20, categoryId: 'dishwashing', name: 'Flight Type Dishwasher', brand: 'VSD Wash', specs: ['2 400 Plates / hr', 'Continuous Feed', 'Energy Save'], tag: 'Premium', image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
   { id: 21, categoryId: 'dishwashing', name: 'Pot & Pan Washer', brand: 'VSD Wash', specs: ['High-Pressure Arms', 'Chemical Dosing', 'SS Basket'], image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-  /* ── Food Prep ────────────────────────────────────────────────────────── */
+  /* -- Food Prep ---------------------------------------------------------- */
   { id: 22, categoryId: 'food-prep', name: 'Planetary Mixer', brand: 'Robot Coupe', specs: ['7 L / 20 L Bowl', '3-Speed', 'Multi-Attachment'], tag: 'Bestseller', image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
   { id: 23, categoryId: 'food-prep', name: 'Food Processor', brand: 'Robot Coupe', specs: ['10 L Bowl', 'S-Blade', 'Vegetable Discs'], image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
   { id: 24, categoryId: 'food-prep', name: 'Vegetable Cutter', brand: 'Robot Coupe', specs: ['300 kg / hr', 'Quick-Change Discs', 'SS Construction'], image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
   { id: 25, categoryId: 'food-prep', name: 'Immersion Blender', brand: 'Hamilton Beach', specs: ['500 W – 1 HP', 'Variable Speed', 'SS Shaft'], image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
   { id: 26, categoryId: 'food-prep', name: 'Commercial Blender', brand: 'Vitamix', specs: ['3 HP Motor', 'Variable Speed', 'Quiet Shield'], tag: 'Premium', image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-  /* ── Ventilation ──────────────────────────────────────────────────────── */
+  /* -- Ventilation -------------------------------------------------------- */
   { id: 27, categoryId: 'ventilation', name: 'SS Exhaust Hood', brand: 'VSD Air', specs: ['SS 304 Body', 'Baffle Filters', 'Custom Sizes'], tag: 'Bestseller', image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
   { id: 28, categoryId: 'ventilation', name: 'Make-Up Air Unit', brand: 'VSD Air', specs: ['Positive Pressure', 'Tempered Air', 'Auto Damper'], image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
   { id: 29, categoryId: 'ventilation', name: 'UV Odour Control System', brand: 'VSD Air', specs: ['UV-C Lamp Array', 'Odour Neutralise', 'Low Maintenance'], tag: 'Premium', image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
   { id: 30, categoryId: 'ventilation', name: 'Grease Trap & Drainage', brand: 'VSD Air', specs: ['GI / SS Body', 'Custom Flow Rate', 'Easy-Clean'], image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
 ];
 
-/* ─── Helpers ────────────────────────────────────────────────────────────── */
+/* --- Helpers -------------------------------------------------------------- */
 
 const TAG_STYLES: Record<string, { bg: string; color: string; border: string }> = {
   Bestseller: { bg: 'rgba(201,168,76,0.14)', color: '#A67C32', border: 'rgba(201,168,76,0.35)' },
@@ -121,7 +121,7 @@ function TagBadge({ tag }: { tag: Product['tag'] }) {
   );
 }
 
-/* ─── Card image area ────────────────────────────────────────────────────── */
+/* --- Card image area ------------------------------------------------------ */
 function CardImageArea({ cat, product }: { cat: Category; product: Product }) {
   const CatIcon = cat.Icon;
   return (
@@ -151,7 +151,7 @@ function CardImageArea({ cat, product }: { cat: Category; product: Product }) {
   );
 }
 
-/* ─── Product Card ───────────────────────────────────────────────────────── */
+/* --- Product Card --------------------------------------------------------- */
 function ProductCard({ product, cat }: { product: Product; cat: Category }) {
   return (
     <article
@@ -296,7 +296,7 @@ function ProductCard({ product, cat }: { product: Product; cat: Category }) {
   );
 }
 
-/* ─── Main Export ────────────────────────────────────────────────────────── */
+/* --- Main Export ---------------------------------------------------------- */
 export default function OurProductsShowcase() {
   const [activeId, setActiveId] = useState<CategoryId>('cooking');
 
@@ -313,7 +313,7 @@ export default function OurProductsShowcase() {
         borderTop: '1px solid var(--border)',
       }}
     >
-      {/* ── Warm gold dot pattern — very subtle ─────────────────────────── */}
+      {/* -- Warm gold dot pattern — very subtle --------------------------- */}
       <div
         aria-hidden="true"
         className="absolute inset-0 pointer-events-none"
@@ -326,7 +326,7 @@ export default function OurProductsShowcase() {
         }}
       />
 
-      {/* ── Soft top-left gold bloom ─────────────────────────────────────── */}
+      {/* -- Soft top-left gold bloom --------------------------------------- */}
       <div
         aria-hidden="true"
         className="absolute pointer-events-none hidden lg:block"
@@ -354,7 +354,7 @@ export default function OurProductsShowcase() {
 
       <div className="container mx-auto" style={{ position: 'relative', zIndex: 1 }}>
 
-        {/* ── Section header ──────────────────────────────────────────────── */}
+        {/* -- Section header ------------------------------------------------ */}
         <div
           style={{
             display: 'flex',
@@ -410,7 +410,7 @@ export default function OurProductsShowcase() {
           </p>
         </div>
 
-        {/* ── Category tabs ────────────────────────────────────────────────── */}
+        {/* -- Category tabs -------------------------------------------------- */}
         <div
           role="tablist"
           aria-label="Filter products by category"
@@ -489,7 +489,7 @@ export default function OurProductsShowcase() {
           </div>
         </div>
 
-        {/* ── Products grid ─────────────────────────────────────────────────── */}
+        {/* -- Products grid --------------------------------------------------- */}
         <AnimatePresence mode="wait">
           <motion.div
             key={activeId}
@@ -514,7 +514,7 @@ export default function OurProductsShowcase() {
           </motion.div>
         </AnimatePresence>
 
-        {/* ── Bottom CTA ───────────────────────────────────────────────────── */}
+        {/* -- Bottom CTA ----------------------------------------------------- */}
         <div
           style={{
             display: 'flex',

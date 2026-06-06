@@ -1,4 +1,4 @@
-import Link from 'next/link';
+﻿import Link from 'next/link';
 import {
   ChefHat, PenTool, Wrench, Package, Settings, Building2,
   ArrowRight,
@@ -150,7 +150,7 @@ export default function ServicesOverview() {
     >
       <div className="container mx-auto">
 
-        {/* ── Section header — flex column so centering is explicit ──────── */}
+        {/* -- Section header — flex column so centering is explicit -------- */}
         <div
           style={{
             display: 'flex',
@@ -205,14 +205,14 @@ export default function ServicesOverview() {
           </p>
         </div>
 
-        {/* ── Service cards — 3-column grid ────────────────────────────── */}
+        {/* -- Service cards — 3-column grid ------------------------------ */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
           {services.map((service) => (
             <ServiceCard key={service.title} service={service} />
           ))}
         </div>
 
-        {/* ── Bottom CTA ───────────────────────────────────────────────── */}
+        {/* -- Bottom CTA ------------------------------------------------- */}
         <div
           style={{
             display: 'flex',
