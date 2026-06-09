@@ -581,7 +581,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link
             href="/"
-            style={{ display: 'flex', alignItems: 'center', overflow: 'hidden', background: '#fff', flexShrink: 0 }}
+            style={{ display: 'flex', alignItems: 'center', overflow: 'hidden', background: '#fff', flexShrink: 0 , padding:"1px 0px 0px 0px"}}
             aria-label="VSD International — Home"
             className='rounded-full'
           >
@@ -656,13 +656,13 @@ export default function Navbar() {
               <PhoneCall size={14} style={{ color: 'var(--gold)', flexShrink: 0 }} aria-hidden="true" />
               +91-9250346370
             </a>
-            <Link
-              href="/contact"
+            <button
+              onClick={() => window.dispatchEvent(new CustomEvent('vsd:open-enquiry'))}
               className="btn-gold"
-              style={{ padding: '0.55rem 1.375rem', fontSize: '0.875rem', minHeight: 'auto', borderRadius: 6, whiteSpace: 'nowrap' }}
+              style={{ padding: '0.55rem 1.375rem', fontSize: '0.875rem', minHeight: 'auto', borderRadius: 6, whiteSpace: 'nowrap', cursor: 'pointer' }}
             >
               Get Quote
-            </Link>
+            </button>
           </div>
 
           {/* -- Mobile hamburger — hidden at 1024px+ via CSS class -------- */}

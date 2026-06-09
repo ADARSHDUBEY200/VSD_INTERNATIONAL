@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
     root: path.resolve(__dirname),
   },
 
-  /* ── Image domains — add vsdinternational.com when live ──────────────── */
+  /* ── Image domains ───────────────────────────────────────────────────── */
   images: {
     remotePatterns: [
       {
@@ -23,6 +23,11 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'plus.unsplash.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
         pathname: '/**',
       },
     ],

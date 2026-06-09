@@ -4,6 +4,9 @@ import Navbar from '@/components/home/Navbar';
 import Hero from '@/components/home/Hero';
 import OurProductsShowcase from '@/components/home/OurProductsShowcase';
 import EnquireNow from '@/components/home/EnquireNow';
+import PreparationCarousel from '@/components/home/PreparationCarousel';
+import CookingEquipmentCarousel from '@/components/home/CookingEquipmentCarousel';
+import RefrigeratorsCarousel from '@/components/home/RefrigeratorsCarousel';
 import TrustMetrics from '@/components/home/TrustMetrics';
 import ClientLogos from '@/components/home/ClientLogos';
 import ServicesOverview from '@/components/home/ServicesOverview';
@@ -12,6 +15,7 @@ import FeaturedProject from '@/components/home/FeaturedProject';
 import ProcessWorkflow from '@/components/home/ProcessWorkflow';
 import BrandsStrip from '@/components/home/BrandsStrip';
 import VideoSection from '@/components/home/VideoSection';
+import DelhiLocalSection from '@/components/home/DelhiLocalSection';
 import Testimonials from '@/components/home/Testimonials';
 import FAQSection from '@/components/home/FAQSection';
 import BlogPreview from '@/components/home/BlogPreview';
@@ -19,21 +23,21 @@ import CitiesWeServe from '@/components/home/CitiesWeServe';
 import CTABanner from '@/components/home/CTABanner';
 import WhatsAppFloat from '@/components/home/WhatsAppFloat';
 import MobileFooterCTA from '@/components/home/MobileFooterCTA';
+import EnquiryModal from '@/components/home/EnquiryModal';
+import LeadPopup from '@/components/home/LeadPopup';
 import Footer from '@/components/home/Footer';
 
 /* --- Page Metadata ------------------------------------------------------- */
 export const metadata: Metadata = {
-  title:
-    'VSD International — Commercial Kitchen Equipment Manufacturer | ISO 9001 | Hyatt · Radisson · ITC',
+  title: 'Commercial Kitchen Equipment Manufacturer India | VSD',
   description:
-    'ISO 9001 certified commercial kitchen equipment supplier. Trusted by Hyatt, Radisson, Crowne Plaza & ITC. Hotel, hospital & cloud kitchen setup. Delhi factories. WhatsApp +91-9250346370.',
-  alternates: { canonical: 'https://vsdinternational.com' },
+    'ISO 9001-certified commercial kitchen equipment manufacturer in Delhi, supplying and installing turnkey kitchens for hotels, hospitals and cloud kitchens across India. Trusted by Hyatt, Radisson, ITC & Crowne Plaza. WhatsApp +91-9250346370.',
+  alternates: { canonical: 'https://vsdinternational.com/' },
   openGraph: {
-    url: 'https://vsdinternational.com',
-    title:
-      'VSD International — #1 Commercial Kitchen Equipment Manufacturer India | ISO 9001 | Hyatt · Radisson · ITC',
+    url: 'https://vsdinternational.com/',
+    title: 'Commercial Kitchen Equipment Manufacturer in India | VSD International',
     description:
-      'Complete Kitchen Solutions — 4.9★ · 312 reviews. ISO 9001 certified. Supply, design, install & AMC. Delhi factories. From ₹8 Lakhs. WhatsApp +91-9250346370.',
+      'ISO 9001 certified. Trusted by Hyatt, Radisson, ITC & Crowne Plaza. Turnkey kitchen supply, design, install & AMC from two Delhi factories. WhatsApp +91-9250346370.',
     images: [{ url: 'https://vsdinternational.com/og-image.jpg', width: 1200, height: 630 }],
   },
 };
@@ -62,13 +66,22 @@ export default function HomePage() {
         <EnquireNow />
 
 
+        <PreparationCarousel />
+
+
         <ServicesOverview />
+
+
+        <CookingEquipmentCarousel />
 
 
         <ClientLogos />
 
 
         <IndustriesServed />
+
+
+        <RefrigeratorsCarousel />
 
 
         <FeaturedProject />
@@ -81,6 +94,9 @@ export default function HomePage() {
 
 
         <VideoSection />
+
+
+        <DelhiLocalSection />
 
 
         <Testimonials />
@@ -107,6 +123,8 @@ export default function HomePage() {
 
       <WhatsAppFloat />
       <MobileFooterCTA />
+      <EnquiryModal />
+      <LeadPopup />
     </>
   );
 }

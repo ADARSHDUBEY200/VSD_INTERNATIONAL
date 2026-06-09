@@ -404,8 +404,8 @@ h1, h2, h3, h4, h5, h6 {
   100% { opacity: 0; }
 }
 @keyframes hero-burner-glow {
-  0%, 100% { opacity: 0.09; }
-  50%       { opacity: 0.15; }
+  0%, 100% { opacity: 0.45; }
+  50%       { opacity: 0.65; }
 }
 
 /* Grain overlay — subtle texture on dark sections */
@@ -556,6 +556,14 @@ h1, h2, h3, h4, h5, h6 {
   100% { transform: translateX(500%) skewX(-15deg); opacity: 0; }
 }
 
+/* Bold golden sweep — wide, bright beam matching premium banner design */
+@keyframes bar-shine-bold {
+  0%          { transform: translateX(-160%) skewX(-18deg); opacity: 0; }
+  5%          { opacity: 1; }
+  38%         { transform: translateX(340%) skewX(-18deg); opacity: 0; }
+  100%        { transform: translateX(340%) skewX(-18deg); opacity: 0; }
+}
+
 /* ════════════════════════════════════════════════════════════════════════════
    TRUST METRICS — Mobile Horizontal Scroll + Premium Card Style
    ════════════════════════════════════════════════════════════════════════════ */
@@ -654,3 +662,321 @@ h1, h2, h3, h4, h5, h6 {
    ════════════════════════════════════════════════════════════════════════════ */
 
 .cat-tabs-scroll::-webkit-scrollbar { display: none; }
+
+/* ════════════════════════════════════════════════════════════════════════════
+   PRODUCT SHOWCASE — Shine animations
+   ════════════════════════════════════════════════════════════════════════════ */
+
+@keyframes shine-left-to-right {
+  0%   { left: -70%; }
+  100% { left: 130%; }
+}
+
+/* Card shine sweep — loops continuously */
+@keyframes card-shine-loop {
+  0%   { left: -70%; opacity: 0; }
+  6%   { opacity: 1; }
+  40%  { left: 130%; opacity: 0; }
+  100% { left: 130%; opacity: 0; }
+}
+.product-card-shine-overlay {
+  position: absolute;
+  top: 0;
+  left: -70%;
+  width: 55%;
+  height: 100%;
+  background: linear-gradient(105deg, transparent 35%, rgba(255,255,255,0.13) 50%, transparent 65%);
+  transform: skewX(-12deg);
+  pointer-events: none;
+  z-index: 5;
+  animation: card-shine-loop 3.6s ease-in-out infinite;
+}
+
+/* Enquire button shine on hover */
+.product-enquire-btn {
+  position: relative;
+  overflow: hidden;
+}
+.product-enquire-btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -70%;
+  width: 55%;
+  height: 100%;
+  background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.46) 50%, transparent 70%);
+  transform: skewX(-15deg);
+  pointer-events: none;
+}
+.product-enquire-btn:hover::after {
+  animation: shine-left-to-right 0.52s ease forwards;
+}
+
+/* Active category tab — repeating periodic shine */
+@keyframes tab-active-shine {
+  0%   { left: -70%; opacity: 0; }
+  6%   { opacity: 1; }
+  38%  { left: 130%; opacity: 0; }
+  100% { left: 130%; opacity: 0; }
+}
+.cat-tab-active {
+  position: relative;
+  overflow: hidden;
+}
+.cat-tab-active::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -70%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(105deg, transparent 28%, rgba(255,255,255,0.36) 50%, transparent 72%);
+  transform: skewX(-18deg);
+  pointer-events: none;
+  animation: tab-active-shine 3.4s ease-in-out infinite;
+}
+
+/* Inactive category tab — shine on hover */
+.cat-tab-inactive {
+  position: relative;
+  overflow: hidden;
+}
+.cat-tab-inactive::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -70%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(105deg, transparent 28%, rgba(201,168,76,0.20) 50%, transparent 72%);
+  transform: skewX(-18deg);
+  pointer-events: none;
+}
+.cat-tab-inactive:hover::after {
+  animation: shine-left-to-right 0.5s ease forwards;
+}
+
+/* Product card image zoom on card hover */
+.product-card:hover .product-card-img {
+  transform: scale(1.06);
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   PREPARATION CAROUSEL
+   ════════════════════════════════════════════════════════════════════════════ */
+
+.prep-carousel-main-img {
+  transition: transform 0.52s ease;
+}
+.prep-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 18px 48px rgba(0,0,0,0.13) !important;
+}
+.prep-card:hover .prep-carousel-main-img {
+  transform: scale(1.06);
+}
+.prep-carousel-thumb-img {
+  transition: transform 0.4s ease;
+}
+.prep-card:hover .prep-carousel-thumb-img {
+  transform: scale(1.08);
+}
+
+/* Hide webkit scrollbar on carousel track */
+.prep-carousel-track::-webkit-scrollbar { display: none; }
+
+/* Responsive card width — shrinks below 530px on small screens */
+.prep-card {
+  width: min(530px, calc(100vw - 40px));
+}
+
+/* Mobile overrides */
+@media (max-width: 640px) {
+  .prep-carousel-track {
+    padding: 14px 16px !important;
+  }
+  .prep-fade-left,
+  .prep-fade-right {
+    width: 36px !important;
+  }
+  .prep-card {
+    height: 220px !important;
+  }
+}
+
+/* Nav button hover */
+.prep-nav-next:hover {
+  transform: translateY(-50%) scale(1.08) !important;
+  box-shadow: 0 6px 22px rgba(201,168,76,0.55) !important;
+}
+.prep-nav-prev:hover {
+  transform: translateY(-50%) scale(1.08) !important;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.16) !important;
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   MOBILE FOOTER CTA — SHINE ANIMATION
+   ════════════════════════════════════════════════════════════════════════════ */
+
+@keyframes mob-btn-shine {
+  0%   { left: -70%; opacity: 0; }
+  8%   { opacity: 1; }
+  45%  { left: 130%; opacity: 0; }
+  100% { left: 130%; opacity: 0; }
+}
+
+/* Ghost "View Projects" button */
+.mob-cta-ghost {
+  position: relative;
+  overflow: hidden;
+}
+.mob-cta-ghost::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -70%;
+  width: 50%; height: 100%;
+  background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.20) 50%, transparent 70%);
+  transform: skewX(-12deg);
+  pointer-events: none;
+  animation: mob-btn-shine 3.4s ease-in-out infinite;
+}
+
+/* Solid gold "Call Now" button */
+.mob-cta-solid {
+  position: relative;
+  overflow: hidden;
+}
+.mob-cta-solid::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -70%;
+  width: 50%; height: 100%;
+  background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.32) 50%, transparent 70%);
+  transform: skewX(-12deg);
+  pointer-events: none;
+  animation: mob-btn-shine 3.0s ease-in-out 1.6s infinite;
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   COOKING EQUIPMENT CAROUSEL
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* Card hover — scale + lift with spring-style easing */
+.cook-card {
+  transition: transform 0.34s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.34s ease;
+  scroll-snap-align: start;
+  position: relative;
+}
+.cook-card:hover {
+  transform: scale(1.05) translateY(-10px);
+  box-shadow: 0 28px 60px rgba(0,0,0,0.20) !important;
+  z-index: 2;
+}
+
+/* Image zoom on card hover */
+.cook-card-img {
+  transition: transform 0.52s ease;
+}
+.cook-card:hover .cook-card-img {
+  transform: scale(1.08);
+}
+
+/* "View Details" button hover */
+.cook-enquire-btn {
+  transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+}
+.cook-enquire-btn:hover {
+  background: rgba(201,168,76,0.22) !important;
+  border-color: rgba(201,168,76,0.65) !important;
+  color: var(--gold-light) !important;
+}
+
+/* Scrollbar hidden */
+.cook-carousel-track::-webkit-scrollbar { display: none; }
+
+/* Nav button hover */
+.cook-nav-next:hover {
+  transform: translateY(-50%) scale(1.08) !important;
+  box-shadow: 0 6px 22px rgba(201,168,76,0.55) !important;
+}
+.cook-nav-prev:hover {
+  transform: translateY(-50%) scale(1.08) !important;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.16) !important;
+}
+
+/* Mobile overrides */
+@media (max-width: 640px) {
+  .cook-carousel-track {
+    padding: 24px 16px !important;
+  }
+  .cook-fade-left,
+  .cook-fade-right {
+    width: 36px !important;
+  }
+  .cook-card {
+    width: calc(75vw) !important;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   REFRIGERATORS CAROUSEL
+   ════════════════════════════════════════════════════════════════════════════ */
+
+.refrig-card {
+  transition: transform 0.34s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.34s ease;
+  scroll-snap-align: start;
+}
+.refrig-card:hover {
+  transform: scale(1.05) translateY(-12px);
+  box-shadow: 0 32px 64px rgba(0,0,0,0.22) !important;
+  z-index: 2;
+}
+
+/* Image zoom on hover */
+.refrig-card-img {
+  transition: transform 0.52s ease;
+}
+.refrig-card:hover .refrig-card-img {
+  transform: scale(1.08);
+}
+
+/* White pill CTA hover — turns gold */
+.refrig-enquire-btn {
+  transition: background 0.20s ease, color 0.20s ease, box-shadow 0.20s ease;
+}
+.refrig-enquire-btn:hover {
+  background: var(--gold) !important;
+  color: #1A1508 !important;
+  box-shadow: 0 4px 16px rgba(201,168,76,0.45);
+}
+
+/* Scrollbar hidden */
+.refrig-carousel-track::-webkit-scrollbar { display: none; }
+
+/* Nav button hover */
+.refrig-nav-next:hover {
+  transform: translateY(-50%) scale(1.08) !important;
+  box-shadow: 0 6px 22px rgba(201,168,76,0.55) !important;
+}
+.refrig-nav-prev:hover {
+  transform: translateY(-50%) scale(1.08) !important;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.16) !important;
+}
+
+/* Mobile overrides */
+@media (max-width: 640px) {
+  .refrig-carousel-track {
+    padding: 24px 16px !important;
+  }
+  .refrig-fade-left,
+  .refrig-fade-right {
+    width: 36px !important;
+  }
+  .refrig-card {
+    width: calc(85vw) !important;
+    height: 480px !important;
+  }
+}
+

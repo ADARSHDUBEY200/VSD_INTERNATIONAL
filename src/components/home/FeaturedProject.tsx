@@ -332,7 +332,7 @@ export default function FeaturedProject() {
     <section
       aria-labelledby="project-heading"
       className="relative overflow-hidden"
-      style={{ background: 'var(--charcoal)', padding: '5.5rem 0' }}
+      style={{ background: 'var(--charcoal)', padding: '2.5rem 0' }}
     >
       {/* -- Gold top bar --------------------------------------------------- */}
       <div
@@ -366,7 +366,7 @@ export default function FeaturedProject() {
       <div className="container mx-auto" style={{ position: 'relative', zIndex: 1 }}>
 
         {/* -- Section header ------------------------------------------------ */}
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', marginBottom: '3.5rem' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', marginBottom: '1.5rem' }}>
           <p className="section-label" style={{ marginBottom: '0.75rem' }}>Case Study</p>
           <h2
             id="project-heading"
@@ -384,9 +384,6 @@ export default function FeaturedProject() {
             </em>
           </h2>
           <div aria-hidden="true" style={{ width: 60, height: 3, background: 'linear-gradient(90deg, var(--gold-bright), var(--gold), var(--gold-deep))', borderRadius: 2, marginTop: '1.25rem' }} />
-          <p style={{ marginTop: '1.125rem', color: 'rgba(245,240,232,0.48)', fontSize: '1rem', fontFamily: 'var(--font-inter)', lineHeight: 1.75, maxWidth: '560px' }}>
-            A ₹42-lakh complete kitchen overhaul across 4 zones — delivered in 21 days with zero disruption to hotel operations.
-          </p>
         </div>
 
         {/* -- Main showcase card --------------------------------------------- */}
@@ -595,116 +592,6 @@ export default function FeaturedProject() {
           ))}
         </div>
 
-        {/* -- Deliverables grid ---------------------------------------------- */}
-        <div style={{ marginTop: '2.5rem' }}>
-          <p
-            style={{
-              fontFamily: 'var(--font-inter)',
-              fontSize: '0.625rem',
-              fontWeight: 700,
-              letterSpacing: '0.2em',
-              textTransform: 'uppercase',
-              color: 'var(--gold)',
-              marginBottom: '1.25rem',
-              textAlign: 'center',
-            }}
-          >
-            Equipment &amp; Services Delivered
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {DELIVERABLE_GROUPS.map((group, i) => (
-              <DeliverableCard key={group.category} group={group} delay={i * 80} />
-            ))}
-          </div>
-        </div>
-
-        {/* -- Testimonial ---------------------------------------------------- */}
-        <div
-          style={{
-            marginTop: '2.5rem',
-            padding: 'clamp(2rem, 4vw, 3rem)',
-            borderRadius: 20,
-            background: 'var(--charcoal-mid)',
-            border: '1px solid rgba(201,168,76,0.18)',
-            position: 'relative',
-            overflow: 'hidden',
-          }}
-        >
-          {/* Gold left border */}
-          <div
-            aria-hidden="true"
-            style={{
-              position: 'absolute', top: 0, left: 0, bottom: 0, width: '3px',
-              background: 'linear-gradient(180deg, var(--gold-bright), var(--gold), var(--gold-deep))',
-            }}
-          />
-
-          {/* Decorative large quote marks */}
-          <svg
-            aria-hidden="true"
-            width="72"
-            height="52"
-            viewBox="0 0 72 52"
-            fill="none"
-            style={{ marginBottom: '1.25rem', opacity: 0.22 }}
-          >
-            <text x="0" y="50" fontFamily="'Playfair Display',Georgia,serif" fontSize="90" fill="var(--gold)">&ldquo;</text>
-          </svg>
-
-          <blockquote style={{ margin: 0 }}>
-            <p
-              style={{
-                fontFamily: 'var(--font-playfair)',
-                fontSize: 'clamp(1.0625rem, 2vw, 1.375rem)',
-                fontStyle: 'italic',
-                fontWeight: 500,
-                color: 'rgba(245,240,232,0.82)',
-                lineHeight: 1.72,
-                maxWidth: '760px',
-                marginBottom: '1.75rem',
-              }}
-            >
-              &ldquo;VSD International delivered the complete kitchen overhaul at Hyatt Regency Delhi in just
-              21 days — on budget and with zero disruption to hotel operations. Their team&apos;s
-              professionalism, technical expertise, and post-commissioning support have been exceptional.
-              We have already engaged them for our second property.&rdquo;
-            </p>
-
-            <footer style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', flexWrap: 'wrap' }}>
-              {/* Avatar placeholder */}
-              <div
-                style={{
-                  width: 48, height: 48, borderRadius: '50%',
-                  background: 'rgba(201,168,76,0.12)',
-                  border: '1.5px solid rgba(201,168,76,0.28)',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  flexShrink: 0,
-                }}
-                aria-hidden="true"
-              >
-                <span style={{ fontFamily: 'var(--font-playfair)', fontSize: '1.25rem', color: 'var(--gold)', fontWeight: 700 }}>F</span>
-              </div>
-
-              <div>
-                <p style={{ fontFamily: 'var(--font-inter)', fontWeight: 700, fontSize: '0.9375rem', color: 'var(--gold)', marginBottom: '0.1rem' }}>
-                  F&amp;B Director
-                </p>
-                <p style={{ fontFamily: 'var(--font-inter)', fontSize: '0.875rem', color: 'rgba(245,240,232,0.45)' }}>
-                  Hyatt Regency New Delhi
-                </p>
-              </div>
-
-              {/* Star rating */}
-              <div style={{ marginLeft: 'auto', display: 'flex', gap: '0.2rem' }} aria-label="5 star review">
-                {[1,2,3,4,5].map(s => (
-                  <svg key={s} width="16" height="16" viewBox="0 0 14 14" fill="var(--gold)" aria-hidden="true">
-                    <path d="M7 1l1.545 3.13 3.455.503-2.5 2.435.59 3.44L7 8.895l-3.09 1.623.59-3.44L2 4.633l3.455-.503L7 1z" />
-                  </svg>
-                ))}
-              </div>
-            </footer>
-          </blockquote>
-        </div>
 
         {/* -- CTAs ----------------------------------------------------------- */}
         <div

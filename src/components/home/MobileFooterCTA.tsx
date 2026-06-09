@@ -37,6 +37,7 @@ export default function MobileFooterCTA() {
           {/* View Projects — ghost gold */}
           <Link
             href="/projects"
+            className="mob-cta-ghost"
             style={{
               flex: 1,
               display: 'flex',
@@ -63,6 +64,7 @@ export default function MobileFooterCTA() {
           {/* Call Now — solid gold */}
           <a
             href="tel:+919250346370"
+            className="mob-cta-solid"
             style={{
               flex: 1,
               display: 'flex',

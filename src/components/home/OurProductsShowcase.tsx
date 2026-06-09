@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -11,20 +11,34 @@ import {
   ChefHat,
   Droplets,
   UtensilsCrossed,
-  Wind,
+  Monitor,
+  Package,
+  Utensils,
+  Archive,
+  Wine,
+  Zap,
 } from 'lucide-react';
 import Image from 'next/image';
 
 /* --- Types ---------------------------------------------------------------- */
 
-type CategoryId = 'cooking' | 'refrigeration' | 'bakery' | 'dishwashing' | 'food-prep' | 'ventilation';
+type CategoryId =
+  | 'preparation'
+  | 'cooking'
+  | 'refrigerators'
+  | 'cold-display'
+  | 'pantry'
+  | 'food-service'
+  | 'storage'
+  | 'dishwashing'
+  | 'bar-imported'
+  | 'bakery'
+  | 'fryer-combi';
 
 type Category = {
   id: CategoryId;
   label: string;
-  accentFrom: string;
-  accentTo: string;
-  Icon: React.ComponentType<{ size?: number; strokeWidth?: number; style?: React.CSSProperties; 'aria-hidden'?: true }>;
+  Icon: React.ComponentType<{ size?: number; strokeWidth?: number; 'aria-hidden'?: true }>;
 };
 
 type Product = {
@@ -41,59 +55,74 @@ type Product = {
 /* --- Data ----------------------------------------------------------------- */
 
 const CATEGORIES: Category[] = [
-  { id: 'cooking', label: 'Cooking Equipment', accentFrom: 'rgba(240,120,60,0.12)', accentTo: 'rgba(201,168,76,0.18)', Icon: Flame },
-  { id: 'refrigeration', label: 'Refrigeration', accentFrom: 'rgba(80,160,220,0.10)', accentTo: 'rgba(201,168,76,0.14)', Icon: Thermometer },
-  { id: 'bakery', label: 'Bakery Equipment', accentFrom: 'rgba(220,150,60,0.12)', accentTo: 'rgba(201,168,76,0.18)', Icon: ChefHat },
-  { id: 'dishwashing', label: 'Dishwashing', accentFrom: 'rgba(60,190,180,0.10)', accentTo: 'rgba(201,168,76,0.14)', Icon: Droplets },
-  { id: 'food-prep', label: 'Food Preparation', accentFrom: 'rgba(80,180,100,0.10)', accentTo: 'rgba(201,168,76,0.16)', Icon: UtensilsCrossed },
-  { id: 'ventilation', label: 'Ventilation', accentFrom: 'rgba(130,130,180,0.10)', accentTo: 'rgba(201,168,76,0.14)', Icon: Wind },
+  { id: 'preparation',   label: 'Preparation Equipment',  Icon: UtensilsCrossed },
+  { id: 'cooking',       label: 'Cooking Equipment',       Icon: Flame },
+  { id: 'refrigerators', label: 'Refrigerators',           Icon: Thermometer },
+  { id: 'cold-display',  label: 'Cold Display Counter',    Icon: Monitor },
+  { id: 'pantry',        label: 'Pantry Equipments',       Icon: Package },
+  { id: 'food-service',  label: 'Food Service Equipment',  Icon: Utensils },
+  { id: 'storage',       label: 'Storage Equipment',       Icon: Archive },
+  { id: 'dishwashing',   label: 'Dish Washing Machine',    Icon: Droplets },
+  { id: 'bar-imported',  label: 'Bar & Imported Equipment',Icon: Wine },
+  { id: 'bakery',        label: 'Bakery Equipment',        Icon: ChefHat },
+  { id: 'fryer-combi',   label: 'Fryer Combi Oven',        Icon: Zap },
 ];
 
+const IMG = 'https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D';
+
 const PRODUCTS: Product[] = [
-  /* -- Cooking ------------------------------------------------------------ */
-  { id: 1,  categoryId: 'cooking',       name: 'Heavy Duty Gas Range',         brand: 'VSD Pro',       description: 'High-output 6-burner range built for peak-volume hotel and restaurant kitchens.',         specs: ['6 Burners', 'LPG / PNG', 'SS 304 Body'],              tag: 'Bestseller', image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-  { id: 2,  categoryId: 'cooking',       name: 'Rational Combi Steam Oven',    brand: 'Rational',      description: 'Intelligent combi steamer that bakes, roasts and steams with precision and consistency.',  specs: ['Steam + Convection', '6 GN 1/1', 'Self-Cleaning'],    tag: 'Premium',    image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-  { id: 3,  categoryId: 'cooking',       name: 'Commercial Tandoor',            brand: 'VSD Classic',   description: 'Traditional clay-body tandoor delivering authentic char and flavour for Indian cuisines.',  specs: ['Clay Inner Body', 'Gas Fired', 'SS Outer Shell'],                        image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-  { id: 4,  categoryId: 'cooking',       name: 'Deep Fat Fryer',                brand: 'VSD Pro',       description: 'Twin-tank fryer with rapid heat recovery for continuous, high-volume fry output.',         specs: ['18 L × 2 Tank', 'Fast Recovery', 'Safety Cutout'],                       image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-  { id: 5,  categoryId: 'cooking',       name: 'Tilting Bratt Pan',             brand: 'VSD Pro',       description: 'Multi-purpose tilting pan ideal for braising, boiling and frying in a single vessel.',     specs: ['40 L Capacity', 'Gas Heated', 'Tilt Mechanism'],                          image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-  { id: 6,  categoryId: 'cooking',       name: 'Salamander Grill',              brand: 'VSD Pro',       description: 'Overhead radiant grill for finishing dishes, glazing sauces and rapid surface melting.',   specs: ['Radiant Heat', 'Adjustable Shelf', '800 °C Max'],                         image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-  /* -- Refrigeration ------------------------------------------------------ */
-  { id: 7,  categoryId: 'refrigeration', name: 'Reach-In Refrigerator',         brand: 'VSD Cold',      description: 'Heavy-duty upright refrigerator keeping produce consistently fresh at 2–8 °C.',           specs: ['600 L / 1200 L', '2 – 8 °C', 'SS Interior'],         tag: 'Bestseller', image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-  { id: 8,  categoryId: 'refrigeration', name: 'Blast Chiller / Freezer',       brand: 'VSD Cold',      description: 'HACCP-compliant rapid-chill unit that brings hot food to safe temperatures in minutes.',    specs: ['3-Cycle Program', '−40 °C Blast', 'HACCP Probe'],     tag: 'Premium',    image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-  { id: 9,  categoryId: 'refrigeration', name: 'Walk-In Cold Room',             brand: 'VSD Custom',    description: 'Custom-built insulated cold room manufactured to your exact kitchen floor plan.',           specs: ['Any Dimension', 'PUF Panels', 'Custom Layout'],                           image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-  { id: 10, categoryId: 'refrigeration', name: 'Prep Table Refrigerator',       brand: 'VSD Cold',      description: 'Refrigerated prep station with integrated GN pan inserts for live-line kitchen use.',      specs: ['Marble Top', 'GN Pans Included', 'SS 304'],                               image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-  { id: 11, categoryId: 'refrigeration', name: 'Display Chiller Counter',       brand: 'VSD Cold',      description: 'LED-lit glass-top chiller counter for front-of-house dessert and drinks display.',         specs: ['1.5 m / 2 m Length', 'Glass Top', 'LED Lit'],                            image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-  { id: 12, categoryId: 'refrigeration', name: 'Ice Flake Machine',             brand: 'Scotsman',      description: 'Continuous-production ice flaker for food display, bar service and cold-chain use.',       specs: ['30 kg / day', 'Water-Cooled', 'Hygienic Ice'],                            image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-  /* -- Bakery ------------------------------------------------------------- */
-  { id: 13, categoryId: 'bakery',        name: 'Deck Oven',                     brand: 'VSD Bake',      description: 'Stone-sole deck oven producing artisan-quality bread, pizza and pastry every bake.',       specs: ['2 / 3 Deck', 'Stone Sole Plate', 'Steam Injection'], tag: 'Bestseller', image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-  { id: 14, categoryId: 'bakery',        name: 'Spiral Dough Mixer',            brand: 'VSD Bake',      description: 'High-torque spiral mixer delivering consistent dough development at commercial volume.',    specs: ['20 L / 40 L Bowl', 'Direct Drive', 'Timer Control'],                     image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-  { id: 15, categoryId: 'bakery',        name: 'Rotary Rack Oven',              brand: 'VSD Bake',      description: 'Fan-forced rotary oven baking 18 trays simultaneously with even colour and texture.',      specs: ['18-Tray Rack', 'Gas / Electric', 'Fan-Forced'],       tag: 'Premium',    image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-  { id: 16, categoryId: 'bakery',        name: 'Bread Proofer',                 brand: 'VSD Bake',      description: 'Humidity-controlled proofing cabinet ensuring perfect dough fermentation every batch.',     specs: ['16 / 32 Tray', 'Humidity Control', 'Digital Display'],                   image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-  { id: 17, categoryId: 'bakery',        name: 'Dough Sheeter',                 brand: 'VSD Bake',      description: 'Motorised sheeter rolling dough to precise, uniform thickness — reversible for all types.', specs: ['520 mm Wide', 'Adjustable Thickness', 'Reversible'],                     image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-  /* -- Dishwashing -------------------------------------------------------- */
-  { id: 18, categoryId: 'dishwashing',   name: 'Rack Conveyor Dishwasher',      brand: 'VSD Wash',      description: 'High-capacity conveyor dishwasher built for large hotel, banquet and catering operations.', specs: ['1 200 Racks / hr', 'Hot Water Rinse', 'Auto Dosing'],  tag: 'Bestseller', image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-  { id: 19, categoryId: 'dishwashing',   name: 'Undercounter Glasswasher',      brand: 'VSD Wash',      description: 'Compact glasswasher delivering spot-free, hygienically clean results in 90-second cycles.',  specs: ['40 Cycles / hr', 'Low Water Use', 'SS Body'],                            image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-  { id: 20, categoryId: 'dishwashing',   name: 'Flight Type Dishwasher',        brand: 'VSD Wash',      description: 'Continuous-feed flight washer handling very high plate volumes for institutional kitchens.', specs: ['2 400 Plates / hr', 'Continuous Feed', 'Energy Save'],  tag: 'Premium',    image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-  { id: 21, categoryId: 'dishwashing',   name: 'Pot & Pan Washer',              brand: 'VSD Wash',      description: 'High-pressure tank washer that blasts stubborn baked-on food from heavy commercial pots.',  specs: ['High-Pressure Arms', 'Chemical Dosing', 'SS Basket'],                     image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-  /* -- Food Prep ---------------------------------------------------------- */
-  { id: 22, categoryId: 'food-prep',     name: 'Planetary Mixer',               brand: 'Robot Coupe',   description: 'Versatile planetary mixer with multi-attachments for dough, batter and whipping at volume.',  specs: ['7 L / 20 L Bowl', '3-Speed', 'Multi-Attachment'],    tag: 'Bestseller', image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-  { id: 23, categoryId: 'food-prep',     name: 'Food Processor',                brand: 'Robot Coupe',   description: 'Heavy-duty food processor that chops, slices, dices and purées ingredients at speed.',       specs: ['10 L Bowl', 'S-Blade', 'Vegetable Discs'],                               image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-  { id: 24, categoryId: 'food-prep',     name: 'Vegetable Cutter',              brand: 'Robot Coupe',   description: 'High-throughput veg cutter with quick-change discs for every slice, dice and julienne.',    specs: ['300 kg / hr', 'Quick-Change Discs', 'SS Construction'],                  image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-  { id: 25, categoryId: 'food-prep',     name: 'Immersion Blender',             brand: 'Hamilton Beach', description: 'Powerful stick blender for bulk soups, sauces and puréeing directly in cooking vessels.',    specs: ['500 W – 1 HP', 'Variable Speed', 'SS Shaft'],                            image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-  { id: 26, categoryId: 'food-prep',     name: 'Commercial Blender',            brand: 'Vitamix',       description: 'High-performance commercial blender for smoothies, cocktails and professional prep tasks.',  specs: ['3 HP Motor', 'Variable Speed', 'Quiet Shield'],       tag: 'Premium',    image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-  /* -- Ventilation -------------------------------------------------------- */
-  { id: 27, categoryId: 'ventilation',   name: 'SS Exhaust Hood',               brand: 'VSD Air',       description: 'Custom SS 304 hood designed to capture grease, heat and smoke from any cooking line.',       specs: ['SS 304 Body', 'Baffle Filters', 'Custom Sizes'],      tag: 'Bestseller', image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-  { id: 28, categoryId: 'ventilation',   name: 'Make-Up Air Unit',              brand: 'VSD Air',       description: 'Tempered fresh-air supply unit that balances kitchen pressure for safe daily operation.',    specs: ['Positive Pressure', 'Tempered Air', 'Auto Damper'],                       image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-  { id: 29, categoryId: 'ventilation',   name: 'UV Odour Control System',       brand: 'VSD Air',       description: 'UV-C lamp array neutralising kitchen odours and grease vapour before atmospheric discharge.', specs: ['UV-C Lamp Array', 'Odour Neutralise', 'Low Maintenance'], tag: 'Premium',  image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-  { id: 30, categoryId: 'ventilation',   name: 'Grease Trap & Drainage',        brand: 'VSD Air',       description: 'Pre-treatment grease interceptor preventing FOG build-up from blocking commercial drains.',  specs: ['GI / SS Body', 'Custom Flow Rate', 'Easy-Clean'],                        image: "https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+  /* Preparation Equipment */
+  { id: 1,  categoryId: 'preparation',   name: 'Planetary Mixer',           brand: 'Robot Coupe',    description: 'Versatile planetary mixer with multi-attachments for dough, batter and cream whipping at high commercial volume.',      specs: ['7 L / 20 L Bowl', '3-Speed Drive', 'Multi-Attachment', 'SS Body'],        tag: 'Bestseller', image: IMG },
+  { id: 2,  categoryId: 'preparation',   name: 'Vegetable Cutter',          brand: 'Robot Coupe',    description: 'High-throughput cutter with quick-change discs for every slice, dice and julienne cut your menu demands.',              specs: ['300 kg / hr', 'Quick-Change Discs', 'SS Construction'],                                     image: IMG },
+  { id: 3,  categoryId: 'preparation',   name: 'Meat Mincer / Grinder',     brand: 'VSD Pro',        description: 'Heavy-duty electric mincer delivering consistent mince quality for butchery, catering and production kitchens.',        specs: ['22 kg / hr', 'SS Auger', 'Reversible Motor', 'FSSAI Safe'],                                image: IMG },
+  /* Cooking Equipment */
+  { id: 4,  categoryId: 'cooking',       name: 'Heavy Duty Gas Range',      brand: 'VSD Pro',        description: 'High-output 6-burner range engineered for peak-volume hotel and restaurant kitchens with daily heavy use.',             specs: ['6 Burners', 'LPG / PNG', 'SS 304 Body', 'Auto Ignition'],                 tag: 'Bestseller', image: IMG },
+  { id: 5,  categoryId: 'cooking',       name: 'Tilting Bratt Pan',         brand: 'VSD Pro',        description: 'Multi-purpose tilting pan ideal for braising, boiling and frying large quantities in a single heavy-duty vessel.',      specs: ['40 L Capacity', 'Gas Heated', 'Tilt Mechanism', 'SS 304'],                                 image: IMG },
+  { id: 6,  categoryId: 'cooking',       name: 'Commercial Tandoor',        brand: 'VSD Classic',    description: 'Traditional clay-body tandoor delivering authentic char and flavour for Indian cuisines in hotel and restaurant kitchens.', specs: ['Clay Inner Body', 'Gas Fired', 'SS Outer Shell'],                                        image: IMG },
+  /* Refrigerators */
+  { id: 7,  categoryId: 'refrigerators', name: 'Reach-In Refrigerator',     brand: 'VSD Cold',       description: 'Heavy-duty upright refrigerator keeping produce consistently fresh at 2–8 °C for high-volume commercial kitchens.',     specs: ['600 L / 1200 L', '2–8 °C', 'SS Interior', 'Digital Thermostat'],          tag: 'Bestseller', image: IMG },
+  { id: 8,  categoryId: 'refrigerators', name: 'Blast Chiller / Freezer',   brand: 'VSD Cold',       description: 'HACCP-compliant rapid-chill unit that brings hot food to safe temperatures in minutes, protecting quality and compliance.', specs: ['3-Cycle Program', '−40 °C Blast', 'HACCP Probe'],                          tag: 'Premium',    image: IMG },
+  { id: 9,  categoryId: 'refrigerators', name: 'Walk-In Cold Room',         brand: 'VSD Custom',     description: 'Custom-built insulated cold room manufactured precisely to your kitchen floor plan, dimensions and temperature needs.',  specs: ['Any Dimension', 'PUF Panels', 'Custom Layout', 'Remote Condenser'],                        image: IMG },
+  /* Cold Display Counter */
+  { id: 10, categoryId: 'cold-display',  name: 'Display Chiller Counter',   brand: 'VSD Cold',       description: 'LED-lit glass-top chiller counter for elegant front-of-house dessert, dairy and cold beverage display.',               specs: ['1.5 m / 2 m Length', 'Glass Top', 'LED Lit', '2–8 °C'],                  tag: 'Bestseller', image: IMG },
+  { id: 11, categoryId: 'cold-display',  name: 'Prep Table Refrigerator',   brand: 'VSD Cold',       description: 'Refrigerated prep station with integrated GN pan inserts keeping ingredients chilled for live-line kitchen use.',       specs: ['Marble / SS Top', 'GN Pans Included', 'SS 304', 'Digital Control'],                       image: IMG },
+  { id: 12, categoryId: 'cold-display',  name: 'Open Front Chiller',        brand: 'VSD Cold',       description: 'Open-front refrigerated showcase ideal for supermarket, café and deli environments with high grab-and-go demand.',       specs: ['Fan-Cooled', '1.5 m Wide', 'LED Canopy', 'Auto Defrost'],                                  image: IMG },
+  /* Pantry Equipments */
+  { id: 13, categoryId: 'pantry',        name: 'Commercial Microwave',      brand: 'Panasonic',      description: 'Heavy-duty commercial microwave built for continuous use in busy pantry and service kitchen environments.',             specs: ['1800 W Output', 'Multi-Stage Cooking', 'SS Interior', '25 L Capacity'], tag: 'Bestseller', image: IMG },
+  { id: 14, categoryId: 'pantry',        name: 'Conveyor Toaster',          brand: 'VSD Pro',        description: 'High-speed conveyor toaster for consistent browning in high-turnover breakfast, banquet and café settings.',            specs: ['360 Slices / hr', 'Variable Speed', 'Removable Crumb Tray'],                              image: IMG },
+  { id: 15, categoryId: 'pantry',        name: 'Juice Extractor',           brand: 'Hamilton Beach', description: 'High-yield centrifugal juicer extracting maximum juice from citrus and soft fruits for breakfast service.',             specs: ['120 Oranges / hr', 'Removable Parts', 'NSF Certified', 'Auto-Feed'],                       image: IMG },
+  /* Food Service Equipment */
+  { id: 16, categoryId: 'food-service',  name: 'Bain Marie Counter',        brand: 'VSD Pro',        description: 'Wet-heat bain marie keeping portioned dishes at safe serving temperature throughout long buffet and banquet service.',   specs: ['4 / 6 GN Pots', '70–90 °C Hold', 'SS 304 Body', 'Tap Drain'],            tag: 'Bestseller', image: IMG },
+  { id: 17, categoryId: 'food-service',  name: 'Soup Kettle',               brand: 'VSD Pro',        description: 'Double-walled electric soup kettle maintaining precise serving temperature without scorching for all-day soup service.', specs: ['15 L / 30 L', 'Ladle Holder', 'Digital Display', 'Drip Tray'],                            image: IMG },
+  { id: 18, categoryId: 'food-service',  name: 'Hot Plate Pass Counter',    brand: 'VSD Pro',        description: 'Heated pass-through counter keeping plated dishes at optimal serving temperature during peak-hour restaurant service.',  specs: ['3 / 6 Zone Heating', 'Infrared Element', 'SS Top', 'Thermostat Control'],                  image: IMG },
+  /* Storage Equipment */
+  { id: 19, categoryId: 'storage',       name: 'SS Wire Rack Shelving',     brand: 'VSD Store',      description: 'Adjustable chrome wire shelving units providing hygienic, well-ventilated dry-goods storage in commercial kitchens.',   specs: ['5-Tier', 'Adjustable Heights', 'Chrome Wire', 'NSF Listed'],              tag: 'Bestseller', image: IMG },
+  { id: 20, categoryId: 'storage',       name: 'Mobile Trolley / Cart',     brand: 'VSD Store',      description: 'Heavy-duty stainless steel mobile trolley for safe, easy transfer of equipment and ingredients across kitchen areas.',   specs: ['200 kg Load', 'Locking Castors', 'SS 304', '2-Shelf Options'],                             image: IMG },
+  { id: 21, categoryId: 'storage',       name: 'GN Pan & Container Set',    brand: 'VSD Classic',    description: 'Complete set of gastronorm pans in various depths for standardised, stackable storage and service operations.',         specs: ['1/1 to 1/9 Sizes', 'SS 304', '20–200 mm Deep', 'Stackable Design'],                       image: IMG },
+  /* Dish Washing Machine */
+  { id: 22, categoryId: 'dishwashing',   name: 'Rack Conveyor Dishwasher',  brand: 'VSD Wash',       description: 'High-capacity conveyor dishwasher built for large hotel, banquet and catering operations running all-day cycles.',       specs: ['1200 Racks / hr', 'Hot Water Rinse', 'Auto Chemical Dosing', 'Energy Save'], tag: 'Bestseller', image: IMG },
+  { id: 23, categoryId: 'dishwashing',   name: 'Undercounter Glasswasher',  brand: 'VSD Wash',       description: 'Compact glasswasher delivering spot-free, hygienically clean results in rapid 90-second cycles for bar and pantry.',    specs: ['40 Cycles / hr', 'Low Water Use', 'SS Body', 'Chemical Dosing'],                           image: IMG },
+  { id: 24, categoryId: 'dishwashing',   name: 'Pot & Pan Washer',          brand: 'VSD Wash',       description: 'High-pressure tank washer that blasts stubborn baked-on food from heavy commercial cookware in each cycle.',            specs: ['High-Pressure Arms', 'Chemical Dosing', 'SS Basket', '85 °C Rinse'],      tag: 'Premium',    image: IMG },
+  /* Bar & Imported Equipment */
+  { id: 25, categoryId: 'bar-imported',  name: 'Commercial Ice Machine',    brand: 'Scotsman',       description: 'Continuous-production cube ice machine for hotel bars, restaurants and high-volume banquet and buffet service.',         specs: ['80 kg / day', 'Water-Cooled', 'HACCP Compliant', 'Air-Cooled Option'],   tag: 'Bestseller', image: IMG },
+  { id: 26, categoryId: 'bar-imported',  name: 'Bar Blender System',        brand: 'Vitamix',        description: 'High-performance commercial blender for cocktails, smoothies and professional beverage prep in busy bar environments.',  specs: ['3 HP Motor', 'Variable Speed', 'Quiet Shield', 'Advance Series'],         tag: 'Premium',    image: IMG },
+  { id: 27, categoryId: 'bar-imported',  name: 'Espresso Coffee Machine',   brand: 'Imported',       description: 'Semi-automatic espresso machine delivering barista-quality shots for hotel lobbies, café bars and luxury dining.',      specs: ['2-Group Head', 'PID Temperature', 'Steam Wand', 'Italian Import'],                         image: IMG },
+  /* Bakery Equipment */
+  { id: 28, categoryId: 'bakery',        name: 'Deck Oven',                 brand: 'VSD Bake',       description: 'Stone-sole deck oven producing artisan-quality bread, pizza and pastry with even heat across every bake.',              specs: ['2 / 3 Deck', 'Stone Sole Plate', 'Steam Injection', 'Independent Control'], tag: 'Bestseller', image: IMG },
+  { id: 29, categoryId: 'bakery',        name: 'Spiral Dough Mixer',        brand: 'VSD Bake',       description: 'High-torque spiral mixer delivering consistent dough development across commercial bread and pizza production volumes.',  specs: ['20 L / 40 L Bowl', 'Direct Drive', 'Timer Control', 'Safety Guard'],                       image: IMG },
+  { id: 30, categoryId: 'bakery',        name: 'Rotary Rack Oven',          brand: 'VSD Bake',       description: 'Fan-forced rotary oven baking 18 trays simultaneously with even colour, crust and texture throughout.',                specs: ['18-Tray Rack', 'Gas / Electric', 'Fan-Forced', 'Digital Control'],        tag: 'Premium',    image: IMG },
+  /* Fryer Combi Oven */
+  { id: 31, categoryId: 'fryer-combi',   name: 'Twin Tank Deep Fryer',      brand: 'VSD Pro',        description: 'Twin-tank deep fryer with rapid heat recovery for continuous, high-volume frying output across hotel and QSR kitchens.', specs: ['18 L × 2 Tank', 'Fast Recovery', 'Safety Cutout', 'Oil Filter Tap'],     tag: 'Bestseller', image: IMG },
+  { id: 32, categoryId: 'fryer-combi',   name: 'Rational Combi Steam Oven', brand: 'Rational',       description: 'Intelligent combi steamer that bakes, roasts and steams with total precision, self-cleaning and recipe memory.',        specs: ['Steam + Convection', '6 GN 1/1', 'Self-Cleaning', 'iCookingControl'],    tag: 'Premium',    image: IMG },
+  { id: 33, categoryId: 'fryer-combi',   name: 'Pressure Fryer',            brand: 'VSD Pro',        description: 'Pressure fryer for faster cooking with sealed heat, locking moisture deep inside while delivering a perfect golden crust.', specs: ['20 L Vat', 'Pressure-Sealed Lid', 'Digital Timer', 'Cool-Zone Filter'],                   image: IMG },
 ];
 
 /* --- Helpers -------------------------------------------------------------- */
 
 const TAG_STYLES: Record<string, { bg: string; color: string; border: string }> = {
-  Bestseller: { bg: 'rgba(201,168,76,0.14)', color: '#A67C32', border: 'rgba(201,168,76,0.35)' },
-  Premium: { bg: 'rgba(100,60,200,0.08)', color: '#7B5EA7', border: 'rgba(120,80,220,0.25)' },
-  New: { bg: 'rgba(30,150,90,0.09)', color: '#1E7A50', border: 'rgba(30,150,90,0.28)' },
+  Bestseller: { bg: 'rgba(201,168,76,0.18)', color: '#A67C32', border: 'rgba(201,168,76,0.45)' },
+  Premium:    { bg: 'rgba(100,60,200,0.10)', color: '#7B5EA7', border: 'rgba(120,80,220,0.30)' },
+  New:        { bg: 'rgba(30,150,90,0.10)',  color: '#1E7A50', border: 'rgba(30,150,90,0.30)' },
 };
 
 function TagBadge({ tag }: { tag: Product['tag'] }) {
@@ -104,9 +133,9 @@ function TagBadge({ tag }: { tag: Product['tag'] }) {
       style={{
         display: 'inline-flex',
         alignItems: 'center',
-        padding: '0.18rem 0.6rem',
+        padding: '0.2rem 0.65rem',
         borderRadius: '999px',
-        fontSize: '0.6rem',
+        fontSize: '0.58rem',
         fontFamily: 'var(--font-inter)',
         fontWeight: 700,
         letterSpacing: '0.12em',
@@ -114,6 +143,7 @@ function TagBadge({ tag }: { tag: Product['tag'] }) {
         background: s.bg,
         color: s.color,
         border: `1px solid ${s.border}`,
+        backdropFilter: 'blur(4px)',
         flexShrink: 0,
       }}
     >
@@ -122,29 +152,59 @@ function TagBadge({ tag }: { tag: Product['tag'] }) {
   );
 }
 
-/* --- Card image area ------------------------------------------------------ */
-function CardImageArea({ cat, product }: { cat: Category; product: Product }) {
-  const CatIcon = cat.Icon;
+/* --- Card image with brand overlay --------------------------------------- */
+function CardImageArea({ product }: { product: Product }) {
   return (
     <div
       style={{
         position: 'relative',
-        height: 168,
+        height: 210,
         overflow: 'hidden',
         flexShrink: 0,
-        borderBottom: '1px solid var(--border)',
       }}
     >
-      {/* Product image */}
       <Image
         src={product.image}
         alt={product.name}
         fill
-        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-        style={{ objectFit: 'cover' }}
+        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+        style={{ objectFit: 'cover', transition: 'transform 0.5s ease' }}
+        className="product-card-img"
       />
+      {/* Bottom gradient so brand text is readable */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: '65%',
+          background: 'linear-gradient(to top, rgba(8,6,2,0.80) 0%, transparent 100%)',
+          zIndex: 1,
+        }}
+      />
+      {/* Brand name overlaid on image */}
+      <p
+        style={{
+          position: 'absolute',
+          bottom: 11,
+          left: 14,
+          zIndex: 2,
+          fontFamily: 'var(--font-inter)',
+          fontSize: '0.595rem',
+          fontWeight: 700,
+          letterSpacing: '0.20em',
+          textTransform: 'uppercase',
+          color: 'var(--gold-light)',
+          margin: 0,
+        }}
+      >
+        {product.brand}
+      </p>
+      {/* Tag badge */}
       {product.tag && (
-        <div style={{ position: 'absolute', top: 10, right: 10, zIndex: 2 }}>
+        <div style={{ position: 'absolute', top: 11, right: 11, zIndex: 2 }}>
           <TagBadge tag={product.tag} />
         </div>
       )}
@@ -153,45 +213,37 @@ function CardImageArea({ cat, product }: { cat: Category; product: Product }) {
 }
 
 /* --- Product Card --------------------------------------------------------- */
-function ProductCard({ product, cat }: { product: Product; cat: Category }) {
+function ProductCard({ product, shineDelay }: { product: Product; shineDelay: number }) {
   return (
     <article
       className="product-card card-lift group relative flex flex-col rounded-2xl overflow-hidden"
       style={{
         background: '#FFFFFF',
         border: '1px solid var(--border)',
+        boxShadow: '0 2px 14px rgba(0,0,0,0.055)',
       }}
     >
-      {/* Gold top accent — reveals on hover via CSS */}
+      {/* Gold top accent — reveals on hover */}
       <div className="product-card-top-line" aria-hidden="true" />
+      {/* Shine sweep overlay — loops continuously, staggered by index */}
+      <div
+        className="product-card-shine-overlay"
+        aria-hidden="true"
+        style={{ animationDelay: `${shineDelay}s` }}
+      />
 
-      {/* Branded image area */}
-      <CardImageArea cat={cat} product={product} />
+      <CardImageArea product={product} />
 
       {/* Content */}
       <div
         style={{
-          padding: '1.25rem 1.5rem 1.375rem',
+          padding: '1.125rem 1.375rem 1.25rem',
           display: 'flex',
           flexDirection: 'column',
           flex: 1,
+          background: 'linear-gradient(180deg, #FFFFFF 0%, #FDFCF8 100%)',
         }}
       >
-        {/* Brand */}
-        <p
-          style={{
-            fontFamily: 'var(--font-inter)',
-            fontSize: '0.625rem',
-            fontWeight: 700,
-            letterSpacing: '0.18em',
-            textTransform: 'uppercase',
-            color: 'var(--gold-deep)',
-            marginBottom: '0.3rem',
-          }}
-        >
-          {product.brand}
-        </p>
-
         {/* Product name */}
         <h3
           style={{
@@ -200,22 +252,22 @@ function ProductCard({ product, cat }: { product: Product; cat: Category }) {
             fontSize: '1.0625rem',
             lineHeight: 1.25,
             color: 'var(--text-dark)',
-            marginBottom: '0.5rem',
+            marginBottom: '0.45rem',
           }}
         >
           {product.name}
         </h3>
 
-        {/* Short description */}
+        {/* Short description — 3 lines */}
         <p
           style={{
             fontFamily: 'var(--font-inter)',
             fontSize: '0.8125rem',
             color: 'var(--text-muted)',
-            lineHeight: 1.55,
-            marginBottom: '0.75rem',
+            lineHeight: 1.58,
+            marginBottom: '0.875rem',
             display: '-webkit-box',
-            WebkitLineClamp: 2,
+            WebkitLineClamp: 3,
             WebkitBoxOrient: 'vertical',
             overflow: 'hidden',
             flexGrow: 1,
@@ -224,27 +276,27 @@ function ProductCard({ product, cat }: { product: Product; cat: Category }) {
           {product.description}
         </p>
 
-        {/* Spec chips */}
+        {/* Spec chips — gold-tinted */}
         <div
           style={{
             display: 'flex',
             flexWrap: 'wrap',
             gap: '0.3rem',
-            marginBottom: '1.25rem',
+            marginBottom: '1.125rem',
           }}
         >
           {product.specs.map((spec) => (
             <span
               key={spec}
               style={{
-                padding: '0.2rem 0.6rem',
+                padding: '0.2rem 0.625rem',
                 borderRadius: '999px',
                 fontSize: '0.6875rem',
                 fontFamily: 'var(--font-inter)',
-                fontWeight: 500,
-                color: 'var(--text-muted)',
-                background: 'var(--surface-alt)',
-                border: '1px solid var(--border)',
+                fontWeight: 600,
+                color: 'var(--gold-deep)',
+                background: 'rgba(201,168,76,0.08)',
+                border: '1px solid rgba(201,168,76,0.25)',
                 whiteSpace: 'nowrap',
               }}
             >
@@ -263,8 +315,8 @@ function ProductCard({ product, cat }: { product: Product; cat: Category }) {
               display: 'inline-flex',
               alignItems: 'center',
               justifyContent: 'center',
-              gap: '0.3rem',
-              padding: '0.55rem 0.75rem',
+              gap: '0.35rem',
+              padding: '0.6rem 0.75rem',
               borderRadius: 8,
               border: '1.5px solid var(--border)',
               background: 'transparent',
@@ -286,27 +338,28 @@ function ProductCard({ product, cat }: { product: Product; cat: Category }) {
             href={`/contact?product=${encodeURIComponent(product.name)}`}
             onClick={(e) => e.stopPropagation()}
             style={{
-              flex: 1,
+              flex: 2,
               display: 'inline-flex',
               alignItems: 'center',
               justifyContent: 'center',
-              gap: '0.3rem',
-              padding: '0.55rem 0.75rem',
+              gap: '0.35rem',
+              padding: '0.6rem 0.875rem',
               borderRadius: 8,
-              background: 'linear-gradient(135deg, var(--gold-light), var(--gold))',
+              background: 'linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 50%, var(--gold-deep) 100%)',
               color: '#1A1508',
               fontFamily: 'var(--font-inter)',
               fontSize: '0.8125rem',
               fontWeight: 700,
               textDecoration: 'none',
               border: 'none',
-              transition: 'all 0.18s ease',
-              boxShadow: '0 2px 10px rgba(201,168,76,0.28)',
+              boxShadow: '0 3px 14px rgba(201,168,76,0.35)',
+              letterSpacing: '0.01em',
             }}
+            className="product-enquire-btn"
             aria-label={`Enquire about ${product.name}`}
           >
             <ArrowRight size={13} aria-hidden="true" />
-            Enquire
+            Enquire Now
           </Link>
         </div>
       </div>
@@ -327,11 +380,11 @@ export default function OurProductsShowcase() {
       className="relative overflow-hidden"
       style={{
         background: 'linear-gradient(180deg, #FFFFFF)',
-        padding: '5.5rem 0',
+        padding: '3.5rem 0',
         borderTop: '1px solid var(--border)',
       }}
     >
-      {/* -- Warm gold dot pattern — very subtle --------------------------- */}
+      {/* Warm gold dot pattern */}
       <div
         aria-hidden="true"
         className="absolute inset-0 pointer-events-none"
@@ -343,16 +396,12 @@ export default function OurProductsShowcase() {
           WebkitMaskImage: 'radial-gradient(ellipse 85% 70% at 50% 50%, black 40%, transparent 100%)',
         }}
       />
-
-      {/* -- Soft top-left gold bloom --------------------------------------- */}
       <div
         aria-hidden="true"
         className="absolute pointer-events-none hidden lg:block"
         style={{
-          top: '-60px',
-          left: '-80px',
-          width: '420px',
-          height: '420px',
+          top: '-60px', left: '-80px',
+          width: '420px', height: '420px',
           background: 'radial-gradient(ellipse, rgba(201,168,76,0.10) 0%, transparent 65%)',
           filter: 'blur(48px)',
         }}
@@ -361,10 +410,8 @@ export default function OurProductsShowcase() {
         aria-hidden="true"
         className="absolute pointer-events-none hidden lg:block"
         style={{
-          bottom: '-40px',
-          right: '-60px',
-          width: '360px',
-          height: '360px',
+          bottom: '-40px', right: '-60px',
+          width: '360px', height: '360px',
           background: 'radial-gradient(ellipse, rgba(201,168,76,0.08) 0%, transparent 65%)',
           filter: 'blur(40px)',
         }}
@@ -372,7 +419,7 @@ export default function OurProductsShowcase() {
 
       <div className="container mx-auto" style={{ position: 'relative', zIndex: 1 }}>
 
-        {/* -- Section header ------------------------------------------------ */}
+        {/* Section header */}
         <div
           style={{
             display: 'flex',
@@ -385,7 +432,6 @@ export default function OurProductsShowcase() {
           <p className="section-label" style={{ marginBottom: '0.75rem' }}>
             Our Products
           </p>
-
           <h2
             id="products-heading"
             style={{
@@ -397,23 +443,20 @@ export default function OurProductsShowcase() {
             }}
           >
             Commercial Kitchen{' '}
-            <span className="accent-gold" style={{ fontStyle: 'italic', fontWeight: 800 }}>
+            <span className="accent-gold" style={{ fontWeight: 800 }}>
               Equipment
             </span>{' '}
             We Supply
           </h2>
-
           <div
             aria-hidden="true"
             style={{
-              width: '60px',
-              height: '3px',
+              width: '60px', height: '3px',
               background: 'linear-gradient(90deg, var(--gold-bright), var(--gold), var(--gold-deep))',
               borderRadius: '2px',
               marginTop: '1.25rem',
             }}
           />
-
           <p
             style={{
               marginTop: '1.25rem',
@@ -428,7 +471,7 @@ export default function OurProductsShowcase() {
           </p>
         </div>
 
-        {/* -- Category tabs -------------------------------------------------- */}
+        {/* Category tabs */}
         <div
           className="cat-tabs-scroll"
           style={{
@@ -459,6 +502,7 @@ export default function OurProductsShowcase() {
                   role="tab"
                   aria-selected={isActive}
                   onClick={() => setActiveId(cat.id)}
+                  className={isActive ? 'cat-tab-active' : 'cat-tab-inactive'}
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',
@@ -478,7 +522,7 @@ export default function OurProductsShowcase() {
                     flexShrink: 0,
                     transition: 'all 0.18s ease',
                     boxShadow: isActive
-                      ? '0 4px 16px rgba(201,168,76,0.30)'
+                      ? '0 4px 18px rgba(201,168,76,0.35)'
                       : '0 1px 4px rgba(0,0,0,0.06)',
                   }}
                 >
@@ -507,7 +551,7 @@ export default function OurProductsShowcase() {
           </div>
         </div>
 
-        {/* -- Products grid --------------------------------------------------- */}
+        {/* Products grid */}
         <AnimatePresence mode="wait">
           <motion.div
             key={activeId}
@@ -524,15 +568,15 @@ export default function OurProductsShowcase() {
                 key={product.id}
                 initial={{ opacity: 0, y: 22 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: idx * 0.05, ease: 'easeOut' }}
+                transition={{ duration: 0.3, delay: idx * 0.06, ease: 'easeOut' }}
               >
-                <ProductCard product={product} cat={activeCat} />
+                <ProductCard product={product} shineDelay={parseFloat((idx * 1.2).toFixed(1))} />
               </motion.div>
             ))}
           </motion.div>
         </AnimatePresence>
 
-        {/* -- Bottom CTA ----------------------------------------------------- */}
+        {/* Bottom CTA */}
         <div
           style={{
             display: 'flex',

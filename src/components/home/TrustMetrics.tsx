@@ -129,7 +129,7 @@ export default function TrustMetrics() {
           textTransform: 'uppercase',
         }}
       >
-        ★ ISO 9001:2008 Certified · GSTIN: 07AABFV5120K1ZZ · Two Delhi Factories · Rational &amp; Robot Coupe Authorised Dealer ★
+        ★ ISO 9001:2015 Certified · GSTIN: 07AABFV5120K1ZZ · Two Delhi Factories · Rational &amp; Robot Coupe Authorised Dealer ★
       </div>
 
       {/* -- Stats — horizontal scroll on mobile, grid on md+ --------------- */}

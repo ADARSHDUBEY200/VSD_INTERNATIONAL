@@ -68,9 +68,23 @@ export default function ContactForm() {
     ev.preventDefault();
     if (!validate()) return;
     setSub(true);
-    await new Promise((r) => setTimeout(r, 1400));
-    setSub(false);
-    setDone(true);
+    try {
+      const res = await fetch('/api/enquiries', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...form, source: 'contact_form' }),
+      });
+      if (!res.ok) {
+        const data = await res.json();
+        setErrors({ name: data.error ?? 'Submission failed. Please try again.' });
+        return;
+      }
+      setDone(true);
+    } catch {
+      setErrors({ name: 'Network error. Please try again.' });
+    } finally {
+      setSub(false);
+    }
   }
 
   function set(field: keyof FormState, value: string) {

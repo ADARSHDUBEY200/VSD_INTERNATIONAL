@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(npm run *)",
-      "Bash(node -e \"const p = require\\('C:/Users/Vishal Dubey/Desktop/vsd_international/node_modules/next/package.json'\\); console.log\\(p.version\\)\")"
+      "Bash(node -e \"const p = require\\('C:/Users/Vishal Dubey/Desktop/vsd_international/node_modules/next/package.json'\\); console.log\\(p.version\\)\")",
+      "PowerShell(ls \"c:\\\\Users\\\\Vishal Dubey\\\\Desktop\\\\vsd_international\\\\node_modules\\\\next\\\\dist\\\\docs\\\\01-app\\\\03-api-reference\\\\04-functions\\\\\")"
     ]
   }
 }

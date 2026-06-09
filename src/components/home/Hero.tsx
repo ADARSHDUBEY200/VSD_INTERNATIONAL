@@ -9,6 +9,9 @@ import { ArrowRight, Shield, Clock, Award, Star } from 'lucide-react';
  * H1 target: 2 lines — "India's Finest Commercial Kitchen" / "Equipment Manufacturer"
  * Stats bar removed — TrustMetrics section directly below already shows stats
  */
+/** Round trig values to 3 dp to prevent server/client float mismatch */
+const r = (n: number) => +n.toFixed(3);
+
 export default function Hero() {
 
   useEffect(() => {
@@ -95,7 +98,7 @@ export default function Hero() {
 
       {/* -- Kitchen Equipment SVG Backgrounds -------------------------------
           All decoratives are aria-hidden, pointer-events:none, z-index:1.
-          Responsive visibility: md+ burners · lg+ hood/steam/range · xl+ utensils · 2xl+ whisk/tongs
+          Responsive visibility: md+ burners · lg+ hood/steam/range · xl+ utensils/stockpot · 2xl+ whisk/tongs
          ------------------------------------------------------------------- */}
 
       {/* === Large Commercial Gas Burner — bottom-left corner === */}
@@ -127,8 +130,8 @@ export default function Hero() {
         {[0, 45, 90, 135, 180, 225, 270, 315].map((deg) => {
           const rad = (deg * Math.PI) / 180;
           return <line key={deg}
-            x1={160 + 18 * Math.cos(rad)} y1={160 + 18 * Math.sin(rad)}
-            x2={160 + 148 * Math.cos(rad)} y2={160 + 148 * Math.sin(rad)}
+            x1={r(160 + 18 * Math.cos(rad))} y1={r(160 + 18 * Math.sin(rad))}
+            x2={r(160 + 148 * Math.cos(rad))} y2={r(160 + 148 * Math.sin(rad))}
             stroke="#C9A84C" strokeWidth="1.5"
           />;
         })}
@@ -136,8 +139,8 @@ export default function Hero() {
         {[22.5, 67.5, 112.5, 157.5, 202.5, 247.5, 292.5, 337.5].map((deg) => {
           const rad = (deg * Math.PI) / 180;
           return <line key={deg}
-            x1={160 + 30 * Math.cos(rad)} y1={160 + 30 * Math.sin(rad)}
-            x2={160 + 108 * Math.cos(rad)} y2={160 + 108 * Math.sin(rad)}
+            x1={r(160 + 30 * Math.cos(rad))} y1={r(160 + 30 * Math.sin(rad))}
+            x2={r(160 + 108 * Math.cos(rad))} y2={r(160 + 108 * Math.sin(rad))}
             stroke="#C9A84C" strokeWidth="1"
           />;
         })}
@@ -145,7 +148,7 @@ export default function Hero() {
         {Array.from({ length: 24 }).map((_, i) => {
           const angle = (i * 15 * Math.PI) / 180;
           return <circle key={i}
-            cx={160 + 90 * Math.cos(angle)} cy={160 + 90 * Math.sin(angle)}
+            cx={r(160 + 90 * Math.cos(angle))} cy={r(160 + 90 * Math.sin(angle))}
             r="2.5" fill="rgba(201,168,76,0.45)"
           />;
         })}
@@ -160,7 +163,7 @@ export default function Hero() {
         style={{
           position: 'absolute', bottom: '-55px', right: '-45px',
           width: '300px', height: '300px',
-          zIndex: 1, pointerEvents: 'none', opacity: 0.20,
+          zIndex: 1, pointerEvents: 'none', opacity: 0.50,
         }}
       >
         <circle cx="120" cy="120" r="112" stroke="#C9A84C" strokeWidth="2"/>
@@ -173,15 +176,15 @@ export default function Hero() {
         {[0, 45, 90, 135, 180, 225, 270, 315].map((deg) => {
           const rad = (deg * Math.PI) / 180;
           return <line key={deg}
-            x1={120 + 24 * Math.cos(rad)} y1={120 + 24 * Math.sin(rad)}
-            x2={120 + 112 * Math.cos(rad)} y2={120 + 112 * Math.sin(rad)}
+            x1={r(120 + 24 * Math.cos(rad))} y1={r(120 + 24 * Math.sin(rad))}
+            x2={r(120 + 112 * Math.cos(rad))} y2={r(120 + 112 * Math.sin(rad))}
             stroke="#C9A84C" strokeWidth="1.2"
           />;
         })}
         {Array.from({ length: 20 }).map((_, i) => {
           const angle = (i * 18 * Math.PI) / 180;
           return <circle key={i}
-            cx={120 + 76 * Math.cos(angle)} cy={120 + 76 * Math.sin(angle)}
+            cx={r(120 + 76 * Math.cos(angle))} cy={r(120 + 76 * Math.sin(angle))}
             r="2" fill="rgba(201,168,76,0.4)"
           />;
         })}
@@ -196,7 +199,7 @@ export default function Hero() {
         style={{
           position: 'absolute', top: '0', right: '5%',
           width: '290px', height: '155px',
-          zIndex: 1, pointerEvents: 'none', opacity: 0.18,
+          zIndex: 1, pointerEvents: 'none', opacity: 0.45,
         }}
       >
         {/* Hood body */}
@@ -233,7 +236,7 @@ export default function Hero() {
         style={{
           position: 'absolute', top: '14%', left: '3%',
           width: '50px', height: '250px',
-          zIndex: 1, pointerEvents: 'none', opacity: 0.26,
+          zIndex: 1, pointerEvents: 'none', opacity: 0.58,
           transform: 'rotate(14deg)',
         }}
       >
@@ -264,7 +267,7 @@ export default function Hero() {
         style={{
           position: 'absolute', top: '8%', right: '3.5%',
           width: '58px', height: '256px',
-          zIndex: 1, pointerEvents: 'none', opacity: 0.24,
+          zIndex: 1, pointerEvents: 'none', opacity: 0.55,
           transform: 'rotate(-11deg)',
         }}
       >
@@ -288,6 +291,74 @@ export default function Hero() {
         <circle cx="32" cy="347" r="3.5" fill="rgba(201,168,76,0.3)"/>
       </svg>
 
+      {/* === Precision Dial Gauge — right side mid (between ladle & spatula) === */}
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 100 165"
+        fill="none"
+        className="hidden xl:block"
+        style={{
+          position: 'absolute', top: '43%', right: '2%',
+          width: '76px', height: '126px',
+          zIndex: 1, pointerEvents: 'none', opacity: 0.50,
+          transform: 'rotate(5deg)',
+        }}
+      >
+        {/* Outer bezel */}
+        <circle cx="50" cy="48" r="46" stroke="#C9A84C" strokeWidth="2"/>
+        {/* Knurled bezel ring */}
+        <circle cx="50" cy="48" r="42" stroke="#C9A84C" strokeWidth="0.8" strokeDasharray="3 4" opacity="0.65"/>
+        {/* Dial face */}
+        <circle cx="50" cy="48" r="38" stroke="#C9A84C" strokeWidth="1.5" fill="rgba(201,168,76,0.04)"/>
+        {/* Inner detail ring */}
+        <circle cx="50" cy="48" r="27" stroke="#C9A84C" strokeWidth="0.6" fill="none" opacity="0.35"/>
+        {/* High-zone arc (top 25% of scale) — subtle emphasis band */}
+        <path
+          d="M 63.4 80.3 A 35 35 0 0 1 25.2 72.7"
+          stroke="#C9A84C" strokeWidth="2.8" strokeLinecap="round" opacity="0.45"
+        />
+        {/* Tick marks — major every 30° (i%5===0), minor every 6° */}
+        {Array.from({ length: 46 }).map((_, i) => {
+          const angle = (225 + i * 6) * Math.PI / 180;
+          const isMajor = i % 5 === 0;
+          return (
+            <line key={i}
+              x1={r(50 + 38 * Math.cos(angle))} y1={r(48 + 38 * Math.sin(angle))}
+              x2={r(50 + (isMajor ? 27 : 33) * Math.cos(angle))} y2={r(48 + (isMajor ? 27 : 33) * Math.sin(angle))}
+              stroke="#C9A84C" strokeWidth={isMajor ? 1.8 : 0.8} opacity={isMajor ? 1 : 0.55}
+            />
+          );
+        })}
+        {/* Main needle — pointing at ~68% of scale */}
+        <line
+          x1={50} y1={48}
+          x2={r(50 + 28 * Math.cos((225 + 0.68 * 270) * Math.PI / 180))}
+          y2={r(48 + 28 * Math.sin((225 + 0.68 * 270) * Math.PI / 180))}
+          stroke="#C9A84C" strokeWidth="2.2" strokeLinecap="round"
+        />
+        {/* Counterweight tail */}
+        <line
+          x1={50} y1={48}
+          x2={r(50 - 9 * Math.cos((225 + 0.68 * 270) * Math.PI / 180))}
+          y2={r(48 - 9 * Math.sin((225 + 0.68 * 270) * Math.PI / 180))}
+          stroke="#C9A84C" strokeWidth="3" strokeLinecap="round"
+        />
+        {/* Center pivot cap */}
+        <circle cx="50" cy="48" r="5.5" stroke="#C9A84C" strokeWidth="1.5" fill="rgba(201,168,76,0.22)"/>
+        <circle cx="50" cy="48" r="2.2" fill="rgba(201,168,76,0.60)"/>
+        {/* Mounting flange */}
+        <rect x="38" y="92" width="24" height="8" rx="2" stroke="#C9A84C" strokeWidth="1.5" fill="rgba(201,168,76,0.10)"/>
+        {/* Probe tube */}
+        <rect x="46" y="100" width="8" height="54" rx="4" stroke="#C9A84C" strokeWidth="1.5" fill="rgba(201,168,76,0.06)"/>
+        {/* Thread marks on probe */}
+        {[109, 117, 125, 133, 141, 149].map((y) => (
+          <line key={y} x1="46" y1={y} x2="54" y2={y} stroke="#C9A84C" strokeWidth="0.7" opacity="0.45"/>
+        ))}
+        {/* Probe tip */}
+        <circle cx="50" cy="158" r="6" stroke="#C9A84C" strokeWidth="1.5" fill="rgba(201,168,76,0.14)"/>
+        <circle cx="50" cy="158" r="2.5" fill="rgba(201,168,76,0.50)"/>
+      </svg>
+
       {/* === Whisk — top-left (2xl+) === */}
       <svg
         aria-hidden="true"
@@ -297,7 +368,7 @@ export default function Hero() {
         style={{
           position: 'absolute', top: '7%', left: '11%',
           width: '42px', height: '175px',
-          zIndex: 1, pointerEvents: 'none', opacity: 0.22,
+          zIndex: 1, pointerEvents: 'none', opacity: 0.52,
           transform: 'rotate(-9deg)',
         }}
       >
@@ -328,7 +399,7 @@ export default function Hero() {
         style={{
           position: 'absolute', bottom: '14%', right: '7.5%',
           width: '38px', height: '215px',
-          zIndex: 1, pointerEvents: 'none', opacity: 0.22,
+          zIndex: 1, pointerEvents: 'none', opacity: 0.52,
           transform: 'rotate(-19deg)',
         }}
       >
@@ -361,7 +432,7 @@ export default function Hero() {
         style={{
           position: 'absolute', bottom: '18%', left: '5.5%',
           width: '48px', height: '185px',
-          zIndex: 1, pointerEvents: 'none', opacity: 0.22,
+          zIndex: 1, pointerEvents: 'none', opacity: 0.52,
           transform: 'rotate(12deg)',
         }}
       >
@@ -377,6 +448,52 @@ export default function Hero() {
         {/* Grip tips */}
         <path d="M16 268 Q19 278 22 268" stroke="#C9A84C" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
         <path d="M54 268 Q51 278 48 268" stroke="#C9A84C" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
+      </svg>
+
+      {/* === Commercial Stockpot — left side, right of knife === */}
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 200 265"
+        fill="none"
+        className="hidden xl:block"
+        style={{
+          position: 'absolute', top: '10%', left: '7%',
+          width: '148px', height: '192px',
+          zIndex: 1, pointerEvents: 'none', opacity: 0.48,
+          transform: 'rotate(-8deg)',
+        }}
+      >
+        {/* Lid knob cap */}
+        <ellipse cx="100" cy="22" rx="11" ry="5" stroke="#C9A84C" strokeWidth="1.5" fill="rgba(201,168,76,0.18)"/>
+        {/* Lid knob stem */}
+        <rect x="93" y="22" width="14" height="13" rx="3" stroke="#C9A84C" strokeWidth="1.5" fill="rgba(201,168,76,0.12)"/>
+        {/* Lid dome arc */}
+        <path d="M19 74 Q100 38 181 74" stroke="#C9A84C" strokeWidth="2.5" fill="none" strokeLinecap="round"/>
+        {/* Lid rim ellipse */}
+        <ellipse cx="100" cy="76" rx="82" ry="19" stroke="#C9A84C" strokeWidth="2" fill="rgba(201,168,76,0.07)"/>
+        {/* Lid inner dashed ring */}
+        <ellipse cx="100" cy="66" rx="60" ry="12" stroke="#C9A84C" strokeWidth="1" strokeDasharray="6 7" fill="none" opacity="0.65"/>
+        {/* Pot top rim */}
+        <ellipse cx="100" cy="82" rx="80" ry="17" stroke="#C9A84C" strokeWidth="2" fill="rgba(201,168,76,0.04)"/>
+        {/* Pot side walls */}
+        <line x1="20" y1="82" x2="17" y2="248" stroke="#C9A84C" strokeWidth="2.2"/>
+        <line x1="180" y1="82" x2="183" y2="248" stroke="#C9A84C" strokeWidth="2.2"/>
+        {/* Pot bottom ellipse */}
+        <ellipse cx="100" cy="248" rx="83" ry="17" stroke="#C9A84C" strokeWidth="2" fill="rgba(201,168,76,0.05)"/>
+        {/* Bottom inner rim detail */}
+        <ellipse cx="100" cy="248" rx="70" ry="11" stroke="#C9A84C" strokeWidth="0.8" fill="none" opacity="0.5"/>
+        {/* Left handle loop */}
+        <path d="M22 104 Q4 99 3 114 Q2 129 20 124" stroke="#C9A84C" strokeWidth="2.2" fill="none" strokeLinecap="round"/>
+        <line x1="20" y1="104" x2="20" y2="124" stroke="#C9A84C" strokeWidth="1" opacity="0.4"/>
+        {/* Right handle loop */}
+        <path d="M178 104 Q196 99 197 114 Q198 129 180 124" stroke="#C9A84C" strokeWidth="2.2" fill="none" strokeLinecap="round"/>
+        <line x1="180" y1="104" x2="180" y2="124" stroke="#C9A84C" strokeWidth="1" opacity="0.4"/>
+        {/* Volume level ellipses */}
+        {[128, 165, 204].map((y) => (
+          <ellipse key={y} cx="100" cy={y} rx="58" ry="10" stroke="#C9A84C" strokeWidth="0.8" fill="none" opacity="0.4"/>
+        ))}
+        {/* Weld seam band */}
+        <path d="M17 150 Q100 162 183 150" stroke="#C9A84C" strokeWidth="1.2" fill="none" opacity="0.55" strokeDasharray="4 6"/>
       </svg>
 
       {/* === Animated Steam Wisps — left side, above burner === */}
@@ -418,7 +535,7 @@ export default function Hero() {
           position: 'absolute', bottom: '0', left: '50%',
           transform: 'translateX(-50%)',
           width: '80%', maxWidth: '900px',
-          zIndex: 1, pointerEvents: 'none', opacity: 0.09,
+          zIndex: 1, pointerEvents: 'none', opacity: 0.13,
         }}
       >
         {/* Range body */}
@@ -443,8 +560,8 @@ export default function Hero() {
             {[0, 60, 120, 180, 240, 300].map((deg) => {
               const rad = deg * Math.PI / 180;
               return <line key={deg}
-                x1={cx + 12 * Math.cos(rad)} y1={cy + 12 * Math.sin(rad)}
-                x2={cx + 58 * Math.cos(rad)} y2={cy + 58 * Math.sin(rad)}
+                x1={r(cx + 12 * Math.cos(rad))} y1={r(cy + 12 * Math.sin(rad))}
+                x2={r(cx + 58 * Math.cos(rad))} y2={r(cy + 58 * Math.sin(rad))}
                 stroke="#C9A84C" strokeWidth="0.75"
               />;
             })}
@@ -521,9 +638,7 @@ export default function Hero() {
           </span>
         </motion.div>
 
-        {/* ② H1 — 2 lines exactly ---------------------------------------- */}
-        {/*  Line 1: India's Finest [Commercial Kitchen]                      */}
-        {/*  Line 2: Equipment Manufacturer                                   */}
+        {/* ② H1 ---------------------------------------------------------- */}
         <motion.h1
           style={{
             fontFamily: 'var(--font-playfair)',
@@ -539,15 +654,14 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.65, delay: 0.18 }}
         >
-          India&apos;s Finest{' '}
-          <em
+          <span
             className="gold-shimmer"
-            style={{ fontStyle: 'italic', fontWeight: 800 }}
+            style={{fontWeight: 800 }}
           >
-            Commercial Kitchen
-          </em>
+            Commercial Kitchen Equipment
+          </span>
           <br />
-          Equipment Manufacturer
+          Manufacturer in India
         </motion.h1>
 
         {/* ③ Gold rule --------------------------------------------------- */}
@@ -567,8 +681,7 @@ export default function Hero() {
           }} />
         </motion.div>
 
-        {/* ④ Sub-headline — flex wrapper is the only reliable centring method  */}
-        {/* for a block inside a Framer Motion element; margin:auto is fragile  */}
+        {/* ④ Sub-headline ------------------------------------------------ */}
         <motion.div
           style={{ marginTop: '1.5rem', display: 'flex', justifyContent: 'center', width: '100%' }}
           initial={{ opacity: 0, y: 18 }}
@@ -589,7 +702,28 @@ export default function Hero() {
             <strong style={{ color: 'var(--gold-light)', fontWeight: 600 }}>
               Hyatt · Radisson Blu · ITC Welcomhotel · Crowne Plaza
             </strong>
-            {' '}and 200+ premium hotels, hospitals &amp; institutions across India.
+            {' '}and 200+ hotels, hospitals &amp; institutions — engineered &amp; installed from our two Delhi factories.
+          </p>
+        </motion.div>
+
+        {/* ④-b Citable AEO proof paragraph ------------------------------ */}
+        <motion.div
+          style={{ marginTop: '1.25rem', display: 'flex', justifyContent: 'center', width: '100%' }}
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.42 }}
+        >
+          <p
+            style={{
+              fontFamily: 'var(--font-inter)',
+              fontSize: 'clamp(0.8125rem, 1vw, 0.9375rem)',
+              color: 'rgba(245,240,232,0.38)',
+              lineHeight: 1.75,
+              maxWidth: '580px',
+              textAlign: 'center',
+            }}
+          >
+            VSD International is an ISO 9001-certified commercial kitchen equipment manufacturer in Delhi, supplying and installing turnkey kitchens for hotels, hospitals and cloud kitchens across India — including a ₹42-lakh kitchen at Hyatt Regency Delhi, commissioned in 21 days.
           </p>
         </motion.div>
 
@@ -629,15 +763,15 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.6 }}
         >
-          <Link
-            href="/contact"
+          <button
+            onClick={() => window.dispatchEvent(new CustomEvent('vsd:open-enquiry'))}
             className="btn-gold inline-flex items-center justify-center gap-2"
             style={{ minHeight: '3.125rem', paddingLeft: '2rem', paddingRight: '2rem', fontSize: '0.9375rem' }}
             aria-label="Get free kitchen layout and quote from VSD International"
           >
             Get Free Kitchen Layout &amp; Quote
             <ArrowRight size={15} aria-hidden="true" />
-          </Link>
+          </button>
 
           {/* View Projects — desktop only (mobile uses fixed footer) */}
           <div className="hidden sm:contents">
