@@ -1,14 +1,10 @@
-// TODO: Replace mockProduct with db.getProduct(params.slug) when DB is connected
-
 import type { Metadata } from 'next';
-import { Cormorant_Garamond, DM_Sans } from 'next/font/google';
 import { notFound } from 'next/navigation';
-
 import { mockProduct } from '@/lib/productData';
 import { SITE_URL } from '@/lib/config';
-
 import Breadcrumb from '@/components/product/Breadcrumb';
 import ProductHero from '@/components/product/ProductHero';
+import ProductDescription from '@/components/product/ProductDescription';
 import ProductOverview from '@/components/product/ProductOverview';
 import ProductSpecs from '@/components/product/ProductSpecs';
 import ProductFeatures from '@/components/product/ProductFeatures';
@@ -21,22 +17,6 @@ import ProductReviews from '@/components/product/ProductReviews';
 import ProductFAQ from '@/components/product/ProductFAQ';
 import ProductRelated from '@/components/product/ProductRelated';
 import ProductCTA from '@/components/product/ProductCTA';
-import StickyEnquiryBar from '@/components/product/StickyEnquiryBar';
-
-/* ── Fonts ──────────────────────────────────────────────────────────────────── */
-const cormorant = Cormorant_Garamond({
-  subsets: ['latin'],
-  variable: '--font-cormorant',
-  display: 'swap',
-  weight: ['400', '500', '600', '700'],
-});
-
-const dmSans = DM_Sans({
-  subsets: ['latin'],
-  variable: '--font-dm-sans',
-  display: 'swap',
-  weight: ['400', '500', '600', '700'],
-});
 
 /* ── Types ──────────────────────────────────────────────────────────────────── */
 type PageParams = Promise<{ category: string; slug: string }>;
@@ -108,10 +88,7 @@ export default async function ProductPage({ params }: { params: PageParams }) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(product.schema) }}
       />
 
-      {/* Font variable scope — Cormorant Garamond + DM Sans for this page */}
-      <div className={`${cormorant.variable} ${dmSans.variable}`}>
-
-        <main id="product-content" tabIndex={-1}>
+      <main id="product-content" tabIndex={-1}>
           <article itemScope itemType="https://schema.org/Product">
             <meta itemProp="name" content={product.fullName} />
             <meta itemProp="brand" content={product.brand} />
@@ -137,30 +114,37 @@ export default async function ProductPage({ params }: { params: PageParams }) {
               heroCtaId="hero-cta"
             />
 
-            {/* 03 — Answer-first overview (primary AI citation asset) */}
+            {/* 03 — Product description: engineering story + brand heritage */}
+            <ProductDescription
+              description={product.description}
+              fullName={product.fullName}
+              brand={product.brand}
+            />
+
+            {/* 04 — Answer-first overview (primary AI citation asset) */}
             <ProductOverview
               overview={product.overview}
               fullName={product.fullName}
               category={product.category}
             />
 
-            {/* 04 — Specifications table (primary AEO asset) */}
+            {/* 05 — Specifications table (primary AEO asset) */}
             <ProductSpecs specs={product.specs} fullName={product.fullName} />
 
-            {/* 05 — Features & benefits */}
+            {/* 06 — Features & benefits */}
             <ProductFeatures features={product.features} />
 
-            {/* 06 — Best for / use cases */}
+            {/* 07 — Best for / use cases */}
             <ProductBestFor bestFor={product.bestFor} />
 
-            {/* 07 — Technical details & compliance */}
+            {/* 08 — Technical details & compliance */}
             <ProductTechnical
               technical={product.technical}
               compliance={product.compliance}
               fullName={product.fullName}
             />
 
-            {/* 08 — Why buy from VSD */}
+            {/* 09 — Why buy from VSD */}
             <ProductWhyVSD whyVSD={product.whyVSD} />
 
             {/* 09 — Comparison / alternatives */}
@@ -192,13 +176,6 @@ export default async function ProductPage({ params }: { params: PageParams }) {
           {/* 14 — Final CTA + WhatsApp */}
           <ProductCTA fullName={product.fullName} whatsappMessage={product.whatsappMessage} />
         </main>
-
-        {/* Sticky enquiry bar — fixed, shown when hero CTA scrolls out of view */}
-        <StickyEnquiryBar
-          product={{ fullName: product.fullName, whatsappMessage: product.whatsappMessage }}
-          heroCTASelector="#hero-cta"
-        />
-      </div>
     </>
   );
 }

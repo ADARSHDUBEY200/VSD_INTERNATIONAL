@@ -6,105 +6,182 @@ interface BreadcrumbProps {
 }
 
 const CATEGORY_LABELS: Record<string, string> = {
-  'combi-ovens': 'Combi Ovens',
-  'blast-chillers': 'Blast Chillers',
-  'dishwashers': 'Dishwashers',
-  'multifunctional-cooking': 'Multifunctional Cooking',
-  'refrigeration': 'Refrigeration',
-  'fabrication': 'SS Fabrication',
+  'combi-ovens':              'Combi Ovens',
+  'blast-chillers':           'Blast Chillers',
+  'dishwashers':              'Dishwashers',
+  'multifunctional-cooking':  'Multifunctional Cooking',
+  'refrigeration':            'Refrigeration',
+  'fabrication':              'SS Fabrication',
 };
 
 export default function Breadcrumb({ product }: BreadcrumbProps) {
   const categoryLabel = CATEGORY_LABELS[product.category] ?? product.category;
 
   return (
-    <nav
-      aria-label="breadcrumb"
-      style={{ padding: '1rem 0', borderBottom: '1px solid var(--border)' }}
-    >
+    <nav aria-label="Breadcrumb" className="bc-nav">
       <div className="container">
         <ol
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            flexWrap: 'wrap',
-            gap: '0.25rem',
-            listStyle: 'none',
-            margin: 0,
-            padding: 0,
-          }}
+          className="bc-list"
           itemScope
           itemType="https://schema.org/BreadcrumbList"
         >
-          <BreadcrumbItem position={1} name="Home" href="/" />
-          <BreadcrumbSeparator />
-          <BreadcrumbItem position={2} name="Products" href="/products/" />
-          <BreadcrumbSeparator />
-          <BreadcrumbItem
-            position={3}
-            name={categoryLabel}
-            href={`/products/${product.category}/`}
-          />
-          <BreadcrumbSeparator />
+          {/* Home — icon only */}
           <li
-            style={{
-              fontFamily: 'var(--font-dm-sans), DM Sans, sans-serif',
-              fontSize: '0.8125rem',
-              color: 'var(--text-dark)',
-              fontWeight: 500,
-            }}
+            className="bc-item"
+            itemProp="itemListElement"
+            itemScope
+            itemType="https://schema.org/ListItem"
+          >
+            <meta itemProp="position" content="1" />
+            <Link href="/" itemProp="item" className="bc-link bc-home-link" aria-label="Home">
+              <svg
+                width="13" height="13" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" strokeWidth="2"
+                strokeLinecap="round" strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                <polyline points="9 22 9 12 15 12 15 22"/>
+              </svg>
+              <span itemProp="name" className="sr-only">Home</span>
+            </Link>
+          </li>
+
+          <Slash />
+
+          <li
+            className="bc-item"
+            itemProp="itemListElement"
+            itemScope
+            itemType="https://schema.org/ListItem"
+          >
+            <meta itemProp="position" content="2" />
+            <Link href="/products/" itemProp="item" className="bc-link">
+              <span itemProp="name">Products</span>
+            </Link>
+          </li>
+
+          <Slash />
+
+          <li
+            className="bc-item"
+            itemProp="itemListElement"
+            itemScope
+            itemType="https://schema.org/ListItem"
+          >
+            <meta itemProp="position" content="3" />
+            <Link href={`/products/${product.category}/`} itemProp="item" className="bc-link">
+              <span itemProp="name">{categoryLabel}</span>
+            </Link>
+          </li>
+
+          <Slash />
+
+          {/* Current page — truncated */}
+          <li
+            className="bc-item bc-current"
             itemProp="itemListElement"
             itemScope
             itemType="https://schema.org/ListItem"
             aria-current="page"
           >
             <meta itemProp="position" content="4" />
-            <span itemProp="name">{product.fullName}</span>
+            <span itemProp="name" className="bc-current-name" title={product.fullName}>
+              {product.fullName}
+            </span>
           </li>
         </ol>
       </div>
+
+      <style>{`
+        .bc-nav {
+          padding: 0.5rem 0;
+          background: var(--surface);
+          border-bottom: 1px solid var(--border);
+        }
+
+        .bc-list {
+          display: flex;
+          align-items: center;
+          flex-wrap: nowrap;
+          overflow: hidden;
+          list-style: none;
+          margin: 0;
+          padding: 0;
+          gap: 0;
+        }
+
+        .bc-item {
+          display: flex;
+          align-items: center;
+          flex-shrink: 0;
+        }
+        .bc-current {
+          flex-shrink: 1;
+          overflow: hidden;
+          min-width: 0;
+        }
+
+        .bc-link {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.25rem;
+          font-family: var(--font-inter), Inter, ui-sans-serif, sans-serif;
+          font-size: 0.75rem;
+          font-weight: 400;
+          color: var(--text-muted);
+          text-decoration: none;
+          white-space: nowrap;
+          transition: color 0.15s ease;
+        }
+        .bc-link:hover { color: var(--gold-deep); }
+
+        .bc-home-link {
+          color: var(--text-muted);
+          padding: 0.125rem;
+        }
+        .bc-home-link:hover { color: var(--gold); }
+
+        .bc-slash {
+          font-family: var(--font-inter), Inter, ui-sans-serif, sans-serif;
+          font-size: 0.6875rem;
+          color: var(--border);
+          padding: 0 0.4rem;
+          flex-shrink: 0;
+          user-select: none;
+          line-height: 1;
+        }
+
+        .bc-current-name {
+          font-family: var(--font-inter), Inter, ui-sans-serif, sans-serif;
+          font-size: 0.75rem;
+          font-weight: 500;
+          color: var(--text-dark);
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: block;
+        }
+
+        /* Visually hidden but accessible */
+        .sr-only {
+          position: absolute;
+          width: 1px;
+          height: 1px;
+          padding: 0;
+          margin: -1px;
+          overflow: hidden;
+          clip: rect(0,0,0,0);
+          white-space: nowrap;
+          border: 0;
+        }
+      `}</style>
     </nav>
   );
 }
 
-function BreadcrumbItem({
-  position,
-  name,
-  href,
-}: {
-  position: number;
-  name: string;
-  href: string;
-}) {
+function Slash() {
   return (
-    <li
-      itemProp="itemListElement"
-      itemScope
-      itemType="https://schema.org/ListItem"
-    >
-      <meta itemProp="position" content={String(position)} />
-      <Link
-        href={href}
-        itemProp="item"
-        style={{
-          fontFamily: 'var(--font-dm-sans), DM Sans, sans-serif',
-          fontSize: '0.8125rem',
-          color: 'var(--text-muted)',
-          textDecoration: 'none',
-          transition: 'color 0.15s ease',
-        }}
-        className="link-hover-gold"
-      >
-        <span itemProp="name">{name}</span>
-      </Link>
-    </li>
-  );
-}
-
-function BreadcrumbSeparator() {
-  return (
-    <li aria-hidden="true" style={{ color: 'var(--gold)', fontSize: '0.75rem', lineHeight: 1 }}>
-      ›
-    </li>
+    <li aria-hidden="true" className="bc-slash">/</li>
   );
 }

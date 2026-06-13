@@ -87,6 +87,7 @@ export interface Product {
   priceContext: string;
   leadTime: string;
   overview: string;
+  description: string[];
   specs: Spec[];
   features: Feature[];
   bestFor: BestForItem[];

@@ -10,73 +10,57 @@ export default function ProductCTA({ fullName, whatsappMessage }: ProductCTAProp
   const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappMessage)}`;
 
   return (
-    <section
-      aria-labelledby="final-cta-heading"
-      style={{
-        background: 'linear-gradient(135deg, var(--gold-pale) 0%, var(--surface-alt) 100%)',
-        padding: '5rem 0',
-      }}
-    >
-      <div className="container">
-        <div style={{ maxWidth: '680px', margin: '0 auto', textAlign: 'center' }}>
-          <p
-            className="section-label"
-            style={{ marginBottom: '0.75rem', color: 'var(--gold-deep)' }}
-          >
-            Get a Quote
-          </p>
-          <h2
-            id="final-cta-heading"
-            style={{
-              fontFamily: 'var(--font-cormorant), Cormorant Garamond, Georgia, serif',
-              fontSize: 'clamp(1.6rem, 3vw, 2.2rem)',
-              fontWeight: 600,
-              color: 'var(--text-dark)',
-              lineHeight: 1.2,
-              marginBottom: '1rem',
-            }}
-          >
-            Get Price &amp; Lead Time for the {fullName}
-          </h2>
-          <p
-            style={{
-              fontFamily: 'var(--font-dm-sans), DM Sans, sans-serif',
-              fontSize: '1rem',
-              color: 'var(--text-body)',
-              lineHeight: 1.75,
-              marginBottom: '2rem',
-            }}
-          >
-            Our team will respond within 4 business hours with pricing, availability and
-            installation details for your project.
-          </p>
+    <section aria-labelledby="final-cta-heading" className="pcta-section">
 
-          <div
-            style={{
-              display: 'flex',
-              gap: '1rem',
-              justifyContent: 'center',
-              flexWrap: 'wrap',
-            }}
-          >
-            <a
-              href="/contact/"
-              className="btn-gold"
-              style={{ minWidth: '180px', justifyContent: 'center' }}
-            >
+      {/* Gold top accent bar */}
+      <div className="pcta-topbar" aria-hidden="true" />
+
+      <div className="container">
+        <div className="pcta-layout">
+
+          {/* ── Left: text ── */}
+          <div className="pcta-text">
+            <div className="pcta-eyebrow-row">
+              <span className="pcta-dot" aria-hidden="true" />
+              <span className="pcta-eyebrow">Get a Quote</span>
+            </div>
+            <h2 id="final-cta-heading" className="pcta-heading">
+              Get Price &amp; Lead Time<br className="pcta-br" /> for the {fullName}
+            </h2>
+            <p className="pcta-sub">
+              Our team responds within 4 business hours with pricing,
+              availability, and installation details for your project.
+            </p>
+          </div>
+
+          {/* ── Right: buttons ── */}
+          <div className="pcta-actions">
+            <a href="/contact/" className="pcta-btn-primary">
               Request a Quote
+              <svg
+                width="14" height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg>
             </a>
+
             <a
               href={waUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-ghost"
-              style={{ minWidth: '180px', justifyContent: 'center' }}
+              className="pcta-btn-wa"
               aria-label={`Chat on WhatsApp about the ${fullName}`}
             >
               <svg
-                width="18"
-                height="18"
+                width="16" height="16"
                 viewBox="0 0 24 24"
                 fill="currentColor"
                 aria-hidden="true"
@@ -85,9 +69,195 @@ export default function ProductCTA({ fullName, whatsappMessage }: ProductCTAProp
               </svg>
               Chat on WhatsApp
             </a>
+
+            <p className="pcta-trust">
+              <svg
+                width="11" height="11"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="3"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Authorised dealer &middot; pan-India commissioning &middot; 2-year warranty
+            </p>
           </div>
+
         </div>
       </div>
+
+      {/* Bottom separator so it doesn't bleed into the footer */}
+      <div className="pcta-bottombar" aria-hidden="true" />
+
+      <style>{`
+        /* ── Section ── */
+        .pcta-section {
+          background: #0e0e0b;
+          padding-bottom: 2.5rem;
+          margin-bottom: 0;
+        }
+
+        /* Gold top accent line */
+        .pcta-topbar {
+          height: 3px;
+          background: linear-gradient(
+            90deg,
+            transparent 0%,
+            var(--gold) 25%,
+            #c8922a 65%,
+            transparent 100%
+          );
+          margin-bottom: 2.25rem;
+        }
+
+        /* Subtle bottom separator */
+        .pcta-bottombar {
+          height: 1px;
+          background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(200,146,42,0.18) 30%,
+            rgba(200,146,42,0.18) 70%,
+            transparent
+          );
+          margin-top: 2.5rem;
+        }
+
+        /* ── Two-column layout ── */
+        .pcta-layout {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 2rem;
+          align-items: center;
+        }
+        @media (min-width: 900px) {
+          .pcta-layout {
+            grid-template-columns: 1fr auto;
+            gap: 5rem;
+          }
+        }
+
+        /* ── Left: text ── */
+        .pcta-eyebrow-row {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          margin-bottom: 0.875rem;
+        }
+        .pcta-dot {
+          width: 6px; height: 6px;
+          border-radius: 50%;
+          background: var(--gold);
+          flex-shrink: 0;
+        }
+        .pcta-eyebrow {
+          font-family: var(--font-inter), Inter, ui-sans-serif, sans-serif;
+          font-size: 0.625rem;
+          font-weight: 700;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+          color: var(--gold);
+        }
+
+        .pcta-heading {
+          font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
+          font-size: clamp(1.5rem, 2.5vw, 2.125rem);
+          font-weight: 700;
+          color: #e8e4d8;
+          line-height: 1.2;
+          letter-spacing: -0.02em;
+          margin: 0 0 0.875rem;
+        }
+        .pcta-br { display: none; }
+        @media (min-width: 900px) { .pcta-br { display: inline; } }
+
+        .pcta-sub {
+          font-family: var(--font-inter), Inter, ui-sans-serif, sans-serif;
+          font-size: 0.9rem;
+          color: rgba(232,228,216,0.48);
+          line-height: 1.72;
+          margin: 0;
+          max-width: 54ch;
+        }
+
+        /* ── Right: action buttons ── */
+        .pcta-actions {
+          display: flex;
+          flex-direction: column;
+          gap: 0.75rem;
+          align-items: stretch;
+          min-width: 220px;
+        }
+
+        /* Primary — solid gold */
+        .pcta-btn-primary {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.5rem;
+          padding: 0.8rem 1.5rem;
+          border-radius: 9px;
+          background: var(--gold);
+          color: #1a1a14;
+          font-family: var(--font-inter), Inter, ui-sans-serif, sans-serif;
+          font-size: 0.9rem;
+          font-weight: 700;
+          text-decoration: none;
+          transition: opacity 0.15s ease, transform 0.15s ease;
+        }
+        .pcta-btn-primary:hover {
+          opacity: 0.88;
+          transform: translateY(-1px);
+        }
+        .pcta-btn-primary svg { flex-shrink: 0; }
+
+        /* WhatsApp — ghost gold */
+        .pcta-btn-wa {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.5rem;
+          padding: 0.8rem 1.5rem;
+          border-radius: 9px;
+          background: rgba(200,146,42,0.07);
+          border: 1px solid rgba(200,146,42,0.28);
+          color: var(--gold);
+          font-family: var(--font-inter), Inter, ui-sans-serif, sans-serif;
+          font-size: 0.9rem;
+          font-weight: 600;
+          text-decoration: none;
+          transition: border-color 0.18s ease, background 0.18s ease;
+        }
+        .pcta-btn-wa:hover {
+          border-color: rgba(200,146,42,0.55);
+          background: rgba(200,146,42,0.13);
+        }
+        .pcta-btn-wa svg { flex-shrink: 0; }
+
+        /* Trust line */
+        .pcta-trust {
+          display: flex;
+          align-items: center;
+          gap: 0.375rem;
+          font-family: var(--font-inter), Inter, ui-sans-serif, sans-serif;
+          font-size: 0.5625rem;
+          font-weight: 500;
+          color: rgba(232,228,216,0.28);
+          margin: 0.125rem 0 0;
+          text-align: center;
+          justify-content: center;
+          letter-spacing: 0.04em;
+        }
+        .pcta-trust svg {
+          flex-shrink: 0;
+          color: var(--gold);
+          opacity: 0.55;
+        }
+      `}</style>
     </section>
   );
 }

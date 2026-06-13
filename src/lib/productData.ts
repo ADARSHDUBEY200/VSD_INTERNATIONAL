@@ -15,10 +15,10 @@ export const mockProduct: Product = {
     '10-tray electric combi oven engineered for precision cooking in hotel, hospital and cloud kitchen environments.',
 
   images: [
-    '/images/products/rational-icombi-pro-10-1-1/rational-icombi-pro-10-1-1-front.webp',
-    '/images/products/rational-icombi-pro-10-1-1/rational-icombi-pro-10-1-1-open-door.webp',
-    '/images/products/rational-icombi-pro-10-1-1/rational-icombi-pro-10-1-1-control-panel.webp',
-    '/images/products/rational-icombi-pro-10-1-1/rational-icombi-pro-10-1-1-installed.webp',
+    'https://plus.unsplash.com/premium_photo-1673439305380-79947d273735?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    'https://images.unsplash.com/photo-1617713780979-4ae0c726f253?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    'https://images.unsplash.com/photo-1617713807246-9b9e55ef560e?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    'https://images.unsplash.com/photo-1584269600519-112d071b35e6?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Q29tYmklMjBPdmVufGVufDB8fDB8fHww',
   ],
 
   keyFacts: [
@@ -35,6 +35,12 @@ export const mockProduct: Product = {
 
   overview:
     'The Rational iCombi Pro 10-1/1 is a 10-tray (1/1 GN) electric combi oven delivering precise steam, convection and combination cooking for high-volume professional kitchens. Operating at 18.6 kW on a 3-phase supply, it features Rational\'s iCombi Pro touchscreen controller with 100+ pre-set cooking programmes, HiDensityControl for uniform heat distribution, and an integrated self-cleaning system. It is certified CE and HACCP-suitable, making it the standard specification for hotel, hospital and central production kitchens across India. VSD International is an authorised Rational dealer supplying and commissioning this unit pan-India.',
+
+  description: [
+    'The Rational iCombi Pro 10-1/1 is not simply a combi oven — it is the result of five decades of professional kitchen engineering compressed into an 847 mm-wide unit. Introduced commercially in 1976, Rational\'s combination steam ovens have become the global reference standard in high-volume cooking, found in the kitchens of leading five-star hotels, hospital chains, airline catering facilities, and institutional kitchens across 150 countries.',
+    'At the core of the iCombi Pro\'s performance advantage is HiDensityControl — a precision climate management architecture that monitors and actively corrects temperature at ±1 °C across all ten tray positions simultaneously. This eliminates the batch-size guesswork that forces conventional kitchens to over-specify production quantities as a quality buffer. When every tray cooks identically, every cover reaches the pass to the same standard — every time.',
+    'The decision to specify AISI 304-grade stainless steel for both the interior cooking chamber and exterior cabinet is an engineering choice, not a marketing claim. Austenitic 304 SS tolerates high-alkaline detergent cycles — the kind the iCombi Pro\'s five-level integrated self-cleaning system runs — indefinitely without surface degradation. The triple-glazed thermal door maintains a cool outer surface at 300 °C operating temperature, measurably reducing ambient kitchen heat and the air-conditioning load that represents a real and ongoing operational cost in Indian kitchen environments.',
+  ],
 
   specs: [
     { name: 'Model', value: 'Rational iCombi Pro 10-1/1' },
