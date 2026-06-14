@@ -7,11 +7,11 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { name, email, phone, source = 'home_form', company, city, service, budget, message } = body;
 
-    if (!name?.trim() || !email?.trim() || !phone?.trim()) {
-      return Response.json({ error: 'Name, email and phone are required' }, { status: 400 });
+    if (!name?.trim() || !phone?.trim()) {
+      return Response.json({ error: 'Name and phone are required' }, { status: 400 });
     }
 
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    if (email?.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return Response.json({ error: 'Invalid email address' }, { status: 400 });
     }
 
@@ -19,7 +19,7 @@ export async function POST(request: NextRequest) {
 
     const enquiry = await Enquiry.create({
       name: name.trim(),
-      email: email.trim().toLowerCase(),
+      email: email?.trim().toLowerCase(),
       phone: phone.trim(),
       source,
       company: company?.trim(),

@@ -52,6 +52,7 @@ const STEPS = [
 export default function ProcessWorkflow() {
   return (
     <section
+      id="our-process"
       aria-labelledby="process-heading"
       style={{
         background: '#FFFFFF',

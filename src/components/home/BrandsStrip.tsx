@@ -124,6 +124,7 @@ function BrandChip({ brand, separator }: { brand: typeof brands[0]; separator?: 
 export default function BrandsStrip() {
   return (
     <section
+      id="international-brands"
       aria-labelledby="brands-heading"
       style={{ padding: '3rem 0', background: '#FFFFFF', borderTop: '1px solid var(--border)' }}
     >

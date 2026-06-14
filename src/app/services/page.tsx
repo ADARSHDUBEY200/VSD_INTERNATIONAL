@@ -17,12 +17,12 @@ export const metadata: Metadata = {
   title: 'Commercial Kitchen Equipment & Solutions | VSD International India',
   description:
     'VSD International delivers end-to-end commercial kitchen solutions across India — equipment supply, custom fabrication, layout design, installation, and annual maintenance. Trusted by 500+ hospitality & healthcare clients since 2009.',
-  alternates: { canonical: 'https://vsdinternational.com/services/' },
+  alternates: { canonical: 'https://vsdinternational.com/' },
   openGraph: {
-    url: 'https://vsdinternational.com/services/',
+    url: 'https://vsdinternational.com/',
     title: 'Complete Commercial Kitchen Solutions — Supply, Install & Maintain | VSD International',
     description: 'End-to-end commercial kitchen solutions for hotels, hospitals, restaurants & cloud kitchens across India. ISO 9001 certified. 500+ projects. Delhi factories.',
-    images: [{ url: 'https://vsdinternational.com/og-image.jpg', width: 1200, height: 630 }],
+    images: [{ url: 'https://vsdinternational.com/VSD_LOGO.png', width: 1200, height: 630 }],
   },
 };
 

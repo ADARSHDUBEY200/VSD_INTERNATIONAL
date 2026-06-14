@@ -170,6 +170,7 @@ function BlogCard({ post }: { post: typeof posts[0] }) {
 export default function BlogPreview() {
   return (
     <section
+      id="blog-guides"
       aria-labelledby="blog-heading"
       style={{ padding: '5rem 0', background: 'var(--surface)', borderTop: '1px solid var(--border)' }}
     >

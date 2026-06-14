@@ -53,6 +53,7 @@ const textCities = [
 export default function CitiesWeServe() {
   return (
     <section
+      id="cities-we-serve"
       aria-labelledby="cities-heading"
       style={{
         padding: '6rem 0 5rem',

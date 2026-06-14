@@ -235,6 +235,7 @@ function IndustryCard({ industry }: { industry: typeof industries[0] }) {
 export default function IndustriesServed() {
   return (
     <section
+      id="industries-we-serve"
       aria-labelledby="industries-heading"
       style={{
         background: '#FFFFFF',

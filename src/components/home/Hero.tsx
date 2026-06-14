@@ -28,6 +28,7 @@ export default function Hero() {
 
   return (
     <section
+      id="hero"
       aria-label="VSD International — Commercial Kitchen Equipment Manufacturer"
       className="relative flex flex-col justify-center overflow-hidden"
       style={{ minHeight: 'min(86vh, 780px)', background: 'var(--charcoal-warm)' }}

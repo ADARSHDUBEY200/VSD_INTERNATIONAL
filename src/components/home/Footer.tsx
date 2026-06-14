@@ -286,7 +286,7 @@ export default function Footer() {
         >
           <p style={{ fontFamily: 'var(--font-inter)', fontSize: '0.75rem', color: '#3A3A36', lineHeight: 1.5 }}>
             <strong style={{ color: '#5A5A54' }}>VSD International</strong>
-            {' '}· GSTIN: 07AABFV5120K1ZZ · ISO 9001:2008 Certified
+            {' '}· GSTIN: 07AABFV5120K1ZZ · ISO 9001:2015 Certified
             {' '}· Factory: A-347 Saraswati Gali Mandawali, New Delhi — 110092
             {' '}· Factory II: Ghaziabad, UP
           </p>

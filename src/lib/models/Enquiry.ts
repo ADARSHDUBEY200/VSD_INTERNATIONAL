@@ -2,9 +2,9 @@ import mongoose, { Schema, Document } from 'mongoose';
 
 export interface IEnquiry extends Document {
   name: string;
-  email: string;
+  email?: string;
   phone: string;
-  source: 'home_form' | 'contact_form';
+  source: 'home_form' | 'contact_form' | 'lp_commercial_kitchen';
   company?: string;
   city?: string;
   service?: string;
@@ -18,9 +18,9 @@ export interface IEnquiry extends Document {
 const EnquirySchema = new Schema<IEnquiry>(
   {
     name:    { type: String, required: true, trim: true },
-    email:   { type: String, required: true, trim: true, lowercase: true },
+    email:   { type: String, trim: true, lowercase: true },
     phone:   { type: String, required: true, trim: true },
-    source:  { type: String, enum: ['home_form', 'contact_form'], default: 'home_form' },
+    source:  { type: String, enum: ['home_form', 'contact_form', 'lp_commercial_kitchen'], default: 'home_form' },
     company: { type: String, trim: true },
     city:    { type: String, trim: true },
     service: { type: String, trim: true },

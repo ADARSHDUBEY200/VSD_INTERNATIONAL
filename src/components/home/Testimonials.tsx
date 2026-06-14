@@ -232,6 +232,7 @@ function TestimonialCard({ t }: { t: typeof testimonials[0] }) {
 export default function Testimonials() {
   return (
     <section
+      id="client-testimonials"
       aria-labelledby="testimonials-heading"
       style={{
         padding: '6rem 0',

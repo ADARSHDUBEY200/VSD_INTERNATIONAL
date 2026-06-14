@@ -330,6 +330,7 @@ export default function FeaturedProject() {
 
   return (
     <section
+      id="featured-projects"
       aria-labelledby="project-heading"
       className="relative overflow-hidden"
       style={{ background: 'var(--charcoal)', padding: '2.5rem 0' }}

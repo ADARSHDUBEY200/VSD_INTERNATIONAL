@@ -199,6 +199,16 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ════════════════════════════════════════════════════════════════════════════
+   ANCHOR SCROLL OFFSET
+   Sticky navbar is 68 px. Without scroll-margin-top, clicking any in-page
+   anchor hides the section heading behind the navbar.
+   Google also reads scroll position to confirm the anchor resolves correctly.
+   ════════════════════════════════════════════════════════════════════════════ */
+section[id] {
+  scroll-margin-top: 84px;
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
    LAYOUT UTILITIES
    ════════════════════════════════════════════════════════════════════════════ */
 
@@ -978,5 +988,62 @@ h1, h2, h3, h4, h5, h6 {
     width: calc(85vw) !important;
     height: 480px !important;
   }
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   PAID-ADS LANDING PAGE  (/lp/commercial-kitchen-setup)
+   Self-contained, namespaced .lp-* utilities — no impact on other pages.
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* Hero / final-CTA split: form stacks under copy on mobile, side-by-side on desktop */
+.lp-hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2rem, 4vw, 3.5rem);
+  align-items: center;
+}
+@media (min-width: 900px) {
+  .lp-hero-grid { grid-template-columns: 1.05fr 0.95fr; }
+}
+
+/* Review strip stats: 2-up on mobile, 4-up on larger screens */
+.lp-stat-grid { grid-template-columns: repeat(2, 1fr); }
+@media (min-width: 640px) {
+  .lp-stat-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* Card grids (USPs, testimonials) */
+.lp-card-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+@media (min-width: 600px) { .lp-card-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 960px) { .lp-card-grid { grid-template-columns: repeat(3, 1fr); } }
+
+/* Process steps — auto-fit so the 5 cards wrap gracefully */
+.lp-step-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+@media (min-width: 560px) { .lp-step-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 980px) { .lp-step-grid { grid-template-columns: repeat(5, 1fr); } }
+
+/* Hide phone number text on the tiniest screens (icon-only) */
+@media (max-width: 419px) { .lp-hide-sm { display: none; } }
+
+/* Mobile sticky call/WhatsApp bar — only below 768px */
+.lp-mobile-cta {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 60;
+  box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.35);
+}
+@media (max-width: 767px) {
+  .lp-mobile-cta { display: flex; }
 }
 

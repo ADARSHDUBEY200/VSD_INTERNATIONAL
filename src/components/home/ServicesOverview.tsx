@@ -145,8 +145,9 @@ function ServiceCard({ service }: { service: typeof services[0] }) {
 export default function ServicesOverview() {
   return (
     <section
+      id="commercial-kitchen-services"
       aria-labelledby="services-heading"
-      style={{ padding: '5.5rem 0', background: '#FFFFFF' }}
+      style={{ padding: '2.5rem 0', background: '#FFFFFF' }}
     >
       <div className="container mx-auto">
 

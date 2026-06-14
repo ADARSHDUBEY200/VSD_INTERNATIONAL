@@ -376,6 +376,7 @@ export default function OurProductsShowcase() {
 
   return (
     <section
+      id="kitchen-equipment"
       aria-labelledby="products-heading"
       className="relative overflow-hidden"
       style={{

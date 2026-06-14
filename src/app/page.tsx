@@ -1,5 +1,7 @@
 ﻿import type { Metadata } from 'next';
+import { allFaqs } from '@/data/faqs';
 import AnnouncementBar from '@/components/home/AnnouncementBar';
+import HomepageQuickLinks from '@/components/home/HomepageQuickLinks';
 import Navbar from '@/components/home/Navbar';
 import Hero from '@/components/home/Hero';
 import OurProductsShowcase from '@/components/home/OurProductsShowcase';
@@ -10,10 +12,12 @@ import RefrigeratorsCarousel from '@/components/home/RefrigeratorsCarousel';
 import TrustMetrics from '@/components/home/TrustMetrics';
 import ClientLogos from '@/components/home/ClientLogos';
 import ServicesOverview from '@/components/home/ServicesOverview';
+import MadeInHouseSection from '@/components/home/MadeInHouseSection';
 import IndustriesServed from '@/components/home/IndustriesServed';
 import FeaturedProject from '@/components/home/FeaturedProject';
 import ProcessWorkflow from '@/components/home/ProcessWorkflow';
 import BrandsStrip from '@/components/home/BrandsStrip';
+import SSFabricationBlock from '@/components/home/SSFabricationBlock';
 import VideoSection from '@/components/home/VideoSection';
 import DelhiLocalSection from '@/components/home/DelhiLocalSection';
 import Testimonials from '@/components/home/Testimonials';
@@ -29,23 +33,575 @@ import Footer from '@/components/home/Footer';
 
 /* --- Page Metadata ------------------------------------------------------- */
 export const metadata: Metadata = {
-  title: 'Commercial Kitchen Equipment Manufacturer India | VSD',
+  title: 'Commercial Kitchen Equipment Manufacturer India | VSD International',
   description:
-    'ISO 9001-certified commercial kitchen equipment manufacturer in Delhi, supplying and installing turnkey kitchens for hotels, hospitals and cloud kitchens across India. Trusted by Hyatt, Radisson, ITC & Crowne Plaza. WhatsApp +91-9250346370.',
+    'ISO 9001 certified commercial kitchen equipment manufacturer in Delhi. Turnkey supply, design, fabrication & installation for hotels, hospitals & cloud kitchens. 500+ projects across India since 2009.',
+  keywords: [
+    'commercial kitchen equipment manufacturers in India',
+    'commercial kitchen equipment manufacturers in Delhi',
+    'hotel kitchen equipment supplier India',
+    'hospital kitchen equipment NABH',
+    'cloud kitchen setup India',
+    'stainless steel kitchen fabrication Delhi',
+    'turnkey commercial kitchen India',
+    'kitchen layout design',
+    'kitchen equipment AMC India',
+    'VSD International Delhi',
+    'Rational combi oven dealer India',
+    'commercial kitchen manufacturer Delhi NCR',
+  ],
+  authors: [{ name: 'VSD International', url: 'https://vsdinternational.com' }],
+  creator: 'VSD International',
+  publisher: 'VSD International',
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   alternates: { canonical: 'https://vsdinternational.com/' },
   openGraph: {
+    type: 'website',
     url: 'https://vsdinternational.com/',
+    siteName: 'VSD International',
+    locale: 'en_IN',
     title: 'Commercial Kitchen Equipment Manufacturer in India | VSD International',
     description:
-      'ISO 9001 certified. Trusted by Hyatt, Radisson, ITC & Crowne Plaza. Turnkey kitchen supply, design, install & AMC from two Delhi factories. WhatsApp +91-9250346370.',
-    images: [{ url: 'https://vsdinternational.com/og-image.jpg', width: 1200, height: 630 }],
+      'ISO 9001 certified. Trusted by Hyatt, Radisson, ITC & Crowne Plaza. Turnkey kitchen supply, design, install & AMC from two Delhi factories. 500+ projects since 2009. ☎ +91-9250346370.',
+    images: [
+      {
+        url: 'https://vsdinternational.com/VSD_LOGO.png',
+        width: 1200,
+        height: 630,
+        alt: 'VSD International — Commercial Kitchen Equipment Manufacturer India',
+      },
+    ],
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Commercial Kitchen Equipment Manufacturer in India | VSD International',
+    description:
+      'ISO 9001 certified. Trusted by Hyatt, Radisson & 500+ clients. Turnkey kitchen supply, design & installation across India.',
+    images: ['https://vsdinternational.com/VSD_LOGO.png'],
+  },
+};
+
+/* --- JSON-LD Home Page Schema -------------------------------------------- */
+const homePageSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+
+    /* ── 1. WebSite — enables Sitelinks Searchbox in Google ──────────────── */
+    {
+      '@type': 'WebSite',
+      '@id': 'https://vsdinternational.com/#website',
+      url: 'https://vsdinternational.com/',
+      name: 'VSD International',
+      alternateName: ['VSD International India', 'VSD Kitchen Equipment'],
+      description:
+        'ISO 9001 certified commercial kitchen equipment manufacturer and supplier in India. Serving hotels, hospitals, restaurants & cloud kitchens since 2009.',
+      publisher: { '@id': 'https://vsdinternational.com/#organization' },
+      inLanguage: 'en-IN',
+      potentialAction: {
+        '@type': 'SearchAction',
+        target: {
+          '@type': 'EntryPoint',
+          urlTemplate: 'https://vsdinternational.com/search?q={search_term_string}',
+        },
+        'query-input': 'required name=search_term_string',
+      },
+    },
+
+    /* ── 2. Organization + LocalBusiness — AggregateRating → Google stars ── */
+    {
+      '@type': ['Organization', 'LocalBusiness'],
+      '@id': 'https://vsdinternational.com/#organization',
+      name: 'VSD International',
+      legalName: 'VSD International',
+      alternateName: 'VSD International India',
+      url: 'https://vsdinternational.com/',
+      logo: {
+        '@type': 'ImageObject',
+        '@id': 'https://vsdinternational.com/#logo',
+        url: 'https://vsdinternational.com/VSD_LOGO.png',
+        contentUrl: 'https://vsdinternational.com/VSD_LOGO.png',
+        width: 200,
+        height: 60,
+        caption: 'VSD International — Commercial Kitchen Equipment Manufacturer India',
+      },
+      image: {
+        '@type': 'ImageObject',
+        url: 'https://vsdinternational.com/og-image.jpg',
+        width: 1200,
+        height: 630,
+        caption: 'VSD International Commercial Kitchen Equipment — Delhi NCR',
+      },
+      description:
+        'ISO 9001:2015 certified manufacturer and turnkey supplier of commercial kitchen equipment. Operating from Delhi NCR manufacturing facilities since 2009, VSD International has completed 500+ projects for hotels, hospitals, restaurants, cloud kitchens, and government institutions across India.',
+      foundingDate: '2009',
+      slogan: "India's Trusted Commercial Kitchen Partner Since 2009",
+      telephone: '+91-9250346370',
+      email: 'sales@vsdinternational.com',
+      vatID: '07AABFV5120K1ZZ',
+      priceRange: '₹₹₹',
+      currenciesAccepted: 'INR',
+      paymentAccepted: 'Cash, Bank Transfer, NEFT, RTGS, Cheque',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'A-347, Saraswati Gali, Mandawali',
+        addressLocality: 'New Delhi',
+        addressRegion: 'Delhi',
+        postalCode: '110092',
+        addressCountry: 'IN',
+      },
+      geo: {
+        '@type': 'GeoCoordinates',
+        latitude: '28.6273',
+        longitude: '77.3088',
+      },
+      hasMap: 'https://g.page/vsd-international-delhi',
+      openingHoursSpecification: [
+        {
+          '@type': 'OpeningHoursSpecification',
+          dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+          opens: '09:00',
+          closes: '18:00',
+        },
+      ],
+      contactPoint: [
+        {
+          '@type': 'ContactPoint',
+          telephone: '+91-9250346370',
+          contactType: 'sales',
+          areaServed: 'IN',
+          availableLanguage: ['en', 'hi'],
+        },
+        {
+          '@type': 'ContactPoint',
+          telephone: '+91-9250346370',
+          contactType: 'customer service',
+          areaServed: 'IN',
+          availableLanguage: ['en', 'hi'],
+        },
+        {
+          '@type': 'ContactPoint',
+          email: 'sales@vsdinternational.com',
+          contactType: 'sales',
+          areaServed: 'IN',
+          availableLanguage: ['en', 'hi'],
+        },
+      ],
+      sameAs: [
+        'https://www.linkedin.com/company/vsd-international',
+        'https://www.indiamart.com/vsd-international',
+        'https://g.page/vsd-international-delhi',
+      ],
+      knowsAbout: [
+        'Commercial Kitchen Equipment',
+        'Hotel Kitchen Setup',
+        'Hospital Kitchen Equipment',
+        'Cloud Kitchen Setup',
+        'Stainless Steel Kitchen Fabrication',
+        'Kitchen Layout Design',
+        'Commercial Refrigeration',
+        'Rational Combi Ovens',
+        'Annual Maintenance Contracts',
+        'Restaurant Kitchen Setup',
+        'Bakery Equipment',
+        'Kitchen Exhaust and Ventilation',
+      ],
+      areaServed: [
+        { '@type': 'Country', name: 'India' },
+        { '@type': 'City', name: 'New Delhi' },
+        { '@type': 'City', name: 'Mumbai' },
+        { '@type': 'City', name: 'Bangalore' },
+        { '@type': 'City', name: 'Hyderabad' },
+        { '@type': 'City', name: 'Chennai' },
+        { '@type': 'City', name: 'Pune' },
+        { '@type': 'City', name: 'Kolkata' },
+        { '@type': 'City', name: 'Jaipur' },
+        { '@type': 'City', name: 'Lucknow' },
+        { '@type': 'City', name: 'Ahmedabad' },
+      ],
+      /* AggregateRating — sourced from 312 verified Google Business Profile reviews */
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: '4.9',
+        reviewCount: '312',
+        bestRating: '5',
+        worstRating: '1',
+      },
+      /* Services offered via OfferCatalog — all 14 service lines */
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'Commercial Kitchen Equipment & Services — VSD International',
+        itemListElement: [
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              '@id': 'https://vsdinternational.com/services/commercial-kitchen-equipment#service',
+              name: 'Commercial Kitchen Equipment Supply',
+              description:
+                'Complete commercial kitchen equipment supply — cooking ranges, refrigeration, food preparation, dishwashing, and custom stainless steel fabrication from Delhi NCR factories.',
+              url: 'https://vsdinternational.com/services/commercial-kitchen-equipment',
+              provider: { '@id': 'https://vsdinternational.com/#organization' },
+              areaServed: { '@type': 'Country', name: 'India' },
+              serviceType: 'Commercial Kitchen Equipment Supply',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              '@id': 'https://vsdinternational.com/services/hotel-kitchen-equipment#service',
+              name: 'Hotel Kitchen Equipment',
+              description:
+                'End-to-end 5-star hotel kitchen setups for banquet, restaurant, bar, and staff kitchens. Trusted by Hyatt Regency, Radisson Blu, Crowne Plaza, and ITC Welcomhotel.',
+              url: 'https://vsdinternational.com/services/hotel-kitchen-equipment',
+              provider: { '@id': 'https://vsdinternational.com/#organization' },
+              areaServed: { '@type': 'Country', name: 'India' },
+              serviceType: 'Hotel Kitchen Equipment Setup',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              '@id': 'https://vsdinternational.com/services/restaurant-kitchen-setup#service',
+              name: 'Restaurant Kitchen Setup',
+              description:
+                'Complete restaurant kitchen setup for fine-dining, QSR, café chains, and casual dining — design, equipment supply, installation, and commissioning.',
+              url: 'https://vsdinternational.com/services/restaurant-kitchen-setup',
+              provider: { '@id': 'https://vsdinternational.com/#organization' },
+              areaServed: { '@type': 'Country', name: 'India' },
+              serviceType: 'Restaurant Kitchen Setup',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              '@id': 'https://vsdinternational.com/services/cloud-kitchen-setup#service',
+              name: 'Cloud Kitchen Setup',
+              description:
+                'Complete cloud kitchen equipment packages for Zomato, Swiggy, and Rebel Foods operators. Multi-brand ghost kitchen setups designed for maximum throughput per square foot.',
+              url: 'https://vsdinternational.com/services/cloud-kitchen-setup',
+              provider: { '@id': 'https://vsdinternational.com/#organization' },
+              areaServed: { '@type': 'Country', name: 'India' },
+              serviceType: 'Cloud Kitchen Setup',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              '@id': 'https://vsdinternational.com/services/hospital-kitchen-equipment#service',
+              name: 'Hospital Kitchen Equipment',
+              description:
+                'NABH and FSSAI compliant dietary kitchen equipment for hospitals and healthcare institutions. Projects at Metro Hospitals, Yashoda, Sarvodaya, and Hans hospitals.',
+              url: 'https://vsdinternational.com/services/hospital-kitchen-equipment',
+              provider: { '@id': 'https://vsdinternational.com/#organization' },
+              areaServed: { '@type': 'Country', name: 'India' },
+              serviceType: 'Hospital Kitchen Equipment Supply',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              '@id': 'https://vsdinternational.com/services/bakery-equipment#service',
+              name: 'Commercial Bakery Equipment',
+              description:
+                'Commercial bakery equipment supply and installation — deck ovens, rotary rack ovens, proofers, spiral mixers, sheeting machines, and blast freezers.',
+              url: 'https://vsdinternational.com/services/bakery-equipment',
+              provider: { '@id': 'https://vsdinternational.com/#organization' },
+              areaServed: { '@type': 'Country', name: 'India' },
+              serviceType: 'Commercial Bakery Equipment',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              '@id': 'https://vsdinternational.com/services/stainless-steel-fabrication#service',
+              name: 'Custom Stainless Steel Fabrication',
+              description:
+                'In-house SS 304 fabrication for worktables, sinks, shelving, exhaust hoods, trolleys, and bespoke kitchen furniture — manufactured to exact dimensions at Delhi NCR factories.',
+              url: 'https://vsdinternational.com/services/stainless-steel-fabrication',
+              provider: { '@id': 'https://vsdinternational.com/#organization' },
+              areaServed: { '@type': 'Country', name: 'India' },
+              serviceType: 'Stainless Steel Kitchen Fabrication',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              '@id': 'https://vsdinternational.com/services/industrial-kitchen-equipment#service',
+              name: 'Industrial & Institutional Kitchen Equipment',
+              description:
+                'Heavy-duty institutional kitchen equipment for defence canteens, factories, government institutions, and large-scale bulk catering operations across India.',
+              url: 'https://vsdinternational.com/services/industrial-kitchen-equipment',
+              provider: { '@id': 'https://vsdinternational.com/#organization' },
+              areaServed: { '@type': 'Country', name: 'India' },
+              serviceType: 'Industrial Kitchen Equipment',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              '@id': 'https://vsdinternational.com/services/cafeteria-kitchen-equipment#service',
+              name: 'Cafeteria Kitchen Equipment',
+              description:
+                'Cafeteria kitchen solutions for corporate offices, schools, and colleges — high-volume serving counters, hot cases, and complete cafeteria equipment packages.',
+              url: 'https://vsdinternational.com/services/cafeteria-kitchen-equipment',
+              provider: { '@id': 'https://vsdinternational.com/#organization' },
+              areaServed: { '@type': 'Country', name: 'India' },
+              serviceType: 'Cafeteria Kitchen Equipment',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              '@id': 'https://vsdinternational.com/services/kitchen-layout-design#service',
+              name: 'Professional Kitchen Layout Design',
+              description:
+                'CAD-based commercial kitchen layout design — workflow analysis, space planning, AutoCAD drawings, and free site visit for projects above ₹5 lakh.',
+              url: 'https://vsdinternational.com/services/kitchen-layout-design',
+              provider: { '@id': 'https://vsdinternational.com/#organization' },
+              areaServed: { '@type': 'Country', name: 'India' },
+              serviceType: 'Kitchen Layout Design',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              '@id': 'https://vsdinternational.com/services/kitchen-exhaust-ventilation#service',
+              name: 'Kitchen Exhaust & Ventilation Systems',
+              description:
+                'Commercial kitchen exhaust hoods, fresh air systems, UV filtration, and fire suppression — FIRE NOC compliant ventilation design and installation.',
+              url: 'https://vsdinternational.com/services/kitchen-exhaust-ventilation',
+              provider: { '@id': 'https://vsdinternational.com/#organization' },
+              areaServed: { '@type': 'Country', name: 'India' },
+              serviceType: 'Kitchen Exhaust and Ventilation',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              '@id': 'https://vsdinternational.com/services/kitchen-equipment-amc#service',
+              name: 'Kitchen Equipment Annual Maintenance Contract (AMC)',
+              description:
+                'AMC covering scheduled preventive servicing, priority breakdown support, genuine spare parts, and dedicated engineer visits. 80+ active AMC clients across India.',
+              url: 'https://vsdinternational.com/services/kitchen-equipment-amc',
+              provider: { '@id': 'https://vsdinternational.com/#organization' },
+              areaServed: { '@type': 'Country', name: 'India' },
+              serviceType: 'Kitchen Equipment Annual Maintenance Contract',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              '@id': 'https://vsdinternational.com/services/bar-equipment#service',
+              name: 'Commercial Bar Equipment',
+              description:
+                'Commercial bar equipment for hotel bars, nightclubs, and event venues — ice machines, blenders, dispensers, and custom bar furniture.',
+              url: 'https://vsdinternational.com/services/bar-equipment',
+              provider: { '@id': 'https://vsdinternational.com/#organization' },
+              areaServed: { '@type': 'Country', name: 'India' },
+              serviceType: 'Commercial Bar Equipment',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              '@id': 'https://vsdinternational.com/services/imported-kitchen-equipment#service',
+              name: 'Imported Commercial Kitchen Equipment',
+              description:
+                'Authorised Indian dealer for Rational, Robot Coupe, Frymaster, Hamilton Beach, Scotsman, BUNN, and Vitamix — genuine imported equipment with Indian warranty and local service.',
+              url: 'https://vsdinternational.com/services/imported-kitchen-equipment',
+              provider: { '@id': 'https://vsdinternational.com/#organization' },
+              areaServed: { '@type': 'Country', name: 'India' },
+              serviceType: 'Imported Kitchen Equipment Distribution',
+            },
+          },
+        ],
+      },
+    },
+
+    /* ── 3. WebPage Schema ────────────────────────────────────────────────── */
+    {
+      '@type': 'WebPage',
+      '@id': 'https://vsdinternational.com/#webpage',
+      url: 'https://vsdinternational.com/',
+      name: 'Commercial Kitchen Equipment Manufacturer India | VSD International',
+      isPartOf: { '@id': 'https://vsdinternational.com/#website' },
+      about: { '@id': 'https://vsdinternational.com/#organization' },
+      primaryImageOfPage: {
+        '@type': 'ImageObject',
+        url: 'https://vsdinternational.com/og-image.jpg',
+        width: 1200,
+        height: 630,
+      },
+      description:
+        'ISO 9001 certified commercial kitchen equipment manufacturer in Delhi. Turnkey supply, fabrication, design, installation & AMC for hotels, hospitals & cloud kitchens across India. 500+ projects since 2009.',
+      breadcrumb: { '@id': 'https://vsdinternational.com/#breadcrumb' },
+      inLanguage: 'en-IN',
+      datePublished: '2009-01-01T00:00:00+05:30',
+      dateModified: '2026-06-14T00:00:00+05:30',
+      potentialAction: {
+        '@type': 'ReadAction',
+        target: ['https://vsdinternational.com/'],
+      },
+    },
+
+    /* ── 4. BreadcrumbList ────────────────────────────────────────────────── */
+    {
+      '@type': 'BreadcrumbList',
+      '@id': 'https://vsdinternational.com/#breadcrumb',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: 'https://vsdinternational.com/',
+        },
+      ],
+    },
+
+    /* ── 5. ItemList — page sections → reinforces Jump Links signal ──────── */
+    {
+      '@type': 'ItemList',
+      '@id': 'https://vsdinternational.com/#page-sections',
+      name: 'VSD International Homepage Sections',
+      description: 'Key sections of the VSD International homepage covering services, equipment, industries, projects, process, brands, reviews, FAQs, and cities served.',
+      numberOfItems: 12,
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Commercial Kitchen Services',
+          url: 'https://vsdinternational.com/#commercial-kitchen-services',
+          description: 'Equipment supply, kitchen design, installation, AMC, brand dealership, and turnkey projects.',
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Kitchen Equipment Categories',
+          url: 'https://vsdinternational.com/#kitchen-equipment',
+          description: 'Cooking equipment, refrigeration, bakery equipment, food preparation, dishwashing, and bar equipment.',
+        },
+        {
+          '@type': 'ListItem',
+          position: 3,
+          name: 'Industries We Serve',
+          url: 'https://vsdinternational.com/#industries-we-serve',
+          description: 'Hotels, hospitals, restaurants, cloud kitchens, bakeries, and institutional clients.',
+        },
+        {
+          '@type': 'ListItem',
+          position: 4,
+          name: 'Featured Projects',
+          url: 'https://vsdinternational.com/#featured-projects',
+          description: 'Completed kitchen projects at Hyatt Regency Delhi, Metro Hospitals, and Rebel Foods.',
+        },
+        {
+          '@type': 'ListItem',
+          position: 5,
+          name: 'How We Work — Our Process',
+          url: 'https://vsdinternational.com/#our-process',
+          description: 'Six-step turnkey process: site visit, layout design, equipment selection, supply, installation, and AMC.',
+        },
+        {
+          '@type': 'ListItem',
+          position: 6,
+          name: 'Stainless Steel Fabrication',
+          url: 'https://vsdinternational.com/#stainless-steel-fabrication',
+          description: 'In-house SS 304 fabrication of worktables, sinks, shelving, exhaust hoods, trolleys, and custom kitchen furniture.',
+        },
+        {
+          '@type': 'ListItem',
+          position: 7,
+          name: 'International Kitchen Equipment Brands',
+          url: 'https://vsdinternational.com/#international-brands',
+          description: 'Authorised dealer for Rational, Robot Coupe, Frymaster, Hamilton Beach, Scotsman, BUNN, and Vitamix.',
+        },
+        {
+          '@type': 'ListItem',
+          position: 8,
+          name: 'Client Testimonials & Reviews',
+          url: 'https://vsdinternational.com/#client-testimonials',
+          description: '4.9 star rating from 312 verified Google reviews from hotels, hospitals, and cloud kitchen clients.',
+        },
+        {
+          '@type': 'ListItem',
+          position: 9,
+          name: 'Frequently Asked Questions',
+          url: 'https://vsdinternational.com/#faqs',
+          description: '30 detailed answers covering pricing, timelines, equipment types, compliance, and how to get started.',
+        },
+        {
+          '@type': 'ListItem',
+          position: 10,
+          name: 'Cities We Serve Across India',
+          url: 'https://vsdinternational.com/#cities-we-serve',
+          description: 'Commercial kitchen equipment supply and installation in Delhi, Mumbai, Bangalore, Hyderabad, Chennai, Pune, Kolkata, and 50+ cities.',
+        },
+        {
+          '@type': 'ListItem',
+          position: 11,
+          name: 'Industry Guides & Kitchen Planning Blogs',
+          url: 'https://vsdinternational.com/#blog-guides',
+          description: 'Expert guides on hotel kitchen setup, cloud kitchen equipment checklists, and commercial kitchen planning.',
+        },
+        {
+          '@type': 'ListItem',
+          position: 12,
+          name: 'Get a Free Quote',
+          url: 'https://vsdinternational.com/#get-a-quote',
+          description: 'Request a free site visit, kitchen layout, and itemised equipment quote. Response within 1 business hour.',
+        },
+      ],
+    },
+
+    /* ── 6. FAQPage — 30 Q&As → expandable rich results in Google ────────── */
+    {
+      '@type': 'FAQPage',
+      '@id': 'https://vsdinternational.com/#faqpage',
+      mainEntity: allFaqs.map((faq) => ({
+        '@type': 'Question',
+        name: faq.q,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: faq.a,
+        },
+      })),
+    },
+  ],
 };
 
 /* --- HomePage — Server Component ------------------------------------------- */
 export default function HomePage() {
   return (
     <>
+      {/* JSON-LD Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(homePageSchema) }}
+      />
+
       {/* ① Announcement Bar */}
       <AnnouncementBar />
 
@@ -56,8 +612,9 @@ export default function HomePage() {
 
         <Hero />
 
-
         <TrustMetrics />
+
+        <HomepageQuickLinks />
 
 
         <OurProductsShowcase />
@@ -70,6 +627,9 @@ export default function HomePage() {
 
 
         <ServicesOverview />
+
+
+        <MadeInHouseSection />
 
 
         <CookingEquipmentCarousel />
@@ -91,6 +651,9 @@ export default function HomePage() {
 
 
         <BrandsStrip />
+
+
+        <SSFabricationBlock />
 
 
         <VideoSection />

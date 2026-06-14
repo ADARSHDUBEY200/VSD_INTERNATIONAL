@@ -36,6 +36,7 @@ export default function CTABanner() {
 
   return (
     <section
+      id="get-a-quote"
       aria-labelledby="cta-heading"
       style={{
         padding: '5.5rem 0',
@@ -87,7 +88,7 @@ export default function CTABanner() {
               lineHeight: 1.12, letterSpacing: '-0.02em',
             }}
           >
-            Start Your Kitchen Project
+            Get a Free Quote for Your Kitchen Project
           </h2>
           <div className="gold-divider mt-5" aria-hidden="true" />
           <p className="mt-5 max-w-lg" style={{
