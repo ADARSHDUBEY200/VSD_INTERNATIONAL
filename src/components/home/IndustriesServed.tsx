@@ -1,5 +1,6 @@
 ﻿import Link from 'next/link';
 import { Hotel, Heart, UtensilsCrossed, Truck, Cake, Landmark, ArrowRight } from 'lucide-react';
+import OpenEnquiryBtn from './OpenEnquiryBtn';
 
 const industries = [
   {
@@ -387,14 +388,18 @@ export default function IndustriesServed() {
         </div>
 
         {/* -- Bottom CTA -- */}
-        <div style={{ textAlign: 'center', marginTop: '3.75rem' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '0.875rem', flexWrap: 'wrap', marginTop: '3.75rem' }}>
           <Link
             href="/industries"
-            className="btn-gold inline-flex items-center gap-2"
+            className="btn-ghost inline-flex items-center gap-2"
             aria-label="View all industries VSD International serves"
           >
             View All Industries <ArrowRight size={15} aria-hidden="true" />
           </Link>
+          <OpenEnquiryBtn
+            label="Get Free Quote"
+            ariaLabel="Get a free kitchen equipment quote for your industry"
+          />
         </div>
       </div>
     </section>

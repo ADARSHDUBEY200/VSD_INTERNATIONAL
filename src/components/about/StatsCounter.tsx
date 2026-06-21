@@ -22,9 +22,9 @@ function useCounter(target: number, started: boolean, duration = 1800) {
 }
 
 const STATS = [
-  { value: 15,  suffix: '+',  label: 'Years of Excellence',  sub: 'Est. 2009, Delhi'        },
+  { value: 7,   suffix: '+',  label: 'Years of Excellence',  sub: 'Est. 2019, Delhi'        },
   { value: 200, suffix: '+',  label: 'Satisfied Clients',     sub: 'Hotels, Hospitals & more' },
-  { value: 312, suffix: '',   label: 'Google Reviews',        sub: '4.9★ Average rating'     },
+  { value: 312, suffix: '',   label: 'Google Reviews',        sub: '5★ Average rating'       },
   { value: 50,  suffix: '+',  label: 'Cities Served',         sub: 'Pan-India network'       },
 ];
 
@@ -43,11 +43,11 @@ export default function StatsCounter() {
     return () => obs.disconnect();
   }, []);
 
-  const v15  = useCounter(15,  on, 1400);
+  const v7   = useCounter(7,   on, 1400);
   const v200 = useCounter(200, on, 1700);
   const v312 = useCounter(312, on, 2000);
   const v50  = useCounter(50,  on, 1500);
-  const vals  = [v15, v200, v312, v50];
+  const vals  = [v7, v200, v312, v50];
 
   return (
     <div

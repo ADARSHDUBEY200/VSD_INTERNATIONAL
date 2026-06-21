@@ -19,6 +19,24 @@ const STATUS_MAP: Record<string, { bg: string; color: string; border: string; ic
   resolved:    { bg: '#ECFDF5', color: '#16A34A', border: '#BBF7D0', icon: <CheckCircle2 size={10} />, label: 'Resolved' },
 };
 
+const SOURCE_LABEL: Record<string, string> = {
+  home_form:             'Home',
+  contact_form:          'Contact',
+  enquiry_modal:         'Modal',
+  lead_popup:            'Lead Popup',
+  cta_banner:            'CTA Banner',
+  lp_commercial_kitchen: 'LP Kitchen',
+};
+
+const SOURCE_STYLE: Record<string, { background: string; color: string; border: string }> = {
+  home_form:             { background: '#EFF6FF', color: '#2563EB', border: '1px solid #BFDBFE' },
+  contact_form:          { background: '#F0FDF4', color: '#16A34A', border: '1px solid #BBF7D0' },
+  enquiry_modal:         { background: '#F5F3FF', color: '#7C3AED', border: '1px solid #DDD6FE' },
+  lead_popup:            { background: '#FFF7ED', color: '#C2410C', border: '1px solid #FED7AA' },
+  cta_banner:            { background: '#FFFBEB', color: '#D97706', border: '1px solid #FDE68A' },
+  lp_commercial_kitchen: { background: '#F0FDF4', color: '#0F766E', border: '1px solid #99F6E4' },
+};
+
 function SkeletonCard() {
   return (
     <div style={{ background: 'white', border: '1px solid #E2E8F0', borderRadius: 12, padding: '0.875rem', marginBottom: '0.625rem' }}>
@@ -177,6 +195,10 @@ export default function EnquiriesPage() {
           <option value="all">All Sources</option>
           <option value="home_form">Home Form</option>
           <option value="contact_form">Contact Form</option>
+          <option value="enquiry_modal">Enquiry Modal</option>
+          <option value="lead_popup">Lead Popup</option>
+          <option value="cta_banner">CTA Banner</option>
+          <option value="lp_commercial_kitchen">LP — Commercial Kitchen</option>
         </select>
       </div>
 
@@ -288,8 +310,8 @@ export default function EnquiriesPage() {
                           {!enq.service && !enq.city && <span style={{ color: '#CBD5E1' }}>—</span>}
                         </td>
                         <td style={{ padding: '0.875rem 1rem' }}>
-                          <span style={{ display: 'inline-flex', padding: '0.2rem 0.6rem', borderRadius: 999, fontSize: 11, fontWeight: 600, background: enq.source === 'contact_form' ? '#F0FDF4' : '#EFF6FF', color: enq.source === 'contact_form' ? '#16A34A' : '#2563EB', border: `1px solid ${enq.source === 'contact_form' ? '#BBF7D0' : '#BFDBFE'}` }}>
-                            {enq.source === 'contact_form' ? 'Contact' : 'Home'}
+                          <span style={{ display: 'inline-flex', padding: '0.2rem 0.6rem', borderRadius: 999, fontSize: 11, fontWeight: 600, ...(SOURCE_STYLE[enq.source] ?? SOURCE_STYLE.home_form) }}>
+                            {SOURCE_LABEL[enq.source] ?? enq.source}
                           </span>
                         </td>
                         <td style={{ padding: '0.875rem 1rem' }} onClick={e => e.stopPropagation()}>

@@ -8,11 +8,11 @@ const featuredCities = [
     name:    'Delhi NCR',
     href:    '/#delhi',
     tagline: 'Our Factory Location · Highest Authority',
-    desc:    "VSD International's headquarters and two manufacturing facilities. Delhi NCR projects benefit from same-day site visits, fastest delivery timelines, and direct factory support.",
+    desc:    "VSD International's headquarters and manufacturing facility. Delhi NCR projects benefit from same-day site visits, fastest delivery timelines, and direct factory support.",
     stats:   [
       { label: 'Projects Completed', value: '150+' },
       { label: 'Response Time',      value: 'Same Day' },
-      { label: 'Delhi Factories',    value: '2' },
+      { label: 'Delhi Factory',      value: '1' },
     ],
     isHQ: true,
   },
@@ -56,7 +56,7 @@ export default function CitiesWeServe() {
       id="cities-we-serve"
       aria-labelledby="cities-heading"
       style={{
-        padding: '6rem 0 5rem',
+        padding: 'clamp(3rem, 10vw, 6rem) 0 clamp(2.5rem, 8vw, 5rem)',
         background: '#FAFAF8',
         borderTop: '1px solid var(--border)',
         position: 'relative',
@@ -83,22 +83,23 @@ export default function CitiesWeServe() {
       <div className="container mx-auto" style={{ maxWidth: '80rem', padding: '0 1.25rem', position: 'relative' }}>
 
         {/* Header */}
-        <div className="text-center mb-14">
-          <p className="section-label mb-3">Pan India Delivery</p>
+        <div className="text-center mb-8 sm:mb-14">
+          <p className="section-label mb-2 sm:mb-3">Pan India Delivery</p>
           <h2
             id="cities-heading"
             style={{
               fontFamily: 'var(--font-playfair)',
-              fontSize: 'clamp(1.875rem, 3.2vw, 2.75rem)',
+              fontSize: 'clamp(1.625rem, 3.2vw, 2.75rem)',
               color: 'var(--text-primary)',
+              lineHeight: 1.2,
             }}
           >
             Cities We Serve Across India
           </h2>
-          <div className="gold-divider mt-5" aria-hidden="true" />
-          <p className="mt-6 max-w-xl" style={{
+          <div className="gold-divider mt-4 sm:mt-5" aria-hidden="true" />
+          <p className="mt-4 sm:mt-6 max-w-xl" style={{
             color: 'var(--text-secondary)',
-            fontSize: '1rem', lineHeight: 1.8,
+            fontSize: 'clamp(0.875rem, 3.6vw, 1rem)', lineHeight: 1.7,
             marginLeft: 'auto', marginRight: 'auto', textAlign: 'center',
           }}>
             Our Delhi factories enable fast delivery pan-India. Enterprise buyers in every major city
@@ -106,8 +107,9 @@ export default function CitiesWeServe() {
           </p>
         </div>
 
-        {/* Featured cities */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        {/* Featured cities — horizontal scroll on phone, 2-col grid from md */}
+        <div className="cities-scroll-outer mb-6 sm:mb-8">
+        <div className="cities-featured-grid">
 
           {/* Delhi NCR — HQ dark card */}
           <Link
@@ -200,9 +202,10 @@ export default function CitiesWeServe() {
                   <div key={stat.label} style={{
                     textAlign: 'center',
                     borderRight: i < 2 ? '1px solid rgba(200,169,107,0.12)' : 'none',
-                    padding: '0 0.75rem',
+                    padding: '0 0.4rem',
+                    minWidth: 0,
                   }}>
-                    <p style={{ fontFamily: 'var(--font-playfair)', fontWeight: 700, fontSize: '1.375rem', color: 'var(--gold)', lineHeight: 1 }}>
+                    <p style={{ fontFamily: 'var(--font-playfair)', fontWeight: 700, fontSize: 'clamp(1.05rem, 4.5vw, 1.375rem)', color: 'var(--gold)', lineHeight: 1, whiteSpace: 'nowrap' }}>
                       {stat.value}
                     </p>
                     <p style={{ fontSize: '0.675rem', color: '#4A4535', fontFamily: 'var(--font-inter)', marginTop: '0.3rem', lineHeight: 1.3 }}>
@@ -307,9 +310,10 @@ export default function CitiesWeServe() {
                   <div key={stat.label} style={{
                     textAlign: 'center',
                     borderRight: i < 2 ? '1px solid var(--border)' : 'none',
-                    padding: '0 0.75rem',
+                    padding: '0 0.4rem',
+                    minWidth: 0,
                   }}>
-                    <p style={{ fontFamily: 'var(--font-playfair)', fontWeight: 700, fontSize: '1.375rem', color: 'var(--gold)', lineHeight: 1 }}>
+                    <p style={{ fontFamily: 'var(--font-playfair)', fontWeight: 700, fontSize: 'clamp(1.05rem, 4.5vw, 1.375rem)', color: 'var(--gold)', lineHeight: 1, whiteSpace: 'nowrap' }}>
                       {stat.value}
                     </p>
                     <p style={{ fontSize: '0.675rem', color: 'var(--text-muted)', fontFamily: 'var(--font-inter)', marginTop: '0.3rem', lineHeight: 1.3 }}>
@@ -326,9 +330,11 @@ export default function CitiesWeServe() {
             </div>
           </Link>
         </div>
+        </div>
 
-        {/* Standard city grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mb-6">
+        {/* Standard city grid — horizontal scroll on phone, grid from sm */}
+        <div className="cities-scroll-outer mb-6">
+        <div className="cities-standard-grid">
           {standardCities.map((city, i) => (
             <Link
               key={city.name}
@@ -391,13 +397,14 @@ export default function CitiesWeServe() {
             </Link>
           ))}
         </div>
+        </div>
 
         {/* Also serving strip */}
         <div style={{
           background: '#FFFFFF',
           border: '1px solid var(--border)',
           borderRadius: 16,
-          padding: '1rem 1.5rem',
+          padding: 'clamp(0.75rem, 3vw, 1rem) clamp(0.875rem, 3.5vw, 1.5rem)',
           display: 'flex',
           flexWrap: 'wrap',
           alignItems: 'center',
@@ -453,6 +460,17 @@ export default function CitiesWeServe() {
           <span style={{ fontSize: '0.8125rem', color: 'var(--text-muted)', fontFamily: 'var(--font-inter)', fontStyle: 'italic' }}>
             + more cities
           </span>
+        </div>
+
+        <div style={{ textAlign: 'center', marginTop: 'clamp(1.75rem, 6vw, 2.5rem)' }}>
+          <button
+            type="button"
+            onClick={() => window.dispatchEvent(new Event('vsd:open-enquiry'))}
+            className="btn-gold inline-flex items-center gap-2"
+            aria-label="Get a free kitchen quote for your city"
+          >
+            Get Free Quote for Your City
+          </button>
         </div>
 
       </div>

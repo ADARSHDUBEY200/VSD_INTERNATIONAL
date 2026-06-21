@@ -67,7 +67,7 @@ export const metadata: Metadata = {
     title:
       'VSD International — #1 Commercial Kitchen Equipment Manufacturer India | ISO 9001 | Hyatt · Radisson · ITC',
     description:
-      'Complete Kitchen Solutions by VSD International — 4.9★ · 312 reviews. ISO 9001 certified. Hotel, hospital & cloud kitchen equipment. Hyatt · Radisson · Crowne Plaza · ITC clients. Supply, design, install & AMC. Delhi factories. From ₹8 Lakhs. WhatsApp +91-9250346370.',
+      'Complete Kitchen Solutions by VSD International — 5★ · 312 reviews. ISO 9001 certified. Hotel, hospital & cloud kitchen equipment. Hyatt · Radisson · Crowne Plaza · ITC clients. Supply, design, install & AMC. Delhi factory. From ₹8 Lakhs. WhatsApp +91-9250346370.',
     images: [
       {
         url: '/og-image.jpg',
@@ -115,7 +115,7 @@ const schemaGraph = {
         width: 200,
         height: 60,
       },
-      foundingDate: '2009',
+      foundingDate: '2019',
       description:
         'ISO 9001 certified manufacturer and supplier of commercial kitchen equipment for hotels, hospitals, restaurants, cloud kitchens, and institutional clients across India.',
       address: {
@@ -131,7 +131,7 @@ const schemaGraph = {
       sameAs: [
         'https://www.linkedin.com/company/vsd-international',
         'https://www.indiamart.com/vsd-international',
-        'https://g.page/vsd-international-delhi',
+        'https://maps.app.goo.gl/kzyGxozpqqGEK13i6',
       ],
     },
 
@@ -167,7 +167,7 @@ const schemaGraph = {
       ],
       aggregateRating: {
         '@type': 'AggregateRating',
-        ratingValue: '4.9',
+        ratingValue: '5',
         reviewCount: '312',
         bestRating: '5',
         worstRating: '1',

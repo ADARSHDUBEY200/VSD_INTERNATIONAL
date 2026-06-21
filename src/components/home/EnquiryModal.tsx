@@ -128,7 +128,7 @@ export default function EnquiryModal() {
           position: 'fixed',
           top: '50%', left: '50%',
           zIndex: 1001,
-          width: 'min(456px, calc(100vw - 1.25rem))',
+          width: 'min(420px, calc(100vw - 1.25rem))',
           maxHeight: 'calc(100dvh - 1.25rem)',
           overflowY: 'auto',
           borderRadius: 22,
@@ -147,29 +147,25 @@ export default function EnquiryModal() {
           flexShrink: 0,
         }} />
 
-        <div style={{ padding: '1.5rem 1.75rem 1.875rem' }}>
+        <div style={{ padding: '1.375rem 1.625rem 1.625rem' }}>
 
           {/* ── Header row ── */}
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.125rem' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 11 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
               {/* Brand avatar */}
               <div style={{
-                width: 42, height: 42, borderRadius: '50%',
+                width: 30, height: 30, borderRadius: '50%',
                 background: 'rgba(200,169,107,0.1)',
                 border: '1.5px solid rgba(200,169,107,0.28)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 flexShrink: 0,
               }}>
-                <Shield size={18} style={{ color: 'var(--gold)' }} />
+                <Shield size={14} style={{ color: 'var(--gold)' }} />
               </div>
-              <div>
-                <p style={{ fontFamily: 'var(--font-inter)', fontWeight: 800, fontSize: 13.5, color: '#F7F5F0', lineHeight: 1.2 }}>
-                  VSD International
-                </p>
-                <p style={{ fontFamily: 'var(--font-inter)', fontSize: 11, color: 'rgba(245,240,232,0.38)', marginTop: 2 }}>
-                  ISO 9001 Certified · Delhi NCR · Est. 2009
-                </p>
-              </div>
+              <p style={{ fontFamily: 'var(--font-inter)', fontSize: 12, lineHeight: 1.2 }}>
+                <span style={{ fontWeight: 800, color: '#F7F5F0' }}>VSD International</span>
+                <span style={{ color: 'rgba(245,240,232,0.38)' }}> · ISO 9001 · Est. 2019</span>
+              </p>
             </div>
 
             {/* Close */}
@@ -191,44 +187,22 @@ export default function EnquiryModal() {
             </button>
           </div>
 
-          {/* Gradient divider */}
-          <div style={{
-            height: 1,
-            background: 'linear-gradient(90deg, transparent, rgba(200,169,107,0.2), transparent)',
-            marginBottom: '1.25rem',
-          }} />
-
-          {/* ── Authenticty row ── */}
-          <div style={{
-            display: 'flex', alignItems: 'center', gap: 10,
-            padding: '0.6rem 0.875rem',
-            borderRadius: 10,
-            background: 'rgba(200,169,107,0.05)',
-            border: '1px solid rgba(200,169,107,0.1)',
-            marginBottom: '1.25rem',
-          }}>
-            <Award size={14} style={{ color: 'var(--gold)', flexShrink: 0 }} />
-            <p style={{ fontFamily: 'var(--font-inter)', fontSize: '0.75rem', color: 'rgba(245,240,232,0.5)', lineHeight: 1.45 }}>
-              Trusted by <strong style={{ color: 'rgba(245,240,232,0.75)', fontWeight: 600 }}>Hyatt, Radisson Blu, ITC & Crowne Plaza</strong> — 200+ projects delivered.
-            </p>
-          </div>
-
           {/* ── Success state ── */}
           {submitted ? (
             <div style={{ textAlign: 'center', padding: '0.75rem 0 0.5rem' }}>
               <div style={{
-                width: 68, height: 68, borderRadius: '50%',
+                width: 64, height: 64, borderRadius: '50%',
                 background: 'rgba(74,222,128,0.1)', border: '2px solid rgba(74,222,128,0.28)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                margin: '0 auto 1.25rem',
+                margin: '0 auto 1.125rem',
                 animation: 'em-success 0.45s cubic-bezier(0.34,1.4,0.64,1)',
               }}>
-                <CheckCircle2 size={34} style={{ color: '#4ADE80' }} />
+                <CheckCircle2 size={32} style={{ color: '#4ADE80' }} />
               </div>
-              <h3 style={{ fontFamily: 'var(--font-playfair)', fontSize: '1.5rem', color: '#F7F5F0', marginBottom: '0.5rem' }}>
+              <h3 style={{ fontFamily: 'var(--font-playfair)', fontSize: '1.375rem', color: '#F7F5F0', marginBottom: '0.375rem' }}>
                 Enquiry Received!
               </h3>
-              <p style={{ fontFamily: 'var(--font-inter)', fontSize: '0.875rem', color: 'rgba(245,240,232,0.48)', lineHeight: 1.7, marginBottom: '1.625rem' }}>
+              <p style={{ fontFamily: 'var(--font-inter)', fontSize: '0.8125rem', color: 'rgba(245,240,232,0.48)', lineHeight: 1.6, marginBottom: '1.25rem' }}>
                 Our team will call you within{' '}
                 <strong style={{ color: 'var(--gold)' }}>1 hour</strong>{' '}
                 with a customised equipment plan and free kitchen layout.
@@ -258,26 +232,44 @@ export default function EnquiryModal() {
           ) : (
             /* ── Form ── */
             <>
-              <div style={{ marginBottom: '1.375rem' }}>
+              <div style={{ marginBottom: '1.125rem' }}>
                 <h2
                   id="em-heading"
                   style={{
                     fontFamily: 'var(--font-playfair)', fontWeight: 700,
-                    fontSize: 'clamp(1.25rem, 4vw, 1.5625rem)',
+                    fontSize: 'clamp(1.25rem, 4vw, 1.4375rem)',
                     color: '#F7F5F0', lineHeight: 1.18,
-                    letterSpacing: '-0.02em', marginBottom: '0.4rem',
+                    letterSpacing: '-0.02em', marginBottom: '0.3rem',
                   }}
                 >
                   Get Your Free Kitchen{' '}
                   <span style={{ color: 'var(--gold)' }}>Quote</span>
                 </h2>
-                <p style={{ fontFamily: 'var(--font-inter)', fontSize: '0.8125rem', color: 'rgba(245,240,232,0.42)', lineHeight: 1.55 }}>
+                <p style={{ fontFamily: 'var(--font-inter)', fontSize: '0.8rem', color: 'rgba(245,240,232,0.42)', lineHeight: 1.5 }}>
                   Free site visit · Free layout plan · Response within{' '}
                   <strong style={{ color: 'var(--gold-light)', fontWeight: 600 }}>1 hour</strong>
                 </p>
               </div>
 
-              <form onSubmit={submit} noValidate style={{ display: 'flex', flexDirection: 'column', gap: '0.9rem' }}>
+              {/* ── Authenticity row ── */}
+              <div style={{
+                display: 'flex', alignItems: 'center', gap: 8,
+                padding: '0.55rem 0.875rem',
+                borderRadius: 10,
+                background: 'rgba(200,169,107,0.05)',
+                border: '1px solid rgba(200,169,107,0.1)',
+                marginBottom: '1.125rem',
+              }}>
+                <Award size={13} style={{ color: 'var(--gold)', flexShrink: 0 }} />
+                <p style={{ fontFamily: 'var(--font-inter)', fontSize: '0.72rem', color: 'rgba(245,240,232,0.45)', lineHeight: 1.4 }}>
+                  Trusted by <strong style={{ color: 'rgba(245,240,232,0.7)', fontWeight: 600 }}>Hyatt, Radisson Blu, ITC & Crowne Plaza</strong> — 200+ projects.
+                </p>
+              </div>
+
+              {/* Gradient divider */}
+              <div style={{ height: 1, background: 'linear-gradient(90deg, transparent, rgba(200,169,107,0.16), transparent)', marginBottom: '1rem' }} />
+
+              <form onSubmit={submit} noValidate style={{ display: 'flex', flexDirection: 'column', gap: '0.7rem' }}>
 
                 <EMField label="Full Name" icon={<User size={14} />} error={errors.name}>
                   <input
@@ -325,8 +317,8 @@ export default function EnquiryModal() {
                   className="btn-gold"
                   style={{
                     width: '100%', justifyContent: 'center',
-                    minHeight: '3rem', fontSize: '0.9375rem',
-                    marginTop: '0.25rem',
+                    minHeight: '2.875rem', fontSize: '0.9375rem',
+                    marginTop: '0.125rem',
                     opacity: submitting ? 0.72 : 1,
                     cursor: submitting ? 'not-allowed' : 'pointer',
                   }}
@@ -339,36 +331,25 @@ export default function EnquiryModal() {
 
               {/* ── Trust strip ── */}
               <div style={{
-                display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)',
-                gap: 0, marginTop: '1.25rem',
-                paddingTop: '1rem',
+                marginTop: '1rem', paddingTop: '0.875rem',
                 borderTop: '1px solid rgba(200,169,107,0.1)',
+                display: 'flex', alignItems: 'center', justifyContent: 'space-between',
               }}>
-                {[
-                  { icon: <Shield size={13} />,       label: 'ISO 9001' },
-                  { icon: <Star size={13} />,          label: '4.9 ★ · 312' },
-                  { icon: <CheckCircle2 size={13} />,  label: 'Free Visit' },
-                ].map(({ icon, label }, i) => (
-                  <div key={label} style={{
-                    textAlign: 'center',
-                    borderRight: i < 2 ? '1px solid rgba(200,169,107,0.1)' : 'none',
-                    padding: '0 0.5rem',
-                  }}>
-                    <span style={{ color: 'var(--gold)', display: 'block', marginBottom: 4 }}>{icon}</span>
-                    <span style={{ fontFamily: 'var(--font-inter)', fontSize: '0.675rem', fontWeight: 600, color: 'rgba(245,240,232,0.4)' }}>
-                      {label}
-                    </span>
-                  </div>
-                ))}
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                  {[
+                    { icon: <Shield size={12} />,      label: 'ISO 9001' },
+                    { icon: <Star size={12} />,         label: '5★ · 312' },
+                    { icon: <CheckCircle2 size={12} />, label: 'Free Visit' },
+                  ].map(({ icon, label }) => (
+                    <div key={label} style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                      <span style={{ color: 'var(--gold)', display: 'flex' }}>{icon}</span>
+                      <span style={{ fontFamily: 'var(--font-inter)', fontSize: '0.675rem', fontWeight: 600, color: 'rgba(245,240,232,0.4)' }}>
+                        {label}
+                      </span>
+                    </div>
+                  ))}
+                </div>
               </div>
-
-              <p style={{
-                fontFamily: 'var(--font-inter)', fontSize: '0.675rem',
-                color: 'rgba(245,240,232,0.18)',
-                textAlign: 'center', marginTop: '0.875rem', lineHeight: 1.5,
-              }}>
-                🔒 Secure & confidential. No spam. No third-party sharing.
-              </p>
             </>
           )}
         </div>

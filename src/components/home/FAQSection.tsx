@@ -27,7 +27,7 @@ export default function FAQSection() {
       id="faqs"
       aria-labelledby="faq-heading"
       style={{
-        padding: '6rem 0',
+        padding: '2rem 0',
         background: 'var(--surface-alt)',
         borderTop: '1px solid var(--border)',
         position: 'relative',
@@ -274,7 +274,7 @@ export default function FAQSection() {
             Have a specific question?{' '}
             <span style={{ color: 'var(--text-dark)', fontWeight: 600 }}>Our team responds within 1 hour.</span>
           </p>
-          <div style={{ display: 'flex', gap: '0.875rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+          <div className="flex flex-col items-stretch sm:flex-row sm:items-center sm:justify-center sm:flex-wrap gap-3.5">
             <a
               href="https://wa.me/919250346370?text=Hi%20VSD%20International%2C%20I%20have%20a%20question%20about%20commercial%20kitchen%20equipment."
               target="_blank"
@@ -295,6 +295,15 @@ export default function FAQSection() {
               <Phone size={16} />
               +91-9250346370
             </a>
+            <button
+              type="button"
+              onClick={() => window.dispatchEvent(new Event('vsd:open-enquiry'))}
+              className="btn-gold"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}
+              aria-label="Get a free kitchen equipment quote"
+            >
+              Get Free Quote
+            </button>
           </div>
         </div>
       </div>

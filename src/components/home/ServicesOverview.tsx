@@ -3,6 +3,7 @@ import {
   ChefHat, PenTool, Wrench, Package, Settings, Building2,
   ArrowRight,
 } from 'lucide-react';
+import OpenEnquiryBtn from './OpenEnquiryBtn';
 
 /** SOP Section ⑥ — Services Grid
  *  H2: "Our Commercial Kitchen Services"
@@ -218,6 +219,8 @@ export default function ServicesOverview() {
           style={{
             display: 'flex',
             justifyContent: 'center',
+            gap: '0.875rem',
+            flexWrap: 'wrap',
             marginTop: '3rem',
           }}
         >
@@ -228,6 +231,10 @@ export default function ServicesOverview() {
           >
             Explore All Services <ArrowRight size={15} aria-hidden="true" />
           </Link>
+          <OpenEnquiryBtn
+            label="Get Free Quote"
+            ariaLabel="Get a free commercial kitchen equipment quote"
+          />
         </div>
       </div>
     </section>

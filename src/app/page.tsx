@@ -35,7 +35,7 @@ import Footer from '@/components/home/Footer';
 export const metadata: Metadata = {
   title: 'Commercial Kitchen Equipment Manufacturer India | VSD International',
   description:
-    'ISO 9001 certified commercial kitchen equipment manufacturer in Delhi. Turnkey supply, design, fabrication & installation for hotels, hospitals & cloud kitchens. 500+ projects across India since 2009.',
+    'ISO 9001 certified commercial kitchen equipment manufacturer in Delhi. Turnkey supply, design, fabrication & installation for hotels, hospitals & cloud kitchens. 500+ projects across India since 2019.',
   keywords: [
     'commercial kitchen equipment manufacturers in India',
     'commercial kitchen equipment manufacturers in Delhi',
@@ -72,7 +72,7 @@ export const metadata: Metadata = {
     locale: 'en_IN',
     title: 'Commercial Kitchen Equipment Manufacturer in India | VSD International',
     description:
-      'ISO 9001 certified. Trusted by Hyatt, Radisson, ITC & Crowne Plaza. Turnkey kitchen supply, design, install & AMC from two Delhi factories. 500+ projects since 2009. ☎ +91-9250346370.',
+      'ISO 9001 certified. Trusted by Hyatt, Radisson, ITC & Crowne Plaza. Turnkey kitchen supply, design, install & AMC from our Delhi factory. 500+ projects since 2019. ☎ +91-9250346370.',
     images: [
       {
         url: 'https://vsdinternational.com/VSD_LOGO.png',
@@ -104,7 +104,7 @@ const homePageSchema = {
       name: 'VSD International',
       alternateName: ['VSD International India', 'VSD Kitchen Equipment'],
       description:
-        'ISO 9001 certified commercial kitchen equipment manufacturer and supplier in India. Serving hotels, hospitals, restaurants & cloud kitchens since 2009.',
+        'ISO 9001 certified commercial kitchen equipment manufacturer and supplier in India. Serving hotels, hospitals, restaurants & cloud kitchens since 2019.',
       publisher: { '@id': 'https://vsdinternational.com/#organization' },
       inLanguage: 'en-IN',
       potentialAction: {
@@ -142,9 +142,9 @@ const homePageSchema = {
         caption: 'VSD International Commercial Kitchen Equipment — Delhi NCR',
       },
       description:
-        'ISO 9001:2015 certified manufacturer and turnkey supplier of commercial kitchen equipment. Operating from Delhi NCR manufacturing facilities since 2009, VSD International has completed 500+ projects for hotels, hospitals, restaurants, cloud kitchens, and government institutions across India.',
-      foundingDate: '2009',
-      slogan: "India's Trusted Commercial Kitchen Partner Since 2009",
+        'ISO 9001:2015 certified manufacturer and turnkey supplier of commercial kitchen equipment. Operating from Delhi NCR manufacturing facility since 2019, VSD International has completed 500+ projects for hotels, hospitals, restaurants, cloud kitchens, and government institutions across India.',
+      foundingDate: '2019',
+      slogan: "India's Trusted Commercial Kitchen Partner Since 2019",
       telephone: '+91-9250346370',
       email: 'sales@vsdinternational.com',
       vatID: '07AABFV5120K1ZZ',
@@ -164,7 +164,7 @@ const homePageSchema = {
         latitude: '28.6273',
         longitude: '77.3088',
       },
-      hasMap: 'https://g.page/vsd-international-delhi',
+      hasMap: 'https://maps.app.goo.gl/kzyGxozpqqGEK13i6',
       openingHoursSpecification: [
         {
           '@type': 'OpeningHoursSpecification',
@@ -199,7 +199,7 @@ const homePageSchema = {
       sameAs: [
         'https://www.linkedin.com/company/vsd-international',
         'https://www.indiamart.com/vsd-international',
-        'https://g.page/vsd-international-delhi',
+        'https://maps.app.goo.gl/kzyGxozpqqGEK13i6',
       ],
       knowsAbout: [
         'Commercial Kitchen Equipment',
@@ -231,7 +231,7 @@ const homePageSchema = {
       /* AggregateRating — sourced from 312 verified Google Business Profile reviews */
       aggregateRating: {
         '@type': 'AggregateRating',
-        ratingValue: '4.9',
+        ratingValue: '5',
         reviewCount: '312',
         bestRating: '5',
         worstRating: '1',
@@ -248,7 +248,7 @@ const homePageSchema = {
               '@id': 'https://vsdinternational.com/services/commercial-kitchen-equipment#service',
               name: 'Commercial Kitchen Equipment Supply',
               description:
-                'Complete commercial kitchen equipment supply — cooking ranges, refrigeration, food preparation, dishwashing, and custom stainless steel fabrication from Delhi NCR factories.',
+                'Complete commercial kitchen equipment supply — cooking ranges, refrigeration, food preparation, dishwashing, and custom stainless steel fabrication from our Delhi NCR factory.',
               url: 'https://vsdinternational.com/services/commercial-kitchen-equipment',
               provider: { '@id': 'https://vsdinternational.com/#organization' },
               areaServed: { '@type': 'Country', name: 'India' },
@@ -332,7 +332,7 @@ const homePageSchema = {
               '@id': 'https://vsdinternational.com/services/stainless-steel-fabrication#service',
               name: 'Custom Stainless Steel Fabrication',
               description:
-                'In-house SS 304 fabrication for worktables, sinks, shelving, exhaust hoods, trolleys, and bespoke kitchen furniture — manufactured to exact dimensions at Delhi NCR factories.',
+                'In-house SS 304 fabrication for worktables, sinks, shelving, exhaust hoods, trolleys, and bespoke kitchen furniture — manufactured to exact dimensions at our Delhi NCR factory.',
               url: 'https://vsdinternational.com/services/stainless-steel-fabrication',
               provider: { '@id': 'https://vsdinternational.com/#organization' },
               areaServed: { '@type': 'Country', name: 'India' },
@@ -456,10 +456,10 @@ const homePageSchema = {
         height: 630,
       },
       description:
-        'ISO 9001 certified commercial kitchen equipment manufacturer in Delhi. Turnkey supply, fabrication, design, installation & AMC for hotels, hospitals & cloud kitchens across India. 500+ projects since 2009.',
+        'ISO 9001 certified commercial kitchen equipment manufacturer in Delhi. Turnkey supply, fabrication, design, installation & AMC for hotels, hospitals & cloud kitchens across India. 500+ projects since 2019.',
       breadcrumb: { '@id': 'https://vsdinternational.com/#breadcrumb' },
       inLanguage: 'en-IN',
-      datePublished: '2009-01-01T00:00:00+05:30',
+      datePublished: '2019-01-01T00:00:00+05:30',
       dateModified: '2026-06-14T00:00:00+05:30',
       potentialAction: {
         '@type': 'ReadAction',
@@ -543,7 +543,7 @@ const homePageSchema = {
           position: 8,
           name: 'Client Testimonials & Reviews',
           url: 'https://vsdinternational.com/#client-testimonials',
-          description: '4.9 star rating from 312 verified Google reviews from hotels, hospitals, and cloud kitchen clients.',
+          description: '5 star rating from 312 verified Google reviews from hotels, hospitals, and cloud kitchen clients.',
         },
         {
           '@type': 'ListItem',
@@ -671,9 +671,6 @@ export default function HomePage() {
         <FAQSection />
 
 
-        <BlogPreview />
-
-
         <CitiesWeServe />
 
 
@@ -796,7 +793,7 @@ function GoogleReviewsSection() {
             <div
               className="stars"
               style={{ fontSize: '1.75rem', letterSpacing: '0.08em', marginBottom: '1.25rem', display: 'block' }}
-              aria-label="4.9 out of 5 stars"
+              aria-label="5 out of 5 stars"
               role="img"
             >
               ★★★★★
@@ -823,7 +820,7 @@ function GoogleReviewsSection() {
                 }}
                 itemProp="ratingValue"
               >
-                4.9
+                5.0
               </span>
               <span
                 style={{
@@ -874,7 +871,7 @@ function GoogleReviewsSection() {
                 marginBottom: '1.75rem',
               }}
             >
-              {['ISO 9001 Certified', '15+ Years Active', 'Pan-India Delivery'].map((label) => (
+              {['ISO 9001 Certified', '7+ Years Active', 'Pan-India Delivery'].map((label) => (
                 <span
                   key={label}
                   style={{
@@ -896,7 +893,7 @@ function GoogleReviewsSection() {
 
             {/* CTA */}
             <a
-              href="https://g.page/vsd-international-delhi/review"
+              href="https://maps.app.goo.gl/kzyGxozpqqGEK13i6"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-gold"

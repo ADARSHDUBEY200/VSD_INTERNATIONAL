@@ -49,7 +49,7 @@ const LINKS: { href: string; label: string; sub: string }[] = [
   {
     href: '#client-testimonials',
     label: 'Client Reviews',
-    sub: '4.9 ★ · 312 verified reviews',
+    sub: '5★ · 312 verified reviews',
   },
   {
     href: '#faqs',
@@ -90,19 +90,12 @@ export default function HomepageQuickLinks() {
           padding-right: 0;
           /* smooth momentum scroll on iOS */
           -webkit-overflow-scrolling: touch;
-          /* thin scrollbar */
-          scrollbar-width: thin;
-          scrollbar-color: var(--border) transparent;
+          /* hide scrollbar — still scrollable, just not visible */
+          scrollbar-width: none;
+          -ms-overflow-style: none;
         }
         .ql-scroll-track::-webkit-scrollbar {
-          height: 4px;
-        }
-        .ql-scroll-track::-webkit-scrollbar-track {
-          background: transparent;
-        }
-        .ql-scroll-track::-webkit-scrollbar-thumb {
-          background: var(--border);
-          border-radius: 2px;
+          display: none;
         }
         .ql-card {
           flex: 0 0 auto;
@@ -146,17 +139,6 @@ export default function HomepageQuickLinks() {
           font-size: 0.625rem;
           color: var(--text-muted);
           line-height: 1.4;
-        }
-        /* on large screens show as a wrapping flex grid instead of horizontal scroll */
-        @media (min-width: 1024px) {
-          .ql-scroll-track {
-            flex-wrap: wrap;
-            overflow-x: visible;
-            padding-bottom: 0;
-          }
-          .ql-card {
-            width: 164px;
-          }
         }
       `}</style>
 
@@ -221,7 +203,7 @@ export default function HomepageQuickLinks() {
             </p>
           </div>
 
-          {/* Horizontal scroll on mobile/tablet, wrapping grid on desktop */}
+          {/* Horizontal scroll at every breakpoint, including laptop/desktop */}
           <ol className="ql-scroll-track">
             {LINKS.map(({ href, label, sub }, index) => (
               <li key={href} style={{ listStyle: 'none', padding: 0, margin: 0 }}>

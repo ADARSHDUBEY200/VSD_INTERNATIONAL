@@ -50,7 +50,7 @@ const FAQS = [
 const schema = {
   '@context': 'https://schema.org',
   '@graph': [
-    { '@type': 'Service', name: 'Cloud Kitchen Setup & Equipment', provider: { '@type': 'LocalBusiness', name: 'VSD International' }, areaServed: { '@type': 'Country', name: 'India' }, serviceType: 'Cloud Kitchen Equipment', aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.9', reviewCount: '312', bestRating: '5' } },
+    { '@type': 'Service', name: 'Cloud Kitchen Setup & Equipment', provider: { '@type': 'LocalBusiness', name: 'VSD International' }, areaServed: { '@type': 'Country', name: 'India' }, serviceType: 'Cloud Kitchen Equipment', aggregateRating: { '@type': 'AggregateRating', ratingValue: '5', reviewCount: '312', bestRating: '5' } },
     { '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://vsdinternational.com' }, { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://vsdinternational.com/services/' }, { '@type': 'ListItem', position: 3, name: 'Cloud Kitchen Setup', item: 'https://vsdinternational.com/services/cloud-kitchen-setup/' }] },
     { '@type': 'FAQPage', mainEntity: FAQS.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
   ],

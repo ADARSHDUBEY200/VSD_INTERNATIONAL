@@ -294,7 +294,7 @@ export default function Testimonials() {
               border: '1px solid var(--border)',
               boxShadow: '0 4px 20px rgba(0,0,0,0.06)',
             }}
-            aria-label="4.9 out of 5 stars based on 312 Google reviews"
+            aria-label="5 out of 5 stars based on 312 Google reviews"
           >
             <div className="stars" style={{ fontSize: '1.125rem', letterSpacing: '0.04em' }} aria-hidden="true">
               ★★★★★
@@ -317,7 +317,7 @@ export default function Testimonials() {
                   lineHeight: 1,
                 }}
               >
-                4.9
+                5.0
               </span>
               <span
                 style={{
@@ -346,10 +346,18 @@ export default function Testimonials() {
           ))}
         </div>
 
-        {/* -- Google reviews CTA -- */}
-        <div style={{ textAlign: 'center', marginTop: '3rem' }}>
+        {/* -- CTAs -- */}
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '0.875rem', flexWrap: 'wrap', marginTop: '3rem' }}>
+          <button
+            type="button"
+            onClick={() => window.dispatchEvent(new Event('vsd:open-enquiry'))}
+            className="btn-gold inline-flex items-center gap-2"
+            aria-label="Get a free kitchen quote from VSD International"
+          >
+            Get Free Quote
+          </button>
           <a
-            href="https://g.page/vsd-international-delhi/review"
+            href="https://maps.app.goo.gl/kzyGxozpqqGEK13i6"
             target="_blank"
             rel="noopener noreferrer"
             style={{

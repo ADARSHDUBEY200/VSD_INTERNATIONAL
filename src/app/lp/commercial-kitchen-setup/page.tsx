@@ -39,7 +39,7 @@ const WA = `https://wa.me/919250346370?text=${encodeURIComponent(
 export const metadata: Metadata = {
   title: 'Commercial Kitchen Setup in 21 Days | Free Layout + Quote | VSD International',
   description:
-    'Get a turnkey commercial kitchen — design, equipment supply, SS fabrication & installation. ISO 9001 certified. 500+ kitchens since 2009. Free layout + itemised quote in 1 hour. ☎ +91-92503 46370.',
+    'Get a turnkey commercial kitchen — design, equipment supply, SS fabrication & installation. ISO 9001 certified. 500+ kitchens since 2019. Free layout + itemised quote in 1 hour. ☎ +91-92503 46370.',
   alternates: { canonical: 'https://vsdinternational.com/lp/commercial-kitchen-setup' },
   robots: { index: true, follow: true },
   openGraph: {
@@ -68,7 +68,7 @@ const LP_FAQS = [
   },
   {
     q: 'Are you a commercial kitchen equipment manufacturer or just a dealer?',
-    a: 'Both. VSD International is an ISO 9001 certified commercial kitchen equipment manufacturer with in-house SS 304 stainless steel fabrication at two Delhi NCR factories, and an authorised dealer for global brands like Rational, Robot Coupe and Frymaster — so your commercial kitchen setup is supplied and installed by one accountable team.',
+    a: 'Both. VSD International is an ISO 9001 certified commercial kitchen equipment manufacturer with in-house SS 304 stainless steel fabrication at our Delhi NCR factory, and an authorised dealer for global brands like Rational, Robot Coupe and Frymaster — so your commercial kitchen setup is supplied and installed by one accountable team.',
   },
   {
     q: 'Do you install commercial kitchens across India?',
@@ -105,7 +105,7 @@ const lpSchema = {
         },
         aggregateRating: {
           '@type': 'AggregateRating',
-          ratingValue: '4.9',
+          ratingValue: '5',
           reviewCount: '312',
           bestRating: '5',
           worstRating: '1',
@@ -147,7 +147,7 @@ export default function CommercialKitchenLP() {
         <WhatYouGet />
         <Comparison />
         <CtaBand
-          eyebrow="500+ kitchens delivered since 2009"
+          eyebrow="500+ kitchens delivered since 2019"
           title="Tell us about your kitchen — we'll handle the rest"
           sub="Design, supply, SS fabrication & installation under one ISO 9001 certified roof."
         />
@@ -268,7 +268,7 @@ function Hero() {
             >
               <Award size={14} style={{ color: 'var(--gold)' }} />
               <span style={{ fontFamily: 'var(--font-inter)', fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.08em', color: 'var(--gold)', textTransform: 'uppercase' }}>
-                ISO 9001 Certified • Since 2009
+                ISO 9001 Certified • Since 2019
               </span>
             </div>
 
@@ -298,8 +298,8 @@ function Hero() {
               {[
                 ['500+', 'commercial kitchens delivered across India'],
                 ['21-Day', 'average turnkey setup, with a fixed timeline'],
-                ['2', 'in-house Delhi NCR fabrication factories'],
-                ['4.9★', 'rating from 312 verified Google reviews'],
+                ['1', 'in-house Delhi NCR fabrication factory'],
+                ['5★', 'rating from 312 verified Google reviews'],
               ].map(([num, text]) => (
                 <li key={text} style={{ display: 'flex', alignItems: 'center', gap: '0.7rem' }}>
                   <span
@@ -366,9 +366,9 @@ function Hero() {
 /* ─── Google review + rating strip (just below CTA) ────────────────────────── */
 function ReviewStrip() {
   const items: [string, string][] = [
-    ['4.9★', '312 Google reviews'],
+    ['5★', '312 Google reviews'],
     ['500+', 'Kitchens delivered'],
-    ['15+', 'Years in business'],
+    ['7+', 'Years in business'],
     ['50+', 'Cities served'],
   ];
   return (
@@ -377,7 +377,7 @@ function ReviewStrip() {
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexWrap: 'wrap', gap: '0.4rem', marginBottom: '1.1rem' }}>
           <span className="stars" style={{ fontSize: '1.15rem', letterSpacing: '0.1em' }}>★★★★★</span>
           <span style={{ fontFamily: 'var(--font-inter)', fontSize: '0.85rem', color: 'rgba(245,240,232,0.6)' }}>
-            Rated <strong style={{ color: 'var(--gold)' }}>4.9/5</strong> by 312 clients on Google
+            Rated <strong style={{ color: 'var(--gold)' }}>5/5</strong> by 312 clients on Google
           </span>
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1rem' }} className="lp-stat-grid">
@@ -396,7 +396,7 @@ function ReviewStrip() {
 /* ─── Why VSD (USPs in pointers) ───────────────────────────────────────────── */
 function WhyUs() {
   const usps: { Icon: typeof Wrench; title: string; body: React.ReactNode }[] = [
-    { Icon: Factory, title: 'Manufacturer, not a middleman', body: <>In-house <strong>SS&nbsp;304 fabrication</strong> at 2 Delhi NCR factories means <strong>factory-direct pricing</strong> and zero markup chains.</> },
+    { Icon: Factory, title: 'Manufacturer, not a middleman', body: <>In-house <strong>SS&nbsp;304 fabrication</strong> at our Delhi NCR factory means <strong>factory-direct pricing</strong> and zero markup chains.</> },
     { Icon: Ruler, title: 'Free CAD kitchen layout', body: <>A <strong>free workflow-optimised layout</strong> after your site visit — included on every project above <strong>₹5 lakh</strong>.</> },
     { Icon: IndianRupee, title: 'Fixed, itemised quote', body: <>No surprises — a <strong>line-by-line quote</strong> locked before work starts, with a <strong>best-price guarantee</strong> on all brands.</> },
     { Icon: Clock, title: '21-day turnkey delivery', body: <>Design → supply → fabrication → install, on a <strong>committed timeline</strong>. Cloud kitchens ready in <strong>~14 days</strong>.</> },
@@ -522,7 +522,7 @@ function Comparison() {
     ['Single team: design, supply, install & AMC', true, false],
     ['Authorised dealer for imported brands + warranty', true, false],
     ['Committed 21-day turnkey timeline', true, false],
-    ['500+ delivered projects & 4.9★ track record', true, false],
+    ['500+ delivered projects & 5★ track record', true, false],
   ];
   return (
     <section style={{ background: '#fff', padding: 'clamp(3rem, 6vw, 5rem) 0' }} aria-labelledby="lp-compare-heading">
@@ -718,22 +718,22 @@ function GoogleReviews() {
         <div style={{ background: '#fff', border: '1px solid var(--border)', borderRadius: '20px', overflow: 'hidden', boxShadow: '0 8px 48px rgba(0,0,0,0.07)' }}>
           <div style={{ height: '3px', background: 'linear-gradient(90deg, var(--gold-bright), var(--gold), var(--gold-deep))' }} />
           <div style={{ padding: '2.5rem 2rem 2rem' }}>
-            <div className="stars" style={{ fontSize: '1.75rem', letterSpacing: '0.08em', marginBottom: '1rem' }} aria-label="4.9 out of 5">★★★★★</div>
+            <div className="stars" style={{ fontSize: '1.75rem', letterSpacing: '0.08em', marginBottom: '1rem' }} aria-label="5 out of 5">★★★★★</div>
             <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'center', gap: '0.4rem', marginBottom: '0.5rem' }}>
-              <span style={{ fontFamily: 'var(--font-playfair)', fontSize: '4rem', fontWeight: 800, color: 'var(--text-dark)', lineHeight: 1 }}>4.9</span>
+              <span style={{ fontFamily: 'var(--font-playfair)', fontSize: '4rem', fontWeight: 800, color: 'var(--text-dark)', lineHeight: 1 }}>5.0</span>
               <span style={{ fontFamily: 'var(--font-inter)', fontSize: '1.15rem', color: 'var(--text-muted)', fontWeight: 500 }}>/ 5</span>
             </div>
             <p style={{ fontFamily: 'var(--font-inter)', fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '1.5rem' }}>
               Based on <strong style={{ color: 'var(--text-dark)' }}>312</strong> Google reviews
             </p>
             <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '1.75rem' }}>
-              {['ISO 9001 Certified', '15+ Years Active', 'Pan-India Delivery'].map((l) => (
+              {['ISO 9001 Certified', '7+ Years Active', 'Pan-India Delivery'].map((l) => (
                 <span key={l} style={{ padding: '0.3rem 0.75rem', borderRadius: '100px', background: 'rgba(201,168,76,0.08)', border: '1px solid rgba(201,168,76,0.22)', fontSize: '0.72rem', fontFamily: 'var(--font-inter)', fontWeight: 600, color: 'var(--gold-deep)' }}>
                   {l}
                 </span>
               ))}
             </div>
-            <a href="https://g.page/vsd-international-delhi/review" target="_blank" rel="noopener noreferrer" className="btn-gold" style={{ width: '100%' }}>
+            <a href="https://maps.app.goo.gl/kzyGxozpqqGEK13i6" target="_blank" rel="noopener noreferrer" className="btn-gold" style={{ width: '100%' }}>
               View on Google Maps →
             </a>
           </div>
@@ -791,7 +791,7 @@ function Footer() {
       <div className="container" style={{ display: 'grid', gap: '1.5rem', textAlign: 'center' }}>
         <Image src="/VSD_LOGO.png" alt="VSD International" width={150} height={46} style={{ height: 'auto', width: 'auto', maxHeight: 46, margin: '0 auto' }} />
         <p style={{ fontFamily: 'var(--font-inter)', fontSize: '0.85rem', color: 'rgba(245,240,232,0.55)', lineHeight: 1.7, maxWidth: '34rem', margin: '0 auto' }}>
-          <strong style={{ color: 'var(--text-on-dark)' }}>VSD International</strong> — ISO 9001 certified commercial kitchen equipment manufacturer &amp; turnkey setup partner. Serving hotels, restaurants, cloud kitchens &amp; hospitals across India since 2009.
+          <strong style={{ color: 'var(--text-on-dark)' }}>VSD International</strong> — ISO 9001 certified commercial kitchen equipment manufacturer &amp; turnkey setup partner. Serving hotels, restaurants, cloud kitchens &amp; hospitals across India since 2019.
         </p>
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.5rem 1.5rem', fontFamily: 'var(--font-inter)', fontSize: '0.85rem', color: 'rgba(245,240,232,0.6)' }}>
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}><MapPin size={14} style={{ color: 'var(--gold)' }} /> A-347, Saraswati Gali, Mandawali, New Delhi 110092</span>

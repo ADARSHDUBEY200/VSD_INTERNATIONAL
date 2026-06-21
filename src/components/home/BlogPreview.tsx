@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { ArrowRight, Clock } from 'lucide-react';
+import OpenEnquiryBtn from './OpenEnquiryBtn';
 
 /** SOP Section ⑮ — Blog Preview
  *  H2: "Industry Insights & Guides"
@@ -206,6 +207,21 @@ export default function BlogPreview() {
           {posts.map((post) => (
             <BlogCard key={post.slug} post={post} />
           ))}
+        </div>
+
+        {/* Bottom CTA */}
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '0.875rem', flexWrap: 'wrap', marginTop: '3rem' }}>
+          <Link
+            href="/blog"
+            className="btn-ghost inline-flex items-center gap-2"
+            aria-label="View all blog articles and industry guides"
+          >
+            View All Articles <ArrowRight size={15} aria-hidden="true" />
+          </Link>
+          <OpenEnquiryBtn
+            label="Get Free Quote"
+            ariaLabel="Get a free commercial kitchen equipment quote"
+          />
         </div>
       </div>
     </section>

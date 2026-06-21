@@ -301,7 +301,7 @@ export default function ContactPage() {
             >
               {[
                 { icon: CheckCircle2, text: 'Free Consultation' },
-                { icon: Star,         text: '4.9★ Google Rating'  },
+                { icon: Star,         text: '5★ Google Rating'    },
                 { icon: Building2,    text: '200+ Clients Served' },
               ].map(({ icon: Icon, text }, idx) => (
                 <div
@@ -1105,7 +1105,7 @@ export default function ContactPage() {
               {[
                 { icon: Shield,       text: 'ISO 9001 Certified'    },
                 { icon: CheckCircle2, text: 'Free Site Visit'       },
-                { icon: Star,         text: '4.9★ Google Rating'     },
+                { icon: Star,         text: '5★ Google Rating'       },
               ].map(({ icon: Icon, text }) => (
                 <div
                   key={text}

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import OpenEnquiryBtn from './OpenEnquiryBtn';
 
 /** SOP Section ⑩ — International Brands We Supply */
 const brands = [
@@ -190,7 +191,7 @@ export default function BrandsStrip() {
         </div>
 
         {/* CTA */}
-        <div className="text-center mt-5">
+        <div className="text-center mt-5" style={{ display: 'flex', justifyContent: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
           <Link
             href="/brands"
             className="btn-ghost inline-flex items-center gap-2 text-sm"
@@ -199,6 +200,11 @@ export default function BrandsStrip() {
           >
             View All Brand Partners →
           </Link>
+          <OpenEnquiryBtn
+            label="Get Free Quote"
+            style={{ padding: '0.625rem 1.5rem', minHeight: '2.5rem', fontSize: '0.875rem' }}
+            ariaLabel="Get a free quote for branded kitchen equipment"
+          />
         </div>
       </div>
     </section>

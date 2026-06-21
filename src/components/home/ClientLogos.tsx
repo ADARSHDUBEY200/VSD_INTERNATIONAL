@@ -130,7 +130,17 @@ export default function ClientLogos() {
         </div>
       </div>
 
-      <div style={{ height: '1.25rem' }} />
+      <div style={{ textAlign: 'center', padding: '1.25rem 0 0.5rem' }}>
+        <button
+          type="button"
+          onClick={() => window.dispatchEvent(new Event('vsd:open-enquiry'))}
+          className="btn-gold inline-flex items-center gap-2"
+          style={{ fontSize: '0.875rem', padding: '0.625rem 1.5rem', minHeight: 'auto' }}
+          aria-label="Get a free kitchen quote from VSD International"
+        >
+          Join 200+ Clients — Get Free Quote
+        </button>
+      </div>
     </section>
   );
 }

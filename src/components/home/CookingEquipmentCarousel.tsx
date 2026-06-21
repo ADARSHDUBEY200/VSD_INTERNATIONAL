@@ -14,14 +14,14 @@ type CookItem = {
 };
 
 /* ── Placeholder images — replace with real product photos ─────────────────── */
-const K1 = 'https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=700&auto=format&fit=crop';
-const K2 = 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?q=80&w=700&auto=format&fit=crop';
-const K3 = 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=700&auto=format&fit=crop';
-const K4 = 'https://images.unsplash.com/photo-1565958011703-44f9829ba187?q=80&w=700&auto=format&fit=crop';
-const K5 = 'https://images.unsplash.com/photo-1565299507177-b0ac66763828?q=80&w=700&auto=format&fit=crop';
-const K6 = 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=700&auto=format&fit=crop';
-const K7 = 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=700&auto=format&fit=crop';
-const K8 = 'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?q=80&w=700&auto=format&fit=crop';
+const K1 = 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782017908/Single_Burner_Range_eosza9.jpg';
+const K2 = 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782017908/Two_Burner_Range_qpgcr4.jpg';
+const K3 = 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782017908/Three_Burner_Range_nnxabi.jpg';
+const K4 = 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782017909/Four_Burner_Range_lnqbxr.jpg';
+const K5 = 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782017911/County_Grill_griddle_Plate_c3cbiy.jpg';
+const K6 = 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782017910/Dosa_Plate_vsq3oe.jpg';
+const K7 = 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782017912/Chapati_Plate_With_Puffer_ghi2wd.jpg';
+const K8 = 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782017912/Bulk_Cooker_kkxfcq.jpg';
 
 /* ── 16 Cooking Equipment Items ─────────────────────────────────────────────── */
 const ITEMS: CookItem[] = [
@@ -30,17 +30,17 @@ const ITEMS: CookItem[] = [
   { id:  3, name: 'Three Burner Chinese Range',   spec: 'Gas · Size Customised',             image: K3 },
   { id:  4, name: '4 Burner Range With Oven',     spec: 'Gas · Size Customised',             image: K4 },
   { id:  5, name: 'Gravy Grid (Griddle Plate)',   spec: 'Gas / Electric · Customised',       image: K5 },
-  { id:  6, name: 'Deck Plate',                   spec: 'Gas · Size Customised',             image: K6 },
+  { id:  6, name: 'Dosa Plate',                   spec: 'Gas · Size Customised',             image: K6 },
   { id:  7, name: 'Chapati Plate With Puffer',    spec: 'Gas · Size Customised',             image: K7 },
   { id:  8, name: 'Bulk Cooker (Rice Boiler)',    spec: 'Gas / Electric · 10–200 Ltr',       image: K8 },
-  { id:  9, name: 'Tilting Braising Pan',         spec: 'Gas / Electric · 10–200 Ltr',       image: K1 },
-  { id: 10, name: 'Deep Fat Fryer',               spec: 'Gas / Electric · 8–20 Ltr',         image: K2 },
-  { id: 11, name: 'Pasta Cooker',                 spec: 'Gas / Electric · Customised',       image: K3 },
-  { id: 12, name: 'Lava Grill (Stone)',           spec: 'Gas / Electric · Customised',       image: K4 },
-  { id: 13, name: 'SS Mobile Tandoor',            spec: 'Gas / Charcoal · 2–4 Burner',       image: K5 },
-  { id: 14, name: 'Charcoal Grill',               spec: 'Charcoal / Gas / Electric',         image: K6 },
-  { id: 15, name: 'SS Steamer',                   spec: 'Gas / Electric · 30–250 Ltr',       image: K7 },
-  { id: 16, name: 'Shawarma Grill',               spec: 'Gas / Electric · 2–4 Burner',       image: K8 },
+  // { id:  9, name: 'Tilting Braising Pan',         spec: 'Gas / Electric · 10–200 Ltr',       image: K1 },
+  // { id: 10, name: 'Deep Fat Fryer',               spec: 'Gas / Electric · 8–20 Ltr',         image: K2 },
+  // { id: 11, name: 'Pasta Cooker',                 spec: 'Gas / Electric · Customised',       image: K3 },
+  // { id: 12, name: 'Lava Grill (Stone)',           spec: 'Gas / Electric · Customised',       image: K4 },
+  // { id: 13, name: 'SS Mobile Tandoor',            spec: 'Gas / Charcoal · 2–4 Burner',       image: K5 },
+  // { id: 14, name: 'Charcoal Grill',               spec: 'Charcoal / Gas / Electric',         image: K6 },
+  // { id: 15, name: 'SS Steamer',                   spec: 'Gas / Electric · 30–250 Ltr',       image: K7 },
+  // { id: 16, name: 'Shawarma Grill',               spec: 'Gas / Electric · 2–4 Burner',       image: K8 },
 ];
 
 /* ── Carousel constants ─────────────────────────────────────────────────────── */
@@ -304,7 +304,7 @@ export default function CookingEquipmentCarousel() {
       </div>
 
       {/* ── Bottom CTA ──────────────────────────────────────────────────── */}
-      <div style={{ textAlign: 'center', marginTop: '2.25rem' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', gap: '0.875rem', flexWrap: 'wrap', marginTop: '2.25rem' }}>
         <Link
           href="/products?category=cooking"
           className="btn-ghost inline-flex items-center gap-2"
@@ -313,6 +313,15 @@ export default function CookingEquipmentCarousel() {
           View All Cooking Equipment
           <ArrowRight size={15} aria-hidden="true" />
         </Link>
+        <button
+          type="button"
+          onClick={() => window.dispatchEvent(new Event('vsd:open-enquiry'))}
+          className="btn-gold inline-flex items-center gap-2"
+          aria-label="Get a free quote for cooking equipment"
+        >
+          Get Free Quote
+          <ArrowRight size={15} aria-hidden="true" />
+        </button>
       </div>
     </section>
   );

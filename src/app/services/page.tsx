@@ -16,7 +16,7 @@ import ServiceFAQ from '@/components/services/ServiceFAQ';
 export const metadata: Metadata = {
   title: 'Commercial Kitchen Equipment & Solutions | VSD International India',
   description:
-    'VSD International delivers end-to-end commercial kitchen solutions across India — equipment supply, custom fabrication, layout design, installation, and annual maintenance. Trusted by 500+ hospitality & healthcare clients since 2009.',
+    'VSD International delivers end-to-end commercial kitchen solutions across India — equipment supply, custom fabrication, layout design, installation, and annual maintenance. Trusted by 500+ hospitality & healthcare clients since 2019.',
   alternates: { canonical: 'https://vsdinternational.com/' },
   openGraph: {
     url: 'https://vsdinternational.com/',
@@ -204,7 +204,7 @@ const PROJECTS = [
 const HUB_FAQS = [
   {
     q: 'What services does VSD International provide?',
-    a: 'VSD International provides end-to-end commercial kitchen solutions — from equipment supply and stainless steel fabrication to kitchen layout design, on-site installation, commissioning, and annual maintenance contracts (AMC). We are an authorised dealer for 15+ international brands including Rational, Robot Coupe, Frymaster, and Hamilton Beach. We serve clients across India from our Delhi NCR manufacturing facilities, with a proven track record of 500+ projects since 2009.',
+    a: 'VSD International provides end-to-end commercial kitchen solutions — from equipment supply and stainless steel fabrication to kitchen layout design, on-site installation, commissioning, and annual maintenance contracts (AMC). We are an authorised dealer for 15+ international brands including Rational, Robot Coupe, Frymaster, and Hamilton Beach. We serve clients across India from our Delhi NCR manufacturing facilities, with a proven track record of 500+ projects since 2019.',
   },
   {
     q: 'Do you supply equipment only, or also handle installation?',
@@ -329,8 +329,8 @@ export default function ServicesHubPage() {
           >
             {[
               { stat: '500+',       label: 'Projects Completed' },
-              { stat: 'ISO 9001',   label: 'Certified Since 2009' },
-              { stat: '15+',        label: 'Years Experience' },
+              { stat: 'ISO 9001',   label: 'Certified Since 2019' },
+              { stat: '7+',         label: 'Years Experience' },
             ].map(({ stat, label }) => (
               <div
                 key={stat}
@@ -509,7 +509,7 @@ export default function ServicesHubPage() {
               {
                 icon: Shield,
                 title: 'Proven Across Industries',
-                body: 'Hotels (Hyatt, Radisson, Crowne Plaza), hospitals (Metro, Yashoda, AIIMS-affiliated), cloud kitchens (Rebel Foods), and government institutions (DRDO, ESIC). 500+ completed projects since 2009. ISO 9001 certified.',
+                body: 'Hotels (Hyatt, Radisson, Crowne Plaza), hospitals (Metro, Yashoda, AIIMS-affiliated), cloud kitchens (Rebel Foods), and government institutions (DRDO, ESIC). 500+ completed projects since 2019. ISO 9001 certified.',
               },
             ].map(({ icon: Icon, title, body }) => (
               <div

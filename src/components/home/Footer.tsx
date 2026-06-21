@@ -54,7 +54,7 @@ export default function Footer() {
             }}
           >
             ISO 9001 certified manufacturer and supplier of commercial kitchen equipment for hotels,
-            hospitals, restaurants, cloud kitchens, and institutions across India since 2009.
+            hospitals, restaurants, cloud kitchens, and institutions across India since 2019.
           </p>
 
           {/* NAP — must match GBP exactly */}
@@ -245,7 +245,7 @@ export default function Footer() {
             {[
               { label: 'LinkedIn',  href: 'https://www.linkedin.com/company/vsd-international' },
               { label: 'IndiaMart', href: 'https://www.indiamart.com/vsd-international' },
-              { label: 'Google',    href: 'https://g.page/vsd-international-delhi' },
+              { label: 'Google',    href: 'https://maps.app.goo.gl/kzyGxozpqqGEK13i6' },
             ].map(({ label, href }) => (
               <a
                 key={label}

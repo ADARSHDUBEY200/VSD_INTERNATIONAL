@@ -337,6 +337,17 @@ export default function VideoSection() {
 
             <div style={{ height: '1px', background: 'rgba(200,169,107,0.1)' }} />
 
+            <div>
+              <button
+                type="button"
+                onClick={() => window.dispatchEvent(new Event('vsd:open-enquiry'))}
+                className="btn-gold inline-flex items-center gap-2"
+                aria-label="Get a free commercial kitchen quote"
+              >
+                Get Free Quote
+              </button>
+            </div>
+
             <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
               {[
                 { icon: <Shield size={13} style={{ color: 'var(--gold)' }} />, label: 'ISO 9001 Certified' },

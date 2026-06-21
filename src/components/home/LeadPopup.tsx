@@ -309,7 +309,7 @@ export default function LeadPopup() {
                     ))}
                   </div>
                   <span style={{ fontFamily: 'var(--font-inter)', fontSize: '0.7rem', color: 'rgba(245,240,232,0.38)', fontWeight: 600 }}>
-                    4.9 · 312 Google Reviews
+                    5★ · 312 Google Reviews
                   </span>
                 </div>
                 <button

@@ -612,13 +612,14 @@ export default function FeaturedProject() {
             View All Projects
             <ArrowRight size={15} aria-hidden="true" />
           </Link>
-          <Link
-            href="/contact"
+          <button
+            type="button"
+            onClick={() => window.dispatchEvent(new Event('vsd:open-enquiry'))}
             className="btn-ghost-dark inline-flex items-center gap-2"
             aria-label="Get a quote for your kitchen project"
           >
             Get a Quote for Your Project
-          </Link>
+          </button>
         </div>
 
       </div>

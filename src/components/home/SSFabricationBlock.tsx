@@ -127,14 +127,15 @@ export default function SSFabricationBlock() {
               ))}
             </div>
 
-            <Link
-              href="/contact"
+            <button
+              type="button"
+              onClick={() => window.dispatchEvent(new Event('vsd:open-enquiry'))}
               className="btn-gold"
               style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}
               aria-label="Get a quote for custom stainless steel fabrication"
             >
               Get a Fabrication Quote →
-            </Link>
+            </button>
           </div>
 
           {/* Right — items grid */}

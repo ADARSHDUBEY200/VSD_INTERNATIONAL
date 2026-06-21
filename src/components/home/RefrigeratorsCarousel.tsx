@@ -14,15 +14,14 @@ type RefrigItem = {
 };
 
 /* ── Placeholder images — replace with real product photos ─────────────────── */
-const R1 = 'https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=700&auto=format&fit=crop';
-const R2 = 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?q=80&w=700&auto=format&fit=crop';
-const R3 = 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=700&auto=format&fit=crop';
-const R4 = 'https://images.unsplash.com/photo-1565958011703-44f9829ba187?q=80&w=700&auto=format&fit=crop';
-const R5 = 'https://images.unsplash.com/photo-1565299507177-b0ac66763828?q=80&w=700&auto=format&fit=crop';
-const R6 = 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=700&auto=format&fit=crop';
-const R7 = 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=700&auto=format&fit=crop';
-const R8 = 'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?q=80&w=700&auto=format&fit=crop';
-const R9 = 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?q=80&w=700&auto=format&fit=crop';
+const R1 = 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782019742/3_Door_Under_Counter_Refrigerator_bmf3ts.jpg';
+const R2 = 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782019743/3_Door_Under_Counter_Pizza_Makeline_uambd9.jpg';
+const R3 = 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782019739/Under_Counter_Pizza_Makeline_ijbwdb.jpg';
+const R4 = 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782019740/Glass_Door_Under_Counter_ae052c.jpg';
+const R5 = 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782019741/Chest_Freezer_Deep_Freezer_f0gno7.jpg';
+const R6 = 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782019738/Visi_Cooler_bwwcbr.jpg';
+const R7 = 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782019738/Vertical_Two_Door_houarl.jpg';
+const R8 = 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782019737/Walk_in_Chiller_Walk_in_Freezer_ugszyi.jpg';
 
 /* ── 9 Refrigerator Items ───────────────────────────────────────────────────── */
 const ITEMS: RefrigItem[] = [
@@ -33,8 +32,7 @@ const ITEMS: RefrigItem[] = [
   { id: 5, name: 'Chest Freezer (Deep Freezer)',                         capacity: 'Electric · 100 to 1000 Ltr.',     image: R5 },
   { id: 6, name: 'Visi Cooler',                                          capacity: 'Electric · 300 to 500 Ltr.',      image: R6 },
   { id: 7, name: 'Vertical Two Door Refrigerator / Freezer',             capacity: 'Electric · 400 to 600 Ltr.',      image: R7 },
-  { id: 8, name: 'Vertical Four Door Refrigerator / Freezer',            capacity: 'Electric · 800 to 1200 Ltr.',     image: R8 },
-  { id: 9, name: 'Walk in Chiller / Walk in Freezer',                    capacity: 'Electric · Size Customised',      image: R9 },
+  { id: 8, name: 'Walk in Chiller / Walk in Freezer',                    capacity: 'Electric · Size Customised',      image: R8 },
 ];
 
 /* ── Carousel constants ─────────────────────────────────────────────────────── */
@@ -327,7 +325,7 @@ export default function RefrigeratorsCarousel() {
       </div>
 
       {/* ── Bottom CTA ──────────────────────────────────────────────────── */}
-      <div style={{ textAlign: 'center', marginTop: '2.25rem' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', gap: '0.875rem', flexWrap: 'wrap', marginTop: '2.25rem' }}>
         <Link
           href="/products?category=refrigerators"
           className="btn-ghost inline-flex items-center gap-2"
@@ -336,6 +334,15 @@ export default function RefrigeratorsCarousel() {
           View All Refrigeration Equipment
           <ArrowRight size={15} aria-hidden="true" />
         </Link>
+        <button
+          type="button"
+          onClick={() => window.dispatchEvent(new Event('vsd:open-enquiry'))}
+          className="btn-gold inline-flex items-center gap-2"
+          aria-label="Get a free quote for refrigeration equipment"
+        >
+          Get Free Quote
+          <ArrowRight size={15} aria-hidden="true" />
+        </button>
       </div>
     </section>
   );

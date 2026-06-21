@@ -60,7 +60,9 @@
 }
 
 /* ─── Base Reset ──────────────────────────────────────────────────────────── */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+}
 
 html {
   scroll-behavior: smooth;
@@ -1045,5 +1047,87 @@ section[id] {
 }
 @media (max-width: 767px) {
   .lp-mobile-cta { display: flex; }
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   CITIES WE SERVE — Mobile Horizontal Scroll (featured + standard cards)
+   ════════════════════════════════════════════════════════════════════════════ */
+
+.cities-scroll-outer { position: relative; }
+
+@media (max-width: 767px) {
+  .cities-scroll-outer::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0; bottom: 0;
+    width: 2.5rem;
+    background: linear-gradient(90deg, transparent, #FAFAF8);
+    pointer-events: none;
+    z-index: 5;
+  }
+}
+
+/* Featured (Delhi NCR / Mumbai) big cards */
+.cities-featured-grid {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-left: 1.25rem;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  margin: 0 -1.25rem;
+  padding: 0 1.25rem 0.5rem;
+  gap: 1rem;
+}
+.cities-featured-grid::-webkit-scrollbar { display: none; }
+.cities-featured-grid > * {
+  flex-shrink: 0;
+  width: calc(100vw - 2.5rem);
+  max-width: 23rem;
+  scroll-snap-align: start;
+}
+@media (min-width: 768px) {
+  .cities-featured-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    overflow-x: visible;
+    margin: 0;
+    padding: 0;
+    gap: 1.5rem;
+  }
+  .cities-featured-grid > * { width: auto; max-width: none; }
+}
+
+/* Standard city pills (Bangalore, Pune, etc.) */
+.cities-standard-grid {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  margin: 0 -1.25rem;
+  padding: 0 1.25rem 0.5rem;
+  gap: 0.75rem;
+}
+.cities-standard-grid::-webkit-scrollbar { display: none; }
+.cities-standard-grid > * {
+  flex-shrink: 0;
+  width: 38vw;
+  max-width: 9.5rem;
+  scroll-snap-align: start;
+}
+@media (min-width: 640px) {
+  .cities-standard-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    overflow-x: visible;
+    margin: 0;
+    padding: 0;
+    gap: 1rem;
+  }
+  .cities-standard-grid > * { width: auto; max-width: none; }
+}
+@media (min-width: 1024px) {
+  .cities-standard-grid { grid-template-columns: repeat(6, 1fr); }
 }
 

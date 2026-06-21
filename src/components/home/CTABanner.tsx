@@ -28,10 +28,28 @@ export default function CTABanner() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!form.name.trim() || !form.phone.trim()) return;
     setSending(true);
-    await new Promise(r => setTimeout(r, 1200));
-    setSent(true);
-    setSending(false);
+    try {
+      const res = await fetch('/api/enquiries', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name:    form.name,
+          company: form.company,
+          city:    form.city,
+          service: form.type,
+          phone:   form.phone,
+          source:  'cta_banner',
+        }),
+      });
+      if (!res.ok) throw new Error('failed');
+      setSent(true);
+    } catch {
+      /* fail silently — user can use WhatsApp */
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -39,7 +57,7 @@ export default function CTABanner() {
       id="get-a-quote"
       aria-labelledby="cta-heading"
       style={{
-        padding: '5.5rem 0',
+        padding: 'clamp(1.75rem, 6vw, 2.5rem) 0',
         background: 'var(--charcoal-light)',
         borderTop: '1px solid rgba(200,169,107,0.15)',
         position: 'relative',
@@ -77,22 +95,22 @@ export default function CTABanner() {
       <div className="container mx-auto" style={{ maxWidth: '80rem', padding: '0 1.25rem', position: 'relative', zIndex: 1 }}>
 
         {/* Section header */}
-        <div className="text-center mb-12">
-          <p className="section-label mb-3">Get Started Today</p>
+        <div className="text-center mb-8 sm:mb-12">
+          <p className="section-label mb-4 sm:mb-5">Get Started Today</p>
           <h2
             id="cta-heading"
             style={{
               fontFamily: 'var(--font-playfair)',
-              fontSize: 'clamp(1.875rem, 3.2vw, 2.875rem)',
+              fontSize: 'clamp(1.625rem, 3.2vw, 2.875rem)',
               color: '#F7F5F0',
-              lineHeight: 1.12, letterSpacing: '-0.02em',
+              lineHeight: 1.18, letterSpacing: '-0.02em',
             }}
           >
             Get a Free Quote for Your Kitchen Project
           </h2>
-          <div className="gold-divider mt-5" aria-hidden="true" />
-          <p className="mt-5 max-w-lg" style={{
-            color: 'rgba(245,240,232,0.5)', fontSize: '1rem', lineHeight: 1.8,
+          <div className="gold-divider mt-4 mb-4 sm:mt-5 sm:mb-5" aria-hidden="true" />
+          <p className="mt-4 sm:mt-5 max-w-lg" style={{
+            color: 'rgba(245,240,232,0.5)', fontSize: 'clamp(0.875rem, 3.6vw, 1rem)', lineHeight: 1.7,
             fontFamily: 'var(--font-inter)', marginLeft: 'auto', marginRight: 'auto', textAlign: 'center',
           }}>
             Free site visit · Free kitchen layout · No commitment.{' '}
@@ -100,22 +118,22 @@ export default function CTABanner() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 items-start">
 
           {/* ── Left: Contact options ── */}
-          <div className="flex flex-col gap-5">
+          <div className="flex flex-col gap-4 sm:gap-5">
 
             {/* WhatsApp — Primary */}
             <a
               href="https://wa.me/919250346370?text=Hi%20VSD%20International%2C%20I%20need%20commercial%20kitchen%20equipment.%20Please%20share%20details."
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-4 rounded-2xl group"
+              className="flex items-center gap-3 sm:gap-4 rounded-2xl group"
               style={{
                 background: 'linear-gradient(135deg, #20C05A 0%, #25D366 50%, #1ebe5d 100%)',
                 boxShadow: '0 8px 32px rgba(37,211,102,0.35), 0 2px 8px rgba(0,0,0,0.15)',
                 textDecoration: 'none',
-                padding: '1.125rem 1.375rem',
+                padding: 'clamp(0.875rem, 4vw, 1.125rem) clamp(0.9rem, 4.5vw, 1.375rem)',
                 transition: 'transform 0.2s, box-shadow 0.2s',
                 position: 'relative',
                 overflow: 'hidden',
@@ -139,24 +157,24 @@ export default function CTABanner() {
               }} className="group-hover:translate-x-full" />
 
               <div style={{
-                width: 52, height: 52, borderRadius: '50%',
+                width: 'clamp(42px, 13vw, 52px)', height: 'clamp(42px, 13vw, 52px)', borderRadius: '50%',
                 background: 'rgba(255,255,255,0.2)',
                 border: '1.5px solid rgba(255,255,255,0.3)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 flexShrink: 0,
               }}>
-                <WaIcon size={26} fill="white" />
+                <WaIcon size={22} fill="white" />
               </div>
-              <div style={{ flex: 1 }}>
-                <p style={{ fontFamily: 'var(--font-inter)', fontWeight: 800, fontSize: '1.0625rem', color: '#fff', lineHeight: 1.2 }}>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <p style={{ fontFamily: 'var(--font-inter)', fontWeight: 800, fontSize: 'clamp(0.88rem, 4vw, 1.0625rem)', color: '#fff', lineHeight: 1.28 }}>
                   WhatsApp Now — Instant Response
                 </p>
-                <p style={{ fontFamily: 'var(--font-inter)', fontSize: '0.875rem', color: 'rgba(255,255,255,0.82)', marginTop: 3 }}>
-                  +91-9250346370 · Response within 15 minutes
+                <p style={{ fontFamily: 'var(--font-inter)', fontSize: 'clamp(0.76rem, 3.2vw, 0.875rem)', color: 'rgba(255,255,255,0.82)', marginTop: 3, lineHeight: 1.5 }}>
+                  +91-9250346370<span className="hidden sm:inline"> · </span><br className="sm:hidden" />Response within 15 minutes
                 </p>
               </div>
               <div style={{
-                width: 32, height: 32, borderRadius: '50%',
+                width: 'clamp(26px, 8vw, 32px)', height: 'clamp(26px, 8vw, 32px)', borderRadius: '50%',
                 background: 'rgba(255,255,255,0.18)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 flexShrink: 0,
@@ -170,13 +188,13 @@ export default function CTABanner() {
             {/* Phone */}
             <a
               href="tel:+919250346370"
-              className="flex items-center gap-4 rounded-2xl group"
+              className="flex items-center gap-3 sm:gap-4 rounded-2xl group"
               style={{
                 background: 'var(--charcoal-mid)',
                 border: '1px solid rgba(200,169,107,0.22)',
                 boxShadow: '0 4px 16px rgba(0,0,0,0.2)',
                 textDecoration: 'none',
-                padding: '1.125rem 1.375rem',
+                padding: 'clamp(0.875rem, 4vw, 1.125rem) clamp(0.9rem, 4.5vw, 1.375rem)',
                 transition: 'transform 0.2s, box-shadow 0.2s, border-color 0.2s',
               }}
               onMouseEnter={e => {
@@ -192,27 +210,27 @@ export default function CTABanner() {
               aria-label="Call VSD International"
             >
               <div style={{
-                width: 52, height: 52, borderRadius: '50%',
+                width: 'clamp(42px, 13vw, 52px)', height: 'clamp(42px, 13vw, 52px)', borderRadius: '50%',
                 background: 'rgba(200,169,107,0.12)',
                 border: '1.5px solid rgba(200,169,107,0.22)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 flexShrink: 0,
               }}>
-                <PhoneCall size={22} style={{ color: 'var(--gold)' }} />
+                <PhoneCall size={20} style={{ color: 'var(--gold)' }} />
               </div>
-              <div style={{ flex: 1 }}>
-                <p style={{ fontFamily: 'var(--font-inter)', fontWeight: 700, fontSize: '1.0625rem', color: '#F7F5F0', lineHeight: 1.2 }}>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <p style={{ fontFamily: 'var(--font-inter)', fontWeight: 700, fontSize: 'clamp(0.88rem, 4vw, 1.0625rem)', color: '#F7F5F0', lineHeight: 1.28 }}>
                   Call Us Directly
                 </p>
-                <p style={{ fontFamily: 'var(--font-inter)', fontSize: '0.875rem', color: 'rgba(245,240,232,0.45)', marginTop: 3 }}>
-                  +91-9250346370 · Mon–Sat, 9 AM – 6 PM
+                <p style={{ fontFamily: 'var(--font-inter)', fontSize: 'clamp(0.76rem, 3.2vw, 0.875rem)', color: 'rgba(245,240,232,0.45)', marginTop: 3, lineHeight: 1.5 }}>
+                  +91-9250346370<span className="hidden sm:inline"> · </span><br className="sm:hidden" />Mon–Sat, 9 AM – 6 PM
                 </p>
               </div>
               <div style={{
-                padding: '4px 10px', borderRadius: 100,
+                padding: '4px 9px', borderRadius: 100,
                 background: 'rgba(200,169,107,0.1)',
                 border: '1px solid rgba(200,169,107,0.2)',
-                fontSize: '0.7rem', fontWeight: 700,
+                fontSize: '0.65rem', fontWeight: 700,
                 color: 'var(--gold)', fontFamily: 'var(--font-inter)',
                 letterSpacing: '0.06em', flexShrink: 0,
               }}>
@@ -221,7 +239,7 @@ export default function CTABanner() {
             </a>
 
             {/* Industry-specific WhatsApp CTAs */}
-            <div className="grid grid-cols-3 gap-3">
+            <div className="grid grid-cols-3 gap-2 sm:gap-3">
               {[
                 { label: '🏨 Hotel',    msg: 'Hi%2C%20I%20need%20kitchen%20equipment%20for%20a%20hotel%20project.' },
                 { label: '🏥 Hospital', msg: 'Hi%2C%20I%20need%20kitchen%20equipment%20for%20a%20hospital%20or%20healthcare%20facility.' },
@@ -234,13 +252,14 @@ export default function CTABanner() {
                   rel="noopener noreferrer"
                   style={{
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    gap: 5, padding: '0.625rem 0.5rem',
+                    gap: 4, padding: 'clamp(0.5rem, 2.5vw, 0.625rem) clamp(0.3rem, 1.5vw, 0.5rem)',
                     borderRadius: 12,
                     border: '1px solid rgba(200,169,107,0.18)',
                     background: 'rgba(200,169,107,0.05)',
                     color: 'rgba(245,240,232,0.65)',
-                    fontSize: '0.8rem', fontFamily: 'var(--font-inter)', fontWeight: 600,
+                    fontSize: 'clamp(0.68rem, 3vw, 0.8rem)', fontFamily: 'var(--font-inter)', fontWeight: 600,
                     textDecoration: 'none',
+                    whiteSpace: 'nowrap',
                     transition: 'background 0.15s, border-color 0.15s, color 0.15s',
                   }}
                   onMouseEnter={e => {
@@ -267,30 +286,30 @@ export default function CTABanner() {
             }}>
               {[
                 { icon: Shield,  label: 'ISO 9001 Certified',    sub: 'Quality assured' },
-                { icon: Star,    label: '15+ Years Experience',   sub: 'Industry veterans' },
+                { icon: Star,    label: '7+ Years Experience',    sub: 'Industry veterans' },
                 { icon: Clock,   label: 'Free Site Visit',        sub: 'Zero obligation' },
                 { icon: CheckCircle2, label: 'Pan India Service', sub: 'All major cities' },
               ].map(({ icon: Icon, label, sub }) => (
                 <div key={label} style={{
-                  display: 'flex', alignItems: 'center', gap: 10,
-                  padding: '0.625rem 0.75rem',
+                  display: 'flex', alignItems: 'center', gap: 8,
+                  padding: 'clamp(0.5rem, 2.2vw, 0.625rem) clamp(0.5rem, 2.2vw, 0.75rem)',
                   borderRadius: 12,
                   background: 'rgba(200,169,107,0.05)',
                   border: '1px solid rgba(200,169,107,0.1)',
                 }}>
                   <div style={{
-                    width: 32, height: 32, borderRadius: '50%',
+                    width: 'clamp(26px, 8vw, 32px)', height: 'clamp(26px, 8vw, 32px)', borderRadius: '50%',
                     background: 'rgba(200,169,107,0.1)',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                     flexShrink: 0,
                   }}>
                     <Icon size={14} style={{ color: 'var(--gold)' }} />
                   </div>
-                  <div>
-                    <p style={{ fontFamily: 'var(--font-inter)', fontSize: '0.8rem', fontWeight: 700, color: 'rgba(245,240,232,0.75)', lineHeight: 1.2 }}>
+                  <div style={{ minWidth: 0 }}>
+                    <p style={{ fontFamily: 'var(--font-inter)', fontSize: 'clamp(0.7rem, 3vw, 0.8rem)', fontWeight: 700, color: 'rgba(245,240,232,0.75)', lineHeight: 1.25 }}>
                       {label}
                     </p>
-                    <p style={{ fontFamily: 'var(--font-inter)', fontSize: '0.675rem', color: 'rgba(245,240,232,0.35)', marginTop: 1 }}>
+                    <p style={{ fontFamily: 'var(--font-inter)', fontSize: 'clamp(0.6rem, 2.6vw, 0.675rem)', color: 'rgba(245,240,232,0.35)', marginTop: 1 }}>
                       {sub}
                     </p>
                   </div>

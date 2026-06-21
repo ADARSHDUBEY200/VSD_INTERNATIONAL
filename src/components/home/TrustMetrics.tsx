@@ -10,9 +10,9 @@ import { useEffect, useRef, useState } from 'react';
 const stats = [
   { value: 20,  suffix: '+', label: 'Hotels Served',   desc: 'Hyatt, Radisson, Crowne Plaza & more' },
   { value: 5,   suffix: '',  label: 'Hospital Groups',  desc: 'Metro, Fortis & institutional kitchens' },
-  { value: 15,  suffix: '+', label: 'Years Active',     desc: 'Founded 2009, Delhi NCR' },
-  { value: 312, suffix: '',  label: 'Google Reviews',   desc: '4.9★ Average rating' },
-  { value: 2,   suffix: '',  label: 'Factories Delhi',  desc: 'Own manufacturing, fast delivery' },
+  { value: 7,   suffix: '+', label: 'Years Active',     desc: 'Founded 2019, Delhi NCR' },
+  { value: 312, suffix: '',  label: 'Google Reviews',   desc: '5★ Average rating' },
+  { value: 1,   suffix: '',  label: 'Factory Delhi',    desc: 'Own manufacturing, fast delivery' },
 ];
 
 function useCountUp(target: number, duration = 1800, startCounting: boolean) {
@@ -129,7 +129,7 @@ export default function TrustMetrics() {
           textTransform: 'uppercase',
         }}
       >
-        ★ ISO 9001:2015 Certified · GSTIN: 07AABFV5120K1ZZ · Two Delhi Factories · Rational &amp; Robot Coupe Authorised Dealer ★
+        ★ ISO 9001:2015 Certified · GSTIN: 07AABFV5120K1ZZ · Delhi Factory · Rational &amp; Robot Coupe Authorised Dealer ★
       </div>
 
       {/* -- Stats — horizontal scroll on mobile, grid on md+ --------------- */}
@@ -145,21 +145,38 @@ export default function TrustMetrics() {
         </div>
       </div>
 
-      {/* -- Bottom trust tagline -------------------------------------------- */}
+      {/* -- Bottom trust tagline + CTA --------------------------------------- */}
       <div
         className="text-center"
         style={{
-          padding: '0.875rem 1rem',
+          padding: '1.25rem 1rem',
           borderTop: '1px solid rgba(201,168,76,0.08)',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '1rem',
+        }}
+      >
+        <p style={{
           fontSize: '0.6875rem',
           letterSpacing: '0.14em',
           color: 'rgba(201,168,76,0.40)',
           fontFamily: 'var(--font-inter)',
           fontWeight: 600,
           textTransform: 'uppercase',
-        }}
-      >
-        Trusted by India&apos;s Leading Establishments
+          margin: 0,
+        }}>
+          Trusted by India&apos;s Leading Establishments
+        </p>
+        <button
+          type="button"
+          onClick={() => window.dispatchEvent(new Event('vsd:open-enquiry'))}
+          className="btn-gold inline-flex items-center gap-2"
+          style={{ fontSize: '0.875rem', padding: '0.625rem 1.5rem', minHeight: 'auto' }}
+          aria-label="Get a free kitchen quote from VSD International"
+        >
+          Get Free Quote
+        </button>
       </div>
     </section>
   );

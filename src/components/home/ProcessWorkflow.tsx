@@ -3,6 +3,7 @@ import Link from 'next/link';
 import {
   MapPin, PenTool, Package, Truck, Wrench, Shield, ArrowRight,
 } from 'lucide-react';
+import OpenEnquiryBtn from './OpenEnquiryBtn';
 
 const STEPS = [
   {
@@ -645,15 +646,11 @@ export default function ProcessWorkflow() {
             ))}
           </div>
 
-          <Link
-            href="/contact"
-            className="btn-gold inline-flex items-center gap-2"
+          <OpenEnquiryBtn
+            label="Book Free Site Visit"
             style={{ fontSize: '0.9375rem', padding: '0.7rem 1.75rem', borderRadius: 8, whiteSpace: 'nowrap' }}
-            aria-label="Book a free site visit"
-          >
-            Book Free Site Visit
-            <ArrowRight size={15} aria-hidden="true" />
-          </Link>
+            ariaLabel="Book a free site visit"
+          />
         </div>
 
       </div>

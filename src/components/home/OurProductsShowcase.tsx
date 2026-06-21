@@ -334,9 +334,9 @@ function ProductCard({ product, shineDelay }: { product: Product; shineDelay: nu
             View
           </Link>
 
-          <Link
-            href={`/contact?product=${encodeURIComponent(product.name)}`}
-            onClick={(e) => e.stopPropagation()}
+          <button
+            type="button"
+            onClick={(e) => { e.stopPropagation(); window.dispatchEvent(new Event('vsd:open-enquiry')); }}
             style={{
               flex: 2,
               display: 'inline-flex',
@@ -350,8 +350,8 @@ function ProductCard({ product, shineDelay }: { product: Product; shineDelay: nu
               fontFamily: 'var(--font-inter)',
               fontSize: '0.8125rem',
               fontWeight: 700,
-              textDecoration: 'none',
               border: 'none',
+              cursor: 'pointer',
               boxShadow: '0 3px 14px rgba(201,168,76,0.35)',
               letterSpacing: '0.01em',
             }}
@@ -360,7 +360,7 @@ function ProductCard({ product, shineDelay }: { product: Product; shineDelay: nu
           >
             <ArrowRight size={13} aria-hidden="true" />
             Enquire Now
-          </Link>
+          </button>
         </div>
       </div>
     </article>
@@ -595,14 +595,15 @@ export default function OurProductsShowcase() {
             Full Product Catalogue
             <ArrowRight size={15} aria-hidden="true" />
           </Link>
-          <Link
-            href="/contact"
+          <button
+            type="button"
+            onClick={() => window.dispatchEvent(new Event('vsd:open-enquiry'))}
             className="btn-gold inline-flex items-center gap-2"
             aria-label="Request a quote for commercial kitchen equipment"
           >
             Request a Quote
             <ArrowRight size={15} aria-hidden="true" />
-          </Link>
+          </button>
         </div>
 
       </div>

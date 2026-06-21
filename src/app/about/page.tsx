@@ -12,15 +12,15 @@ import StatsCounter      from '@/components/about/StatsCounter';
 
 /* --- Metadata ------------------------------------------------------------- */
 export const metadata: Metadata = {
-  title: 'About Us — VSD International | ISO 9001 Kitchen Equipment Manufacturer Since 2009',
+  title: 'About Us — VSD International | ISO 9001 Kitchen Equipment Manufacturer Since 2019',
   description:
-    'Learn about VSD International — ISO 9001 certified commercial kitchen equipment manufacturer in Delhi since 2009. Trusted by Hyatt, Radisson & ITC. 15+ years, 200+ clients, pan-India service.',
+    'Learn about VSD International — ISO 9001 certified commercial kitchen equipment manufacturer in Delhi since 2019. Trusted by Hyatt, Radisson & ITC. 7+ years, 200+ clients, pan-India service.',
   alternates: { canonical: 'https://vsdinternational.com/about' },
 };
 
 /* --- Timeline milestones -------------------------------------------------- */
 const MILESTONES = [
-  { year: '2009', title: 'Founded in Delhi',         desc: 'Started with local restaurant equipment supply from a single workshop in Mandawali.'   },
+  { year: '2019', title: 'Founded in Delhi',         desc: 'Started with local restaurant equipment supply from a single workshop in Mandawali.'   },
   { year: '2011', title: 'First Hotel Project',       desc: 'Completed first luxury hotel kitchen setup in New Delhi, marking our premium entry.'    },
   { year: '2013', title: 'Manufacturing Unit',        desc: 'Launched dedicated SS fabrication unit for custom kitchen equipment and modular setups.' },
   { year: '2015', title: 'ISO 9001 Certified',        desc: 'Achieved ISO 9001:2015 quality certification — a milestone in our quality journey.'     },
@@ -41,7 +41,7 @@ const VALUES = [
 /* --- Why VSD differentiators (on gold background) ------------------------ */
 const DIFFERENTIATORS = [
   { Icon: Award,   title: 'ISO 9001:2015 Certified',       body: 'Internationally recognised quality management system covering manufacturing, supply, and after-sales service.' },
-  { Icon: Clock,   title: '15+ Years Track Record',        body: 'Founded in 2009 with a clear mission. A decade and a half of on-time delivery and satisfied clients speak for us.' },
+  { Icon: Clock,   title: '7+ Years Track Record',         body: 'Founded in 2019 with a clear mission. Years of on-time delivery and satisfied clients speak for us.' },
   { Icon: Layers,  title: 'Premium International Brands',  body: 'Rational, Robot Coupe, Scotsman, Vitamix, Hamilton Beach, BUNN — the world\'s best, available through VSD.'        },
   { Icon: Users,   title: 'Dedicated After-Sales Team',    body: 'Dedicated AMC engineers, genuine spare parts, and 24/7 support so your kitchen never faces unplanned downtime.'     },
 ];
@@ -144,7 +144,7 @@ export default function AboutPage() {
                   letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--text-muted)',
                 }}
               >
-                Est. 2009 · Delhi, India
+                Est. 2019 · Delhi, India
               </span>
             </div>
 
@@ -190,7 +190,7 @@ export default function AboutPage() {
                 margin: '0 auto 2.5rem',
               }}
             >
-              Since 2009, VSD International has been the trusted partner for hotels, hospitals, and
+              Since 2019, VSD International has been the trusted partner for hotels, hospitals, and
               institutions across India — delivering world-class kitchen equipment with ISO 9001 quality
               and unmatched after-sales support.
             </p>
@@ -209,9 +209,9 @@ export default function AboutPage() {
               }}
             >
               {[
-                { val: '15+',  label: 'Years'     },
+                { val: '7+',   label: 'Years'     },
                 { val: '200+', label: 'Clients'   },
-                { val: '4.9★', label: 'Google'    },
+                { val: '5★',   label: 'Google'    },
                 { val: '50+',  label: 'Cities'    },
               ].map(({ val, label }, idx) => (
                 <div
@@ -272,19 +272,19 @@ export default function AboutPage() {
                 {/* Story paragraphs — gold left border */}
                 <div style={{ borderLeft: '3px solid rgba(201,168,76,0.35)', paddingLeft: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1.125rem' }}>
                   <p style={{ fontFamily: 'var(--font-inter)', fontSize: '1rem', color: 'var(--text-body)', lineHeight: 1.8 }}>
-                    VSD International was founded in 2009 with a singular vision: to make world-class commercial
+                    VSD International was founded in 2019 with a singular vision: to make world-class commercial
                     kitchen equipment accessible to every hospitality establishment across India. What began in a
                     small workshop in Mandawali, Delhi has grown into one of the country&apos;s most trusted
                     kitchen equipment suppliers and manufacturers.
                   </p>
                   <p style={{ fontFamily: 'var(--font-inter)', fontSize: '1rem', color: 'var(--text-body)', lineHeight: 1.8 }}>
-                    Today, we operate two manufacturing units in Delhi, serve 200+ clients — including India&apos;s
+                    Today, we operate a manufacturing unit in Delhi, serve 200+ clients — including India&apos;s
                     finest hotels, hospital groups, and cloud kitchen operators — and are the authorised dealer for
                     premium international brands including Rational, Robot Coupe, Scotsman, and Vitamix.
                   </p>
                   <p style={{ fontFamily: 'var(--font-inter)', fontSize: '1rem', color: 'var(--text-body)', lineHeight: 1.8 }}>
                     Our ISO 9001:2015 certification reflects our unwavering commitment to quality — from the raw
-                    materials we source to the final commissioning of your kitchen. Our 312 Google reviews (4.9★)
+                    materials we source to the final commissioning of your kitchen. Our 312 Google reviews (5★)
                     are not just a number; they are the voice of 200+ satisfied clients.
                   </p>
                 </div>
@@ -616,7 +616,7 @@ export default function AboutPage() {
                   maxWidth: '680px',
                 }}
               >
-                India&apos;s Most Trusted Commercial Kitchen Partner — Since 2009
+                India&apos;s Most Trusted Commercial Kitchen Partner — Since 2019
               </h2>
               <div aria-hidden="true" style={{ width: 60, height: 3, background: 'rgba(26,18,8,0.3)', borderRadius: 2, marginTop: '1.25rem' }} />
             </div>
@@ -726,9 +726,9 @@ export default function AboutPage() {
               {/* Factory facts */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 {[
-                  { icon: Factory, label: '2 Manufacturing Units', note: 'Both located in Delhi NCR for fast delivery' },
+                  { icon: Factory, label: '1 Manufacturing Unit', note: 'Located in Delhi NCR for fast delivery' },
                   { icon: Users,   label: '50+ Trained Engineers',  note: 'In-house installation and commissioning team' },
-                  { icon: Star,    label: '4.9★ Google Rating',      note: 'Based on 312 verified Google reviews' },
+                  { icon: Star,    label: '5★ Google Rating',        note: 'Based on 312 verified Google reviews' },
                 ].map(({ icon: Icon, label, note }) => (
                   <div key={label} style={{ background: '#FFFFFF', border: '1.5px solid var(--border)', borderRadius: 12, padding: '1.25rem 1.5rem', display: 'flex', alignItems: 'flex-start', gap: '1rem' }}>
                     <div style={{ width: 38, height: 38, borderRadius: 10, background: 'rgba(201,168,76,0.10)', border: '1px solid rgba(201,168,76,0.22)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }} aria-hidden="true">

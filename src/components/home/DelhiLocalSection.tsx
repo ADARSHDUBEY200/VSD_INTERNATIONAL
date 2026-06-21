@@ -1,5 +1,6 @@
 import { MapPin, Clock, Truck, Building2 } from 'lucide-react';
 import Link from 'next/link';
+import OpenEnquiryBtn from './OpenEnquiryBtn';
 
 /**
  * Delhi Local Section — Blueprint §03 Section 10 (ADD)
@@ -143,7 +144,7 @@ export default function DelhiLocalSection() {
             {/* Quick stats */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
               {[
-                { icon: Building2, label: 'Delhi Factories', value: '2' },
+                { icon: Building2, label: 'Delhi Factory', value: '1' },
                 { icon: Clock,     label: 'Site Visit',      value: 'Same Day' },
                 { icon: Truck,     label: 'NCR Delivery',    value: 'Fastest' },
                 { icon: MapPin,    label: 'Projects in NCR', value: '150+' },
@@ -190,13 +191,11 @@ export default function DelhiLocalSection() {
             </div>
 
             <div style={{ marginTop: '2rem' }}>
-              <Link
-                href="/contact"
-                className="btn-gold inline-flex items-center gap-2"
-                aria-label="Book a free same-day site visit in Delhi NCR"
-              >
-                Book a Free Delhi Site Visit
-              </Link>
+              <OpenEnquiryBtn
+                label="Book a Free Delhi Site Visit"
+                ariaLabel="Book a free same-day site visit in Delhi NCR"
+                showIcon={false}
+              />
             </div>
           </div>
 
@@ -213,7 +212,7 @@ export default function DelhiLocalSection() {
           >
             <iframe
               title="VSD International — Mandawali, New Delhi office location"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3501.6!2d77.2857!3d28.6358!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfb3b5c5c5c5b%3A0x1234567890abcdef!2sMandawali%2C%20New%20Delhi%2C%20Delhi%20110092!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3501.6!2d77.2913299!3d28.6247358!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce4a96b6e0881%3A0xb8718d87431e9d64!2sVSD%20International!5e0!3m2!1sen!2sin!4v1771000000000!5m2!1sen!2sin"
               width="100%"
               height="420"
               style={{ border: 0, display: 'block' }}

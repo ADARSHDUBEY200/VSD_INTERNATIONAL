@@ -2,6 +2,7 @@
 // Native <details>/<summary> → all text indexed by Googlebot at full weight.
 
 import { ChevronDown } from 'lucide-react';
+import OpenEnquiryBtn from './OpenEnquiryBtn';
 
 const subsections = [
   {
@@ -208,6 +209,13 @@ export default function MadeInHouseSection() {
               ))}
             </div>
           </details>
+        </div>
+
+        <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+          <OpenEnquiryBtn
+            label="Get a Free Kitchen Quote"
+            ariaLabel="Get a free commercial kitchen equipment quote"
+          />
         </div>
 
       </div>

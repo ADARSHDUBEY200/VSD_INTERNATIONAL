@@ -1,6 +1,7 @@
 import { NextRequest } from 'next/server';
 import { connectDB } from '@/lib/mongodb';
 import Enquiry from '@/lib/models/Enquiry';
+import { sendEnquiryNotification } from '@/lib/email';
 
 export async function POST(request: NextRequest) {
   try {
@@ -18,16 +19,19 @@ export async function POST(request: NextRequest) {
     await connectDB();
 
     const enquiry = await Enquiry.create({
-      name: name.trim(),
-      email: email?.trim().toLowerCase(),
-      phone: phone.trim(),
+      name:    name.trim(),
+      email:   email?.trim().toLowerCase(),
+      phone:   phone.trim(),
       source,
       company: company?.trim(),
-      city: city?.trim(),
+      city:    city?.trim(),
       service: service?.trim(),
-      budget: budget?.trim(),
+      budget:  budget?.trim(),
       message: message?.trim(),
     });
+
+    // Send admin email notification (non-blocking — failure won't affect response)
+    sendEnquiryNotification({ name: name.trim(), phone: phone.trim(), email, source, company, city, service, budget, message }).catch(() => {});
 
     return Response.json({ ok: true, id: enquiry._id }, { status: 201 });
   } catch {

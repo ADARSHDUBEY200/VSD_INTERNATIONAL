@@ -15,17 +15,27 @@ type Card = {
 };
 
 /* ── Placeholder images — replace with real product photos ─────────────────── */
-const I1 = 'https://plus.unsplash.com/premium_photo-1723823036427-b19e6d270bb6?q=80&w=900&auto=format&fit=crop';
-const I2 = 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?q=80&w=600&auto=format&fit=crop';
-const I3 = 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=600&auto=format&fit=crop';
-const I4 = 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=600&auto=format&fit=crop';
-const I5 = 'https://images.unsplash.com/photo-1565299507177-b0ac66763828?q=80&w=600&auto=format&fit=crop';
+const I1 = 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782030727/wet_masala_grinder_2_avonxq.jpg';
+const I2 = 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782014917/wet_masala_grinder_3_hkyhop.jpg';
+const I3 = 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782014917/wet_masala_grinder_4_lxxsw1.jpg';
+const I4 = 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782014917/wet_masala_grinder_1_fw5edj.jpg';
+const I5 = 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782014917/wet_masala_grinder_5_yqravd.jpg';
+const I6 = 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782015937/Tilting_Wet_Grinder_2_gsi8nb.webp'
+const I7 = 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782015615/Titling_Grinder_1_xuyjcj.avif'
+const I8 = 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782015616/Tilting_Wet_Grinder_4_utww9m.webp'
+const I9 = 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782015616/Tilting_Wet__Grinder_3_utrj1w.jpg'
+const I10 = 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782015616/Tilting-Wet-Grinder-5_nob8sl.jpg'
+const I11 = 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782016559/Dough_Kneader_4_e8dkci.jpg'
+const I12 = 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782016560/Dough_Kneader_2_fy8g2f.jpg'
+const I13 = 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782016559/Dough_Kneader_3_yv9ems.jpg'
+const I14 = 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782016561/Dough_Kneader_1_otpoby.jpg'
+const I15 = 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782016559/Dough_Kneader_5_ikywzj.jpg'
 
 /* ── 9 Static Cards ─────────────────────────────────────────────────────────── */
 const CARDS: Card[] = [
   { id: 1, name: 'Wet Masala Grinder',        capacity: 'Electric · 5 to 25 Ltr.',      mainImage: I1, thumbImages: [I2, I3, I4, I5] },
-  { id: 2, name: 'Tilting Wet Grinder',        capacity: 'Electric · 5 to 30 Ltr.',      mainImage: I2, thumbImages: [I1, I4, I5, I3] },
-  { id: 3, name: 'Dough Kneader',              capacity: 'Electric · 5 to 100 Ltr.',     mainImage: I3, thumbImages: [I4, I1, I2, I5] },
+  { id: 2, name: 'Tilting Wet Grinder',        capacity: 'Electric · 5 to 30 Ltr.',      mainImage: I6, thumbImages: [I7, I8, I9, I10] },
+  { id: 3, name: 'Dough Kneader',              capacity: 'Electric · 5 to 100 Ltr.',     mainImage: I11, thumbImages: [I12, I13, I14, I15] },
   { id: 4, name: 'Pulverizer Machine',         capacity: 'Electric · 2 / 3 / 5 HP',     mainImage: I4, thumbImages: [I5, I2, I1, I3] },
   { id: 5, name: 'Vegetable Cutting Machine',  capacity: 'Electric · 40–200 kg / hr',    mainImage: I5, thumbImages: [I1, I3, I4, I2] },
   { id: 6, name: 'Potato Peeler',              capacity: 'Electric · 5 to 50 kg',        mainImage: I1, thumbImages: [I3, I5, I2, I4] },
@@ -368,7 +378,7 @@ export default function PreparationCarousel() {
       </div>
 
       {/* ── Bottom CTA ──────────────────────────────────────────────────── */}
-      <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', gap: '0.875rem', flexWrap: 'wrap', marginTop: '2rem' }}>
         <Link
           href="/products?category=preparation"
           className="btn-ghost inline-flex items-center gap-2"
@@ -377,6 +387,15 @@ export default function PreparationCarousel() {
           View All Preparation Equipment
           <ArrowRight size={15} aria-hidden="true" />
         </Link>
+        <button
+          type="button"
+          onClick={() => window.dispatchEvent(new Event('vsd:open-enquiry'))}
+          className="btn-gold inline-flex items-center gap-2"
+          aria-label="Get a free quote for preparation equipment"
+        >
+          Get Free Quote
+          <ArrowRight size={15} aria-hidden="true" />
+        </button>
       </div>
     </section>
   );
