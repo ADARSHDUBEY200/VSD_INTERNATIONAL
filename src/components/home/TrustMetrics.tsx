@@ -8,9 +8,9 @@ import { useEffect, useRef, useState } from 'react';
  *  CRO: Social proof cascade — numbers build trust before scrolling
  */
 const stats = [
-  { value: 20,  suffix: '+', label: 'Hotels Served',   desc: 'Hyatt, Radisson, Crowne Plaza & more' },
+  { value: 200, suffix: '+', label: 'Hotels Served',   desc: 'Hyatt, Radisson, Crowne Plaza & more' },
   { value: 5,   suffix: '',  label: 'Hospital Groups',  desc: 'Metro, Fortis & institutional kitchens' },
-  { value: 7,   suffix: '+', label: 'Years Active',     desc: 'Founded 2019, Delhi NCR' },
+  { value: 15,  suffix: '+', label: 'Years Active',     desc: 'Founded 2009, Delhi NCR' },
   { value: 312, suffix: '',  label: 'Google Reviews',   desc: '5★ Average rating' },
   { value: 1,   suffix: '',  label: 'Factory Delhi',    desc: 'Own manufacturing, fast delivery' },
 ];

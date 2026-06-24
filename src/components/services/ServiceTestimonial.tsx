@@ -17,6 +17,7 @@ export default function ServiceTestimonial({ testimonial }: { testimonial: Testi
 
   return (
     <section
+      id="client-testimonials"
       aria-label="Client testimonial"
       style={{
         background: 'var(--surface)',

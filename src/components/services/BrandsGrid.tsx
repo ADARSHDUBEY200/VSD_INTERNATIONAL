@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import Link from 'next/link';
 
 export interface Brand { name: string; tagline: string; slug: string }
@@ -13,12 +14,29 @@ const ALL_BRANDS: Brand[] = [
   { name: 'Waring',          tagline: 'Countertop commercial equipment',     slug: 'waring'          },
 ];
 
+interface BrandsGridProps {
+  brands?: Brand[];
+  label?: string;
+  heading?: ReactNode;
+  description?: string;
+  viewAllHref?: string;
+  viewAllText?: string;
+}
+
 /** §6 — Brands We Supply & Install
  *  Logo-grid with brand name + 1-line tagline.
  *  Each links to /brands/[slug]. */
-export default function BrandsGrid({ brands = ALL_BRANDS }: { brands?: Brand[] }) {
+export default function BrandsGrid({
+  brands = ALL_BRANDS,
+  label = 'Authorised Dealer',
+  heading = <>International Brands We Supply &amp; Install</>,
+  description = 'VSD International is the authorised Indian dealer for 15+ global kitchen equipment brands.',
+  viewAllHref = '/brands',
+  viewAllText = 'View All 15+ Brands →',
+}: BrandsGridProps) {
   return (
     <section
+      id="international-brands"
       aria-labelledby="brands-heading"
       style={{
         background: 'var(--charcoal)',
@@ -29,7 +47,7 @@ export default function BrandsGrid({ brands = ALL_BRANDS }: { brands?: Brand[] }
       <div className="container mx-auto" style={{ maxWidth: '80rem', padding: '0 1.25rem' }}>
         {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-          <p className="section-label" style={{ marginBottom: '0.75rem' }}>Authorised Dealer</p>
+          <p className="section-label" style={{ marginBottom: '0.75rem' }}>{label}</p>
           <h2
             id="brands-heading"
             style={{
@@ -39,7 +57,7 @@ export default function BrandsGrid({ brands = ALL_BRANDS }: { brands?: Brand[] }
               lineHeight: 1.15,
             }}
           >
-            International Brands We Supply &amp; Install
+            {heading}
           </h2>
           <div
             aria-hidden="true"
@@ -59,7 +77,7 @@ export default function BrandsGrid({ brands = ALL_BRANDS }: { brands?: Brand[] }
               margin: '1rem auto 0',
             }}
           >
-            VSD International is the authorised Indian dealer for 15+ global kitchen equipment brands.
+            {description}
           </p>
         </div>
 
@@ -128,10 +146,10 @@ export default function BrandsGrid({ brands = ALL_BRANDS }: { brands?: Brand[] }
 
         <div style={{ textAlign: 'center', marginTop: '2.5rem' }}>
           <Link
-            href="/brands"
+            href={viewAllHref}
             className="btn-ghost-dark inline-flex items-center gap-2 text-sm"
           >
-            View All 15+ Brands →
+            {viewAllText}
           </Link>
         </div>
       </div>

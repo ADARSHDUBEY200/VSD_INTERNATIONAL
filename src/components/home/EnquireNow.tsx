@@ -167,7 +167,7 @@ export default function EnquireNow() {
             }}>
               {[
                 { Icon: PhoneCall, label: '+91-9250346370',           href: 'tel:+919250346370' },
-                { Icon: Mail,      label: 'info@vsdinternational.com', href: 'mailto:info@vsdinternational.com' },
+                { Icon: Mail,      label: 'info.vsdinternational@gmail.com', href: 'mailto:info.vsdinternational@gmail.com' },
                 { Icon: MapPin,    label: 'Delhi NCR, India',           href: '#' },
               ].map(({ Icon, label, href }) => (
                 <a

@@ -35,7 +35,7 @@ import Footer from '@/components/home/Footer';
 export const metadata: Metadata = {
   title: 'Commercial Kitchen Equipment Manufacturer India | VSD International',
   description:
-    'ISO 9001 certified commercial kitchen equipment manufacturer in Delhi. Turnkey supply, design, fabrication & installation for hotels, hospitals & cloud kitchens. 500+ projects across India since 2019.',
+    'ISO 9001 certified commercial kitchen equipment manufacturer in Delhi. Turnkey supply, design, fabrication & installation for hotels, hospitals & cloud kitchens. 500+ projects across India since 2009.',
   keywords: [
     'commercial kitchen equipment manufacturers in India',
     'commercial kitchen equipment manufacturers in Delhi',
@@ -72,7 +72,7 @@ export const metadata: Metadata = {
     locale: 'en_IN',
     title: 'Commercial Kitchen Equipment Manufacturer in India | VSD International',
     description:
-      'ISO 9001 certified. Trusted by Hyatt, Radisson, ITC & Crowne Plaza. Turnkey kitchen supply, design, install & AMC from our Delhi factory. 500+ projects since 2019. ☎ +91-9250346370.',
+      'ISO 9001 certified. Trusted by Hyatt, Radisson, ITC & Crowne Plaza. Turnkey kitchen supply, design, install & AMC from our Delhi factory. 500+ projects since 2009. ☎ +91-9250346370.',
     images: [
       {
         url: 'https://vsdinternational.com/VSD_LOGO.png',
@@ -104,7 +104,7 @@ const homePageSchema = {
       name: 'VSD International',
       alternateName: ['VSD International India', 'VSD Kitchen Equipment'],
       description:
-        'ISO 9001 certified commercial kitchen equipment manufacturer and supplier in India. Serving hotels, hospitals, restaurants & cloud kitchens since 2019.',
+        'ISO 9001 certified commercial kitchen equipment manufacturer and supplier in India. Serving hotels, hospitals, restaurants & cloud kitchens since 2009.',
       publisher: { '@id': 'https://vsdinternational.com/#organization' },
       inLanguage: 'en-IN',
       potentialAction: {
@@ -142,11 +142,11 @@ const homePageSchema = {
         caption: 'VSD International Commercial Kitchen Equipment — Delhi NCR',
       },
       description:
-        'ISO 9001:2015 certified manufacturer and turnkey supplier of commercial kitchen equipment. Operating from Delhi NCR manufacturing facility since 2019, VSD International has completed 500+ projects for hotels, hospitals, restaurants, cloud kitchens, and government institutions across India.',
-      foundingDate: '2019',
-      slogan: "India's Trusted Commercial Kitchen Partner Since 2019",
+        'ISO 9001:2015 certified manufacturer and turnkey supplier of commercial kitchen equipment. Operating from Delhi NCR manufacturing facility since 2009, VSD International has completed 500+ projects for hotels, hospitals, restaurants, cloud kitchens, and government institutions across India.',
+      foundingDate: '2009',
+      slogan: "India's Trusted Commercial Kitchen Partner Since 2009",
       telephone: '+91-9250346370',
-      email: 'sales@vsdinternational.com',
+      email: 'info.vsdinternational@gmail.com',
       vatID: '07AABFV5120K1ZZ',
       priceRange: '₹₹₹',
       currenciesAccepted: 'INR',
@@ -190,7 +190,7 @@ const homePageSchema = {
         },
         {
           '@type': 'ContactPoint',
-          email: 'sales@vsdinternational.com',
+          email: 'info.vsdinternational@gmail.com',
           contactType: 'sales',
           areaServed: 'IN',
           availableLanguage: ['en', 'hi'],
@@ -456,10 +456,10 @@ const homePageSchema = {
         height: 630,
       },
       description:
-        'ISO 9001 certified commercial kitchen equipment manufacturer in Delhi. Turnkey supply, fabrication, design, installation & AMC for hotels, hospitals & cloud kitchens across India. 500+ projects since 2019.',
+        'ISO 9001 certified commercial kitchen equipment manufacturer in Delhi. Turnkey supply, fabrication, design, installation & AMC for hotels, hospitals & cloud kitchens across India. 500+ projects since 2009.',
       breadcrumb: { '@id': 'https://vsdinternational.com/#breadcrumb' },
       inLanguage: 'en-IN',
-      datePublished: '2019-01-01T00:00:00+05:30',
+      datePublished: '2009-01-01T00:00:00+05:30',
       dateModified: '2026-06-14T00:00:00+05:30',
       potentialAction: {
         '@type': 'ReadAction',
@@ -675,6 +675,7 @@ export default function HomePage() {
 
 
         <CTABanner />
+        
       </main>
 
 
@@ -871,7 +872,7 @@ function GoogleReviewsSection() {
                 marginBottom: '1.75rem',
               }}
             >
-              {['ISO 9001 Certified', '7+ Years Active', 'Pan-India Delivery'].map((label) => (
+              {['ISO 9001 Certified', '15+ Years Active', 'Pan-India Delivery'].map((label) => (
                 <span
                   key={label}
                   style={{

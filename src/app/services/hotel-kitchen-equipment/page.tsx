@@ -12,6 +12,7 @@ import BrandsGrid         from '@/components/services/BrandsGrid';
 import type { Brand }     from '@/components/services/BrandsGrid';
 import CitiesGrid         from '@/components/services/CitiesGrid';
 import ServiceCTA         from '@/components/services/ServiceCTA';
+import QuickLinksNav      from '@/components/services/QuickLinksNav';
 
 /* ─── Meta ──────────────────────────────────────────────────────────────── */
 export const metadata: Metadata = {
@@ -117,20 +118,38 @@ const WHY_VSD = [
 ];
 
 /* ─── §5 Price Guide ─────────────────────────────────────────────────────── */
+const PRICE_GUIDE_COLUMNS = [
+  'Hotel Type',
+  'Typical Scope',
+  'Outlets & Covers',
+  'Key Equipment Included',
+  'Installation Timeline',
+  'Indicative Price Range',
+];
+
 const PRICE_GUIDE = [
   {
     type: 'Boutique / Small Hotel',
     scope: 'Single main kitchen + limited cold chain',
+    outlets: '1 outlet · up to 60 covers',
+    equipment: 'Combi oven, 2-burner range, under-counter fridge, prep tables, SS worktables',
+    timeline: '15 – 21 days',
     range: '₹12 – 25 lakh',
   },
   {
     type: 'Business / 4-Star',
     scope: 'Main + banquet + cold kitchen + warewash',
+    outlets: '2 outlets · up to 150 covers',
+    equipment: 'Combi oven, tilting bratt pan, walk-in cold room, rack-conveyor dishwasher',
+    timeline: '21 – 30 days',
     range: '₹25 – 60 lakh',
   },
   {
     type: '5-Star / Luxury',
     scope: 'Multi-outlet: main, banquet, bakery, specialty, staff',
+    outlets: '4+ outlets · 300+ covers',
+    equipment: 'Multiple combi ovens, bulk cookers, blast chiller, bakery line, full SS fabrication',
+    timeline: '30 – 45 days',
     range: '₹60 lakh – ₹2 crore+',
   },
 ];
@@ -144,6 +163,61 @@ const HOTEL_BRANDS: Brand[] = [
   { name: 'Scotsman',       tagline: 'Ice machines',                   slug: 'scotsman'       },
   { name: 'BUNN',           tagline: 'Beverage equipment',             slug: 'bunn'           },
   { name: 'Hatco',          tagline: 'Holding & warming',              slug: 'hatco'          },
+];
+
+/* ─── Quick Links — "On This Page" jump-link nav ─────────────────────────── */
+/* Order mirrors document order; href ids must match the target section's id. */
+const QUICK_LINKS = [
+  {
+    href: '#kitchen-equipment-zones',
+    label: 'Kitchen Equipment Range',
+    sub: 'Production · Banquet · Bakery · Cold',
+  },
+  {
+    href: '#hotels-we-equip',
+    label: 'Hotels We Equip',
+    sub: '5-Star · Business · Boutique · Resorts',
+  },
+  {
+    href: '#why-choose-vsd',
+    label: 'Why Choose VSD',
+    sub: '5-Star Spec · Turnkey · AMC',
+  },
+  {
+    href: '#price-guide',
+    label: 'Price Guide',
+    sub: '₹12 Lakh – ₹2 Crore+',
+  },
+  {
+    href: '#hotel-projects',
+    label: 'Featured Projects',
+    sub: 'Hyatt · Radisson · ITC',
+  },
+  {
+    href: '#international-brands',
+    label: 'International Brands',
+    sub: 'Rational · Robot Coupe · Frymaster',
+  },
+  {
+    href: '#cities-we-serve',
+    label: 'Cities We Serve',
+    sub: 'Delhi · Mumbai · Bangalore & more',
+  },
+  {
+    href: '#client-testimonials',
+    label: 'Client Reviews',
+    sub: 'Hyatt Regency Delhi',
+  },
+  {
+    href: '#faqs',
+    label: 'FAQs',
+    sub: '51 answers on pricing & process',
+  },
+  {
+    href: '#get-a-quote',
+    label: 'Get a Free Quote',
+    sub: 'Free site visit · 24-hr plan',
+  },
 ];
 
 /* ─── §9 Testimonial ─────────────────────────────────────────────────────── */
@@ -160,36 +234,208 @@ const TESTIMONIAL = {
 /* ─── §10 FAQs (AEO — answer-first, unique to this page) ────────────────── */
 const FAQS = [
   {
-    q: 'How much does it cost to set up a hotel kitchen in India?',
-    a: 'A complete hotel kitchen in India typically ranges from about ₹12–25 lakh for a boutique property to ₹60 lakh–₹2 crore or more for a full five-star kitchen. The figure depends on the number of outlets, banquet capacity, the share of imported equipment and how much custom stainless-steel fabrication is involved. VSD provides an itemised price list after a free site visit — for reference, our four-zone Hyatt Regency Delhi kitchen was delivered for ₹42 lakh.',
+    q: "How much does it cost to set up a hotel kitchen in India?",
+    a: "A complete hotel kitchen in India typically ranges from about ₹12–25 lakh for a boutique property to ₹60 lakh–₹2 crore or more for a full five-star kitchen. The figure depends on the number of outlets, banquet capacity, the share of imported equipment and the amount of custom stainless-steel fabrication. VSD provides an itemised price list after a free site visit — for reference, our four-zone Hyatt Regency Delhi kitchen was delivered for ₹42 lakh.",
   },
   {
-    q: 'How long does a hotel kitchen installation take?',
-    a: 'Most hotel kitchen projects are completed in 21 to 45 days from order to commissioning, scaling with the number of outlets and the amount of custom fabrication. A single-kitchen refit can be faster, while a multi-outlet five-star build runs toward the upper end. VSD commissioned the complete four-zone kitchen at Hyatt Regency Delhi in 21 days, and confirms a fixed timeline at the proposal stage.',
+    q: "What does a 5-star hotel kitchen cost compared with a 4-star?",
+    a: "A five-star hotel kitchen generally costs ₹60 lakh to ₹2 crore-plus, while a 4-star or business hotel kitchen typically falls in the ₹25–60 lakh range. The difference comes from more outlets, larger banquet capacity, a higher share of imported equipment and finer finishing standards. VSD specifies each kitchen to its star-grade brief rather than over- or under-building.",
   },
   {
-    q: 'What is included in a turnkey hotel kitchen project?',
-    a: 'A turnkey hotel kitchen covers everything from design to handover under one contract: site assessment, CAD layout, equipment manufacturing and supply, custom SS fabrication, installation, commissioning, staff training and post-installation AMC. This single-vendor model means one team is accountable for the whole kitchen, rather than coordinating separate designers, fabricators and equipment suppliers.',
+    q: "How much should a boutique hotel budget for its kitchen?",
+    a: "A boutique or small hotel can usually equip a single main kitchen with a limited cold chain for around ₹12–25 lakh. Compact properties save by combining functions into fewer, well-chosen units rather than duplicating large-format equipment. We design boutique kitchens to fit constrained or heritage spaces without paying for capacity they won't use.",
   },
   {
-    q: 'What equipment does a 5-star hotel kitchen need?',
-    a: 'A five-star hotel kitchen needs a main production line (combi ovens, ranges, fryers, salamanders), a banquet kitchen (bulk cookers, bain maries, hot-holding), bakery and pastry equipment, a full cold chain (walk-in cold rooms, blast chillers), banquet-scale warewashing, and custom SS fabrication. The exact mix depends on the number of outlets and covers. VSD plans and equips all of these zones as one integrated kitchen.',
+    q: "What share of a hotel kitchen budget goes to imported equipment?",
+    a: "Imported equipment usually accounts for roughly 25–45% of a hotel kitchen budget, concentrated in combi ovens, fryers, ice machines and prep machines where engineering matters most. The remainder is custom stainless-steel fabrication and domestic equipment. Because VSD both manufactures and imports, we help balance the two so you pay for imports only where they earn their cost.",
   },
   {
-    q: 'Is your hotel kitchen equipment FSSAI and HACCP compliant?',
-    a: 'Yes — VSD designs and equips hotel kitchens to align with FSSAI hygiene norms and HACCP food-safety principles, using food-safe SS 304 surfaces, correct zoning and a cold chain that supports temperature control. Compliant layout, materials and ventilation are planned from the design stage so the kitchen supports audits rather than working against them.',
+    q: "Does banquet capacity change the kitchen cost significantly?",
+    a: "Yes — banquet capacity is one of the biggest cost drivers in a hotel kitchen, because high-volume bulk cooking, hot-holding and warewashing scale with the number of covers. A property with large banquet halls needs bulk cookers, tilting braising pans and bigger dishwashing lines that a rooms-only hotel does not. We size the banquet kitchen to your real event load.",
   },
   {
-    q: 'Why choose a manufacturer over a dealer for a hotel kitchen?',
-    a: 'A manufacturer can build equipment to your exact kitchen rather than forcing standard sizes, offer factory pricing on fabrication, and stand behind the whole kitchen — while a pure dealer only forwards equipment from others. VSD is both: we manufacture custom SS work in our Delhi facilities and supply authorised imported brands, so you get bespoke fit, fair pricing and one accountable partner for design, supply, install and service.',
+    q: "Can you reduce hotel kitchen costs without lowering quality?",
+    a: "Yes — the main levers are using custom fabrication instead of imported equivalents where performance is identical, right-sizing capacity to actual covers, and standardising on fewer equipment platforms. Because we manufacture in-house, we can substitute factory-built stainless steel for marked-up imported units where it makes no difference to the result, then reserve budget for the equipment that genuinely needs a global brand.",
   },
   {
-    q: 'Do you provide warranty and AMC for hotel kitchen equipment?',
-    a: "Yes — manufactured equipment carries a workmanship warranty and imported equipment carries the manufacturer's warranty, both backed by VSD's Annual Maintenance Contracts. An AMC covers preventive maintenance, genuine spare parts and priority engineer response — essential for hotels, where kitchen downtime across multiple outlets is costly. Exact terms are confirmed in your proposal.",
+    q: "Do you provide an itemised hotel kitchen price list?",
+    a: "Yes — after a free site visit we provide a fully itemised hotel kitchen price list covering every zone, unit, capacity and brand, so there are no hidden costs. The indicative ranges on this page help with early planning, while the detailed quotation lets your finance and procurement teams evaluate line by line.",
   },
   {
-    q: 'Which hotels has VSD International worked with?',
-    a: 'VSD has delivered hotel kitchen projects for leading properties including Hyatt Regency Delhi, Radisson Blu Kaushambi, Crowne Plaza Rohini and ITC Welcomhotel Dwarka. This documented five-star portfolio — spanning main production, banquet, bakery and cold kitchens — is difficult for equipment-only competitors to match and is available to review on our projects page.',
+    q: "How long does a hotel kitchen installation take?",
+    a: "Most hotel kitchen projects are completed in 21 to 45 days from order to commissioning, scaling with the number of outlets and the amount of custom fabrication. A single-kitchen refit can be faster, while a multi-outlet five-star build runs toward the upper end. VSD commissioned the complete four-zone kitchen at Hyatt Regency Delhi in 21 days and confirms a fixed timeline at the proposal stage.",
+  },
+  {
+    q: "What is the step-by-step process for a hotel kitchen project?",
+    a: "A hotel kitchen project follows six stages: free site visit, CAD layout design, equipment selection, supply and delivery, installation and commissioning, and ongoing AMC. You approve the layout and equipment list before any order is placed, so scope, cost and timeline are agreed up front and there are no surprises during the build.",
+  },
+  {
+    q: "Can you deliver a hotel kitchen without shutting down operations?",
+    a: "Yes — for live properties we phase the work so sections are replaced while the rest of the kitchen keeps running, and we schedule disruptive activities around service hours. The Hyatt Regency overhaul was completed in 21 days without halting operations. We plan the sequence with your F&B team so banquet and restaurant service continues throughout.",
+  },
+  {
+    q: "Do you provide a CAD layout before we commit?",
+    a: "Yes — we provide a CAD-based kitchen layout as part of the proposal, before any order is placed. It maps equipment placement, workflow, utilities and ventilation against your covers and menu, so your team can review and adjust the design before committing budget.",
+  },
+  {
+    q: "Can the installation be phased across renovation stages?",
+    a: "Yes — we can phase supply and installation to match a hotel's renovation or pre-opening schedule, delivering zones such as main, banquet, bakery and cold kitchen in sequence. This keeps the kitchen build aligned with civil and MEP progress and spreads cost across project milestones.",
+  },
+  {
+    q: "Do you handle installation and commissioning, or only supply?",
+    a: "VSD handles complete installation and commissioning, not just supply — certified engineers position, connect, test and commission every unit, train your team and provide a formal handover. This single-vendor turnkey model is what distinguishes a manufacturer-led partner from a reseller who only ships equipment.",
+  },
+  {
+    q: "What equipment does a 5-star hotel kitchen need?",
+    a: "A five-star hotel kitchen needs a main production line (combi ovens, ranges, fryers, salamanders), a banquet kitchen (bulk cookers, bain maries, hot-holding), bakery and pastry equipment, a full cold chain (walk-in cold rooms, blast chillers), banquet-scale warewashing and custom stainless-steel fabrication. The exact mix depends on outlets and covers; VSD plans and equips all of these zones as one integrated kitchen.",
+  },
+  {
+    q: "What goes into a hotel banquet kitchen specifically?",
+    a: "A hotel banquet kitchen centres on high-volume bulk cooking and hot-holding: bulk cookers and rice boilers, tilting braising pans, bain maries, hot cases and foodservice trolleys, supported by enough cold storage and warewashing for peak event load. It is engineered to plate large covers quickly without losing temperature or quality.",
+  },
+  {
+    q: "What refrigeration and cold-chain does a hotel need?",
+    a: "A hotel typically needs walk-in cold rooms and freezers, blast chillers, under-counter and vertical units and display chillers — sized to storage volume, menu and HACCP requirements. The cold chain keeps raw and prepared food within safe temperatures across multiple outlets. VSD designs the cold chain as an integrated part of the kitchen rather than an add-on.",
+  },
+  {
+    q: "What warewashing setup suits a hotel kitchen?",
+    a: "Hotels generally need hood-type or rack-conveyor dishwashers with pre-rinse stations, pot-wash units and grease traps, sized to banquet-scale throughput. The right machine depends on peak covers and turnaround speed. We specify warewashing that clears event and restaurant volumes without becoming a service bottleneck.",
+  },
+  {
+    q: "Do you supply hotel bakery and pastry equipment?",
+    a: "Yes — we supply and install deck and rotary rack ovens, planetary and spiral mixers, dough sheeters, proofers and chocolate equipment for in-house hotel bakery and patisserie. Equipment is matched to the property's bakery output and product range.",
+  },
+  {
+    q: "What cooking equipment is essential for all-day dining?",
+    a: "An all-day-dining kitchen needs versatile high-output equipment: combi ovens, gas or induction ranges, griddles, salamanders, deep fryers and tilting bratt pans that handle multiple cuisines across long service hours. We specify a line that covers à-la-carte, buffet and room-service demand from one production kitchen.",
+  },
+  {
+    q: "Do you supply pantry and room-service kitchen equipment?",
+    a: "Yes — we equip hotel pantries and room-service kitchens with compact cooking, beverage, holding and refrigeration units suited to fast, around-the-clock output. These satellite kitchens are designed to deliver quickly to rooms and lounges without the footprint of the main kitchen.",
+  },
+  {
+    q: "Do you supply bar and beverage equipment for hotels?",
+    a: "Yes — we supply back-bar chillers, ice machines, glass washers, beverage dispensers and coffee equipment for hotel bars and lounges, including authorised brands such as Scotsman and BUNN. Bar equipment is specified alongside the main kitchen so utilities and layout are coordinated.",
+  },
+  {
+    q: "What is the difference between à-la-carte and banquet kitchen equipment?",
+    a: "À-la-carte kitchens favour flexible, precise equipment for made-to-order dishes, while banquet kitchens favour bulk-capacity equipment for plating hundreds of covers at once. A hotel usually needs both, sized differently. We design each zone for its job rather than forcing one line to do everything.",
+  },
+  {
+    q: "Do you supply commercial tandoors and Indian-cuisine equipment for hotels?",
+    a: "Yes — we manufacture commercial tandoors, bulk cookers, dosa plates and other India-specific equipment in-house, alongside global brands. Indian and multi-cuisine hotel kitchens get authentic, high-output equipment built for daily volume, matched to the rest of the production line.",
+  },
+  {
+    q: "How do you size a hotel kitchen for the number of rooms or covers?",
+    a: "We size a hotel kitchen from its real demand — number of rooms, restaurant covers, banquet capacity and menu complexity — then translate that into equipment capacity per zone. Over-sizing wastes capital and space; under-sizing throttles service. The CAD layout stage matches each unit's throughput to your peak load.",
+  },
+  {
+    q: "How much space does a hotel kitchen need?",
+    a: "Hotel kitchen space depends on outlets and covers, but the priority is workflow, not just area — clear zones for prep, cooking, plating, warewashing and cold storage with safe, hygienic flow. Custom fabrication lets us fit a fully functional kitchen into constrained or irregular spaces, which matters in boutique and heritage properties.",
+  },
+  {
+    q: "How many combi ovens does a hotel kitchen need?",
+    a: "The number of combi ovens depends on covers and menu, but a mid-size hotel often runs one to three, with banquet-heavy properties using more or larger units. We calculate combi capacity against peak production rather than applying a fixed rule, so you neither queue food nor pay for idle ovens.",
+  },
+  {
+    q: "Can the kitchen scale as the hotel adds outlets?",
+    a: "Yes — we design hotel kitchens with expansion in mind, so utilities, ventilation and layout can support added outlets or higher covers later. Equipment platforms are chosen so capacity can grow without ripping out and replacing the core kitchen.",
+  },
+  {
+    q: "Which stainless steel grade do you use for hotel kitchens?",
+    a: "We use food-grade SS 304 as standard for hotel kitchens because it resists corrosion and is hygienic for daily five-star service, with SS 316 available for high-moisture or coastal environments. Grade is matched to each zone — for example tougher specifications for wet and warewashing areas.",
+  },
+  {
+    q: "Why is custom fabrication better than standard-size equipment for hotels?",
+    a: "Custom fabrication lets equipment be built to the exact footprint, workflow and utilities of your kitchen rather than forcing the kitchen to fit standard sizes — which matters in hotels with irregular or heritage spaces. Because VSD fabricates in its own Delhi facilities, worktables, hoods, sinks and counters match the CAD layout precisely, with no gaps or compromises.",
+  },
+  {
+    q: "Do you fabricate exhaust hoods for hotel kitchens?",
+    a: "Yes — we design and fabricate stainless-steel baffle-filter exhaust hoods sized to your cooking load and fire code, with the ducting and fresh-air balance planned as part of the layout. Correct hood sizing is essential for heat, grease and smoke removal and for passing fire and hygiene inspections.",
+  },
+  {
+    q: "Can you match fabrication to an existing hotel kitchen's layout?",
+    a: "Yes — for renovations we measure the existing space and fabricate replacement worktables, hoods, sinks and shelving to fit the current footprint and any retained equipment. This lets a hotel upgrade in stages without rebuilding the whole kitchen at once.",
+  },
+  {
+    q: "Which international brands do you supply for hotel kitchens?",
+    a: "We are an authorised dealer for leading global brands hotels specify, including Rational combi ovens, Robot Coupe food processors, Frymaster fryers, Hamilton Beach blenders, Scotsman ice machines, BUNN beverage equipment and Hatco holding equipment. All imports come with manufacturer warranty and our own in-country service support.",
+  },
+  {
+    q: "Are you an authorised Rational dealer for hotel kitchens?",
+    a: "Yes — VSD is an authorised Rational dealer in India and regularly specifies Rational combi ovens for hotel production and banquet kitchens. Authorised dealership means genuine equipment, valid warranty, correct installation and trained support — not grey-market imports.",
+  },
+  {
+    q: "Do imported units come with warranty and service in India?",
+    a: "Yes — imported hotel equipment carries the manufacturer's warranty and is backed by VSD's local service and spare-parts support, so a property is never left waiting on overseas service. Authorised imports plus in-country AMC are why hotels choose a single accountable partner over direct importing.",
+  },
+  {
+    q: "Can you supply the brands our hotel chain has standardised on?",
+    a: "Yes — where a hotel group has standardised on particular equipment brands, we supply and install to that specification across properties, combining the required imports with our custom fabrication. This keeps a chain's kitchens consistent while still fitting each property's space.",
+  },
+  {
+    q: "Do you supply Robot Coupe and Frymaster for hotel kitchens?",
+    a: "Yes — we supply Robot Coupe food-preparation machines and Frymaster fryers as an authorised dealer, both common in high-volume hotel kitchens. They are specified alongside the rest of the production line so capacity and workflow stay balanced.",
+  },
+  {
+    q: "Is your hotel kitchen equipment FSSAI and HACCP compliant?",
+    a: "Yes — VSD designs and equips hotel kitchens to align with FSSAI hygiene norms and HACCP food-safety principles, using food-safe SS 304 surfaces, correct zoning and a temperature-controlled cold chain. Compliant layout, materials and ventilation are planned from the design stage so the kitchen supports audits rather than working against them.",
+  },
+  {
+    q: "Do you meet star-rating classification requirements for hotel kitchens?",
+    a: "Yes — we build hotel kitchens to the specification and hygiene standards expected for star-rated properties, including the equipment quality, finishes and segregation that classification and brand audits look for. We design to the brief your brand standard or classification sets.",
+  },
+  {
+    q: "Do you handle kitchen fire-safety and exhaust compliance?",
+    a: "Yes — exhaust hoods, ducting and fresh-air systems are sized to the cooking load and fire code, which is essential for passing fire inspections and controlling heat and air quality. We plan fire-safety-relevant ventilation as an integral part of the kitchen, not a later add-on.",
+  },
+  {
+    q: "Can you build a kitchen that supports our hygiene audits?",
+    a: "Yes — we design hotel kitchens around cleanability and segregation: corrosion-resistant SS 304 surfaces, suitable finishes, clear raw-to-cooked flow and a cold chain that holds safe temperatures. The result is a kitchen built to pass routine hygiene and brand audits rather than to scramble before them.",
+  },
+  {
+    q: "Do you provide documentation for hotel licensing and audits?",
+    a: "Yes — we provide equipment specifications, layouts and compliance-relevant documentation that support FSSAI licensing, brand audits and procurement records. Proper documentation is part of the handover, which matters for tendered and chain-managed properties.",
+  },
+  {
+    q: "Do you equip resort kitchens in remote locations?",
+    a: "Yes — we equip resort kitchens, including multi-outlet operations in remote or hill locations where reliable supply and service matter most. We plan equipment durability, spare-parts availability and AMC coverage around the location so a remote resort is not left without support.",
+  },
+  {
+    q: "Can you equip a heritage or boutique hotel with limited space?",
+    a: "Yes — boutique and heritage hotels are a particular strength, because in-house custom fabrication lets us fit a fully functional kitchen into constrained, irregular or listed spaces. We combine functions into fewer well-chosen units so a small footprint still delivers full service.",
+  },
+  {
+    q: "Do you work with hotel chains across multiple properties?",
+    a: "Yes — we work with hotel groups across multiple properties, supplying to a consistent specification while adapting each kitchen to its building. Centralised specification with local fabrication keeps a chain's kitchens uniform without forcing identical layouts into different spaces.",
+  },
+  {
+    q: "Which hotels has VSD International worked with?",
+    a: "VSD has delivered hotel kitchen projects for leading properties including Hyatt Regency Delhi, Radisson Blu Kaushambi, Crowne Plaza Rohini and ITC Welcomhotel Dwarka. This documented portfolio — spanning main production, banquet, bakery and cold kitchens — is difficult for equipment-only competitors to match and can be reviewed on our projects page.",
+  },
+  {
+    q: "Do you provide warranty and AMC for hotel kitchen equipment?",
+    a: "Yes — manufactured equipment carries a workmanship warranty and imported equipment carries the manufacturer's warranty, both backed by VSD's Annual Maintenance Contracts. An AMC covers preventive maintenance, genuine spare parts and priority engineer response — important for hotels, where downtime across multiple outlets is costly.",
+  },
+  {
+    q: "How fast is your service response for a hotel?",
+    a: "Our AMC clients receive priority response with dedicated service engineers and a support hotline, because hotel kitchen downtime directly affects service and revenue. Response commitments are set in the AMC, and Delhi NCR properties benefit from our local engineering team.",
+  },
+  {
+    q: "What is the typical lifespan of hotel kitchen equipment?",
+    a: "Well-specified hotel kitchen equipment generally lasts 8 to 15 years with regular maintenance, and custom stainless-steel fabrication often outlasts powered units. An AMC — preventive maintenance, genuine parts and engineer visits — is designed to protect that lifespan and avoid premature replacement.",
+  },
+  {
+    q: "Can we visit your factory or a reference hotel project?",
+    a: "Yes — prospective clients are welcome to visit our Delhi facilities to see fabrication quality first-hand, and where possible we can arrange reference visits or share project documentation. Seeing the build quality is the best way to verify a partner before a major hotel project.",
+  },
+  {
+    q: "Do you provide GST invoicing and procurement documentation?",
+    a: "Yes — VSD provides proper GST invoicing and the specifications, quotations and documentation that hotel procurement and tender processes require. This suits chain-managed and corporately owned properties that need line-item records for approvals.",
+  },
+  {
+    q: "How do we get a quote for our hotel kitchen?",
+    a: "Share your property type, number of outlets and approximate covers by phone or WhatsApp at +91-9250346370, or through the enquiry form, and we'll arrange a free site visit. You'll receive a tailored equipment plan, CAD layout and itemised price list, typically within 24 hours of the visit.",
   },
 ];
 
@@ -204,6 +450,20 @@ const schema = {
         { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://vsdinternational.com/services/' },
         { '@type': 'ListItem', position: 3, name: 'Hotel Kitchen Equipment', item: 'https://vsdinternational.com/services/hotel-kitchen-equipment/' },
       ],
+    },
+    {
+      '@type': 'ItemList',
+      '@id': 'https://vsdinternational.com/services/hotel-kitchen-equipment/#page-sections',
+      name: 'Hotel Kitchen Equipment Page Sections',
+      description: 'Key sections of the hotel kitchen equipment page covering equipment zones, hotel types served, pricing, projects, brands, reviews, FAQs and cities served.',
+      numberOfItems: QUICK_LINKS.length,
+      itemListElement: QUICK_LINKS.map((link, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: link.label,
+        url: `https://vsdinternational.com/services/hotel-kitchen-equipment/${link.href}`,
+        description: link.sub,
+      })),
     },
     {
       '@type': 'Service',
@@ -262,12 +522,9 @@ export default function HotelKitchenEquipmentPage() {
 
       {/* ── §1 Hero ───────────────────────────────────────────────────────── */}
       <section
-        className="grain-overlay"
+        className="grain-overlay hotel-hero"
         style={{
           background: 'var(--charcoal-warm)',
-          height: '90vh',
-          maxHeight: '900px',
-          minHeight: '560px',
           position: 'relative',
           borderBottom: '1px solid rgba(201,168,76,0.15)',
           display: 'flex',
@@ -520,8 +777,11 @@ export default function HotelKitchenEquipmentPage() {
         </div>
       </section>
 
+      {/* ── Quick Links — "On This Page" jump-link nav (Google Jump Links signal) ── */}
+      <QuickLinksNav links={QUICK_LINKS} />
+
       {/* ── §2 Hotel Kitchen Equipment Range ─────────────────────────────── */}
-      <section aria-labelledby="range-heading" style={{ background: '#FFFFFF', padding: '5.5rem 0' }}>
+      <section id="kitchen-equipment-zones" aria-labelledby="range-heading" style={{ background: '#FFFFFF', padding: 'clamp(3rem, 8vw, 5.5rem) 0' }}>
         <div className="container mx-auto" style={{ maxWidth: '80rem', padding: '0 1.25rem' }}>
           <div style={{ textAlign: 'center', marginBottom: '3.25rem' }}>
             <p className="section-label" style={{ marginBottom: '0.75rem' }}>Hotel Kitchen Zones</p>
@@ -609,10 +869,11 @@ export default function HotelKitchenEquipmentPage() {
 
       {/* ── §3 Hotels We Equip ───────────────────────────────────────────── */}
       <section
+        id="hotels-we-equip"
         aria-labelledby="hotels-heading"
         style={{
           background: 'var(--surface)',
-          padding: '4.5rem 0',
+          padding: 'clamp(3rem, 8vw, 4.5rem) 0',
           borderTop: '1px solid var(--border)',
         }}
       >
@@ -698,11 +959,12 @@ export default function HotelKitchenEquipmentPage() {
 
       {/* ── §4 Why Hotels Choose VSD ─────────────────────────────────────── */}
       <section
+        id="why-choose-vsd"
         aria-labelledby="why-heading"
         className="grain-overlay"
         style={{
           background: 'var(--charcoal-light)',
-          padding: '5.5rem 0',
+          padding: 'clamp(3rem, 8vw, 5.5rem) 0',
           borderTop: '1px solid rgba(201,168,76,0.1)',
         }}
       >
@@ -751,8 +1013,9 @@ export default function HotelKitchenEquipmentPage() {
 
       {/* ── §5 Price Guide ────────────────────────────────────────────────── */}
       <section
+        id="price-guide"
         aria-labelledby="price-heading"
-        style={{ background: '#FFFFFF', padding: '5.5rem 0', borderTop: '1px solid var(--border)' }}
+        style={{ background: '#FFFFFF', padding: 'clamp(3rem, 8vw, 5.5rem) 0', borderTop: '1px solid var(--border)' }}
       >
         <div className="container mx-auto" style={{ maxWidth: '80rem', padding: '0 1.25rem' }}>
           <div style={{ maxWidth: '820px' }}>
@@ -787,31 +1050,33 @@ export default function HotelKitchenEquipmentPage() {
               }}
             >
               Hotel kitchen budgets are driven by the number of outlets, banquet capacity, the share of imported
-              equipment and how much custom stainless-steel fabrication is involved. The indicative ranges below
-              help you plan; we provide an itemised price list after a free site visit.
+              equipment and how much custom stainless-steel fabrication is involved. The table below breaks down
+              typical scope, outlets and covers, key equipment included and installation timeline by hotel tier;
+              we provide a fully itemised price list after a free site visit.
             </p>
           </div>
 
           {/* Price table */}
-          <div style={{ maxWidth: '820px', border: '1px solid var(--border)', borderRadius: 12, overflow: 'hidden' }}>
-            {/* Table header */}
+          <div style={{ border: '1px solid var(--border)', borderRadius: 12, overflow: 'hidden' }}>
+            {/* Table header — hidden below lg, rows become labelled cards instead */}
             <div
-              className="grid grid-cols-3"
+              className="hidden lg:grid lg:grid-cols-[0.9fr_1.2fr_0.8fr_1.6fr_0.8fr_0.9fr] lg:gap-4"
               style={{
                 background: 'var(--charcoal)',
                 padding: '1rem 1.5rem',
               }}
             >
-              {['Hotel Type', 'Typical Scope', 'Indicative Range'].map(h => (
+              {PRICE_GUIDE_COLUMNS.map(h => (
                 <span
                   key={h}
                   style={{
                     fontFamily: 'var(--font-inter)',
-                    fontSize: '0.75rem',
+                    fontSize: '0.6875rem',
                     fontWeight: 700,
-                    letterSpacing: '0.1em',
+                    letterSpacing: '0.08em',
                     textTransform: 'uppercase',
                     color: 'rgba(245,240,232,0.5)',
+                    lineHeight: 1.3,
                   }}
                 >
                   {h}
@@ -819,10 +1084,10 @@ export default function HotelKitchenEquipmentPage() {
               ))}
             </div>
             {/* Rows */}
-            {PRICE_GUIDE.map(({ type, scope, range }, i) => (
+            {PRICE_GUIDE.map(({ type, scope, outlets, equipment, timeline, range }, i) => (
               <div
                 key={type}
-                className="grid grid-cols-3 items-center"
+                className="grid grid-cols-1 gap-2 lg:grid-cols-[0.9fr_1.2fr_0.8fr_1.6fr_0.8fr_0.9fr] lg:gap-4 lg:items-start"
                 style={{
                   padding: '1.25rem 1.5rem',
                   background: i % 2 === 0 ? '#FFFFFF' : 'var(--surface)',
@@ -835,6 +1100,30 @@ export default function HotelKitchenEquipmentPage() {
                 <span style={{ fontFamily: 'var(--font-inter)', fontSize: '0.875rem', color: 'var(--text-body)', lineHeight: 1.5 }}>
                   {scope}
                 </span>
+                <div>
+                  <span className="lg:hidden" style={{ display: 'block', fontFamily: 'var(--font-inter)', fontSize: '0.6875rem', fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '0.15rem' }}>
+                    Outlets &amp; Covers
+                  </span>
+                  <span style={{ fontFamily: 'var(--font-inter)', fontSize: '0.875rem', color: 'var(--text-body)', lineHeight: 1.5 }}>
+                    {outlets}
+                  </span>
+                </div>
+                <div>
+                  <span className="lg:hidden" style={{ display: 'block', fontFamily: 'var(--font-inter)', fontSize: '0.6875rem', fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '0.15rem' }}>
+                    Key Equipment Included
+                  </span>
+                  <span style={{ fontFamily: 'var(--font-inter)', fontSize: '0.875rem', color: 'var(--text-body)', lineHeight: 1.5 }}>
+                    {equipment}
+                  </span>
+                </div>
+                <div>
+                  <span className="lg:hidden" style={{ display: 'block', fontFamily: 'var(--font-inter)', fontSize: '0.6875rem', fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '0.15rem' }}>
+                    Installation Timeline
+                  </span>
+                  <span style={{ fontFamily: 'var(--font-inter)', fontSize: '0.875rem', color: 'var(--text-body)', lineHeight: 1.5 }}>
+                    {timeline}
+                  </span>
+                </div>
                 <span style={{ fontFamily: 'var(--font-playfair)', fontWeight: 800, fontSize: '1rem', color: 'var(--gold)' }}>
                   {range}
                 </span>
@@ -862,8 +1151,9 @@ export default function HotelKitchenEquipmentPage() {
 
       {/* ── §6 Featured Project & Clients ────────────────────────────────── */}
       <section
+        id="hotel-projects"
         aria-labelledby="project-heading"
-        style={{ background: 'var(--surface)', padding: '5rem 0', borderTop: '1px solid var(--border)' }}
+        style={{ background: 'var(--surface)', padding: 'clamp(3rem, 8vw, 5rem) 0', borderTop: '1px solid var(--border)' }}
       >
         <div className="container mx-auto" style={{ maxWidth: '80rem', padding: '0 1.25rem' }}>
           <p className="section-label" style={{ marginBottom: '0.75rem' }}>Portfolio</p>

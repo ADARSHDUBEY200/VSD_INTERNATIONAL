@@ -2,11 +2,11 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowRight, Clock, Calendar, ChevronRight, Home, User, MessageCircle } from 'lucide-react';
-import { BLOG_POSTS, CATEGORIES, getPostBySlug, getPostsByCategory } from '@/lib/blog';
+import { BLOG_POSTS, getPostBySlug, getPostsByCategory } from '@/lib/blog';
 
 /* ─── Static Params ─────────────────────────────────────────────────────── */
 interface Props {
-  params: Promise<{ category: string; slug: string }>;
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = getPostBySlug(slug);
   if (!post) return {};
 
-  const canonicalUrl = `https://vsdinternational.com/blog/${post.category}/${post.slug}/`;
+  const canonicalUrl = `https://vsdinternational.com/blog/${post.slug}/`;
   return {
     title: post.headline,
     description: post.metaDescription,
@@ -107,13 +107,12 @@ const RELATED_POSTS_SLUGS = [
 
 /* ─── Page Component ─────────────────────────────────────────────────────── */
 export default async function BlogPostPage({ params }: Props) {
-  const { category, slug } = await params;
+  const { slug } = await params;
   const post = getPostBySlug(slug);
-  if (!post || post.category !== category) notFound();
+  if (!post) notFound();
 
-  const cat = CATEGORIES[category];
-  const canonicalUrl = `https://vsdinternational.com/blog/${post.category}/${post.slug}/`;
-  const relatedPosts = getPostsByCategory(category).filter((p) => RELATED_POSTS_SLUGS.includes(p.slug));
+  const canonicalUrl = `https://vsdinternational.com/blog/${post.slug}/`;
+  const relatedPosts = getPostsByCategory(post.category).filter((p) => RELATED_POSTS_SLUGS.includes(p.slug));
 
   /* ── JSON-LD Schema @graph ──────────────────────────────────────────────── */
   const schemaGraph = {
@@ -170,8 +169,7 @@ export default async function BlogPostPage({ params }: Props) {
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://vsdinternational.com' },
           { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://vsdinternational.com/blog/' },
-          { '@type': 'ListItem', position: 3, name: post.categoryLabel, item: `https://vsdinternational.com/blog/${post.category}/` },
-          { '@type': 'ListItem', position: 4, name: post.title, item: canonicalUrl },
+          { '@type': 'ListItem', position: 3, name: post.title, item: canonicalUrl },
         ],
       },
       /* 5 — FAQPage (RECOMMENDED — for AI extraction) */
@@ -219,8 +217,6 @@ export default async function BlogPostPage({ params }: Props) {
           <ChevronRight size={11} style={{ color: 'rgba(201,168,76,0.35)' }} aria-hidden="true" />
           <Link href="/blog/" style={{ color: 'rgba(245,240,232,0.45)', fontSize: '0.8125rem', fontFamily: 'var(--font-inter)' }}>Blog</Link>
           <ChevronRight size={11} style={{ color: 'rgba(201,168,76,0.35)' }} aria-hidden="true" />
-          <Link href={`/blog/${post.category}/`} style={{ color: 'rgba(245,240,232,0.45)', fontSize: '0.8125rem', fontFamily: 'var(--font-inter)' }}>{post.categoryLabel}</Link>
-          <ChevronRight size={11} style={{ color: 'rgba(201,168,76,0.35)' }} aria-hidden="true" />
           <span style={{ color: 'var(--gold)', fontSize: '0.8125rem', fontFamily: 'var(--font-inter)', fontWeight: 600, maxWidth: '280px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} aria-current="page" title={post.title}>
             {post.title}
           </span>
@@ -240,12 +236,11 @@ export default async function BlogPostPage({ params }: Props) {
             <header style={{ marginBottom: '2.5rem' }}>
               {/* Category badge */}
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.25rem', flexWrap: 'wrap' }}>
-                <Link
-                  href={`/blog/${post.category}/`}
-                  style={{ padding: '0.25rem 0.875rem', borderRadius: '100px', background: 'rgba(201,168,76,0.1)', border: '1px solid rgba(201,168,76,0.25)', fontSize: '0.6875rem', fontFamily: 'var(--font-inter)', fontWeight: 700, color: 'var(--gold-deep)', letterSpacing: '0.08em', textDecoration: 'none', textTransform: 'uppercase' }}
+                <span
+                  style={{ padding: '0.25rem 0.875rem', borderRadius: '100px', background: 'rgba(201,168,76,0.1)', border: '1px solid rgba(201,168,76,0.25)', fontSize: '0.6875rem', fontFamily: 'var(--font-inter)', fontWeight: 700, color: 'var(--gold-deep)', letterSpacing: '0.08em', textTransform: 'uppercase' }}
                 >
                   {post.categoryLabel}
-                </Link>
+                </span>
               </div>
 
               {/* H1 — one per page, contains primary keyword */}
@@ -928,9 +923,7 @@ export default async function BlogPostPage({ params }: Props) {
               </h2>
               <p style={{ fontFamily: 'var(--font-inter)', fontSize: '0.875rem', color: 'var(--text-muted)', marginBottom: '1.5rem' }}>
                 More guides from the{' '}
-                <Link href={`/blog/${post.category}/`} style={{ color: 'var(--gold-deep)', fontWeight: 600, textDecoration: 'none' }}>
-                  {post.categoryLabel} cluster
-                </Link>
+                <strong style={{ color: 'var(--text-dark)' }}>{post.categoryLabel} cluster</strong>
                 {' '}→ all linking to the{' '}
                 <Link href={post.pillarPage} style={{ color: 'var(--gold-deep)', fontWeight: 600, textDecoration: 'none' }}>
                   {post.pillarLabel}
@@ -941,7 +934,7 @@ export default async function BlogPostPage({ params }: Props) {
                 {relatedPosts.map((related) => (
                   <Link
                     key={related.slug}
-                    href={`/blog/${related.category}/${related.slug}/`}
+                    href={`/blog/${related.slug}/`}
                     className="card-lift group block rounded-xl overflow-hidden border"
                     style={{ borderColor: 'var(--border)', background: '#FFFFFF', textDecoration: 'none' }}
                   >

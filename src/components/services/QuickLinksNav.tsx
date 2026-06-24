@@ -1,79 +1,27 @@
 /**
- * HomepageQuickLinks — "On This Page" anchor navigation
+ * QuickLinksNav — "On This Page" anchor navigation for service pillar pages
+ *
+ * Same pattern as HomepageQuickLinks, generalised for /services/* pages so
+ * each one can register its own jump-link targets.
  *
  * SEO RULES ENFORCED:
  * 1. Pure server component — NO 'use client'. All links are in initial HTML for Googlebot.
  * 2. <nav aria-label="On this page"> — distinct landmark Google maps to Jump Links
  * 3. "On This Page" label uses <p>, NOT <h2>, so heading outline is unbroken
- * 4. Every label text matches the actual H2 of the target section
+ * 4. Every label text matches the actual H2/section heading of the target section
  * 5. <ol> because order mirrors document order — semantically correct for a TOC
  * 6. Layout is horizontal scroll — CSS only, HTML structure unchanged → SEO unaffected
+ * 7. Placed right after the hero, before any other content — same position Google
+ *    has already been seen to recognise on the homepage equivalent.
  */
 
-const LINKS: { href: string; label: string; sub: string }[] = [
-  {
-    href: '#commercial-kitchen-services',
-    label: 'Our Services',
-    sub: 'Supply · Design · Install · AMC',
-  },
-  {
-    href: '#kitchen-equipment',
-    label: 'Kitchen Equipment',
-    sub: 'Cooking · Refrigeration · Bakery',
-  },
-  {
-    href: '#industries-we-serve',
-    label: 'Industries We Serve',
-    sub: 'Hotels · Hospitals · Cloud Kitchens',
-  },
-  {
-    href: '#featured-projects',
-    label: 'Featured Projects',
-    sub: 'Hyatt · Metro Hospital · Rebel Foods',
-  },
-  {
-    href: '#our-process',
-    label: 'Our Process',
-    sub: 'Visit → Design → Supply → Install',
-  },
-  {
-    href: '#stainless-steel-fabrication',
-    label: 'SS Fabrication',
-    sub: 'SS 304 · Worktables · Sinks · Hoods',
-  },
-  {
-    href: '#international-brands',
-    label: 'International Brands',
-    sub: 'Rational · Robot Coupe · Frymaster',
-  },
-  {
-    href: '#client-testimonials',
-    label: 'Client Reviews',
-    sub: '5★ · 312 verified reviews',
-  },
-  {
-    href: '#faqs',
-    label: 'FAQs',
-    sub: '30 answers on pricing & process',
-  },
-  {
-    href: '#cities-we-serve',
-    label: 'Cities We Serve',
-    sub: 'Delhi · Mumbai · Bangalore & more',
-  },
-  {
-    href: '#blog-guides',
-    label: 'Guides & Insights',
-    sub: 'Hotel kitchens · Equipment guides',
-  },
-  {
-    href: '#get-a-quote',
-    label: 'Get a Free Quote',
-    sub: 'Free site visit · 1-hour response',
-  },
-];
+export interface QuickLink {
+  href: string;
+  label: string;
+  sub: string;
+}
 
-export default function HomepageQuickLinks() {
+export default function QuickLinksNav({ links }: { links: QuickLink[] }) {
   return (
     <>
       <style>{`
@@ -89,9 +37,7 @@ export default function HomepageQuickLinks() {
           margin: 0;
           padding-left: 0;
           padding-right: 0;
-          /* smooth momentum scroll on iOS */
           -webkit-overflow-scrolling: touch;
-          /* hide scrollbar — still scrollable, just not visible */
           scrollbar-width: none;
           -ms-overflow-style: none;
         }
@@ -214,7 +160,7 @@ export default function HomepageQuickLinks() {
 
           {/* Horizontal scroll at every breakpoint, including laptop/desktop */}
           <ol className="ql-scroll-track">
-            {LINKS.map(({ href, label, sub }, index) => (
+            {links.map(({ href, label, sub }, index) => (
               <li key={href} style={{ listStyle: 'none', padding: 0, margin: 0 }}>
                 <a href={href} className="ql-card">
                   <span className="ql-num" aria-hidden="true">

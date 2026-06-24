@@ -9,6 +9,7 @@ const SOURCE_LABELS: Record<string, string> = {
   lead_popup:            'Lead Popup (Auto)',
   enquiry_modal:         'Enquiry Modal (CTA Button)',
   cta_banner:            'CTA Banner Form',
+  product_callback:      'Product Page — Request a Callback',
 };
 
 export interface EnquiryData {
@@ -110,7 +111,7 @@ export async function sendEnquiryNotification(data: EnquiryData): Promise<void> 
   try {
     await resend.emails.send({
       from: 'VSD Enquiries <noreply@vsdinternational.com>',
-      to:   [process.env.ADMIN_EMAIL ?? 'sales@vsdinternational.com'],
+      to:   [process.env.ADMIN_EMAIL ?? 'info.vsdinternational@gmail.com'],
       subject: `New Enquiry — ${data.name} (${data.phone})`,
       html,
     });

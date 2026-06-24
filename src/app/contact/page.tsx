@@ -40,9 +40,9 @@ const CHANNELS = [
   {
     Icon: Mail,
     label: 'Email Us',
-    value: 'info@vsdinternational.com',
+    value: 'info.vsdinternational@gmail.com',
     note: 'Response within 24 hours',
-    href: 'mailto:info@vsdinternational.com',
+    href: 'mailto:info.vsdinternational@gmail.com',
     cta: 'Send Email',
   },
   {
@@ -752,7 +752,7 @@ export default function ContactPage() {
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                       <Mail size={16} strokeWidth={1.6} style={{ color: 'var(--gold)', flexShrink: 0 }} aria-hidden="true" />
                       <a
-                        href="mailto:info@vsdinternational.com"
+                        href="mailto:info.vsdinternational@gmail.com"
                         itemProp="email"
                         style={{
                           fontFamily: 'var(--font-inter)',
@@ -762,7 +762,7 @@ export default function ContactPage() {
                           wordBreak: 'break-all',
                         }}
                       >
-                        info@vsdinternational.com
+                        info.vsdinternational@gmail.com
                       </a>
                     </div>
                   </div>

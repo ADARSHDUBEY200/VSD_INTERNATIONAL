@@ -286,7 +286,7 @@ export default function CTABanner() {
             }}>
               {[
                 { icon: Shield,  label: 'ISO 9001 Certified',    sub: 'Quality assured' },
-                { icon: Star,    label: '7+ Years Experience',    sub: 'Industry veterans' },
+                { icon: Star,    label: '15+ Years Experience',   sub: 'Industry veterans' },
                 { icon: Clock,   label: 'Free Site Visit',        sub: 'Zero obligation' },
                 { icon: CheckCircle2, label: 'Pan India Service', sub: 'All major cities' },
               ].map(({ icon: Icon, label, sub }) => (

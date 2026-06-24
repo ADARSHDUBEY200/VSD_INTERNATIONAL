@@ -16,6 +16,16 @@ interface Enquiry {
 
 const STATUS_OPTIONS = ['new', 'in_progress', 'resolved'] as const;
 
+const SOURCE_LABELS: Record<string, string> = {
+  home_form:             'Home Page Form',
+  contact_form:          'Contact Page Form',
+  enquiry_modal:         'Enquiry Modal',
+  lead_popup:            'Lead Popup',
+  cta_banner:            'CTA Banner',
+  lp_commercial_kitchen: 'LP — Commercial Kitchen',
+  product_callback:      'Product Callback',
+};
+
 const STATUS_COLORS: Record<string, { bg: string; color: string; border: string }> = {
   new:         { bg: '#EFF6FF', color: '#2563EB', border: '#BFDBFE' },
   in_progress: { bg: '#FEF9C3', color: '#CA8A04', border: '#FDE68A' },
@@ -136,7 +146,7 @@ export default function EnquiryDetailPage({ params }: { params: Promise<{ id: st
               { icon: MapPin,      label: 'City',    value: enquiry.city },
               { icon: Tag,         label: 'Service', value: enquiry.service },
               { icon: IndianRupee, label: 'Budget',  value: enquiry.budget },
-              { icon: Calendar,    label: 'Source',  value: enquiry.source === 'contact_form' ? 'Contact Page Form' : 'Home Page Form' },
+              { icon: Calendar,    label: 'Source',  value: SOURCE_LABELS[enquiry.source] ?? enquiry.source },
             ] as { icon: React.ElementType; label: string; value?: string }[]).filter(f => f.value).map(({ icon: Icon, label, value }) => (
               <div key={label} style={{ display: 'flex', gap: '0.875rem', padding: '0.75rem 0', borderBottom: '1px solid #F8FAFC' }}>
                 <div style={{ width: 34, height: 34, borderRadius: 8, background: '#EFF6FF', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>

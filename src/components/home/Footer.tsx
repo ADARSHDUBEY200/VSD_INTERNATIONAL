@@ -54,7 +54,7 @@ export default function Footer() {
             }}
           >
             ISO 9001 certified manufacturer and supplier of commercial kitchen equipment for hotels,
-            hospitals, restaurants, cloud kitchens, and institutions across India since 2019.
+            hospitals, restaurants, cloud kitchens, and institutions across India since 2009.
           </p>
 
           {/* NAP — must match GBP exactly */}
@@ -72,14 +72,14 @@ export default function Footer() {
                 +91-9250346370
               </a>
               <a
-                href="mailto:sales@vsdinternational.com"
+                href="mailto:info.vsdinternational@gmail.com"
                 className="link-hover-gold-dark flex items-start gap-2.5"
                 style={{ fontSize: '0.875rem', fontFamily: 'var(--font-inter)' }}
                 itemProp="email"
                 aria-label="Email VSD International"
               >
                 <Mail size={14} style={{ color: 'var(--gold)', marginTop: '0.2rem', flexShrink: 0 }} aria-hidden="true" />
-                sales@vsdinternational.com
+                info.vsdinternational@gmail.com
               </a>
               <div
                 className="flex items-start gap-2.5"

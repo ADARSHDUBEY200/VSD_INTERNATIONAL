@@ -144,7 +144,7 @@ export const faqGroups: FaqGroup[] = [
       },
       {
         q: 'Is VSD International ISO certified?',
-        a: 'Yes — VSD is an ISO 9001:2015 certified manufacturer and supplier, with quality processes covering sourcing, fabrication, quality control, installation and after-sales service. The company has operated since 2019, serving hotels, hospitals, restaurants, cloud kitchens and institutions across India.',
+        a: 'Yes — VSD is an ISO 9001:2015 certified manufacturer and supplier, with quality processes covering sourcing, fabrication, quality control, installation and after-sales service. The company has operated since 2009, serving hotels, hospitals, restaurants, cloud kitchens and institutions across India.',
       },
       {
         q: "Where are VSD's factories and office located?",

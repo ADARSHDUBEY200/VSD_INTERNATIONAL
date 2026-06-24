@@ -26,6 +26,7 @@ const SOURCE_LABEL: Record<string, string> = {
   lead_popup:            'Lead Popup',
   cta_banner:            'CTA Banner',
   lp_commercial_kitchen: 'LP Kitchen',
+  product_callback:      'Product Callback',
 };
 
 const SOURCE_STYLE: Record<string, { background: string; color: string; border: string }> = {
@@ -35,6 +36,7 @@ const SOURCE_STYLE: Record<string, { background: string; color: string; border: 
   lead_popup:            { background: '#FFF7ED', color: '#C2410C', border: '1px solid #FED7AA' },
   cta_banner:            { background: '#FFFBEB', color: '#D97706', border: '1px solid #FDE68A' },
   lp_commercial_kitchen: { background: '#F0FDF4', color: '#0F766E', border: '1px solid #99F6E4' },
+  product_callback:      { background: '#FDF2F8', color: '#BE185D', border: '1px solid #FBCFE8' },
 };
 
 function SkeletonCard() {
@@ -199,6 +201,7 @@ export default function EnquiriesPage() {
           <option value="lead_popup">Lead Popup</option>
           <option value="cta_banner">CTA Banner</option>
           <option value="lp_commercial_kitchen">LP — Commercial Kitchen</option>
+          <option value="product_callback">Product Callback</option>
         </select>
       </div>
 

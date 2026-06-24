@@ -20,6 +20,8 @@ export default function ServiceCTA({
 
   return (
     <section
+      id="get-a-quote"
+      aria-labelledby="cta-heading"
       className="grain-overlay"
       style={{
         background: 'var(--charcoal-warm)',
@@ -57,6 +59,7 @@ export default function ServiceCTA({
         </p>
 
         <h2
+          id="cta-heading"
           style={{
             fontFamily: 'var(--font-playfair)',
             fontSize: 'clamp(1.875rem, 3.5vw, 3rem)',

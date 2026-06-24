@@ -39,7 +39,7 @@ const WA = `https://wa.me/919250346370?text=${encodeURIComponent(
 export const metadata: Metadata = {
   title: 'Commercial Kitchen Setup in 21 Days | Free Layout + Quote | VSD International',
   description:
-    'Get a turnkey commercial kitchen — design, equipment supply, SS fabrication & installation. ISO 9001 certified. 500+ kitchens since 2019. Free layout + itemised quote in 1 hour. ☎ +91-92503 46370.',
+    'Get a turnkey commercial kitchen — design, equipment supply, SS fabrication & installation. ISO 9001 certified. 500+ kitchens since 2009. Free layout + itemised quote in 1 hour. ☎ +91-92503 46370.',
   alternates: { canonical: 'https://vsdinternational.com/lp/commercial-kitchen-setup' },
   robots: { index: true, follow: true },
   openGraph: {
@@ -147,7 +147,7 @@ export default function CommercialKitchenLP() {
         <WhatYouGet />
         <Comparison />
         <CtaBand
-          eyebrow="500+ kitchens delivered since 2019"
+          eyebrow="500+ kitchens delivered since 2009"
           title="Tell us about your kitchen — we'll handle the rest"
           sub="Design, supply, SS fabrication & installation under one ISO 9001 certified roof."
         />
@@ -268,7 +268,7 @@ function Hero() {
             >
               <Award size={14} style={{ color: 'var(--gold)' }} />
               <span style={{ fontFamily: 'var(--font-inter)', fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.08em', color: 'var(--gold)', textTransform: 'uppercase' }}>
-                ISO 9001 Certified • Since 2019
+                ISO 9001 Certified • Since 2009
               </span>
             </div>
 
@@ -368,7 +368,7 @@ function ReviewStrip() {
   const items: [string, string][] = [
     ['5★', '312 Google reviews'],
     ['500+', 'Kitchens delivered'],
-    ['7+', 'Years in business'],
+    ['15+', 'Years in business'],
     ['50+', 'Cities served'],
   ];
   return (
@@ -727,7 +727,7 @@ function GoogleReviews() {
               Based on <strong style={{ color: 'var(--text-dark)' }}>312</strong> Google reviews
             </p>
             <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '1.75rem' }}>
-              {['ISO 9001 Certified', '7+ Years Active', 'Pan-India Delivery'].map((l) => (
+              {['ISO 9001 Certified', '15+ Years Active', 'Pan-India Delivery'].map((l) => (
                 <span key={l} style={{ padding: '0.3rem 0.75rem', borderRadius: '100px', background: 'rgba(201,168,76,0.08)', border: '1px solid rgba(201,168,76,0.22)', fontSize: '0.72rem', fontFamily: 'var(--font-inter)', fontWeight: 600, color: 'var(--gold-deep)' }}>
                   {l}
                 </span>
@@ -791,7 +791,7 @@ function Footer() {
       <div className="container" style={{ display: 'grid', gap: '1.5rem', textAlign: 'center' }}>
         <Image src="/VSD_LOGO.png" alt="VSD International" width={150} height={46} style={{ height: 'auto', width: 'auto', maxHeight: 46, margin: '0 auto' }} />
         <p style={{ fontFamily: 'var(--font-inter)', fontSize: '0.85rem', color: 'rgba(245,240,232,0.55)', lineHeight: 1.7, maxWidth: '34rem', margin: '0 auto' }}>
-          <strong style={{ color: 'var(--text-on-dark)' }}>VSD International</strong> — ISO 9001 certified commercial kitchen equipment manufacturer &amp; turnkey setup partner. Serving hotels, restaurants, cloud kitchens &amp; hospitals across India since 2019.
+          <strong style={{ color: 'var(--text-on-dark)' }}>VSD International</strong> — ISO 9001 certified commercial kitchen equipment manufacturer &amp; turnkey setup partner. Serving hotels, restaurants, cloud kitchens &amp; hospitals across India since 2009.
         </p>
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.5rem 1.5rem', fontFamily: 'var(--font-inter)', fontSize: '0.85rem', color: 'rgba(245,240,232,0.6)' }}>
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}><MapPin size={14} style={{ color: 'var(--gold)' }} /> A-347, Saraswati Gali, Mandawali, New Delhi 110092</span>

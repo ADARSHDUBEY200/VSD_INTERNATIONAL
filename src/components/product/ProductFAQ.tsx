@@ -69,21 +69,40 @@ function FAQItem({
 }
 
 /* ── Callback form (inside the dark card) ── */
-function CallbackForm() {
+function CallbackForm({ fullName }: { fullName: string }) {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!name.trim() || !phone.trim()) return;
     setLoading(true);
-    /* TODO: wire to real API — POST /api/enquiries */
-    setTimeout(() => {
-      setLoading(false);
+    setError('');
+    try {
+      const res = await fetch('/api/enquiries', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name,
+          phone,
+          service: fullName,
+          source: 'product_callback',
+        }),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        setError(data.error ?? 'Submission failed. Please try again.');
+        return;
+      }
       setSubmitted(true);
-    }, 900);
+    } catch {
+      setError('Network error. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   }
 
   if (submitted) {
@@ -187,6 +206,10 @@ function CallbackForm() {
         )}
       </button>
 
+      {error && (
+        <span role="alert" className="pfaq-form-error">{error}</span>
+      )}
+
       <p className="pfaq-form-note">
         We&rsquo;ll call within 48 hours &middot; No spam, ever.
       </p>
@@ -255,7 +278,7 @@ export default function ProductFAQ({ faq, fullName }: ProductFAQProps) {
                   Leave your details and our kitchen equipment specialist will call you back.
                 </p>
 
-                <CallbackForm />
+                <CallbackForm fullName={fullName} />
 
               </div>
             </div>
@@ -541,6 +564,12 @@ export default function ProductFAQ({ faq, fullName }: ProductFAQProps) {
           flex-shrink: 0;
         }
         @keyframes pfaq-spin { to { transform: rotate(360deg); } }
+
+        .pfaq-form-error {
+          font-family: var(--font-inter), Inter, ui-sans-serif, sans-serif;
+          font-size: 0.75rem; font-weight: 500;
+          color: #F87171; text-align: center; margin: -0.25rem 0 0;
+        }
 
         .pfaq-form-note {
           font-family: var(--font-inter), Inter, ui-sans-serif, sans-serif;

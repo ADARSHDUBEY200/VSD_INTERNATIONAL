@@ -41,7 +41,7 @@ const schemaGraph = {
         itemListElement: BLOG_POSTS.map((post, i) => ({
           '@type': 'ListItem',
           position: i + 1,
-          url: `https://vsdinternational.com/blog/${post.category}/${post.slug}/`,
+          url: `https://vsdinternational.com/blog/${post.slug}/`,
           name: post.title,
         })),
       },
@@ -134,11 +134,10 @@ export default function BlogIndexPage() {
         <div className="container mx-auto" style={{ maxWidth: '80rem', padding: '0 1.25rem' }}>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {Object.entries(CATEGORIES).map(([key, cat]) => (
-              <Link
+              <div
                 key={key}
-                href={`/blog/${key}/`}
-                className="card-lift block rounded-xl p-5 border"
-                style={{ borderColor: 'var(--border)', background: '#FFFFFF', textDecoration: 'none' }}
+                className="rounded-xl p-5 border"
+                style={{ borderColor: 'var(--border)', background: '#FFFFFF' }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.75rem' }}>
                   <span style={{ fontSize: '1.5rem' }} aria-hidden="true">{CATEGORY_ICONS[key] ?? '📖'}</span>
@@ -153,13 +152,10 @@ export default function BlogIndexPage() {
                     {cat.label}
                   </h2>
                 </div>
-                <p style={{ fontFamily: 'var(--font-inter)', fontSize: '0.875rem', color: 'var(--text-muted)', lineHeight: 1.6, marginBottom: '0.75rem' }}>
+                <p style={{ fontFamily: 'var(--font-inter)', fontSize: '0.875rem', color: 'var(--text-muted)', lineHeight: 1.6 }}>
                   {cat.description}
                 </p>
-                <span style={{ color: 'var(--gold)', fontSize: '0.8125rem', fontFamily: 'var(--font-inter)', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
-                  Browse guides <ArrowRight size={12} aria-hidden="true" />
-                </span>
-              </Link>
+              </div>
             ))}
           </div>
         </div>
@@ -229,7 +225,7 @@ export default function BlogIndexPage() {
               </div>
 
               <Link
-                href={`/blog/${FEATURED_POST.category}/${FEATURED_POST.slug}/`}
+                href={`/blog/${FEATURED_POST.slug}/`}
                 className="btn-gold"
               >
                 Read the full guide <ArrowRight size={15} aria-hidden="true" />
@@ -253,7 +249,7 @@ export default function BlogIndexPage() {
             {RECENT_POSTS.map((post) => (
               <Link
                 key={post.slug}
-                href={`/blog/${post.category}/${post.slug}/`}
+                href={`/blog/${post.slug}/`}
                 className="card-lift group block rounded-xl overflow-hidden border"
                 style={{ borderColor: 'var(--border)', background: '#FFFFFF', textDecoration: 'none' }}
               >

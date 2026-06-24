@@ -635,7 +635,7 @@ export default function Hero() {
               fontWeight: 600,
             }}
           >
-            Founded 2019 · Delhi, India
+            Founded 2009 · Delhi, India
           </span>
         </motion.div>
 
@@ -737,7 +737,7 @@ export default function Hero() {
           transition={{ duration: 0.5, delay: 0.5 }}
         >
           {[
-            { icon: Clock,  text: '7+ Years Experience' },
+            { icon: Clock,  text: '15+ Years Experience' },
             { icon: Award,  text: 'Rational & Robot Coupe Dealer' },
             { icon: Star,   text: '5★ · 312 Reviews' },
           ].map(({ icon: Icon, text }) => (

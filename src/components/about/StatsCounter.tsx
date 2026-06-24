@@ -22,7 +22,7 @@ function useCounter(target: number, started: boolean, duration = 1800) {
 }
 
 const STATS = [
-  { value: 7,   suffix: '+',  label: 'Years of Excellence',  sub: 'Est. 2019, Delhi'        },
+  { value: 15,  suffix: '+',  label: 'Years of Excellence',  sub: 'Est. 2009, Delhi'        },
   { value: 200, suffix: '+',  label: 'Satisfied Clients',     sub: 'Hotels, Hospitals & more' },
   { value: 312, suffix: '',   label: 'Google Reviews',        sub: '5★ Average rating'       },
   { value: 50,  suffix: '+',  label: 'Cities Served',         sub: 'Pan-India network'       },

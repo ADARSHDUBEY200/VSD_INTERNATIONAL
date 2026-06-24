@@ -1,9 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 import { Plus, Minus } from 'lucide-react';
 
-export interface FAQ { q: string; a: string }
+export interface FAQ { q: string; a: string; category?: string }
 
 /** FAQ Accordion — used on all service pages.
  *  Client component for open/close interactivity.
@@ -26,6 +26,7 @@ export default function ServiceFAQ({
 
   return (
     <section
+      id="faqs"
       aria-labelledby="faq-heading"
       style={{ background: bg, padding: '5.5rem 0', borderTop: `1px solid ${bdr}` }}
     >
@@ -60,9 +61,25 @@ export default function ServiceFAQ({
         >
           {faqs.map((faq, i) => {
             const isOpen = open === i;
+            const showCategory = !!faq.category && faq.category !== faqs[i - 1]?.category;
             return (
+              <Fragment key={i}>
+              {showCategory && (
+                <p
+                  style={{
+                    fontFamily: 'var(--font-inter)',
+                    fontSize: '0.6875rem',
+                    fontWeight: 700,
+                    letterSpacing: '0.14em',
+                    textTransform: 'uppercase',
+                    color: 'var(--gold)',
+                    margin: i === 0 ? '0 0 0.25rem' : '1.5rem 0 0.25rem',
+                  }}
+                >
+                  {faq.category}
+                </p>
+              )}
               <div
-                key={i}
                 style={{
                   border: `1px solid ${isOpen ? 'rgba(201,168,76,0.4)' : bdr}`,
                   borderRadius: '8px',
@@ -122,6 +139,7 @@ export default function ServiceFAQ({
                   </div>
                 )}
               </div>
+              </Fragment>
             );
           })}
         </div>

@@ -22,6 +22,7 @@ const CITIES = [
 export default function CitiesGrid({ serviceSlug }: { serviceSlug: string }) {
   return (
     <section
+      id="cities-we-serve"
       aria-labelledby="cities-heading"
       style={{
         background: '#FFFFFF',

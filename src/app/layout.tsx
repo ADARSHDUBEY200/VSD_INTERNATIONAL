@@ -115,7 +115,7 @@ const schemaGraph = {
         width: 200,
         height: 60,
       },
-      foundingDate: '2019',
+      foundingDate: '2009',
       description:
         'ISO 9001 certified manufacturer and supplier of commercial kitchen equipment for hotels, hospitals, restaurants, cloud kitchens, and institutional clients across India.',
       address: {
@@ -127,7 +127,7 @@ const schemaGraph = {
         addressCountry: 'IN',
       },
       telephone: '+91-9250346370',
-      email: 'sales@vsdinternational.com',
+      email: 'info.vsdinternational@gmail.com',
       sameAs: [
         'https://www.linkedin.com/company/vsd-international',
         'https://www.indiamart.com/vsd-international',
@@ -143,7 +143,7 @@ const schemaGraph = {
       image: 'https://vsdinternational.com/og-image.jpg',
       url: 'https://vsdinternational.com',
       telephone: '+91-9250346370',
-      email: 'sales@vsdinternational.com',
+      email: 'info.vsdinternational@gmail.com',
       address: {
         '@type': 'PostalAddress',
         streetAddress: 'A-347 Saraswati Gali Mandawali',

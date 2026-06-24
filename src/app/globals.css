@@ -670,6 +670,48 @@ section[id] {
 }
 
 /* ════════════════════════════════════════════════════════════════════════════
+   SERVICE HERO — content-driven height on mobile, fixed 90vh on desktop
+   Fixed 90vh + overflow:hidden clipped the bottom of the hero (stats grid /
+   CTAs) on short mobile viewports. Below md the hero just grows with its
+   content; the dramatic fixed-height treatment only applies md and up.
+   ════════════════════════════════════════════════════════════════════════════ */
+.hotel-hero {
+  padding: 3rem 0 3.5rem;
+}
+@media (min-width: 768px) {
+  .hotel-hero {
+    height: 90vh;
+    max-height: 900px;
+    min-height: 560px;
+    padding: 0;
+  }
+}
+
+.bakery-hero {
+  padding: 3rem 0 3.5rem;
+}
+@media (min-width: 768px) {
+  .bakery-hero {
+    height: 88vh;
+    max-height: 880px;
+    min-height: 540px;
+    padding: 0;
+  }
+}
+
+.restaurant-hero {
+  padding: 3rem 0 3.5rem;
+}
+@media (min-width: 768px) {
+  .restaurant-hero {
+    height: 88vh;
+    max-height: 880px;
+    min-height: 540px;
+    padding: 0;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
    PRODUCTS SHOWCASE — Category tab scroll (hide scrollbar cross-browser)
    ════════════════════════════════════════════════════════════════════════════ */
 
