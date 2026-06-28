@@ -1,7 +1,10 @@
 ﻿import type { Metadata } from 'next';
 import { Playfair_Display, Inter, Poppins } from 'next/font/google';
 import Script from 'next/script';
+import { GoogleTagManager } from '@next/third-parties/google';
 import './globals.css';
+
+const GTM_ID = 'GTM-MDWC9SC4';
 
 /* --- Fonts ---------------------------------------------------------------- */
 const playfair = Playfair_Display({
@@ -240,6 +243,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="en"
       className={`${playfair.variable} ${inter.variable} ${poppins.variable} scroll-smooth`}
     >
+      <GoogleTagManager gtmId={GTM_ID} />
+
       <head>
         {/* Preconnect for performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -271,6 +276,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
 
       <body className="antialiased min-h-screen">
+        <noscript>
+          <iframe
+            src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+            height="0"
+            width="0"
+            style={{ display: 'none', visibility: 'hidden' }}
+          />
+        </noscript>
+
         {children}
 
         {/* Google Analytics placeholder — add GA4 measurement ID */}

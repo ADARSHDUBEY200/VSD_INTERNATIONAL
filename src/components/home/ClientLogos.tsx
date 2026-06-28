@@ -18,8 +18,8 @@ const clients = [
   { name: 'DoubleTree by Hilton',  abbr: 'DoubleTree Hilton' },
 ];
 
-/* Duplicate for seamless loop */
-const track = [...clients, ...clients];
+/* Triple-duplicated for a seamless loop on wide screens — see .marquee-track--triple */
+const track = [...clients, ...clients, ...clients];
 
 function LogoChip({ name, abbr }: { name: string; abbr: string }) {
   return (
@@ -116,8 +116,8 @@ export default function ClientLogos() {
         }}
       >
         <div
-          className="marquee-track"
-          style={{ animationDuration: '36s' }}
+          className="marquee-track marquee-track--triple"
+          style={{ animationDuration: '48s' }}
           aria-hidden="true"
         >
           {track.map((client, i) => (

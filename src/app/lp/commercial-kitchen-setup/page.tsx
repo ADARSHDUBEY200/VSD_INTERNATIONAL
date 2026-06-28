@@ -19,16 +19,13 @@ import {
   ShieldCheck,
   Wrench,
   Ruler,
-  Truck,
   Factory,
   Award,
   Clock,
   IndianRupee,
   MapPin,
   Headset,
-  Star,
   Hotel,
-  Quote,
 } from 'lucide-react';
 import LeadForm from './LeadForm';
 import LeadCta from './LeadCta';
@@ -41,18 +38,49 @@ import LoaderIntro from './LoaderIntro';
 import TiltCard from './TiltCard';
 import IconBadge from './IconBadge';
 import AnimatedStars from './AnimatedStars';
+import GoogleIcon from './GoogleIcon';
+import TestimonialSlider, { type Review } from './TestimonialSlider';
+import ProductsCarousel from './ProductsCarousel';
+import { SiteVisitIcon, DesignIcon, FabricationIcon, SupplyIcon, InstallIcon, VentilationIcon, TrainingIcon, AmcIcon } from './ServiceIcons';
 
-const PHONE = '+91-92503 46370';
+const PHONE = '09250346370';
 const PHONE_TEL = '+919250346370';
 const WA = `https://wa.me/919250346370?text=${encodeURIComponent(
   "Hi VSD, I'd like a free quote for my commercial kitchen setup.",
 )}`;
 
+/* ─── Shared section CTA row (lead-quote button + WhatsApp) ────────────────── */
+function SectionCta({ ctaLabel = 'Get My Free Quote' }: { ctaLabel?: string }) {
+  return (
+    <div className="lp-cta-row">
+      <LeadCta className="btn-gold">
+        {ctaLabel} <ArrowRight size={16} />
+      </LeadCta>
+      <a href={WA} target="_blank" rel="noopener noreferrer" className="lp-btn-whatsapp">
+        <MessageCircle size={17} /> WhatsApp Us
+      </a>
+    </div>
+  );
+}
+
 /* ─── Metadata ─────────────────────────────────────────────────────────────── */
 export const metadata: Metadata = {
   title: 'Commercial Kitchen Setup in 21 Days | Free Layout + Quote | VSD International',
   description:
-    'Get a turnkey commercial kitchen — design, equipment supply, SS fabrication & installation. ISO 9001 certified. 500+ kitchens since 2009. Free layout + itemised quote in 1 hour. ☎ +91-92503 46370.',
+    'Get a turnkey commercial kitchen — design, equipment supply, SS fabrication & installation. ISO 9001 certified. 200+ kitchens since 2009. Free layout + itemised quote in 1 hour. ☎ +91-92503 46370.',
+  keywords: [
+    'commercial kitchen equipment',
+    'commercial kitchen equipment near me',
+    'commercial kitchen equipment manufacturer in delhi',
+    'commercial kitchen cooking equipment',
+    'commercial cooking equipment',
+    'manufacturer of commercial kitchen equipment',
+    'suppliers of commercial kitchen equipment',
+    'industrial kitchen equipment manufacturers',
+    'restaurant kitchen equipment',
+    'restaurant cooking equipment',
+    'restaurant and kitchen equipment',
+  ],
   alternates: { canonical: 'https://vsdinternational.com/lp/commercial-kitchen-setup' },
   robots: { index: true, follow: true },
   openGraph: {
@@ -60,7 +88,7 @@ export const metadata: Metadata = {
     url: 'https://vsdinternational.com/lp/commercial-kitchen-setup',
     title: 'Setup Your Commercial Kitchen in 21 Days | VSD International',
     description:
-      'ISO 9001 certified turnkey commercial kitchen setup — design, supply, fabrication & installation. 500+ projects. Free layout + quote.',
+      'ISO 9001 certified turnkey commercial kitchen setup — design, supply, fabrication & installation. 200+ projects. Free layout + quote.',
     images: ['https://vsdinternational.com/VSD_LOGO.png'],
   },
 };
@@ -81,7 +109,7 @@ const LP_FAQS = [
   },
   {
     q: 'Are you a commercial kitchen equipment manufacturer or just a dealer?',
-    a: 'Both. VSD International is an ISO 9001 certified commercial kitchen equipment manufacturer with in-house SS 304 stainless steel fabrication at our Delhi NCR factory, and an authorised dealer for global brands like Rational, Robot Coupe and Frymaster — so your commercial kitchen setup is supplied and installed by one accountable team.',
+    a: 'Both. VSD International is an ISO 9001 certified commercial kitchen equipment manufacturer with in-house SS 304 stainless steel fabrication across our 2 Delhi NCR factories, and an authorised dealer for global brands like Rational, Robot Coupe and Frymaster — so your commercial kitchen setup is supplied and installed by one accountable team.',
   },
   {
     q: 'Do you install commercial kitchens across India?',
@@ -153,16 +181,18 @@ export default function CommercialKitchenLP() {
       <main style={{ background: 'var(--charcoal)', overflowX: 'hidden' }}>
         <Hero />
         <Stats />
+        <OurServices />
+        <OurProducts />
+        <Certificates />
         <WhyUs />
         <CtaBand
           eyebrow="Limited free site visits this month"
           title="Get your free kitchen layout + itemised quote"
           sub="No obligation. A kitchen expert calls you within 1 business hour."
         />
-        <WhatYouGet />
         <Comparison />
         <CtaBand
-          eyebrow="500+ kitchens delivered since 2009"
+          eyebrow="200+ kitchens delivered since 2009"
           title="Tell us about your kitchen — we'll handle the rest"
           sub="Design, supply, SS fabrication & installation under one ISO 9001 certified roof."
         />
@@ -172,6 +202,7 @@ export default function CommercialKitchenLP() {
         <GoogleReviews />
         <FinalCta />
         <Footer />
+        <DisclaimerSection />
       </main>
 
       <MobileCtaBar />
@@ -275,9 +306,9 @@ function Hero() {
                   marginBottom: '2rem',
                 }}
               >
-                <span className="stars" style={{ fontSize: '1.1rem', letterSpacing: '0.08em' }}>★★★★★</span>
+                <AnimatedStars size={17} gap={3} />
                 <span style={{ fontFamily: 'var(--font-poppins)', fontSize: '0.9rem', color: 'rgba(245,240,232,0.7)' }}>
-                  Rated <strong style={{ color: 'var(--gold-bright)' }}>4.9/5</strong> by 312 happy clients on Google
+                  Rated <strong style={{ color: 'var(--gold-bright)' }}>5/5</strong> by 312 happy clients on Google
                 </span>
               </div>
             </Reveal>
@@ -285,9 +316,6 @@ function Hero() {
             {/* CTAs */}
             <Reveal immediate delay={0.4}>
               <div className="lp-hero-ctas">
-                <LeadCta className="btn-gold" style={{ fontSize: '1rem', padding: '0.95rem 2.1rem', fontFamily: 'var(--font-poppins)' }}>
-                  Get My Free Quote <ArrowRight size={17} />
-                </LeadCta>
                 <a href={`tel:${PHONE_TEL}`} className="lp-btn-outline" style={{ justifyContent: 'center' }}>
                   <Phone size={17} /> Call {PHONE}
                 </a>
@@ -319,9 +347,9 @@ function Hero() {
 function Stats() {
   const stats: { Icon: typeof Award; value: number; decimals?: number; suffix: string; label: string; rating?: boolean }[] = [
     { Icon: Award, value: 15, suffix: '+', label: 'Years of Experience' },
-    { Icon: Star, value: 4.9, decimals: 1, suffix: '', label: 'Google Rating', rating: true },
+    { Icon: Award, value: 5, decimals: 0, suffix: '', label: 'Google Rating', rating: true },
     { Icon: Hotel, value: 200, suffix: '+', label: 'Hotels Served' },
-    { Icon: Factory, value: 1, suffix: '', label: 'Delhi Factory' },
+    { Icon: Factory, value: 2, suffix: '', label: 'Delhi Factories' },
   ];
   return (
     <section className="lp-stats-band" aria-label="VSD International by the numbers">
@@ -331,7 +359,7 @@ function Stats() {
             <Reveal key={label} delay={i * 0.08}>
               <div className="lp-stat">
                 <span className="lp-stat-icon">
-                  <Icon size={22} />
+                  {rating ? <GoogleIcon size={22} /> : <Icon size={22} />}
                 </span>
                 <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'center', gap: '0.2rem' }}>
                   <span className="lp-stat-num">
@@ -342,7 +370,9 @@ function Stats() {
                   )}
                 </div>
                 {rating && (
-                  <span className="stars" style={{ display: 'block', fontSize: '0.78rem', letterSpacing: '0.12em', marginTop: '0.35rem' }}>★★★★★</span>
+                  <span style={{ display: 'block', marginTop: '0.35rem' }}>
+                    <AnimatedStars size={13} gap={2} />
+                  </span>
                 )}
                 <div className="lp-stat-label">{label}</div>
               </div>
@@ -357,7 +387,7 @@ function Stats() {
 /* ─── Why VSD (USPs in pointers) ───────────────────────────────────────────── */
 function WhyUs() {
   const usps: { Icon: typeof Wrench; title: string; body: React.ReactNode }[] = [
-    { Icon: Factory, title: 'Manufacturer, not a middleman', body: <>In-house <strong>SS&nbsp;304 fabrication</strong> at our Delhi NCR factory means <strong>factory-direct pricing</strong> and zero markup chains.</> },
+    { Icon: Factory, title: 'Manufacturer, not a middleman', body: <>In-house <strong>SS&nbsp;304 fabrication</strong> across our <strong>2 Delhi NCR factories</strong> means factory-direct pricing and zero markup chains.</> },
     { Icon: Ruler, title: 'Free CAD kitchen layout', body: <>A <strong>free workflow-optimised layout</strong> after your site visit — included on every project above <strong>₹5 lakh</strong>.</> },
     { Icon: IndianRupee, title: 'Fixed, itemised quote', body: <>No surprises — a <strong>line-by-line quote</strong> locked before work starts, with a <strong>best-price guarantee</strong> on all brands.</> },
     { Icon: Clock, title: '21-day turnkey delivery', body: <>Design → supply → fabrication → install, on a <strong>committed timeline</strong>. Cloud kitchens ready in <strong>~14 days</strong>.</> },
@@ -365,11 +395,11 @@ function WhyUs() {
     { Icon: Headset, title: 'One accountable team + AMC', body: <>One partner from <strong>drawing to commissioning</strong>, backed by <strong>80+ active AMC</strong> clients for lifetime support.</> },
   ];
   return (
-    <section style={{ background: '#fff', padding: 'clamp(3rem, 6vw, 5rem) 0' }} aria-labelledby="lp-why-heading">
+    <section style={{ background: '#fff', padding: 'clamp(2.25rem, 4.5vw, 3.5rem) 0' }} aria-labelledby="lp-why-heading">
       <div className="container">
         <div style={{ textAlign: 'center', marginBottom: '2.75rem' }}>
           <span className="section-label">Why VSD International</span>
-          <RevealTitle id="lp-why-heading" style={{ fontFamily: 'var(--font-playfair)', fontSize: 'clamp(1.75rem, 3.4vw, 2.6rem)', color: 'var(--text-dark)', letterSpacing: '-0.02em', margin: '0.75rem 0 0' }} text="Why 500+ Kitchens Chose Us" />
+          <RevealTitle id="lp-why-heading" style={{ fontFamily: 'var(--font-playfair)', fontSize: 'clamp(1.75rem, 3.4vw, 2.6rem)', color: 'var(--text-dark)', letterSpacing: '-0.02em', margin: '0.75rem 0 0' }} text="Why 200+ Kitchens Chose Us" />
           <span className="gold-divider lp-divider-glow" style={{ marginTop: '1rem' }} />
         </div>
 
@@ -393,6 +423,10 @@ function WhyUs() {
             </Reveal>
           ))}
         </div>
+
+        <div style={{ marginTop: '2.5rem' }}>
+          <SectionCta />
+        </div>
       </div>
     </section>
   );
@@ -401,7 +435,7 @@ function WhyUs() {
 /* ─── CTA Band (inserted after every ~2 sections) ──────────────────────────── */
 function CtaBand({ eyebrow, title, sub }: { eyebrow: string; title: string; sub: string }) {
   return (
-    <section style={{ background: 'var(--charcoal-warm)', padding: 'clamp(2.5rem, 5vw, 3.5rem) 0', position: 'relative', overflow: 'hidden' }}>
+    <section style={{ background: 'var(--charcoal-warm)', padding: 'clamp(1.75rem, 3.5vw, 2.5rem) 0', position: 'relative', overflow: 'hidden' }}>
       <div
         aria-hidden="true"
         style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse 65% 130% at 50% 0%, rgba(201,168,76,0.18) 0%, transparent 65%), radial-gradient(ellipse 40% 90% at 85% 100%, rgba(240,196,66,0.12) 0%, transparent 70%)', pointerEvents: 'none' }}
@@ -413,12 +447,12 @@ function CtaBand({ eyebrow, title, sub }: { eyebrow: string; title: string; sub:
           </p>
           <h2 style={{ fontFamily: 'var(--font-playfair)', fontSize: 'clamp(1.5rem, 3vw, 2.25rem)', color: 'var(--text-on-dark)', lineHeight: 1.18, marginBottom: '0.75rem' }}>{title}</h2>
           <p style={{ fontFamily: 'var(--font-inter)', fontSize: '0.98rem', color: 'rgba(245,240,232,0.55)', marginBottom: '1.75rem' }}>{sub}</p>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', justifyContent: 'center' }}>
-            <LeadCta className="btn-gold" style={{ fontSize: '0.95rem' }}>
-              Get My Free Quote <ArrowRight size={16} />
-            </LeadCta>
-            <a href={`tel:${PHONE_TEL}`} style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.875rem 1.5rem', borderRadius: '5px', border: '1.5px solid rgba(201,168,76,0.5)', color: 'var(--gold)', fontFamily: 'var(--font-inter)', fontWeight: 700, fontSize: '0.95rem', textDecoration: 'none' }}>
-              <Phone size={16} /> {PHONE}
+          <div className="lp-cta-row">
+            <a href={`tel:${PHONE_TEL}`} className="btn-gold" style={{ fontSize: '0.95rem' }}>
+              <Phone size={16} /> Call {PHONE}
+            </a>
+            <a href={WA} target="_blank" rel="noopener noreferrer" className="lp-btn-whatsapp" style={{ fontSize: '0.95rem' }}>
+              <MessageCircle size={16} /> WhatsApp Us
             </a>
           </div>
         </Reveal>
@@ -427,37 +461,141 @@ function CtaBand({ eyebrow, title, sub }: { eyebrow: string; title: string; sub:
   );
 }
 
-/* ─── What you get — turnkey process ───────────────────────────────────────── */
-function WhatYouGet() {
-  const steps: { Icon: typeof Ruler; n: string; title: string; body: string }[] = [
-    { Icon: MapPin, n: '01', title: 'Free site visit', body: 'We measure your space, study workflow needs and your menu — at no cost across Delhi NCR and on schedule pan-India.' },
-    { Icon: Ruler, n: '02', title: 'CAD layout + quote', body: 'A workflow-optimised commercial kitchen layout and a fixed, itemised equipment quote — usually within 48 hours.' },
-    { Icon: Factory, n: '03', title: 'Fabrication & supply', body: 'In-house SS 304 worktables, sinks, hoods & shelving, plus brand-genuine cooking and refrigeration equipment.' },
-    { Icon: Truck, n: '04', title: 'Install & commission', body: 'Delivery, installation, gas, exhaust, testing and handover — your kitchen ready to fire, on the committed date.' },
-    { Icon: Headset, n: '05', title: 'Training & AMC', body: 'Staff training on equipment plus optional Annual Maintenance Contract for breakdown-free running.' },
+/* ─── Our Services — full service menu, custom SVG icon cards ─────────────── */
+function OurServices() {
+  const services: { Icon: typeof SiteVisitIcon; n: string; title: string; body: string }[] = [
+    { Icon: SiteVisitIcon, n: '01', title: 'Free Site Visit & Consultation', body: 'We measure your space, study workflow needs and your menu — at no cost across Delhi NCR and on schedule pan-India.' },
+    { Icon: DesignIcon, n: '02', title: 'CAD Kitchen Layout & Design', body: 'A workflow-optimised commercial kitchen layout and a fixed, itemised equipment quote — usually within 48 hours.' },
+    { Icon: FabricationIcon, n: '03', title: 'In-House SS 304 Fabrication', body: 'Worktables, sinks, hoods & shelving fabricated in-house across our 2 Delhi NCR factories to food-grade SS 304 standards.' },
+    { Icon: SupplyIcon, n: '04', title: 'Equipment Supply & Branded Imports', body: 'Brand-genuine cooking, refrigeration & prep equipment — authorised dealer for Rational, Robot Coupe, Frymaster and more.' },
+    { Icon: InstallIcon, n: '05', title: 'Installation & Commissioning', body: 'Delivery, installation, gas, exhaust, testing and handover — your kitchen ready to fire, on the committed date.' },
+    { Icon: VentilationIcon, n: '06', title: 'Kitchen Exhaust & Ventilation', body: 'Hood, ducting & make-up air design engineered for heat load, grease capture and fire-code compliance.' },
+    { Icon: TrainingIcon, n: '07', title: 'Staff Training & Handover', body: 'Hands-on equipment training for your kitchen team so day one runs as smoothly as day one hundred.' },
+    { Icon: AmcIcon, n: '08', title: 'Annual Maintenance Contract', body: 'Optional AMC plans for breakdown-free running, backed by 80+ active AMC clients across India.' },
   ];
   return (
-    <section style={{ background: 'var(--surface-alt)', padding: 'clamp(3rem, 6vw, 5rem) 0' }} aria-labelledby="lp-process-heading">
+    <section style={{ background: 'var(--surface-alt)', padding: 'clamp(2.25rem, 4.5vw, 3.5rem) 0' }} aria-labelledby="lp-services-heading">
       <div className="container">
         <div style={{ textAlign: 'center', marginBottom: '2.75rem' }}>
-          <span className="section-label">What You Get</span>
-          <RevealTitle id="lp-process-heading" style={{ fontFamily: 'var(--font-playfair)', fontSize: 'clamp(1.75rem, 3.4vw, 2.6rem)', color: 'var(--text-dark)', letterSpacing: '-0.02em', margin: '0.75rem 0 0' }} text="One Team, From Drawing to Handover" />
+          <span className="section-label">Our Services</span>
+          <RevealTitle id="lp-services-heading" style={{ fontFamily: 'var(--font-playfair)', fontSize: 'clamp(1.75rem, 3.4vw, 2.6rem)', color: 'var(--text-dark)', letterSpacing: '-0.02em', margin: '0.75rem 0 0' }} text="Everything Your Kitchen Needs, One Team" />
           <span className="gold-divider lp-divider-glow" style={{ marginTop: '1rem' }} />
         </div>
 
-        <div className="lp-step-grid">
-          {steps.map(({ Icon, n, title, body }, i) => (
-            <Reveal key={n} delay={i * 0.07}>
-              <TiltCard style={{ background: '#fff', border: '1px solid var(--border)', padding: '1.5rem', height: '100%' }}>
-                <span style={{ position: 'absolute', top: '1rem', right: '1.1rem', fontFamily: 'var(--font-playfair)', fontSize: '1.6rem', fontWeight: 800, color: 'rgba(201,168,76,0.28)' }}>{n}</span>
-                <IconBadge size={44}>
-                  <Icon size={22} style={{ color: 'var(--gold-deep)' }} />
-                </IconBadge>
-                <h3 style={{ fontFamily: 'var(--font-playfair)', fontSize: '1.1rem', color: 'var(--text-dark)', marginBottom: '0.45rem' }}>{title}</h3>
-                <p style={{ fontFamily: 'var(--font-inter)', fontSize: '0.875rem', color: 'var(--text-body)', lineHeight: 1.6 }}>{body}</p>
+        <div className="lp-service-grid">
+          {services.map(({ Icon, n, title, body }, i) => (
+            <Reveal key={n} delay={i * 0.06}>
+              <TiltCard className="lp-service-card" style={{ background: '#fff', border: '1px solid var(--border)', padding: 0, height: '100%' }}>
+                <div className="lp-service-illustration">
+                  <span className="lp-service-illustration-dots" aria-hidden="true" />
+                  <Icon size={52} />
+                </div>
+                <div style={{ padding: '1.5rem 1.4rem 1.4rem' }}>
+                  <span className="lp-service-eyebrow">{n}</span>
+                  <h3 style={{ fontFamily: 'var(--font-playfair)', fontSize: '1.05rem', color: 'var(--text-dark)', margin: '0.3rem 0 0.5rem' }}>{title}</h3>
+                  <p style={{ fontFamily: 'var(--font-inter)', fontSize: '0.85rem', color: 'var(--text-body)', lineHeight: 1.6 }}>{body}</p>
+                </div>
               </TiltCard>
             </Reveal>
           ))}
+        </div>
+
+        <div style={{ marginTop: '2.5rem' }}>
+          <SectionCta />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─── Our Products — equipment carousel ────────────────────────────────────── */
+const OUR_PRODUCTS: { name: string; spec: string; image: string; category: string }[] = [
+  { category: 'Cooking', name: 'Single Burner Range', spec: 'Gas · Size Customised', image: 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782017908/Single_Burner_Range_eosza9.jpg' },
+  { category: 'Cooking', name: 'Three Burner Chinese Range', spec: 'Gas · Size Customised', image: 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782017908/Three_Burner_Range_nnxabi.jpg' },
+  { category: 'Cooking', name: '4 Burner Range With Oven', spec: 'Gas · Size Customised', image: 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782017909/Four_Burner_Range_lnqbxr.jpg' },
+  { category: 'Cooking', name: 'Gravy Grid (Griddle Plate)', spec: 'Gas / Electric · Customised', image: 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782017911/County_Grill_griddle_Plate_c3cbiy.jpg' },
+  { category: 'Cooking', name: 'Dosa Plate', spec: 'Gas · Size Customised', image: 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782017910/Dosa_Plate_vsq3oe.jpg' },
+  { category: 'Cooking', name: 'Bulk Cooker (Rice Boiler)', spec: 'Gas / Electric · 10–200 Ltr', image: 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782017912/Bulk_Cooker_kkxfcq.jpg' },
+  { category: 'Refrigeration', name: '3 Door Under Counter Refrigerator / Freezer', spec: 'Electric · Size Customised', image: 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782019742/3_Door_Under_Counter_Refrigerator_bmf3ts.jpg' },
+  { category: 'Refrigeration', name: 'Under Counter Pizza Makeline Refrigerator / Freezer', spec: 'Electric · Size Customised', image: 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782019739/Under_Counter_Pizza_Makeline_ijbwdb.jpg' },
+  { category: 'Refrigeration', name: 'Glass Door Under Counter (Back Bar Chiller)', spec: 'Electric · Size Customised', image: 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782019740/Glass_Door_Under_Counter_ae052c.jpg' },
+  { category: 'Refrigeration', name: 'Chest Freezer (Deep Freezer)', spec: 'Electric · 100 to 1000 Ltr.', image: 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782019741/Chest_Freezer_Deep_Freezer_f0gno7.jpg' },
+  { category: 'Refrigeration', name: 'Visi Cooler', spec: 'Electric · 300 to 500 Ltr.', image: 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782019738/Visi_Cooler_bwwcbr.jpg' },
+  { category: 'Refrigeration', name: 'Walk in Chiller / Walk in Freezer', spec: 'Electric · Size Customised', image: 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782019737/Walk_in_Chiller_Walk_in_Freezer_ugszyi.jpg' },
+  { category: 'Preparation', name: 'Wet Masala Grinder', spec: 'Electric · 5 to 25 Ltr.', image: 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782030727/wet_masala_grinder_2_avonxq.jpg' },
+  { category: 'Preparation', name: 'Tilting Wet Grinder', spec: 'Electric · 5 to 30 Ltr.', image: 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782015937/Tilting_Wet_Grinder_2_gsi8nb.webp' },
+  { category: 'Preparation', name: 'Dough Kneader', spec: 'Electric · 5 to 100 Ltr.', image: 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782016559/Dough_Kneader_4_e8dkci.jpg' },
+];
+
+function OurProducts() {
+  return (
+    <section style={{ background: 'var(--charcoal)', padding: 'clamp(2.25rem, 4.5vw, 3.5rem) 0', position: 'relative', overflow: 'hidden' }} aria-labelledby="lp-products-heading">
+      <div aria-hidden="true" style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse 65% 100% at 50% 0%, rgba(201,168,76,0.12) 0%, transparent 65%)', pointerEvents: 'none' }} />
+      <div className="container" style={{ position: 'relative' }}>
+        <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
+          <span className="section-label">Our Products</span>
+          <RevealTitle id="lp-products-heading" style={{ fontFamily: 'var(--font-playfair)', fontSize: 'clamp(1.75rem, 3.4vw, 2.6rem)', color: 'var(--text-on-dark)', letterSpacing: '-0.02em', margin: '0.75rem 0 0' }} text="Commercial Kitchen Equipment We Supply" />
+          <span className="gold-divider lp-divider-glow" style={{ marginTop: '1rem' }} />
+        </div>
+
+        <Reveal>
+          <ProductsCarousel items={OUR_PRODUCTS} />
+        </Reveal>
+
+        <div style={{ marginTop: '1.5rem' }}>
+          <SectionCta />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─── Certificates — trust badges (ISO 9001, MSME, GST) ────────────────────── */
+const CERTIFICATES: { Icon: typeof ShieldCheck; title: string; caption: string; image: string }[] = [
+  { Icon: ShieldCheck, title: 'ISO 9001:2015 Certified', caption: 'Quality management system certified for consistent manufacturing standards.', image: '/Certificates/ISO.webp' },
+  { Icon: Award, title: 'MSME Registered', caption: 'Registered as a Micro, Small & Medium Enterprise under the Government of India.', image: '/Certificates/MSME_CERTIFICATE.webp' },
+  { Icon: CheckCircle2, title: 'GST Registered', caption: 'Fully GST-compliant business — transparent, itemised, tax-compliant billing.', image: '/Certificates/VSD_GST_CERTIFICATE.webp' },
+];
+
+function Certificates() {
+  return (
+    <section style={{ background: 'var(--surface-alt)', padding: 'clamp(2.25rem, 4.5vw, 3.5rem) 0' }} aria-labelledby="lp-cert-heading">
+      <div className="container">
+        <div style={{ textAlign: 'center', marginBottom: '2.75rem' }}>
+          <span className="section-label">Certified for Trust</span>
+          <RevealTitle id="lp-cert-heading" style={{ fontFamily: 'var(--font-playfair)', fontSize: 'clamp(1.75rem, 3.4vw, 2.6rem)', color: 'var(--text-dark)', letterSpacing: '-0.02em', margin: '0.75rem 0 0' }} text="Recognised, Registered & Verified" />
+          <span className="gold-divider lp-divider-glow" style={{ marginTop: '1rem' }} />
+          <p style={{ fontFamily: 'var(--font-inter)', fontSize: '0.95rem', color: 'var(--text-muted)', maxWidth: '34rem', margin: '1rem auto 0' }}>
+            Every kitchen we deliver is backed by the same certifications you can verify below — click any certificate to view it full-size.
+          </p>
+        </div>
+
+        <div className="lp-cert-grid">
+          {CERTIFICATES.map(({ Icon, title, caption, image }, i) => (
+            <Reveal key={title} delay={i * 0.08}>
+              <a href={image} target="_blank" rel="noopener noreferrer" className="lp-cert-card">
+                <div className="lp-cert-photo">
+                  <div className="lp-cert-frame">
+                    <Image src={image} alt={title} fill sizes="(max-width: 640px) 90vw, 320px" style={{ objectFit: 'contain' }} />
+                  </div>
+                  <span className="lp-cert-seal">
+                    <Icon size={16} style={{ color: '#1A1508' }} />
+                  </span>
+                </div>
+                <div className="lp-cert-info">
+                  <h3>{title}</h3>
+                  <p>{caption}</p>
+                  <span>
+                    View Full Certificate <ArrowRight size={12} />
+                  </span>
+                </div>
+              </a>
+            </Reveal>
+          ))}
+        </div>
+
+        <div style={{ marginTop: '2.5rem' }}>
+          <SectionCta />
         </div>
       </div>
     </section>
@@ -474,10 +612,10 @@ function Comparison() {
     ['Single team: design, supply, install & AMC', true, false],
     ['Authorised dealer for imported brands + warranty', true, false],
     ['Committed 21-day turnkey timeline', true, false],
-    ['500+ delivered projects & 5★ track record', true, false],
+    ['200+ delivered projects & 5★ track record', true, false],
   ];
   return (
-    <section style={{ background: '#fff', padding: 'clamp(3rem, 6vw, 5rem) 0' }} aria-labelledby="lp-compare-heading">
+    <section style={{ background: '#fff', padding: 'clamp(2.25rem, 4.5vw, 3.5rem) 0' }} aria-labelledby="lp-compare-heading">
       <div className="container" style={{ maxWidth: '52rem' }}>
         <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
           <span className="section-label">VSD vs Typical Vendor</span>
@@ -516,75 +654,153 @@ function Comparison() {
             ))}
           </div>
         </Reveal>
-        <div style={{ textAlign: 'center', marginTop: '2rem' }}>
-          <LeadCta className="btn-gold">
-            Get My Free Quote <ArrowRight size={16} />
-          </LeadCta>
+        <div style={{ marginTop: '2rem' }}>
+          <SectionCta />
         </div>
       </div>
     </section>
   );
 }
 
-/* ─── Clients / social proof ───────────────────────────────────────────────── */
+/* ─── Clients / social proof — infinite smooth logo carousel ──────────────── */
 function Clients() {
-  const logos = ['Hyatt Regency', 'Radisson Blu', 'Crowne Plaza', 'ITC Welcomhotel', 'Metro Hospitals', 'Rebel Foods', 'Yashoda', 'Sarvodaya'];
+  const logos: { name: string; src: string }[] = [
+    { name: 'Hyatt Regency', src: '/Client_Logo/Hyatt_Regency_Logo.png' },
+    { name: 'Radisson Blu', src: '/Client_Logo/Radisson_Blu.png' },
+    { name: 'Crowne Plaza', src: '/Client_Logo/Crowne_Plaza_Logo.png' },
+    { name: 'ITC Welcomhotel', src: '/Client_Logo/ITC_Welcomhotel_Logo.png' },
+    { name: 'Metro Hospital', src: '/Client_Logo/Metro_Hospital.png' },
+    { name: 'Sarvodaya Healthcare', src: '/Client_Logo/Sarvodya_HealthCare.jpg' },
+    { name: 'Yashoda Hospital', src: '/Client_Logo/Yasodha_Hospital.png' },
+  ];
+  const logoCard = (l: { name: string; src: string }, key: string) => (
+    <span key={key} className="lp-client-logo-card" title={l.name}>
+      <Image src={l.src} alt={l.name} fill sizes="150px" style={{ objectFit: 'contain' }} />
+    </span>
+  );
   return (
-    <section style={{ background: 'var(--charcoal-light)', padding: 'clamp(2.5rem, 5vw, 4rem) 0' }} aria-labelledby="lp-clients-heading">
+    <section style={{ background: 'var(--charcoal-light)', padding: 'clamp(1.75rem, 3.5vw, 2.75rem) 0' }} aria-labelledby="lp-clients-heading">
       <div className="container" style={{ textAlign: 'center' }}>
         <span className="section-label">Trusted By</span>
         <RevealTitle id="lp-clients-heading" style={{ fontFamily: 'var(--font-playfair)', fontSize: 'clamp(1.5rem, 3vw, 2.25rem)', color: 'var(--text-on-dark)', margin: '0.75rem 0 0.5rem' }} text="Kitchens Built for India's Best Brands" />
         <p style={{ fontFamily: 'var(--font-inter)', fontSize: '0.92rem', color: 'rgba(245,240,232,0.5)', marginBottom: '2rem' }}>
           From 5-star hotels and NABH hospitals to high-volume cloud kitchens.
         </p>
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.75rem' }}>
-          {logos.map((l, i) => (
-            <Reveal key={l} delay={i * 0.04} y={10}>
-              <span
-                className="lp-client-pill"
-                style={{
-                  display: 'inline-block',
-                  padding: '0.6rem 1.15rem',
-                  borderRadius: '100px',
-                  background: 'rgba(201,168,76,0.06)',
-                  border: '1px solid rgba(201,168,76,0.2)',
-                  fontFamily: 'var(--font-inter)',
-                  fontSize: '0.85rem',
-                  fontWeight: 600,
-                  color: 'rgba(245,240,232,0.78)',
-                }}
-              >
-                {l}
-              </span>
-            </Reveal>
-          ))}
+      </div>
+      <Reveal>
+        <div
+          style={{
+            maskImage: 'linear-gradient(90deg, transparent, black 8%, black 92%, transparent)',
+            WebkitMaskImage: 'linear-gradient(90deg, transparent, black 8%, black 92%, transparent)',
+          }}
+        >
+          <div className="marquee-track marquee-track--triple" style={{ gap: '1rem', animationDuration: '36s' }} aria-hidden="true">
+            {logos.map((l) => logoCard(l, `a-${l.name}`))}
+            {logos.map((l) => logoCard(l, `b-${l.name}`))}
+            {logos.map((l) => logoCard(l, `c-${l.name}`))}
+          </div>
         </div>
+      </Reveal>
+
+      <div className="container" style={{ marginTop: '2.5rem' }}>
+        <SectionCta />
       </div>
     </section>
   );
 }
 
-/* ─── Testimonials (keyword-rich) ──────────────────────────────────────────── */
+/* ─── Testimonials (keyword-rich, slider) ──────────────────────────────────── */
+const TESTIMONIALS: Review[] = [
+  {
+    name: 'Rajeev Menon',
+    role: 'F&B Director, 5-Star Hotel — Delhi',
+    text: 'VSD International handled our entire hotel kitchen setup — layout design, SS fabrication and installation — in 24 days. The commercial kitchen equipment quality is genuinely 5-star and the team stuck to the committed timeline.',
+  },
+  {
+    name: 'Anjali Verma',
+    role: 'Founder, Cloud Kitchen Brand — Gurgaon',
+    text: 'We launched our cloud kitchen setup in 13 days. Their commercial kitchen layout squeezed maximum output from a tiny space and the itemised quote had zero hidden costs. Best commercial kitchen equipment manufacturer we found in Delhi NCR.',
+  },
+  {
+    name: 'Dr. S. Khanna',
+    role: 'Admin Head, Multi-Speciality Hospital',
+    text: 'For our hospital kitchen equipment we needed NABH-compliant, food-grade SS 304 fabrication. VSD delivered a turnkey commercial kitchen that cleared every audit on the first inspection. Highly recommended.',
+  },
+  {
+    name: 'Vikram Singh',
+    role: 'Owner, North Indian Restaurant — Karol Bagh, Delhi',
+    text: 'We searched commercial kitchen equipment near me for weeks and found VSD just down the road. Their restaurant kitchen equipment is solid, heavy-gauge steel — not the flimsy stuff most local suppliers push.',
+  },
+  {
+    name: 'Priya Nair',
+    role: 'Operations Head, QSR Chain — Noida',
+    text: 'As a multi-outlet QSR we needed a reliable manufacturer of commercial kitchen equipment who could standardise five kitchens at once. Their restaurant cooking equipment held up perfectly under daily peak-hour volume.',
+  },
+  {
+    name: 'Arjun Malhotra',
+    role: 'Executive Chef, Banquet Hall — Chandigarh',
+    text: 'VSD is hands-down the best commercial kitchen equipment manufacturer in Delhi we have worked with. Their commercial cooking equipment handles 500-cover banquets without a single hiccup.',
+  },
+  {
+    name: 'Sunita Rao',
+    role: 'Director, Catering Company — Gurgaon',
+    text: 'We needed suppliers of commercial kitchen equipment who actually understood high-volume catering. VSD’s fabrication is industrial kitchen equipment manufacturers-grade — it survives daily abuse on-site.',
+  },
+  {
+    name: 'Mohammed Iqbal',
+    role: 'Owner, Biryani Restaurant Chain — Lucknow',
+    text: 'Searched commercial kitchen equipment near me for weeks before finding VSD. Pan-India delivery, and the restaurant and kitchen equipment quality matched what 5-star hotels use.',
+  },
+  {
+    name: 'Neha Kapoor',
+    role: 'Founder, Patisserie & Bakery — Mumbai',
+    text: 'Their commercial cooking equipment — ovens, proofers, worktables — is genuinely commercial-grade. I recommend VSD to every bakery owner who asks me about commercial kitchen cooking equipment.',
+  },
+  {
+    name: 'Ramesh Pillai',
+    role: 'General Manager, Beach Resort — Goa',
+    text: 'We compared several industrial kitchen equipment manufacturers before choosing VSD. Their fabrication quality and on-time installation made the decision easy.',
+  },
+  {
+    name: 'Kavita Joshi',
+    role: 'Admin Manager, Corporate Cafeteria — Pune',
+    text: 'VSD supplied our entire cafeteria’s commercial kitchen equipment — from tandoors to dish-wash lines — on a fixed budget with zero surprises.',
+  },
+  {
+    name: 'Sandeep Yadav',
+    role: 'Owner, Multi-Cuisine Restaurant — Jaipur',
+    text: 'Best restaurant kitchen equipment supplier we have used in 12 years of running restaurants. The SS 304 build quality is noticeably heavier-gauge than competitors.',
+  },
+  {
+    name: 'Farah Sheikh',
+    role: 'Founder, Cloud Kitchen Network — Hyderabad',
+    text: 'Needed a commercial kitchen equipment manufacturer in Delhi who could ship pan-India fast. VSD’s team handled the logistics to our Hyderabad kitchen without any delay.',
+  },
+  {
+    name: 'Deepak Chawla',
+    role: 'Director, Wedding Caterers — Amritsar',
+    text: 'Our outdoor catering rigs needed rugged commercial cooking equipment. VSD’s burners and bhatti units have survived three wedding seasons without a single breakdown.',
+  },
+  {
+    name: 'Anita Desai',
+    role: 'Owner, Café Chain — Ahmedabad',
+    text: 'We needed restaurant cooking equipment that could be serviced easily across multiple cities. VSD’s AMC support has been faster than any local supplier we tried before.',
+  },
+  {
+    name: 'Harpreet Singh',
+    role: 'Plant Manager, Industrial Canteen — Manesar',
+    text: 'Among the industrial kitchen equipment manufacturers we evaluated, VSD handled our 2,000-meal canteen setup with genuine engineering rigor, not just sales talk.',
+  },
+  {
+    name: 'Rohit Bansal',
+    role: 'Owner, Family Restaurant — Dehradun',
+    text: 'Looked up commercial kitchen equipment near me and VSD’s site-visit team reached us within days despite us being a smaller hill-town restaurant. True pan-India suppliers of commercial kitchen equipment.',
+  },
+];
+
 function Testimonials() {
-  const reviews = [
-    {
-      name: 'Rajeev Menon',
-      role: 'F&B Director, 5-Star Hotel — Delhi',
-      text: 'VSD International handled our entire hotel kitchen setup — layout design, SS fabrication and installation — in 24 days. The commercial kitchen equipment quality is genuinely 5-star and the team stuck to the committed timeline.',
-    },
-    {
-      name: 'Anjali Verma',
-      role: 'Founder, Cloud Kitchen Brand — Gurgaon',
-      text: 'We launched our cloud kitchen setup in 13 days. Their commercial kitchen layout squeezed maximum output from a tiny space and the itemised quote had zero hidden costs. Best commercial kitchen equipment manufacturer we found in Delhi NCR.',
-    },
-    {
-      name: 'Dr. S. Khanna',
-      role: 'Admin Head, Multi-Speciality Hospital',
-      text: 'For our hospital kitchen equipment we needed NABH-compliant, food-grade SS 304 fabrication. VSD delivered a turnkey commercial kitchen that cleared every audit on the first inspection. Highly recommended.',
-    },
-  ];
   return (
-    <section style={{ background: 'var(--surface)', padding: 'clamp(3rem, 6vw, 5rem) 0' }} aria-labelledby="lp-reviews-heading">
+    <section style={{ background: 'var(--surface)', padding: 'clamp(2.25rem, 4.5vw, 3.5rem) 0' }} aria-labelledby="lp-reviews-heading">
       <div className="container">
         <div style={{ textAlign: 'center', marginBottom: '2.75rem' }}>
           <span className="section-label">Client Testimonials</span>
@@ -592,22 +808,12 @@ function Testimonials() {
           <span className="gold-divider lp-divider-glow" style={{ marginTop: '1rem' }} />
         </div>
 
-        <div className="lp-card-grid">
-          {reviews.map((r, i) => (
-            <Reveal key={r.name} delay={i * 0.1}>
-              <TiltCard style={{ background: '#fff', border: '1px solid var(--border)', padding: '1.75rem', height: '100%' }}>
-                <Quote className="lp-quote-mark" strokeWidth={1.5} aria-hidden="true" />
-                <AnimatedStars size={18} className="lp-review-stars" />
-                <blockquote style={{ fontFamily: 'var(--font-inter)', fontSize: '0.92rem', color: 'var(--text-body)', lineHeight: 1.7, margin: '0.9rem 0 1.25rem' }}>
-                  “{r.text}”
-                </blockquote>
-                <figcaption style={{ borderTop: '1px solid var(--border)', paddingTop: '0.9rem' }}>
-                  <div style={{ fontFamily: 'var(--font-inter)', fontWeight: 700, fontSize: '0.9rem', color: 'var(--text-dark)' }}>{r.name}</div>
-                  <div style={{ fontFamily: 'var(--font-inter)', fontSize: '0.78rem', color: 'var(--text-muted)' }}>{r.role}</div>
-                </figcaption>
-              </TiltCard>
-            </Reveal>
-          ))}
+        <Reveal>
+          <TestimonialSlider reviews={TESTIMONIALS} />
+        </Reveal>
+
+        <div style={{ marginTop: '1.5rem' }}>
+          <SectionCta />
         </div>
       </div>
     </section>
@@ -617,7 +823,7 @@ function Testimonials() {
 /* ─── FAQs (keyword-rich, no-JS accordion) ─────────────────────────────────── */
 function Faqs() {
   return (
-    <section style={{ background: '#fff', padding: 'clamp(3rem, 6vw, 5rem) 0' }} aria-labelledby="lp-faq-heading">
+    <section style={{ background: '#fff', padding: 'clamp(2.25rem, 4.5vw, 3.5rem) 0' }} aria-labelledby="lp-faq-heading">
       <div className="container" style={{ maxWidth: '46rem' }}>
         <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
           <span className="section-label">Questions, Answered</span>
@@ -651,6 +857,10 @@ function Faqs() {
             </details>
           ))}
         </div>
+
+        <div style={{ marginTop: '2rem' }}>
+          <SectionCta />
+        </div>
       </div>
     </section>
   );
@@ -659,7 +869,7 @@ function Faqs() {
 /* ─── Google reviews block ─────────────────────────────────────────────────── */
 function GoogleReviews() {
   return (
-    <section style={{ background: 'var(--surface-alt)', padding: 'clamp(3rem, 6vw, 4.5rem) 0' }} aria-label="Verified Google reviews">
+    <section style={{ background: 'var(--surface-alt)', padding: 'clamp(2.25rem, 4.5vw, 3.25rem) 0' }} aria-label="Verified Google reviews">
       <div className="container" style={{ maxWidth: '34rem', textAlign: 'center' }}>
         <span className="section-label" style={{ marginBottom: '1.5rem', display: 'inline-block' }}>Verified Reviews</span>
 
@@ -690,6 +900,10 @@ function GoogleReviews() {
             </div>
           </div>
         </Reveal>
+
+        <div style={{ marginTop: '2rem' }}>
+          <SectionCta />
+        </div>
       </div>
     </section>
   );
@@ -698,7 +912,7 @@ function GoogleReviews() {
 /* ─── Final CTA with form ──────────────────────────────────────────────────── */
 function FinalCta() {
   return (
-    <section style={{ background: 'var(--charcoal)', padding: 'clamp(3rem, 6vw, 5rem) 0', position: 'relative', overflow: 'hidden' }} aria-labelledby="lp-final-heading">
+    <section style={{ background: 'var(--charcoal)', padding: 'clamp(2.25rem, 4.5vw, 3.5rem) 0', position: 'relative', overflow: 'hidden' }} aria-labelledby="lp-final-heading">
       <div aria-hidden="true" className="lp-final-glow" style={{ position: 'absolute', top: '-120px', left: '50%', transform: 'translateX(-50%)', width: '720px', height: '460px', background: 'radial-gradient(ellipse, rgba(240,196,66,0.20) 0%, rgba(201,168,76,0.1) 45%, transparent 70%)', filter: 'blur(64px)', pointerEvents: 'none' }} />
       <div className="container" style={{ position: 'relative' }}>
         <div className="lp-hero-grid">
@@ -721,7 +935,7 @@ function FinalCta() {
                   </li>
                 ))}
               </ul>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem' }}>
+              <div className="lp-cta-row" style={{ justifyContent: 'flex-start' }}>
                 <a href={`tel:${PHONE_TEL}`} className="btn-gold"><Phone size={17} /> Call {PHONE}</a>
                 <a href={WA} target="_blank" rel="noopener noreferrer" className="lp-btn-whatsapp">
                   <MessageCircle size={17} /> WhatsApp
@@ -743,24 +957,53 @@ function Footer() {
   return (
     <footer style={{ background: 'var(--charcoal-warm)', borderTop: '1px solid rgba(201,168,76,0.15)', padding: '2.5rem 0 6rem' }}>
       <div className="container" style={{ display: 'grid', gap: '1.5rem', textAlign: 'center' }}>
-        <Image src="/VSD_LOGO.png" alt="VSD International" width={150} height={46} style={{ height: 'auto', width: 'auto', maxHeight: 46, margin: '0 auto' }} />
+        <Image src="/VSD_LOGO_DARK.webp" alt="VSD International" width={150} height={46} style={{ height: 'auto', width: 'auto', maxHeight: 46, margin: '0 auto' }} />
         <p style={{ fontFamily: 'var(--font-inter)', fontSize: '0.85rem', color: 'rgba(245,240,232,0.55)', lineHeight: 1.7, maxWidth: '34rem', margin: '0 auto' }}>
           <strong style={{ color: 'var(--text-on-dark)' }}>VSD International</strong> — ISO 9001 certified commercial kitchen equipment manufacturer &amp; turnkey setup partner. Serving hotels, restaurants, cloud kitchens &amp; hospitals across India since 2009.
         </p>
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.5rem 1.5rem', fontFamily: 'var(--font-inter)', fontSize: '0.85rem', color: 'rgba(245,240,232,0.6)' }}>
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}><MapPin size={14} style={{ color: 'var(--gold)' }} /> A-347, Saraswati Gali, Mandawali, New Delhi 110092</span>
         </div>
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.75rem' }}>
+        <div className="lp-cta-row">
           <a href={`tel:${PHONE_TEL}`} className="btn-gold"><Phone size={16} /> Call {PHONE}</a>
-          <LeadCta style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.875rem 1.5rem', borderRadius: '5px', border: '1.5px solid rgba(201,168,76,0.5)', background: 'transparent', color: 'var(--gold)', fontFamily: 'var(--font-inter)', fontWeight: 700, fontSize: '0.95rem', cursor: 'pointer' }}>
-            Get Free Quote <ArrowRight size={15} />
-          </LeadCta>
+          <a href={WA} target="_blank" rel="noopener noreferrer" className="lp-btn-whatsapp">
+            <MessageCircle size={16} /> WhatsApp Us
+          </a>
         </div>
         <p style={{ fontFamily: 'var(--font-inter)', fontSize: '0.72rem', color: 'rgba(245,240,232,0.3)', marginTop: '0.5rem' }}>
           © {new Date().getFullYear()} VSD International. All rights reserved.
         </p>
       </div>
     </footer>
+  );
+}
+
+/* ─── Disclaimer & Privacy Policy — always visible, final section ──────────── */
+function DisclaimerSection() {
+  return (
+    <section style={{ background: 'var(--charcoal)', borderTop: '1px solid rgba(201,168,76,0.15)', padding: 'clamp(1.75rem, 3.5vw, 2.5rem) 0' }} aria-labelledby="lp-disclaimer-heading">
+      <div className="container" style={{ maxWidth: '64rem' }}>
+        <Reveal>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
+            <span style={{ width: 34, height: 34, borderRadius: '9px', background: 'rgba(201,168,76,0.12)', border: '1px solid rgba(201,168,76,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+              <ShieldCheck size={17} style={{ color: 'var(--gold)' }} />
+            </span>
+            <h2 id="lp-disclaimer-heading" style={{ fontFamily: 'var(--font-playfair)', fontSize: 'clamp(1.1rem, 2.2vw, 1.4rem)', color: 'var(--text-on-dark)', letterSpacing: '-0.01em' }}>
+              Disclaimer &amp; Privacy Policy
+            </h2>
+          </div>
+          <p style={{ fontFamily: 'var(--font-inter)', fontSize: '0.85rem', color: 'rgba(245,240,232,0.5)', lineHeight: 1.75 }}>
+            The information provided on this website is intended for general informational purposes only and may be updated or modified without prior notice. Product images, specifications, and other visuals are for illustrative purposes and may vary from the actual products.
+          </p>
+          <p style={{ fontFamily: 'var(--font-inter)', fontSize: '0.85rem', color: 'rgba(245,240,232,0.5)', lineHeight: 1.75, marginTop: '0.75rem' }}>
+            By submitting your contact details through this website, you authorize VSD International to contact you via phone, email, SMS, or WhatsApp regarding product inquiries, quotations, order updates, and other business-related communications.
+          </p>
+          <p style={{ fontFamily: 'var(--font-inter)', fontSize: '0.85rem', color: 'rgba(245,240,232,0.5)', lineHeight: 1.75, marginTop: '0.75rem' }}>
+            VSD International respects your privacy and is committed to safeguarding your personal information. We do not sell, rent, or disclose your personal data to third parties without your consent, except where required by law. Users are advised to independently verify product specifications and other information before making any purchase or business decision.
+          </p>
+        </Reveal>
+      </div>
+    </section>
   );
 }
 

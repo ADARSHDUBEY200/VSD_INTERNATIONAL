@@ -42,7 +42,7 @@ export default function LeadForm({
   function validate(): boolean {
     const e: Partial<FormState> = {};
     if (!form.name.trim()) e.name = 'Please enter your name';
-    if (!/^\+?[\d\s\-]{7,15}$/.test(form.phone)) e.phone = 'Enter a valid phone number';
+    if (!/^\d{10}$/.test(form.phone)) e.phone = 'Enter a valid 10-digit phone number';
     if (form.email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email))
       e.email = 'Enter a valid email';
     setErrors(e);
@@ -72,7 +72,7 @@ export default function LeadForm({
       }
       setSubmitted(true);
     } catch {
-      setErrors({ name: 'Network error. Please call +91-92503 46370.' });
+      setErrors({ name: 'Network error. Please call 09250346370.' });
     } finally {
       setSubmitting(false);
     }
@@ -150,7 +150,7 @@ export default function LeadForm({
             A kitchen expert will call you within <strong style={{ color: 'var(--gold)' }}>1 business hour</strong> with
             your free layout and quote. Prefer to talk now? Call{' '}
             <a href="tel:+919250346370" style={{ color: 'var(--gold)', fontWeight: 600 }}>
-              +91-92503&nbsp;46370
+              09250346370
             </a>
             .
           </p>
@@ -194,12 +194,15 @@ export default function LeadForm({
 
           <input
             type="tel"
-            placeholder="Phone number*"
+            placeholder="10-digit phone number*"
             value={form.phone}
-            onChange={(e) => update('phone', e.target.value)}
+            onChange={(e) => update('phone', e.target.value.replace(/\D/g, '').slice(0, 10))}
             autoComplete="tel"
+            inputMode="numeric"
+            pattern="[0-9]*"
+            maxLength={10}
             className="enquire-input"
-            aria-label="Phone number"
+            aria-label="10-digit phone number"
           />
           {errors.phone && <Err msg={errors.phone} />}
 

@@ -12,7 +12,8 @@ const brands = [
   { name: 'Vitamix',        desc: 'High-performance blenders',    country: 'USA',     flag: '🇺🇸', role: 'Authorised Dealer' },
 ];
 
-const track = [...brands, ...brands];
+/* Triple-duplicated for a seamless loop on wide screens — see .marquee-track--triple */
+const track = [...brands, ...brands, ...brands];
 
 function BrandTile({ brand }: { brand: typeof brands[0] }) {
   const initials = brand.name.split(' ').map((w) => w[0]).join('').substring(0, 2).toUpperCase();
@@ -183,7 +184,7 @@ export default function BrandsStrip() {
             WebkitMaskImage: 'linear-gradient(90deg, transparent, black 6%, black 94%, transparent)',
           }}
         >
-          <div className="marquee-track" style={{ animationDuration: '28s' }} aria-hidden="true">
+          <div className="marquee-track marquee-track--triple" style={{ animationDuration: '38s' }} aria-hidden="true">
             {track.map((brand, i) => (
               <BrandChip key={`${brand.name}-${i}`} brand={brand} separator={i > 0} />
             ))}

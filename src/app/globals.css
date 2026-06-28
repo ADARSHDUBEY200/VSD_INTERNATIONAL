@@ -336,6 +336,18 @@ section[id] {
 }
 .marquee-track:hover { animation-play-state: paused; }
 
+/* Triple-duplicated content (3 copies in the DOM instead of 2) — needed when
+   a single copy's width can be narrower than the viewport (e.g. short logo
+   lists on wide desktop screens), otherwise the loop briefly runs out of
+   content to show right before it resets. */
+@keyframes marquee-triple {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-33.3334%); }
+}
+.marquee-track--triple {
+  animation-name: marquee-triple;
+}
+
 /* ════════════════════════════════════════════════════════════════════════════
    STAR RATING
    ════════════════════════════════════════════════════════════════════════════ */
@@ -1056,23 +1068,32 @@ section[id] {
   .lp-stat-grid { grid-template-columns: repeat(4, 1fr); }
 }
 
-/* Card grids (USPs, testimonials) */
+/* Card grid (USPs) — horizontally swipeable on phones, grid from tablet up */
 .lp-card-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.25rem;
+  display: flex;
+  gap: 1.1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding-bottom: 0.4rem;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
-@media (min-width: 600px) { .lp-card-grid { grid-template-columns: repeat(2, 1fr); } }
+.lp-card-grid::-webkit-scrollbar { display: none; }
+.lp-card-grid > * {
+  scroll-snap-align: start;
+  flex: 0 0 82%;
+}
+@media (min-width: 600px) {
+  .lp-card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    overflow: visible;
+    gap: 1.25rem;
+  }
+  .lp-card-grid > * { flex: initial; }
+}
 @media (min-width: 960px) { .lp-card-grid { grid-template-columns: repeat(3, 1fr); } }
-
-/* Process steps — auto-fit so the 5 cards wrap gracefully */
-.lp-step-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
-}
-@media (min-width: 560px) { .lp-step-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 980px) { .lp-step-grid { grid-template-columns: repeat(5, 1fr); } }
 
 /* Hide phone number text on the tiniest screens (icon-only) */
 @media (max-width: 419px) { .lp-hide-sm { display: none; } }
@@ -1376,6 +1397,7 @@ section[id] {
 .lp-btn-whatsapp {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   padding: 0.875rem 1.6rem;
   min-height: 3rem;
@@ -1434,7 +1456,7 @@ section[id] {
     radial-gradient(ellipse 70% 100% at 50% 0%, rgba(201, 168, 76, 0.1) 0%, transparent 65%),
     linear-gradient(180deg, #0A0907 0%, var(--charcoal-warm) 100%);
   border-bottom: 1px solid rgba(201, 168, 76, 0.16);
-  padding: clamp(2rem, 4vw, 3.25rem) 0;
+  padding: clamp(1.5rem, 3vw, 2.5rem) 0;
 }
 
 .lp-stats {
@@ -1567,6 +1589,20 @@ section[id] {
   .lp-hero-ctas > * { width: 100%; }
 }
 
+/* Generic CTA + WhatsApp row (section CTAs, CTA band, footer, final CTA) —
+   same buttons stack to equal full-width on phones instead of each sizing
+   to its own text length. */
+.lp-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+}
+@media (max-width: 520px) {
+  .lp-cta-row { flex-direction: column; align-items: stretch; }
+  .lp-cta-row > * { width: 100%; }
+}
+
 /* ════════════════════════════════════════════════════════════════════════════
    LP — LEAD FORM  (City / Project-type row stacks on very narrow phones)
    ════════════════════════════════════════════════════════════════════════════ */
@@ -1686,6 +1722,81 @@ section[id] {
   transform: translateY(-3px);
   border-color: rgba(201, 168, 76, 0.45) !important;
   background: rgba(201, 168, 76, 0.12) !important;
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   LP — CLIENT LOGO CARD  (real logo image on a white card, for dark sections)
+   ════════════════════════════════════════════════════════════════════════════ */
+.lp-client-logo-card {
+  position: relative;
+  display: inline-block;
+  flex-shrink: 0;
+  width: 9.5rem;
+  height: 4.25rem;
+  padding: 0.85rem 1.1rem;
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid rgba(201, 168, 76, 0.18);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.lp-client-logo-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.25);
+  border-color: rgba(201, 168, 76, 0.45);
+}
+@media (max-width: 480px) {
+  .lp-client-logo-card { width: 7.25rem; height: 3.5rem; padding: 0.6rem 0.8rem; }
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   LP — OUR SERVICES  (custom SVG-icon cards, no photography)
+   ════════════════════════════════════════════════════════════════════════════ */
+.lp-service-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.1rem;
+}
+@media (min-width: 560px) { .lp-service-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 900px) { .lp-service-grid { grid-template-columns: repeat(4, 1fr); } }
+
+.lp-service-card {
+  overflow: hidden;
+}
+.lp-service-illustration {
+  position: relative;
+  height: 128px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: radial-gradient(circle at 30% 25%, rgba(201, 168, 76, 0.16) 0%, rgba(201, 168, 76, 0.05) 55%, transparent 80%), var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+.lp-service-illustration svg {
+  position: relative;
+  z-index: 2;
+  transition: transform 0.35s ease;
+}
+.lp-service-card:hover .lp-service-illustration svg {
+  transform: scale(1.08) rotate(-2deg);
+}
+.lp-service-illustration-dots {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(201, 168, 76, 0.28) 1px, transparent 1.4px);
+  background-size: 14px 14px;
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, black 0%, transparent 75%);
+  mask-image: radial-gradient(circle at 50% 50%, black 0%, transparent 75%);
+  opacity: 0.6;
+}
+.lp-service-eyebrow {
+  display: inline-block;
+  font-family: var(--font-inter);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--gold-deep);
+  opacity: 0.7;
 }
 
 /* ════════════════════════════════════════════════════════════════════════════
@@ -1870,5 +1981,304 @@ section[id] {
 }
 @media (prefers-reduced-motion: reduce) {
   .lp-intro-halo { animation: none; opacity: 0.8; }
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   LP — TESTIMONIAL SLIDER  (snap-scroll carousel, autoplay + arrows)
+   Card count per view is pure CSS (flex-basis breakpoints) so it's fully
+   responsive with zero JS layout logic; native touch scroll handles swipe.
+   ════════════════════════════════════════════════════════════════════════════ */
+.lp-testi-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.lp-testi-track {
+  display: flex;
+  gap: 1.25rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding: 0.4rem 0.15rem 1rem;
+  flex: 1;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.lp-testi-track::-webkit-scrollbar {
+  display: none;
+}
+.lp-testi-card {
+  scroll-snap-align: start;
+  flex: 0 0 86%;
+}
+@media (min-width: 640px) {
+  .lp-testi-card { flex: 0 0 46%; }
+}
+@media (min-width: 1020px) {
+  .lp-testi-card { flex: 0 0 31.5%; }
+}
+.lp-testi-arrow {
+  flex-shrink: 0;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 50%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border: 1px solid var(--border);
+  color: var(--gold-deep);
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+.lp-testi-arrow:hover {
+  background: rgba(201, 168, 76, 0.1);
+  border-color: rgba(201, 168, 76, 0.4);
+  transform: scale(1.06);
+}
+@media (min-width: 640px) {
+  .lp-testi-arrow { display: flex; }
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   LP — OUR PRODUCTS CAROUSEL  (image-forward equipment cards, snap-scroll)
+   ════════════════════════════════════════════════════════════════════════════ */
+.lp-prod-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.lp-prod-track {
+  display: flex;
+  gap: 1.1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding: 0.4rem 0.15rem 1rem;
+  flex: 1;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.lp-prod-track::-webkit-scrollbar {
+  display: none;
+}
+.lp-prod-card {
+  position: relative;
+  scroll-snap-align: start;
+  flex: 0 0 72%;
+  height: 330px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(201, 168, 76, 0.22);
+  background: var(--charcoal-mid);
+  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.32), 0 0 0 1px rgba(201, 168, 76, 0.06);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  animation: lp-prod-glow 4.5s ease-in-out infinite;
+}
+.lp-prod-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.45), 0 0 30px rgba(201, 168, 76, 0.32), 0 0 0 1px rgba(201, 168, 76, 0.55);
+  border-color: rgba(201, 168, 76, 0.6);
+}
+@keyframes lp-prod-glow {
+  0%, 100% { box-shadow: 0 8px 26px rgba(0, 0, 0, 0.32), 0 0 0 1px rgba(201, 168, 76, 0.06); }
+  50% { box-shadow: 0 8px 26px rgba(0, 0, 0, 0.32), 0 0 18px rgba(201, 168, 76, 0.22), 0 0 0 1px rgba(201, 168, 76, 0.3); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lp-prod-card { animation: none; }
+}
+@media (min-width: 540px) {
+  .lp-prod-card { flex: 0 0 42%; }
+}
+@media (min-width: 900px) {
+  .lp-prod-card { flex: 0 0 23.5%; }
+}
+.lp-prod-photo {
+  position: relative;
+  height: 180px;
+  flex-shrink: 0;
+  background: radial-gradient(ellipse 90% 80% at 50% 40%, #F4EFE4 0%, #E2D9C3 100%);
+  overflow: hidden;
+}
+.lp-prod-photo img {
+  transition: transform 0.5s ease;
+  padding: 0.75rem;
+}
+.lp-prod-card:hover .lp-prod-photo img {
+  transform: scale(1.06);
+}
+.lp-prod-badge {
+  position: absolute;
+  top: 0.85rem;
+  left: 0.85rem;
+  background: rgba(20, 16, 8, 0.7);
+  border: 1px solid rgba(201, 168, 76, 0.52);
+  border-radius: 999px;
+  padding: 0.22rem 0.7rem;
+  font-family: var(--font-inter);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  backdrop-filter: blur(8px);
+  z-index: 2;
+}
+.lp-prod-info {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0.95rem 1.1rem 1.1rem;
+  border-top: 1px solid rgba(201, 168, 76, 0.16);
+}
+.lp-prod-info h3 {
+  font-family: var(--font-playfair);
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.25;
+  margin-bottom: 0.3rem;
+}
+.lp-prod-info p {
+  font-family: var(--font-inter);
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.55);
+  font-weight: 500;
+}
+.lp-prod-arrow {
+  flex-shrink: 0;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 50%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  color: var(--gold);
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+.lp-prod-arrow:hover {
+  background: rgba(201, 168, 76, 0.15);
+  border-color: rgba(201, 168, 76, 0.5);
+  transform: scale(1.06);
+}
+@media (min-width: 640px) {
+  .lp-prod-arrow { display: flex; }
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   LP — CERTIFICATES  (trust badges, glowing card, click-to-enlarge)
+   ════════════════════════════════════════════════════════════════════════════ */
+.lp-cert-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  max-width: 56rem;
+  margin: 0 auto;
+}
+@media (min-width: 640px) {
+  .lp-cert-grid { grid-template-columns: repeat(3, 1fr); }
+}
+.lp-cert-card {
+  display: block;
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid rgba(201, 168, 76, 0.25);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(201, 168, 76, 0.06);
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  animation: lp-cert-glow 4.2s ease-in-out infinite;
+}
+.lp-cert-card:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 22px 50px rgba(0, 0, 0, 0.14), 0 0 32px rgba(201, 168, 76, 0.3), 0 0 0 1px rgba(201, 168, 76, 0.55);
+  border-color: rgba(201, 168, 76, 0.6);
+}
+@keyframes lp-cert-glow {
+  0%, 100% { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(201, 168, 76, 0.06); }
+  50% { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08), 0 0 22px rgba(201, 168, 76, 0.28), 0 0 0 1px rgba(201, 168, 76, 0.3); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lp-cert-card { animation: none; }
+}
+.lp-cert-photo {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.35rem;
+  background: linear-gradient(160deg, #EDE6D3 0%, #D9CDA9 100%);
+  overflow: hidden;
+}
+.lp-cert-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.24), 0 0 0 1px rgba(0, 0, 0, 0.06);
+  transition: transform 0.45s ease, box-shadow 0.45s ease;
+}
+.lp-cert-frame img {
+  padding: 0.35rem;
+}
+.lp-cert-card:hover .lp-cert-frame {
+  transform: scale(1.045);
+  box-shadow: 0 24px 46px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(0, 0, 0, 0.06);
+}
+.lp-cert-seal {
+  position: absolute;
+  top: 0.85rem;
+  right: 0.85rem;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-deep));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(201, 168, 76, 0.5);
+  z-index: 2;
+}
+.lp-cert-info {
+  padding: 1.1rem 1.25rem 1.3rem;
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+.lp-cert-info h3 {
+  font-family: var(--font-playfair);
+  font-size: 1.05rem;
+  color: var(--text-dark);
+  margin-bottom: 0.3rem;
+}
+.lp-cert-info p {
+  font-family: var(--font-inter);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+.lp-cert-info span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-top: 0.6rem;
+  font-family: var(--font-inter);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--gold-deep);
 }
 
