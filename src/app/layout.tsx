@@ -1,5 +1,5 @@
 ﻿import type { Metadata } from 'next';
-import { Playfair_Display, Inter } from 'next/font/google';
+import { Playfair_Display, Inter, Poppins } from 'next/font/google';
 import Script from 'next/script';
 import './globals.css';
 
@@ -16,6 +16,13 @@ const inter = Inter({
   variable: '--font-inter',
   display: 'swap',
   weight: ['300', '400', '500', '600', '700', '800'],
+});
+
+const poppins = Poppins({
+  subsets: ['latin'],
+  variable: '--font-poppins',
+  display: 'swap',
+  weight: ['400', '500', '600', '700', '800'],
 });
 
 /* --- SEO Metadata --------------------------------------------------------- */
@@ -231,7 +238,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${playfair.variable} ${inter.variable} scroll-smooth`}
+      className={`${playfair.variable} ${inter.variable} ${poppins.variable} scroll-smooth`}
     >
       <head>
         {/* Preconnect for performance */}

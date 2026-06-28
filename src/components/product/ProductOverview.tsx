@@ -1,19 +1,11 @@
 import type { Product } from '@/types/product';
+import { categoryLabel as getCategoryLabel } from '@/lib/categories';
 
 interface ProductOverviewProps {
   overview: Product['overview'];
   fullName: Product['fullName'];
   category: Product['category'];
 }
-
-const CATEGORY_LABELS: Record<string, string> = {
-  'combi-ovens':             'Combi Ovens',
-  'blast-chillers':          'Blast Chillers',
-  'dishwashers':             'Dishwashers',
-  'multifunctional-cooking': 'Multifunctional Cooking',
-  'refrigeration':           'Refrigeration',
-  'fabrication':             'SS Fabrication',
-};
 
 function splitLede(text: string): [string, string] {
   const idx = text.search(/\.\s+[A-Z]/);
@@ -24,7 +16,7 @@ function splitLede(text: string): [string, string] {
 const BADGES = ['CE Marked', 'HACCP-Suitable', 'Authorised Dealer', 'Pan-India Supply'];
 
 export default function ProductOverview({ overview, fullName, category }: ProductOverviewProps) {
-  const categoryLabel = CATEGORY_LABELS[category] ?? category;
+  const categoryLabel = getCategoryLabel(category);
   const [lede, body] = splitLede(overview);
 
   return (

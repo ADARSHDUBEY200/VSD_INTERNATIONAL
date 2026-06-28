@@ -9,7 +9,7 @@ export async function GET(request: NextRequest) {
     const status   = searchParams.get('status');
     const category = searchParams.get('category');
     const page     = Math.max(1, parseInt(searchParams.get('page') ?? '1'));
-    const limit    = 20;
+    const limit    = Math.min(200, Math.max(1, parseInt(searchParams.get('limit') ?? '20')));
 
     const filter: Record<string, string> = {};
     if (status   && status   !== 'all') filter.status   = status;
@@ -17,7 +17,7 @@ export async function GET(request: NextRequest) {
 
     const [products, total] = await Promise.all([
       Product.find(filter).sort({ createdAt: -1 }).skip((page - 1) * limit).limit(limit)
-        .select('name slug category brand status featured images createdAt').lean(),
+        .select('fullName slug category brand status featured mainImage createdAt').lean(),
       Product.countDocuments(filter),
     ]);
 
@@ -30,7 +30,7 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    if (!body.name?.trim() || !body.slug?.trim() || !body.category?.trim()) {
+    if (!body.fullName?.trim() || !body.slug?.trim() || !body.category?.trim()) {
       return Response.json({ error: 'Name, slug and category are required' }, { status: 400 });
     }
 

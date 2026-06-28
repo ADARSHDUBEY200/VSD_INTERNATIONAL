@@ -1,6 +1,9 @@
+import { cache } from 'react';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { mockProduct } from '@/lib/productData';
+import { connectDB } from '@/lib/mongodb';
+import Product from '@/lib/models/Product';
+import { toProductViewModel, type ProductDocLike } from '@/lib/productPresenter';
 import { SITE_URL } from '@/lib/config';
 import Breadcrumb from '@/components/product/Breadcrumb';
 import ProductHero from '@/components/product/ProductHero';
@@ -21,14 +24,22 @@ import ProductCTA from '@/components/product/ProductCTA';
 /* ── Types ──────────────────────────────────────────────────────────────────── */
 type PageParams = Promise<{ category: string; slug: string }>;
 
+/* ── Data fetching (memoized per-request so generateMetadata + Page share one query) ── */
+const getProductDoc = cache(async (slug: string): Promise<ProductDocLike | null> => {
+  await connectDB();
+  const doc = await Product.findOne({ slug, status: 'active' })
+    .populate('relatedProducts', 'fullName slug category mainImage tagline')
+    .lean();
+  return doc as unknown as ProductDocLike | null;
+});
+
 /* ── generateMetadata ────────────────────────────────────────────────────────  */
 export async function generateMetadata({ params }: { params: PageParams }): Promise<Metadata> {
   const { slug } = await params;
+  const doc = await getProductDoc(slug);
+  if (!doc) return { title: 'Product Not Found' };
 
-  // TODO: fetch from DB — const product = await db.getProduct(slug);
-  const product = slug === mockProduct.slug ? mockProduct : null;
-  if (!product) return { title: 'Product Not Found' };
-
+  const product = toProductViewModel(doc);
   const canonicalUrl = `${SITE_URL}${product.seo.canonicalSlug}`;
   const firstImage = product.images[0];
 
@@ -43,14 +54,16 @@ export async function generateMetadata({ params }: { params: PageParams }): Prom
       description: product.seo.metaDescription,
       url: canonicalUrl,
       type: 'website',
-      images: [
-        {
-          url: firstImage.startsWith('http') ? firstImage : `${SITE_URL}${firstImage}`,
-          width: 1200,
-          height: 900,
-          alt: `${product.brand} ${product.fullName} — front view`,
-        },
-      ],
+      images: firstImage
+        ? [
+            {
+              url: firstImage.startsWith('http') ? firstImage : `${SITE_URL}${firstImage}`,
+              width: 1200,
+              height: 900,
+              alt: `${product.brand} ${product.fullName} — front view`,
+            },
+          ]
+        : undefined,
     },
   };
 }
@@ -59,9 +72,9 @@ export async function generateMetadata({ params }: { params: PageParams }): Prom
 export default async function ProductPage({ params }: { params: PageParams }) {
   const { slug } = await params;
 
-  // TODO: fetch from DB — const product = await db.getProduct(slug);
-  const product = slug === mockProduct.slug ? mockProduct : null;
-  if (!product) notFound();
+  const doc = await getProductDoc(slug);
+  if (!doc) notFound();
+  const product = toProductViewModel(doc);
 
   return (
     <>

@@ -16,15 +16,17 @@ const CATEGORIES = [
 
 interface BlogData {
   title: string; slug: string; category: string; excerpt: string;
-  content: string; featuredImage: string;
+  content: string; mainImage: string; childImages: string[];
   metaTitle: string; metaDescription: string;
+  schemaTitle: string; schemaDescription: string;
   author: string; status: 'draft' | 'published';
 }
 
 const EMPTY: BlogData = {
   title: '', slug: '', category: '', excerpt: '',
-  content: '', featuredImage: '',
+  content: '', mainImage: '', childImages: ['', '', '', ''],
   metaTitle: '', metaDescription: '',
+  schemaTitle: '', schemaDescription: '',
   author: 'VSD International', status: 'draft',
 };
 
@@ -63,7 +65,14 @@ export default function BlogForm({ id }: { id?: string }) {
     if (!isEdit) return;
     fetch(`/api/admin/blogs/${id}`)
       .then(r => r.json())
-      .then(({ blog }) => { if (blog) { setData(blog); setSlugManual(true); } })
+      .then(({ blog }) => {
+        if (blog) {
+          const childImages = [...(blog.childImages ?? [])];
+          while (childImages.length < 4) childImages.push('');
+          setData({ ...EMPTY, ...blog, childImages: childImages.slice(0, 4) });
+          setSlugManual(true);
+        }
+      })
       .finally(() => setLoading(false));
   }, [id, isEdit]);
 
@@ -78,12 +87,16 @@ export default function BlogForm({ id }: { id?: string }) {
     });
   }
 
+  const setChildImage = (i: number, url: string) => {
+    const n = [...data.childImages]; n[i] = url; set('childImages', n);
+  };
+
   async function handleSave(publish = false) {
     if (!data.title.trim() || !data.slug.trim() || !data.content.trim()) {
       setError('Title, slug and content are required.'); return;
     }
     setSaving(true); setError('');
-    const payload = { ...data, status: publish ? 'published' : data.status } as BlogData;
+    const payload = { ...data, childImages: data.childImages.filter(Boolean), status: publish ? 'published' : data.status } as BlogData;
     try {
       const url    = isEdit ? `/api/admin/blogs/${id}` : '/api/admin/blogs';
       const method = isEdit ? 'PUT' : 'POST';
@@ -188,18 +201,51 @@ export default function BlogForm({ id }: { id?: string }) {
 
           {/* SEO */}
           <div style={cardStyle}>
-            <p style={{ fontSize: 13, fontWeight: 700, color: '#0F172A', margin: '0 0 0.875rem' }}>SEO Settings</p>
+            <p style={{ fontSize: 13, fontWeight: 700, color: '#0F172A', margin: '0 0 0.875rem' }}>SEO Settings — Meta Tags</p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               <div>
                 <label style={labelStyle}>Meta Title</label>
-                <input value={data.metaTitle} onChange={e => set('metaTitle', e.target.value)} style={inputStyle} placeholder="SEO title" />
+                <input value={data.metaTitle} onChange={e => set('metaTitle', e.target.value)} style={inputStyle} placeholder="SEO title — falls back to post title if left blank" />
                 <p style={{ fontSize: 11, color: '#94A3B8', margin: '0.25rem 0 0' }}>{data.metaTitle.length}/60</p>
               </div>
               <div>
                 <label style={labelStyle}>Meta Description</label>
-                <textarea value={data.metaDescription} onChange={e => set('metaDescription', e.target.value)} rows={3} placeholder="150–160 chars ideal" style={{ ...inputStyle, resize: 'vertical' }} />
+                <textarea value={data.metaDescription} onChange={e => set('metaDescription', e.target.value)} rows={3} placeholder="150–160 chars ideal. Falls back to excerpt if left blank." style={{ ...inputStyle, resize: 'vertical' }} />
                 <p style={{ fontSize: 11, color: '#94A3B8', margin: '0.25rem 0 0' }}>{data.metaDescription.length}/160</p>
               </div>
+            </div>
+          </div>
+
+          {/* Schema.org overrides */}
+          <div style={cardStyle}>
+            <p style={{ fontSize: 13, fontWeight: 700, color: '#0F172A', margin: '0 0 0.375rem' }}>Schema.org (JSON-LD) Overrides</p>
+            <p style={{ fontSize: 12, color: '#64748B', margin: '0 0 0.875rem' }}>
+              Controls the <code>headline</code> and <code>description</code> fields in the structured data read by search engines and AI crawlers.
+              The rest of the markup (author, breadcrumbs, dates) is generated automatically.
+            </p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+              <div>
+                <label style={labelStyle}>Schema Title</label>
+                <input value={data.schemaTitle} onChange={e => set('schemaTitle', e.target.value)} style={inputStyle} placeholder="Falls back to post title if left blank" />
+              </div>
+              <div>
+                <label style={labelStyle}>Schema Description</label>
+                <textarea value={data.schemaDescription} onChange={e => set('schemaDescription', e.target.value)} rows={3} placeholder="Falls back to excerpt if left blank." style={{ ...inputStyle, resize: 'vertical' }} />
+              </div>
+            </div>
+          </div>
+
+          {/* Images */}
+          <div style={cardStyle}>
+            <ImageUpload value={data.mainImage} onChange={url => set('mainImage', url)} folder="vsd-international/blogs" label="Main Image *" />
+          </div>
+
+          <div style={cardStyle}>
+            <p style={{ fontSize: 13, fontWeight: 700, color: '#0F172A', margin: '0 0 0.75rem' }}>Child Images (up to 4)</p>
+            <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: '0.875rem' }}>
+              {[0, 1, 2, 3].map(i => (
+                <ImageUpload key={i} value={data.childImages[i] ?? ''} onChange={url => setChildImage(i, url)} folder="vsd-international/blogs" label={`Child Image ${i + 1}`} />
+              ))}
             </div>
           </div>
         </div>
@@ -236,11 +282,6 @@ export default function BlogForm({ id }: { id?: string }) {
           <div style={cardStyle}>
             <label style={labelStyle}>Excerpt *</label>
             <textarea value={data.excerpt} onChange={e => set('excerpt', e.target.value)} rows={4} placeholder="Short description for listings…" style={{ ...inputStyle, resize: 'vertical' }} />
-          </div>
-
-          {/* Featured image */}
-          <div style={cardStyle}>
-            <ImageUpload value={data.featuredImage} onChange={url => set('featuredImage', url)} folder="vsd-international/blogs" label="Featured Image" />
           </div>
 
           {/* Status badge */}

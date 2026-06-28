@@ -1,18 +1,11 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import type { Product } from '@/types/product';
+import { categoryLabel as getCategoryLabel } from '@/lib/categories';
 
 interface ProductRelatedProps {
   relatedProducts: Product['relatedProducts'];
 }
-
-const CATEGORY_LABELS: Record<string, string> = {
-  'combi-ovens': 'Combi Ovens',
-  'blast-chillers': 'Blast Chillers',
-  'multifunctional-cooking': 'Multifunctional Cooking',
-  'refrigeration': 'Refrigeration',
-  'fabrication': 'SS Fabrication',
-};
 
 export default function ProductRelated({ relatedProducts }: ProductRelatedProps) {
   return (
@@ -91,7 +84,7 @@ export default function ProductRelated({ relatedProducts }: ProductRelatedProps)
                       marginBottom: '0.375rem',
                     }}
                   >
-                    {CATEGORY_LABELS[related.category] ?? related.category}
+                    {getCategoryLabel(related.category)}
                   </span>
                   <strong
                     style={{

@@ -7,8 +7,9 @@ import { Plus, Edit2, Trash2, Search, Star, ChevronLeft, ChevronRight, Package }
 import ConfirmModal from '@/components/admin/ConfirmModal';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { useToast } from '@/components/admin/Toast';
+import { CATEGORIES, categoryLabel } from '@/lib/categories';
 
-interface Product { _id: string; name: string; slug: string; category: string; brand: string; status: string; featured: boolean; images: string[]; createdAt: string; }
+interface Product { _id: string; fullName: string; slug: string; category: string; brand: string; status: string; featured: boolean; mainImage: string; createdAt: string; }
 
 const StatusBadge = ({ s }: { s: string }) => (
   <span style={{
@@ -22,7 +23,7 @@ const StatusBadge = ({ s }: { s: string }) => (
   </span>
 );
 
-const CATS = ['all', 'Combi Ovens', 'Cooking Ranges', 'Bakery Equipment', 'Refrigeration', 'Preparation Equipment', 'Exhaust & Ventilation', 'Custom Fabrication', 'Dishwashers', 'International Brands'];
+const CATS = ['all', ...CATEGORIES.map(c => c.slug)];
 
 function SkeletonRow() {
   return (
@@ -96,7 +97,7 @@ export default function ProductsPage() {
   }
 
   const filtered = search
-    ? products.filter(p => p.name.toLowerCase().includes(search.toLowerCase()) || p.brand?.toLowerCase().includes(search.toLowerCase()))
+    ? products.filter(p => p.fullName.toLowerCase().includes(search.toLowerCase()) || p.brand?.toLowerCase().includes(search.toLowerCase()))
     : products;
 
   const p = isMobile ? '0.875rem' : '1.25rem';
@@ -144,7 +145,7 @@ export default function ProductsPage() {
           />
         </div>
         <select value={category} onChange={e => { setCategory(e.target.value); setPage(1); }} style={{ padding: '0.525rem 0.75rem', border: '1.5px solid #E2E8F0', borderRadius: 8, fontSize: 13, background: '#FAFBFC', outline: 'none', flex: isMobile ? 1 : undefined, cursor: 'pointer' }}>
-          {CATS.map(c => <option key={c} value={c}>{c === 'all' ? 'All Categories' : c}</option>)}
+          {CATS.map(c => <option key={c} value={c}>{c === 'all' ? 'All Categories' : categoryLabel(c)}</option>)}
         </select>
         <select value={status} onChange={e => { setStatus(e.target.value); setPage(1); }} style={{ padding: '0.525rem 0.75rem', border: '1.5px solid #E2E8F0', borderRadius: 8, fontSize: 13, background: '#FAFBFC', outline: 'none', cursor: 'pointer' }}>
           <option value="all">All Status</option>
@@ -171,9 +172,9 @@ export default function ProductsPage() {
                   onMouseLeave={e => ((e.currentTarget as HTMLDivElement).style.boxShadow = '0 1px 4px rgba(0,0,0,0.04)')}
                 >
                   <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem', marginBottom: '0.625rem' }}>
-                    {prod.images?.[0] ? (
+                    {prod.mainImage ? (
                       // eslint-disable-next-line @next/next/no-img-element
-                      <img src={prod.images[0]} alt="" style={{ width: 48, height: 48, borderRadius: 9, objectFit: 'cover', border: '1px solid #E2E8F0', flexShrink: 0 }} />
+                      <img src={prod.mainImage} alt="" style={{ width: 48, height: 48, borderRadius: 9, objectFit: 'cover', border: '1px solid #E2E8F0', flexShrink: 0 }} />
                     ) : (
                       <div style={{ width: 48, height: 48, borderRadius: 9, background: '#F1F5F9', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                         <Package size={18} color="#CBD5E1" />
@@ -181,10 +182,10 @@ export default function ProductsPage() {
                     )}
                     <div style={{ flex: 1, minWidth: 0 }}>
                       <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '0.5rem' }}>
-                        <p style={{ fontSize: 14, fontWeight: 700, color: '#1E293B', margin: '0 0 0.2rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{prod.name}</p>
+                        <p style={{ fontSize: 14, fontWeight: 700, color: '#1E293B', margin: '0 0 0.2rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{prod.fullName}</p>
                         <StatusBadge s={prod.status} />
                       </div>
-                      <p style={{ fontSize: 12, color: '#64748B', margin: '0 0 0.1rem' }}>{prod.category}</p>
+                      <p style={{ fontSize: 12, color: '#64748B', margin: '0 0 0.1rem' }}>{categoryLabel(prod.category)}</p>
                       {prod.brand && <p style={{ fontSize: 11, color: '#94A3B8', margin: 0 }}>{prod.brand}</p>}
                     </div>
                   </div>
@@ -199,7 +200,7 @@ export default function ProductsPage() {
                       <button onClick={() => router.push(`/admin/products/${prod._id}`)} style={{ background: '#EFF6FF', border: 'none', borderRadius: 7, padding: '0.35rem 0.75rem', display: 'flex', alignItems: 'center', gap: '0.3rem', cursor: 'pointer', fontSize: 12, color: '#2563EB', fontWeight: 600 }}>
                         <Edit2 size={12} /> Edit
                       </button>
-                      <button onClick={() => setConfirm({ id: prod._id, name: prod.name })} style={{ background: '#FEF2F2', border: 'none', borderRadius: 7, width: 30, height: 30, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
+                      <button onClick={() => setConfirm({ id: prod._id, name: prod.fullName })} style={{ background: '#FEF2F2', border: 'none', borderRadius: 7, width: 30, height: 30, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
                         <Trash2 size={13} color="#EF4444" />
                       </button>
                     </div>
@@ -236,21 +237,21 @@ export default function ProductsPage() {
                     >
                       <td style={{ padding: '0.875rem 1rem' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.625rem' }}>
-                          {prod.images?.[0] ? (
+                          {prod.mainImage ? (
                             // eslint-disable-next-line @next/next/no-img-element
-                            <img src={prod.images[0]} alt="" style={{ width: 36, height: 36, borderRadius: 8, objectFit: 'cover', border: '1px solid #E2E8F0', flexShrink: 0 }} />
+                            <img src={prod.mainImage} alt="" style={{ width: 36, height: 36, borderRadius: 8, objectFit: 'cover', border: '1px solid #E2E8F0', flexShrink: 0 }} />
                           ) : (
                             <div style={{ width: 36, height: 36, borderRadius: 8, background: '#F1F5F9', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                               <Package size={15} color="#CBD5E1" />
                             </div>
                           )}
                           <div>
-                            <p style={{ fontSize: 13, fontWeight: 600, color: '#1E293B', margin: '0 0 0.1rem', maxWidth: 180, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{prod.name}</p>
+                            <p style={{ fontSize: 13, fontWeight: 600, color: '#1E293B', margin: '0 0 0.1rem', maxWidth: 180, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{prod.fullName}</p>
                             <p style={{ fontSize: 11, color: '#94A3B8', margin: 0 }}>{prod.slug}</p>
                           </div>
                         </div>
                       </td>
-                      <td style={{ padding: '0.875rem 1rem', fontSize: 13, color: '#64748B' }}>{prod.category}</td>
+                      <td style={{ padding: '0.875rem 1rem', fontSize: 13, color: '#64748B' }}>{categoryLabel(prod.category)}</td>
                       <td style={{ padding: '0.875rem 1rem', fontSize: 13, color: '#64748B' }}>{prod.brand || '—'}</td>
                       <td style={{ padding: '0.875rem 1rem' }}><StatusBadge s={prod.status} /></td>
                       <td style={{ padding: '0.875rem 1rem' }}>
@@ -269,7 +270,7 @@ export default function ProductsPage() {
                           >
                             <Edit2 size={13} color="#2563EB" />
                           </button>
-                          <button onClick={() => setConfirm({ id: prod._id, name: prod.name })} style={{ background: '#FEF2F2', border: 'none', borderRadius: 7, width: 32, height: 32, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', transition: 'background 0.15s' }}
+                          <button onClick={() => setConfirm({ id: prod._id, name: prod.fullName })} style={{ background: '#FEF2F2', border: 'none', borderRadius: 7, width: 32, height: 32, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', transition: 'background 0.15s' }}
                             onMouseEnter={e => ((e.currentTarget as HTMLButtonElement).style.background = '#FECACA')}
                             onMouseLeave={e => ((e.currentTarget as HTMLButtonElement).style.background = '#FEF2F2')}
                           >

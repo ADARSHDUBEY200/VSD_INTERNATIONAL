@@ -203,7 +203,7 @@ export default function LeadForm({
           />
           {errors.phone && <Err msg={errors.phone} />}
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.875rem' }}>
+          <div className="lp-form-row-2col">
             <input
               type="text"
               placeholder="City"

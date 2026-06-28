@@ -25,7 +25,7 @@ export async function PUT(
     const { id } = await params;
     const body = await request.json();
 
-    if (!body.name?.trim() || !body.slug?.trim() || !body.category?.trim()) {
+    if (!body.fullName?.trim() || !body.slug?.trim() || !body.category?.trim()) {
       return Response.json({ error: 'Name, slug and category are required' }, { status: 400 });
     }
 

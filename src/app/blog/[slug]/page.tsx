@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
-import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowRight, Clock, Calendar, ChevronRight, Home, User, MessageCircle } from 'lucide-react';
 import { BLOG_POSTS, getPostBySlug, getPostsByCategory } from '@/lib/blog';
+import DynamicBlogPost from '@/components/blog/DynamicBlogPost';
+import { getPublishedBlogDoc, buildBlogMetadata } from '@/lib/blogPresenter';
 
 /* ─── Static Params ─────────────────────────────────────────────────────── */
 interface Props {
@@ -17,7 +18,10 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const post = getPostBySlug(slug);
-  if (!post) return {};
+  if (!post) {
+    const doc = await getPublishedBlogDoc(slug);
+    return doc ? buildBlogMetadata(doc) : {};
+  }
 
   const canonicalUrl = `https://vsdinternational.com/blog/${post.slug}/`;
   return {
@@ -109,7 +113,12 @@ const RELATED_POSTS_SLUGS = [
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
   const post = getPostBySlug(slug);
-  if (!post) notFound();
+
+  // Posts authored in /admin/blogs aren't in the hardcoded BLOG_POSTS set above —
+  // render them through the generic CMS-driven template instead.
+  if (!post) {
+    return <DynamicBlogPost slug={slug} />;
+  }
 
   const canonicalUrl = `https://vsdinternational.com/blog/${post.slug}/`;
   const relatedPosts = getPostsByCategory(post.category).filter((p) => RELATED_POSTS_SLUGS.includes(p.slug));

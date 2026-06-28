@@ -1,21 +1,13 @@
 import Link from 'next/link';
 import type { Product } from '@/types/product';
+import { categoryLabel as getCategoryLabel } from '@/lib/categories';
 
 interface BreadcrumbProps {
   product: Pick<Product, 'fullName' | 'category'>;
 }
 
-const CATEGORY_LABELS: Record<string, string> = {
-  'combi-ovens':              'Combi Ovens',
-  'blast-chillers':           'Blast Chillers',
-  'dishwashers':              'Dishwashers',
-  'multifunctional-cooking':  'Multifunctional Cooking',
-  'refrigeration':            'Refrigeration',
-  'fabrication':              'SS Fabrication',
-};
-
 export default function Breadcrumb({ product }: BreadcrumbProps) {
-  const categoryLabel = CATEGORY_LABELS[product.category] ?? product.category;
+  const categoryLabel = getCategoryLabel(product.category);
 
   return (
     <nav aria-label="Breadcrumb" className="bc-nav">

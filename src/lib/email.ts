@@ -24,8 +24,26 @@ export interface EnquiryData {
   message?: string;
 }
 
+/* Recipient for new-enquiry notifications. Kept separate from ADMIN_EMAIL
+   (which is the admin-panel login) so leads always land in the shared inbox. */
+const NOTIFY_TO   = process.env.ENQUIRY_NOTIFY_EMAIL ?? 'info.vsdinternational@gmail.com';
+const NOTIFY_FROM = process.env.RESEND_FROM ?? 'VSD Enquiries <noreply@vsdinternational.com>';
+
+/* Escape user-supplied values before embedding them in the HTML email. */
+function esc(value: string): string {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 export async function sendEnquiryNotification(data: EnquiryData): Promise<void> {
-  if (!resend) return;
+  if (!resend) {
+    console.warn('[email] RESEND_API_KEY not set — skipping enquiry notification email.');
+    return;
+  }
 
   const sourceLabel = SOURCE_LABELS[data.source ?? ''] ?? data.source ?? 'Unknown';
   const now = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', dateStyle: 'medium', timeStyle: 'short' });
@@ -46,8 +64,8 @@ export async function sendEnquiryNotification(data: EnquiryData): Promise<void> 
   const tableRows = rows
     .map(([label, value]) => `
       <tr>
-        <td style="padding:10px 14px;font-weight:600;color:#5a4a1e;background:#fdf8ee;border-bottom:1px solid #ede0b5;white-space:nowrap;">${label}</td>
-        <td style="padding:10px 14px;color:#1a1a1a;background:#ffffff;border-bottom:1px solid #ede0b5;">${value}</td>
+        <td style="padding:10px 14px;font-weight:600;color:#5a4a1e;background:#fdf8ee;border-bottom:1px solid #ede0b5;white-space:nowrap;">${esc(label)}</td>
+        <td style="padding:10px 14px;color:#1a1a1a;background:#ffffff;border-bottom:1px solid #ede0b5;">${esc(value)}</td>
       </tr>`)
     .join('');
 
@@ -109,13 +127,17 @@ export async function sendEnquiryNotification(data: EnquiryData): Promise<void> 
 </html>`;
 
   try {
-    await resend.emails.send({
-      from: 'VSD Enquiries <noreply@vsdinternational.com>',
-      to:   [process.env.ADMIN_EMAIL ?? 'info.vsdinternational@gmail.com'],
+    const { error } = await resend.emails.send({
+      from: NOTIFY_FROM,
+      to:   [NOTIFY_TO],
+      replyTo: data.email?.trim() || undefined,
       subject: `New Enquiry — ${data.name} (${data.phone})`,
       html,
     });
-  } catch {
+    // Resend returns errors in the response body rather than throwing.
+    if (error) console.error('[email] Resend rejected enquiry notification:', error);
+  } catch (err) {
     // Email failure must never break the form submission
+    console.error('[email] Failed to send enquiry notification:', err);
   }
 }

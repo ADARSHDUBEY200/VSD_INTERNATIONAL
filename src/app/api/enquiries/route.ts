@@ -34,7 +34,8 @@ export async function POST(request: NextRequest) {
     sendEnquiryNotification({ name: name.trim(), phone: phone.trim(), email, source, company, city, service, budget, message }).catch(() => {});
 
     return Response.json({ ok: true, id: enquiry._id }, { status: 201 });
-  } catch {
+  } catch (err) {
+    console.error('[api/enquiries] Failed to save enquiry:', err);
     return Response.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
