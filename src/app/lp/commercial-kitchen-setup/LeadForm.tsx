@@ -17,11 +17,14 @@ export default function LeadForm({
   heading = 'Get Your Free Kitchen Quote',
   subheading = 'Free layout + itemised quote. Reply within 1 business hour.',
   ctaLabel = 'Get a Free Quote',
+  compact = false,
 }: {
   id?: string;
   heading?: string;
   subheading?: string;
   ctaLabel?: string;
+  /** compact = only Name + Phone (used in the mobile hero) */
+  compact?: boolean;
 }) {
   const [form, setForm] = useState<FormState>(EMPTY);
   const [submitting, setSubmitting] = useState(false);
@@ -151,26 +154,30 @@ export default function LeadForm({
           />
           {errors.phone && <Err msg={errors.phone} />}
 
-          <input
-            type="email"
-            placeholder="Email address (optional)"
-            value={form.email}
-            onChange={(e) => update('email', e.target.value)}
-            autoComplete="email"
-            className="enquire-input"
-            aria-label="Email address"
-          />
-          {errors.email && <Err msg={errors.email} />}
+          {!compact && (
+            <>
+              <input
+                type="email"
+                placeholder="Email address (optional)"
+                value={form.email}
+                onChange={(e) => update('email', e.target.value)}
+                autoComplete="email"
+                className="enquire-input"
+                aria-label="Email address"
+              />
+              {errors.email && <Err msg={errors.email} />}
 
-          <textarea
-            placeholder="Your message — kitchen type, size or city (optional)"
-            value={form.message}
-            onChange={(e) => update('message', e.target.value)}
-            rows={4}
-            className="enquire-input"
-            aria-label="Your message"
-            style={{ resize: 'vertical', minHeight: '5.5rem' }}
-          />
+              <textarea
+                placeholder="Your message — kitchen type, size or city (optional)"
+                value={form.message}
+                onChange={(e) => update('message', e.target.value)}
+                rows={4}
+                className="enquire-input"
+                aria-label="Your message"
+                style={{ resize: 'vertical', minHeight: '5.5rem' }}
+              />
+            </>
+          )}
 
           <button
             type="submit"

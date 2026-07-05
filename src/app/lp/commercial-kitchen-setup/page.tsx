@@ -380,6 +380,7 @@ function Hero() {
             <div className="lp-hero-form-mobile">
               <Reveal immediate delay={0.4} y={18}>
                 <LeadForm
+                  compact
                   heading="Get Your Free Kitchen Quote"
                   subheading="Enter your details — an expert calls you within 1 business hour."
                   ctaLabel="Grab Your Free Quote"
