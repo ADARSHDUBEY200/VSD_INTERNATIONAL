@@ -8,11 +8,12 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 
 import type { Metadata } from 'next';
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import {
   Phone,
   MessageCircle,
-  ArrowRight,
+  Sparkles,
   CheckCircle2,
   XCircle,
   Check,
@@ -34,14 +35,23 @@ import Reveal from './Reveal';
 import RevealTitle from './RevealTitle';
 import CountUp from './CountUp';
 import HeroGlow from './HeroGlow';
-import LoaderIntro from './LoaderIntro';
 import TiltCard from './TiltCard';
 import IconBadge from './IconBadge';
 import AnimatedStars from './AnimatedStars';
 import GoogleIcon from './GoogleIcon';
-import TestimonialSlider, { type Review } from './TestimonialSlider';
-import ProductsCarousel from './ProductsCarousel';
-import { SiteVisitIcon, DesignIcon, FabricationIcon, SupplyIcon, InstallIcon, VentilationIcon, TrainingIcon, AmcIcon } from './ServiceIcons';
+import type { Review } from './TestimonialSlider';
+import CertificateGallery from './CertificateGallery';
+
+/* ─── Dynamically loaded heavy below-fold components ───────────────────────── */
+const TestimonialSlider = dynamic(() => import('./TestimonialSlider'), {
+  loading: () => <div style={{ height: '340px', borderRadius: '16px', background: 'var(--surface)', opacity: 0.5 }} />,
+});
+const ProductsCarousel = dynamic(() => import('./ProductsCarousel'), {
+  loading: () => <div style={{ height: '420px', borderRadius: '16px', background: 'var(--surface)', opacity: 0.5 }} />,
+});
+const WoodFireCarousel = dynamic(() => import('./WoodFireCarousel'), {
+  loading: () => <div style={{ height: '440px', borderRadius: '20px', background: 'rgba(255,110,25,0.05)', border: '1px solid rgba(255,110,25,0.12)' }} />,
+});
 
 const PHONE = '09250346370';
 const PHONE_TEL = '+919250346370';
@@ -49,16 +59,37 @@ const WA = `https://wa.me/919250346370?text=${encodeURIComponent(
   "Hi VSD, I'd like a free quote for my commercial kitchen setup.",
 )}`;
 
-/* ─── Shared section CTA row (lead-quote button + WhatsApp) ────────────────── */
-function SectionCta({ ctaLabel = 'Get My Free Quote' }: { ctaLabel?: string }) {
+/* ─── Shared section CTA — a persuasive hook + a single channel button.
+   Each section alternates channel (whatsapp / phone) and uses its own catchy
+   hook + label; `tone` picks a hook colour that reads on light vs dark bg. ─── */
+function SectionCta({
+  hook,
+  label,
+  channel,
+  tone = 'light',
+}: {
+  hook: string;
+  label: string;
+  channel: 'whatsapp' | 'phone';
+  tone?: 'light' | 'dark';
+}) {
   return (
-    <div className="lp-cta-row">
-      <LeadCta className="btn-gold">
-        {ctaLabel} <ArrowRight size={16} />
-      </LeadCta>
-      <a href={WA} target="_blank" rel="noopener noreferrer" className="lp-btn-whatsapp">
-        <MessageCircle size={17} /> WhatsApp Us
-      </a>
+    <div className={`lp-section-cta lp-section-cta--${tone}`}>
+      <span className="lp-section-cta-ornament" aria-hidden="true">
+        <span className="lp-section-cta-line" />
+        <Sparkles size={15} />
+        <span className="lp-section-cta-line" />
+      </span>
+      <p className="lp-section-cta-hook">{hook}</p>
+      {channel === 'whatsapp' ? (
+        <a href={WA} target="_blank" rel="noopener noreferrer" className="lp-btn-whatsapp lp-cta-single">
+          <MessageCircle size={18} /> {label}
+        </a>
+      ) : (
+        <a href={`tel:${PHONE_TEL}`} className="btn-gold lp-cta-single">
+          <Phone size={17} /> {label}
+        </a>
+      )}
     </div>
   );
 }
@@ -172,31 +203,36 @@ const lpSchema = {
 export default function CommercialKitchenLP() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(lpSchema) }} />
+      {/* Preconnect for Cloudinary product images — improves product carousel LCP */}
+      <link rel="preconnect" href="https://res.cloudinary.com" />
 
-      <LoaderIntro />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(lpSchema) }} />
 
       <StickyBar />
 
       <main style={{ background: 'var(--charcoal)', overflowX: 'hidden' }}>
         <Hero />
-        <Stats />
+        <Clients />
         <OurServices />
         <OurProducts />
         <Certificates />
+        <WoodFireOvens />
         <WhyUs />
         <CtaBand
-          eyebrow="Limited free site visits this month"
+          eyebrow="Only a few free site visits left this month"
           title="Get your free kitchen layout + itemised quote"
           sub="No obligation. A kitchen expert calls you within 1 business hour."
+          channel="phone"
+          label="Reserve a Free Site Visit"
         />
         <Comparison />
         <CtaBand
           eyebrow="200+ kitchens delivered since 2009"
           title="Tell us about your kitchen — we'll handle the rest"
           sub="Design, supply, SS fabrication & installation under one ISO 9001 certified roof."
+          channel="phone"
+          label="Call Now — Speak to an Expert"
         />
-        <Clients />
         <Testimonials />
         <Faqs />
         <GoogleReviews />
@@ -275,45 +311,60 @@ function Hero() {
             {/* Eyebrow */}
             <Reveal immediate delay={0}>
               <div className="lp-eyebrow" style={{ marginBottom: '1.5rem' }}>
-                <Award size={14} /> ISO 9001 Certified • Trusted Since 2009
+                <Award size={14} /> ISO 9001 Certified Manufacturer • 200+ Kitchens Since 2009
               </div>
             </Reveal>
 
             {/* Headline */}
             <Reveal immediate delay={0.1} y={28}>
               <h1 id="lp-hero-heading" className="lp-hero-title" style={{ marginBottom: '1.35rem' }}>
-                Setup Your Commercial Kitchen in{' '}
-                <span className="lp-gold-text">Just 21 Days</span>
+                Your Trusted Commercial Kitchen {' '}
+                <span className="lp-gold-text">Equipment Partner.</span>
               </h1>
             </Reveal>
 
             {/* Sub-copy */}
             <Reveal immediate delay={0.2}>
               <p className="lp-hero-sub" style={{ maxWidth: '40rem', margin: '0 0 1.4rem' }}>
-                Turnkey <strong style={{ color: 'var(--text-on-dark)', fontWeight: 600 }}>design, equipment supply, SS&nbsp;304 fabrication &amp; installation</strong> — handled end-to-end by one ISO&nbsp;9001 certified team for hotels, restaurants, cloud kitchens &amp; hospitals.
+                From <strong style={{ color: 'var(--text-on-dark)', fontWeight: 600 }}>design and manufacturing</strong> to <strong style={{ color: 'var(--text-on-dark)', fontWeight: 600 }}>installation</strong>, we deliver complete kitchen solutions engineered for <strong style={{ color: 'var(--text-on-dark)', fontWeight: 600 }}>performance and reliability</strong>.
               </p>
             </Reveal>
 
-            {/* Rating trust line */}
+            {/* Trust stats — 2×2 pointer cards */}
             <Reveal immediate delay={0.3}>
-              <div
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.6rem',
-                  flexWrap: 'wrap',
-                  justifyContent: 'center',
-                  marginBottom: '2rem',
-                }}
-              >
-                <AnimatedStars size={17} gap={3} />
-                <span style={{ fontFamily: 'var(--font-poppins)', fontSize: '0.9rem', color: 'rgba(245,240,232,0.7)' }}>
-                  Rated <strong style={{ color: 'var(--gold-bright)' }}>5/5</strong> by 312 happy clients on Google
-                </span>
+              <div className="lp-hero-stats">
+                <div className="lp-hero-stat">
+                  <span className="lp-hero-stat-badge"><Award size={19} /></span>
+                  <div className="lp-hero-stat-text">
+                    <span className="lp-hero-stat-num"><CountUp value={15} />+</span>
+                    <span className="lp-hero-stat-label">Years Experience</span>
+                  </div>
+                </div>
+                <div className="lp-hero-stat">
+                  <span className="lp-hero-stat-badge"><GoogleIcon size={19} /></span>
+                  <div className="lp-hero-stat-text">
+                    <span className="lp-hero-stat-num"><CountUp value={5} />/5</span>
+                    <span className="lp-hero-stat-label">Google Rating</span>
+                  </div>
+                </div>
+                <div className="lp-hero-stat">
+                  <span className="lp-hero-stat-badge"><Hotel size={19} /></span>
+                  <div className="lp-hero-stat-text">
+                    <span className="lp-hero-stat-num"><CountUp value={200} />+</span>
+                    <span className="lp-hero-stat-label">Hotels Served</span>
+                  </div>
+                </div>
+                <div className="lp-hero-stat">
+                  <span className="lp-hero-stat-badge"><Factory size={19} /></span>
+                  <div className="lp-hero-stat-text">
+                    <span className="lp-hero-stat-num"><CountUp value={2} /></span>
+                    <span className="lp-hero-stat-label">Delhi Factories</span>
+                  </div>
+                </div>
               </div>
             </Reveal>
 
-            {/* CTAs */}
+            {/* CTAs — desktop/laptop only (mobile shows the compact form below instead) */}
             <Reveal immediate delay={0.4}>
               <div className="lp-hero-ctas">
                 <a href={`tel:${PHONE_TEL}`} className="lp-btn-outline" style={{ justifyContent: 'center' }}>
@@ -324,60 +375,30 @@ function Hero() {
                 </a>
               </div>
             </Reveal>
+
+            {/* Compact lead form — phones only (replaces the Call/WhatsApp CTAs) */}
+            <div className="lp-hero-form-mobile">
+              <Reveal immediate delay={0.4} y={18}>
+                <LeadForm
+                  heading="Get Your Free Kitchen Quote"
+                  subheading="Enter your details — an expert calls you within 1 business hour."
+                  ctaLabel="Grab Your Free Quote"
+                />
+              </Reveal>
+            </div>
           </div>
 
-          {/* Form column — laptop and up only; mobile relies on the popup + sticky CTA bar */}
+          {/* Form column — laptop and up only; mobile relies on the compact form above */}
           <div className="lp-hero-form-col">
             <Reveal immediate delay={0.25} x={28} y={0}>
               <LeadForm
                 id="lead-form"
-                heading="Get My Free Kitchen Quote"
+                heading="Get Your Free Kitchen Quote"
                 subheading="Free CAD layout + itemised quote. Only takes 30 seconds."
-                ctaLabel="Get My Free Quote"
+                ctaLabel="Get an Instant Free Quote"
               />
             </Reveal>
           </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ─── Premium stats band (authentic proof, just below hero) ────────────────── */
-function Stats() {
-  const stats: { Icon: typeof Award; value: number; decimals?: number; suffix: string; label: string; rating?: boolean }[] = [
-    { Icon: Award, value: 15, suffix: '+', label: 'Years of Experience' },
-    { Icon: Award, value: 5, decimals: 0, suffix: '', label: 'Google Rating', rating: true },
-    { Icon: Hotel, value: 200, suffix: '+', label: 'Hotels Served' },
-    { Icon: Factory, value: 2, suffix: '', label: 'Delhi Factories' },
-  ];
-  return (
-    <section className="lp-stats-band" aria-label="VSD International by the numbers">
-      <div className="container">
-        <div className="lp-stats">
-          {stats.map(({ Icon, value, decimals, suffix, label, rating }, i) => (
-            <Reveal key={label} delay={i * 0.08}>
-              <div className="lp-stat">
-                <span className="lp-stat-icon">
-                  {rating ? <GoogleIcon size={22} /> : <Icon size={22} />}
-                </span>
-                <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'center', gap: '0.2rem' }}>
-                  <span className="lp-stat-num">
-                    <CountUp value={value} decimals={decimals} />{suffix}
-                  </span>
-                  {rating && (
-                    <span style={{ fontFamily: 'var(--font-poppins)', fontSize: '0.95rem', fontWeight: 600, color: 'rgba(245,240,232,0.45)' }}>/5</span>
-                  )}
-                </div>
-                {rating && (
-                  <span style={{ display: 'block', marginTop: '0.35rem' }}>
-                    <AnimatedStars size={13} gap={2} />
-                  </span>
-                )}
-                <div className="lp-stat-label">{label}</div>
-              </div>
-            </Reveal>
-          ))}
         </div>
       </div>
     </section>
@@ -425,15 +446,20 @@ function WhyUs() {
         </div>
 
         <div style={{ marginTop: '2.5rem' }}>
-          <SectionCta />
+          <SectionCta
+            tone="light"
+            channel="whatsapp"
+            hook="See why 200+ kitchens picked VSD over every other vendor?"
+            label="Talk to a Kitchen Expert"
+          />
         </div>
       </div>
     </section>
   );
 }
 
-/* ─── CTA Band (inserted after every ~2 sections) ──────────────────────────── */
-function CtaBand({ eyebrow, title, sub }: { eyebrow: string; title: string; sub: string }) {
+/* ─── CTA Band (inserted after every ~2 sections) — single channel button ──── */
+function CtaBand({ eyebrow, title, sub, channel, label }: { eyebrow: string; title: string; sub: string; channel: 'whatsapp' | 'phone'; label: string }) {
   return (
     <section style={{ background: 'var(--charcoal-warm)', padding: 'clamp(1.75rem, 3.5vw, 2.5rem) 0', position: 'relative', overflow: 'hidden' }}>
       <div
@@ -448,12 +474,15 @@ function CtaBand({ eyebrow, title, sub }: { eyebrow: string; title: string; sub:
           <h2 style={{ fontFamily: 'var(--font-playfair)', fontSize: 'clamp(1.5rem, 3vw, 2.25rem)', color: 'var(--text-on-dark)', lineHeight: 1.18, marginBottom: '0.75rem' }}>{title}</h2>
           <p style={{ fontFamily: 'var(--font-inter)', fontSize: '0.98rem', color: 'rgba(245,240,232,0.55)', marginBottom: '1.75rem' }}>{sub}</p>
           <div className="lp-cta-row">
-            <a href={`tel:${PHONE_TEL}`} className="btn-gold" style={{ fontSize: '0.95rem' }}>
-              <Phone size={16} /> Call {PHONE}
-            </a>
-            <a href={WA} target="_blank" rel="noopener noreferrer" className="lp-btn-whatsapp" style={{ fontSize: '0.95rem' }}>
-              <MessageCircle size={16} /> WhatsApp Us
-            </a>
+            {channel === 'whatsapp' ? (
+              <a href={WA} target="_blank" rel="noopener noreferrer" className="lp-btn-whatsapp lp-cta-single" style={{ fontSize: '0.95rem' }}>
+                <MessageCircle size={17} /> {label}
+              </a>
+            ) : (
+              <a href={`tel:${PHONE_TEL}`} className="btn-gold lp-cta-single" style={{ fontSize: '0.95rem' }}>
+                <Phone size={16} /> {label}
+              </a>
+            )}
           </div>
         </Reveal>
       </div>
@@ -461,17 +490,17 @@ function CtaBand({ eyebrow, title, sub }: { eyebrow: string; title: string; sub:
   );
 }
 
-/* ─── Our Services — full service menu, custom SVG icon cards ─────────────── */
+/* ─── Our Services — full service menu, real photo cards ─────────────────── */
 function OurServices() {
-  const services: { Icon: typeof SiteVisitIcon; n: string; title: string; body: string }[] = [
-    { Icon: SiteVisitIcon, n: '01', title: 'Free Site Visit & Consultation', body: 'We measure your space, study workflow needs and your menu — at no cost across Delhi NCR and on schedule pan-India.' },
-    { Icon: DesignIcon, n: '02', title: 'CAD Kitchen Layout & Design', body: 'A workflow-optimised commercial kitchen layout and a fixed, itemised equipment quote — usually within 48 hours.' },
-    { Icon: FabricationIcon, n: '03', title: 'In-House SS 304 Fabrication', body: 'Worktables, sinks, hoods & shelving fabricated in-house across our 2 Delhi NCR factories to food-grade SS 304 standards.' },
-    { Icon: SupplyIcon, n: '04', title: 'Equipment Supply & Branded Imports', body: 'Brand-genuine cooking, refrigeration & prep equipment — authorised dealer for Rational, Robot Coupe, Frymaster and more.' },
-    { Icon: InstallIcon, n: '05', title: 'Installation & Commissioning', body: 'Delivery, installation, gas, exhaust, testing and handover — your kitchen ready to fire, on the committed date.' },
-    { Icon: VentilationIcon, n: '06', title: 'Kitchen Exhaust & Ventilation', body: 'Hood, ducting & make-up air design engineered for heat load, grease capture and fire-code compliance.' },
-    { Icon: TrainingIcon, n: '07', title: 'Staff Training & Handover', body: 'Hands-on equipment training for your kitchen team so day one runs as smoothly as day one hundred.' },
-    { Icon: AmcIcon, n: '08', title: 'Annual Maintenance Contract', body: 'Optional AMC plans for breakdown-free running, backed by 80+ active AMC clients across India.' },
+  const services: { img: string; n: string; title: string; body: string }[] = [
+    { img: '/landingPageServices/Free_Site_Visit_And_Consultation.webp', n: '01', title: 'Free Site Visit & Consultation', body: 'We measure your space, study workflow needs and your menu — at no cost across Delhi NCR and on schedule pan-India.' },
+    { img: '/landingPageServices/Cad_Kitchen_Layout_Design.webp', n: '02', title: 'CAD Kitchen Layout & Design', body: 'A workflow-optimised commercial kitchen layout and a fixed, itemised equipment quote — usually within 48 hours.' },
+    { img: '/landingPageServices/In_House_SS_304_Fabrication.webp', n: '03', title: 'In-House SS 304 Fabrication', body: 'Worktables, sinks, hoods & shelving fabricated in-house across our 2 Delhi NCR factories to food-grade SS 304 standards.' },
+    { img: '/landingPageServices/Equipment_Supply_And_Branded_Imports.webp', n: '04', title: 'Equipment Supply & Branded Imports', body: 'Brand-genuine cooking, refrigeration & prep equipment — authorised dealer for Rational, Robot Coupe, Frymaster and more.' },
+    { img: '/landingPageServices/Installation_And_Commissioning.webp', n: '05', title: 'Installation & Commissioning', body: 'Delivery, installation, gas, exhaust, testing and handover — your kitchen ready to fire, on the committed date.' },
+    { img: '/landingPageServices/Kitchen_Exhaust_And_Ventilation.webp', n: '06', title: 'Kitchen Exhaust & Ventilation', body: 'Hood, ducting & make-up air design engineered for heat load, grease capture and fire-code compliance.' },
+    { img: '/landingPageServices/Staff_Training_And_Handover.webp', n: '07', title: 'Staff Training & Handover', body: 'Hands-on equipment training for your kitchen team so day one runs as smoothly as day one hundred.' },
+    { img: '/landingPageServices/Annual_Maintenance_Contract.webp', n: '08', title: 'Annual Maintenance Contract', body: 'Optional AMC plans for breakdown-free running, backed by 80+ active AMC clients across India.' },
   ];
   return (
     <section style={{ background: 'var(--surface-alt)', padding: 'clamp(2.25rem, 4.5vw, 3.5rem) 0' }} aria-labelledby="lp-services-heading">
@@ -483,16 +512,16 @@ function OurServices() {
         </div>
 
         <div className="lp-service-grid">
-          {services.map(({ Icon, n, title, body }, i) => (
+          {services.map(({ img, n, title, body }, i) => (
             <Reveal key={n} delay={i * 0.06}>
               <TiltCard className="lp-service-card" style={{ background: '#fff', border: '1px solid var(--border)', padding: 0, height: '100%' }}>
-                <div className="lp-service-illustration">
-                  <span className="lp-service-illustration-dots" aria-hidden="true" />
-                  <Icon size={52} />
+                <div className="lp-service-photo">
+                  <Image src={img} alt={title} fill sizes="(max-width: 560px) 100vw, (max-width: 900px) 50vw, 25vw" style={{ objectFit: 'cover' }} />
+                  <span className="lp-service-photo-overlay" aria-hidden="true" />
+                  <span className="lp-service-num">{n}</span>
                 </div>
-                <div style={{ padding: '1.5rem 1.4rem 1.4rem' }}>
-                  <span className="lp-service-eyebrow">{n}</span>
-                  <h3 style={{ fontFamily: 'var(--font-playfair)', fontSize: '1.05rem', color: 'var(--text-dark)', margin: '0.3rem 0 0.5rem' }}>{title}</h3>
+                <div style={{ padding: '1.15rem 1.4rem 1.4rem' }}>
+                  <h3 style={{ fontFamily: 'var(--font-playfair)', fontSize: '1.05rem', color: 'var(--text-dark)', margin: '0 0 0.5rem' }}>{title}</h3>
                   <p style={{ fontFamily: 'var(--font-inter)', fontSize: '0.85rem', color: 'var(--text-body)', lineHeight: 1.6 }}>{body}</p>
                 </div>
               </TiltCard>
@@ -501,30 +530,186 @@ function OurServices() {
         </div>
 
         <div style={{ marginTop: '2.5rem' }}>
-          <SectionCta />
+          <SectionCta
+            tone="light"
+            channel="whatsapp"
+            hook="Not sure which of these your kitchen actually needs?"
+            label="Ask a Kitchen Expert Free"
+          />
         </div>
       </div>
     </section>
   );
 }
 
+/* ─── Wood Fire Pizza Ovens — premium carousel ─────────────────────────────── */
+const WOOD_FIRE_OVENS = [
+  {
+    src: '/woodfirepizzaoven/WoodFirePizzaOven_1.webp',
+    name: 'Classic Barrel Wood Fire Pizza Oven',
+    spec: 'Gas / Wood Dual Fuel · 4–6 Pizza Capacity · Custom Size Available',
+    tag: 'Most Popular',
+    features: ['800°C peak temperature', 'Dual fuel — wood & LPG', 'Food-grade SS 304 body', 'Custom dimensions available'],
+  },
+  {
+    src: '/woodfirepizzaoven/WoodFirePizzaOven_2.webp',
+    name: 'Traditional Dome Wood Fire Oven',
+    spec: 'Authentic Wood Fired · Neapolitan Style · 6–8 Pizza Capacity',
+    tag: 'Authentic',
+    features: ['True brick-dome thermal mass', '90-second Neapolitan pizza', '750°C sustained temperature', 'Indoor & outdoor builds'],
+  },
+  {
+    src: '/woodfirepizzaoven/WoodFirePizzaOven_3.webp',
+    name: 'Open-Flame Commercial Pizza Oven',
+    spec: 'Visible Live Fire · Restaurant Grade · High Output',
+    tag: 'Restaurant Grade',
+    features: ['Live flame visible to guests', 'Adds theatre to open kitchens', 'High-volume peak output', 'SS & refractory stone deck'],
+  },
+  {
+    src: '/woodfirepizzaoven/WoodFirePizzaOven_4.webp',
+    name: 'High-Capacity Wood Fire Oven',
+    spec: 'Gas / Wood · 8–12 Pizza Capacity · Banquet & Buffet Grade',
+    tag: 'High Volume',
+    features: ['8–12 simultaneous pizzas', 'Engineered for peak service', 'Thick refractory stone deck', 'Ideal for banquets & buffets'],
+  },
+  {
+    src: '/woodfirepizzaoven/WoodFirePizzaOven_5.webp',
+    name: 'Premium Heavy-Gauge Pizza Oven',
+    spec: 'Wood / Coal Fired · Heavy SS 304 Build · Long Service Life',
+    tag: 'Premium',
+    features: ['Heavy-gauge SS 304 construction', 'Excellent heat retention', 'Authentic charred crust', '10+ year service life'],
+  },
+  {
+    src: '/woodfirepizzaoven/WoodFirePizzaOven_6.webp',
+    name: 'Built-In Kitchen Wood Fire Oven',
+    spec: 'In-Kitchen Integration · Tile or Stone Finish · Custom Design',
+    tag: 'Custom Build',
+    features: ['Integrates into kitchen design', 'Tile, stone or SS finish', 'Concealed exhaust ducting', 'Perfect for hotel kitchens'],
+  },
+  {
+    src: '/woodfirepizzaoven/WoodFirePizzaOven_7.webp',
+    name: 'Compact Cloud Kitchen Pizza Oven',
+    spec: 'Space-Saving Design · Gas Fired · 90 × 90 cm Footprint',
+    tag: 'Cloud Kitchen',
+    features: ['Minimal kitchen footprint', 'Gas-fired for consistency', '4–5 pizza capacity', 'Easy ventilation setup'],
+  },
+  {
+    src: '/woodfirepizzaoven/WoodFirePizzaOven_8.webp',
+    name: 'Flagship Showpiece Pizza Oven',
+    spec: 'Statement Design · Open Mouth · Polished SS Finish',
+    tag: 'Showpiece',
+    features: ['Restaurant centrepiece design', 'Polished SS or matte finish', 'Open mouth for chef access', 'Engineered for 100+ covers'],
+  },
+  {
+    src: '/woodfirepizzaoven/WoodFirePizzaOven_9.webp',
+    name: 'Outdoor Catering Wood Fire Oven',
+    spec: 'Portable Frame · Wood / Coal · Heavy-Gauge Build',
+    tag: 'Outdoor & Events',
+    features: ['Heavy-duty outdoor build', 'Wood & coal dual fire', 'Robust transport frame', 'Ideal for wedding catering'],
+  },
+];
+
+const FEAT_CHIPS = [
+  '800°C Peak Temperature',
+  'Gas + Wood Dual Fuel',
+  'Custom Sizes Available',
+  'Made at Our Delhi Factory',
+  'Pan-India Delivery & Install',
+];
+
+function WoodFireOvens() {
+  return (
+    <section className="wfp-section" aria-labelledby="lp-wfp-heading">
+      {/* Ambient gold glows */}
+      <div className="wfp-glow" aria-hidden="true" />
+
+      {/* Floating gold particles */}
+      <div className="wfp-embers" aria-hidden="true">
+        {[1, 2, 3, 4, 5, 6].map((n) => (
+          <span key={n} className="wfp-ember" />
+        ))}
+      </div>
+
+      <div className="container" style={{ position: 'relative' }}>
+        {/* Section header */}
+        <div className="wfp-header">
+          <span className="section-label">
+            Featured Product
+          </span>
+
+          <h2
+            id="lp-wfp-heading"
+            style={{
+              fontFamily: 'var(--font-playfair)',
+              fontSize: 'clamp(1.75rem, 3.6vw, 2.7rem)',
+              color: 'var(--text-on-dark)',
+              letterSpacing: '-0.02em',
+              lineHeight: 1.12,
+              margin: '0.75rem 0 0',
+            }}
+          >
+            <em className="lp-gold-text" style={{ fontStyle: 'normal', fontWeight: 800 }}>
+              Wood Fire Pizza Ovens
+            </em>{' '}
+            for Commercial Kitchens
+          </h2>
+
+          <span className="gold-divider lp-divider-glow" style={{ marginTop: '1rem' }} />
+
+          <p
+            style={{
+              fontFamily: 'var(--font-inter)',
+              fontSize: '0.9rem',
+              color: 'rgba(245,240,232,0.5)',
+              maxWidth: '34rem',
+              margin: '0.75rem auto 0',
+              lineHeight: 1.65,
+            }}
+          >
+            Custom-built for restaurants, hotels &amp; outdoor caterers — gas, wood or dual-fuel. Designed &amp; manufactured at our 2 Delhi factories.
+          </p>
+
+          {/* Feature chips */}
+          <div className="wfp-feat-strip">
+            {FEAT_CHIPS.map((c) => (
+              <span key={c} className="wfp-feat-chip">
+                <span className="wfp-feat-chip-dot" aria-hidden="true" />
+                {c}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* Carousel */}
+        <Reveal>
+          <WoodFireCarousel items={WOOD_FIRE_OVENS} />
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+
+
 /* ─── Our Products — equipment carousel ────────────────────────────────────── */
 const OUR_PRODUCTS: { name: string; spec: string; image: string; category: string }[] = [
-  { category: 'Cooking', name: 'Single Burner Range', spec: 'Gas · Size Customised', image: 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782017908/Single_Burner_Range_eosza9.jpg' },
-  { category: 'Cooking', name: 'Three Burner Chinese Range', spec: 'Gas · Size Customised', image: 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782017908/Three_Burner_Range_nnxabi.jpg' },
-  { category: 'Cooking', name: '4 Burner Range With Oven', spec: 'Gas · Size Customised', image: 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782017909/Four_Burner_Range_lnqbxr.jpg' },
-  { category: 'Cooking', name: 'Gravy Grid (Griddle Plate)', spec: 'Gas / Electric · Customised', image: 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782017911/County_Grill_griddle_Plate_c3cbiy.jpg' },
-  { category: 'Cooking', name: 'Dosa Plate', spec: 'Gas · Size Customised', image: 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782017910/Dosa_Plate_vsq3oe.jpg' },
-  { category: 'Cooking', name: 'Bulk Cooker (Rice Boiler)', spec: 'Gas / Electric · 10–200 Ltr', image: 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782017912/Bulk_Cooker_kkxfcq.jpg' },
-  { category: 'Refrigeration', name: '3 Door Under Counter Refrigerator / Freezer', spec: 'Electric · Size Customised', image: 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782019742/3_Door_Under_Counter_Refrigerator_bmf3ts.jpg' },
-  { category: 'Refrigeration', name: 'Under Counter Pizza Makeline Refrigerator / Freezer', spec: 'Electric · Size Customised', image: 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782019739/Under_Counter_Pizza_Makeline_ijbwdb.jpg' },
-  { category: 'Refrigeration', name: 'Glass Door Under Counter (Back Bar Chiller)', spec: 'Electric · Size Customised', image: 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782019740/Glass_Door_Under_Counter_ae052c.jpg' },
-  { category: 'Refrigeration', name: 'Chest Freezer (Deep Freezer)', spec: 'Electric · 100 to 1000 Ltr.', image: 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782019741/Chest_Freezer_Deep_Freezer_f0gno7.jpg' },
-  { category: 'Refrigeration', name: 'Visi Cooler', spec: 'Electric · 300 to 500 Ltr.', image: 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782019738/Visi_Cooler_bwwcbr.jpg' },
-  { category: 'Refrigeration', name: 'Walk in Chiller / Walk in Freezer', spec: 'Electric · Size Customised', image: 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782019737/Walk_in_Chiller_Walk_in_Freezer_ugszyi.jpg' },
-  { category: 'Preparation', name: 'Wet Masala Grinder', spec: 'Electric · 5 to 25 Ltr.', image: 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782030727/wet_masala_grinder_2_avonxq.jpg' },
-  { category: 'Preparation', name: 'Tilting Wet Grinder', spec: 'Electric · 5 to 30 Ltr.', image: 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782015937/Tilting_Wet_Grinder_2_gsi8nb.webp' },
-  { category: 'Preparation', name: 'Dough Kneader', spec: 'Electric · 5 to 100 Ltr.', image: 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1782016559/Dough_Kneader_4_e8dkci.jpg' },
+  { category: 'Cooking', name: 'Combi Oven', spec: 'Gas · Size Customised', image: 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1783229972/combi_oven_hftsyx.webp' },
+  { category: 'Cooking', name: 'Pizza Oven', spec: 'Gas · Size Customised', image: 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1783230473/ChatGPT_Image_Jul_5_2026_11_16_24_AM_rsz66q.webp' },
+  { category: 'Cooking', name: 'Single Burner Range', spec: 'Gas · Size Customised', image: 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1783225769/sgf99gvyydqhs9iwmqdr_mygsws.webp' },
+  { category: 'Cooking', name: 'Three Burner Chinese Range', spec: 'Gas · Size Customised', image: 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1783225770/lvittmcoflkyqmuwpj2t_klklvn.webp' },
+  { category: 'Cooking', name: '4 Burner Range With Oven', spec: 'Gas · Size Customised', image: 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1783227884/four_Burner_Rnage_ymprtp.png' },
+  { category: 'Cooking', name: 'Gravy Grid (Griddle Plate)', spec: 'Gas / Electric · Customised', image: 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1783225770/jpbc0ixgdrib4die4980_vykqiq.webp' },
+  { category: 'Cooking', name: 'Dosa Plate', spec: 'Gas · Size Customised', image: 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1783225769/yuu3omnohzm6lysznnai_xtdec1.webp' },
+  { category: 'Cooking', name: 'Bulk Cooker (Rice Boiler)', spec: 'Gas / Electric · 10–200 Ltr', image: 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1783225770/jcmusjmx6d1f97ikgrn5_nrjq91.webp' },
+  { category: 'Refrigeration', name: '3 Door Under Counter Refrigerator / Freezer', spec: 'Electric · Size Customised', image: 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1783225770/cliyzkfmkczxx5khrnfl_nfgnag.webp' },
+  { category: 'Refrigeration', name: 'Under Counter Pizza Makeline Refrigerator / Freezer', spec: 'Electric · Size Customised', image: 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1783225770/nm1wjv7rcjw6nwvojqdd_c16eyj.webp' },
+  { category: 'Refrigeration', name: 'Glass Door Under Counter (Back Bar Chiller)', spec: 'Electric · Size Customised', image: 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1783225770/hyxxnepy5dbat6quyn19_yn2zvb.webp' },
+  { category: 'Refrigeration', name: 'Chest Freezer (Deep Freezer)', spec: 'Electric · 100 to 1000 Ltr.', image: 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1783225771/px5nvr5temy0f4hxb3um_tjjq4a.webp' },
+  { category: 'Refrigeration', name: 'Visi Cooler', spec: 'Electric · 300 to 500 Ltr.', image: 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1783225770/ikatpkjfjdwkaki3xghl_wj5xte.webp' },
+  { category: 'Refrigeration', name: 'Walk in Chiller / Walk in Freezer', spec: 'Electric · Size Customised', image: 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1783228105/Walk_In_Chiller_mrfsof.webp' },
+  { category: 'Preparation', name: 'Wet Masala Grinder', spec: 'Electric · 5 to 25 Ltr.', image: 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1783228229/Wet_Masala_Grinder_iimxcr.webp' },
+  { category: 'Preparation', name: 'Tilting Wet Grinder', spec: 'Electric · 5 to 30 Ltr.', image: 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1783225771/ybdjbqg84fdcxduowshr_mb6b9h.webp' },
+  { category: 'Preparation', name: 'Dough Kneader', spec: 'Electric · 5 to 100 Ltr.', image: 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1783225771/sj7qtl9jrsgihwcxifxq_suv1ay.webp' },
 ];
 
 function OurProducts() {
@@ -543,7 +728,12 @@ function OurProducts() {
         </Reveal>
 
         <div style={{ marginTop: '1.5rem' }}>
-          <SectionCta />
+          <SectionCta
+            tone="dark"
+            channel="phone"
+            hook="Want the best factory-direct price on any equipment above?"
+            label="Call for Today's Price"
+          />
         </div>
       </div>
     </section>
@@ -551,12 +741,6 @@ function OurProducts() {
 }
 
 /* ─── Certificates — trust badges (ISO 9001, MSME, GST) ────────────────────── */
-const CERTIFICATES: { Icon: typeof ShieldCheck; title: string; caption: string; image: string }[] = [
-  { Icon: ShieldCheck, title: 'ISO 9001:2015 Certified', caption: 'Quality management system certified for consistent manufacturing standards.', image: '/Certificates/ISO.webp' },
-  { Icon: Award, title: 'MSME Registered', caption: 'Registered as a Micro, Small & Medium Enterprise under the Government of India.', image: '/Certificates/MSME_CERTIFICATE.webp' },
-  { Icon: CheckCircle2, title: 'GST Registered', caption: 'Fully GST-compliant business — transparent, itemised, tax-compliant billing.', image: '/Certificates/VSD_GST_CERTIFICATE.webp' },
-];
-
 function Certificates() {
   return (
     <section style={{ background: 'var(--surface-alt)', padding: 'clamp(2.25rem, 4.5vw, 3.5rem) 0' }} aria-labelledby="lp-cert-heading">
@@ -566,36 +750,19 @@ function Certificates() {
           <RevealTitle id="lp-cert-heading" style={{ fontFamily: 'var(--font-playfair)', fontSize: 'clamp(1.75rem, 3.4vw, 2.6rem)', color: 'var(--text-dark)', letterSpacing: '-0.02em', margin: '0.75rem 0 0' }} text="Recognised, Registered & Verified" />
           <span className="gold-divider lp-divider-glow" style={{ marginTop: '1rem' }} />
           <p style={{ fontFamily: 'var(--font-inter)', fontSize: '0.95rem', color: 'var(--text-muted)', maxWidth: '34rem', margin: '1rem auto 0' }}>
-            Every kitchen we deliver is backed by the same certifications you can verify below — click any certificate to view it full-size.
+            Every kitchen we deliver is backed by the same certifications you can verify below — tap any certificate to view it full-size.
           </p>
         </div>
 
-        <div className="lp-cert-grid">
-          {CERTIFICATES.map(({ Icon, title, caption, image }, i) => (
-            <Reveal key={title} delay={i * 0.08}>
-              <a href={image} target="_blank" rel="noopener noreferrer" className="lp-cert-card">
-                <div className="lp-cert-photo">
-                  <div className="lp-cert-frame">
-                    <Image src={image} alt={title} fill sizes="(max-width: 640px) 90vw, 320px" style={{ objectFit: 'contain' }} />
-                  </div>
-                  <span className="lp-cert-seal">
-                    <Icon size={16} style={{ color: '#1A1508' }} />
-                  </span>
-                </div>
-                <div className="lp-cert-info">
-                  <h3>{title}</h3>
-                  <p>{caption}</p>
-                  <span>
-                    View Full Certificate <ArrowRight size={12} />
-                  </span>
-                </div>
-              </a>
-            </Reveal>
-          ))}
-        </div>
+        <CertificateGallery />
 
         <div style={{ marginTop: '2.5rem' }}>
-          <SectionCta />
+          <SectionCta
+            tone="light"
+            channel="whatsapp"
+            hook="Want our certificates & client references for your project?"
+            label="Request Them on WhatsApp"
+          />
         </div>
       </div>
     </section>
@@ -655,7 +822,12 @@ function Comparison() {
           </div>
         </Reveal>
         <div style={{ marginTop: '2rem' }}>
-          <SectionCta />
+          <SectionCta
+            tone="light"
+            channel="whatsapp"
+            hook="Ready to put the VSD advantage to work in your kitchen?"
+            label="Send Your Enquiry Now"
+          />
         </div>
       </div>
     </section>
@@ -679,32 +851,19 @@ function Clients() {
     </span>
   );
   return (
-    <section style={{ background: 'var(--charcoal-light)', padding: 'clamp(1.75rem, 3.5vw, 2.75rem) 0' }} aria-labelledby="lp-clients-heading">
-      <div className="container" style={{ textAlign: 'center' }}>
-        <span className="section-label">Trusted By</span>
-        <RevealTitle id="lp-clients-heading" style={{ fontFamily: 'var(--font-playfair)', fontSize: 'clamp(1.5rem, 3vw, 2.25rem)', color: 'var(--text-on-dark)', margin: '0.75rem 0 0.5rem' }} text="Kitchens Built for India's Best Brands" />
-        <p style={{ fontFamily: 'var(--font-inter)', fontSize: '0.92rem', color: 'rgba(245,240,232,0.5)', marginBottom: '2rem' }}>
-          From 5-star hotels and NABH hospitals to high-volume cloud kitchens.
-        </p>
-      </div>
+    <section className="lp-clients-band" aria-label="Brands that trust VSD International">
+      <p className="lp-clients-eyebrow">
+        Trusted by <strong>200+ kitchens</strong> — from 5-star hotels to NABH hospitals &amp; cloud kitchens
+      </p>
       <Reveal>
-        <div
-          style={{
-            maskImage: 'linear-gradient(90deg, transparent, black 8%, black 92%, transparent)',
-            WebkitMaskImage: 'linear-gradient(90deg, transparent, black 8%, black 92%, transparent)',
-          }}
-        >
-          <div className="marquee-track marquee-track--triple" style={{ gap: '1rem', animationDuration: '36s' }} aria-hidden="true">
+        <div className="lp-clients-marquee">
+          <div className="marquee-track marquee-track--triple" style={{ gap: '1rem', animationDuration: '32s' }} aria-hidden="true">
             {logos.map((l) => logoCard(l, `a-${l.name}`))}
             {logos.map((l) => logoCard(l, `b-${l.name}`))}
             {logos.map((l) => logoCard(l, `c-${l.name}`))}
           </div>
         </div>
       </Reveal>
-
-      <div className="container" style={{ marginTop: '2.5rem' }}>
-        <SectionCta />
-      </div>
     </section>
   );
 }
@@ -813,7 +972,12 @@ function Testimonials() {
         </Reveal>
 
         <div style={{ marginTop: '1.5rem' }}>
-          <SectionCta />
+          <SectionCta
+            tone="light"
+            channel="whatsapp"
+            hook="Want to be our next 5-star kitchen success story?"
+            label="Start Your Kitchen Today"
+          />
         </div>
       </div>
     </section>
@@ -859,7 +1023,12 @@ function Faqs() {
         </div>
 
         <div style={{ marginTop: '2rem' }}>
-          <SectionCta />
+          <SectionCta
+            tone="light"
+            channel="phone"
+            hook="Still have a question we didn't cover above?"
+            label="Call Us — We'll Answer It"
+          />
         </div>
       </div>
     </section>
@@ -877,6 +1046,10 @@ function GoogleReviews() {
           <div style={{ background: '#fff', border: '1px solid var(--border)', borderRadius: '20px', overflow: 'hidden', boxShadow: '0 8px 48px rgba(0,0,0,0.07)' }}>
             <div style={{ height: '3px', background: 'linear-gradient(90deg, var(--gold-bright), var(--gold), var(--gold-deep))' }} />
             <div style={{ padding: 'clamp(1.75rem, 6vw, 2.5rem) clamp(1.25rem, 5vw, 2rem) clamp(1.5rem, 5vw, 2rem)' }}>
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.1rem' }}>
+                <GoogleIcon size={26} />
+                <span style={{ fontFamily: 'var(--font-inter)', fontSize: '1rem', fontWeight: 600, color: 'var(--text-dark)', letterSpacing: '-0.01em' }}>Google Reviews</span>
+              </div>
               <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1rem' }}>
                 <AnimatedStars size={28} gap={4} />
               </div>
@@ -887,23 +1060,16 @@ function GoogleReviews() {
               <p style={{ fontFamily: 'var(--font-inter)', fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '1.5rem' }}>
                 Based on <strong style={{ color: 'var(--text-dark)' }}>312</strong> Google reviews
               </p>
-              <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '1.75rem' }}>
+              <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
                 {['ISO 9001 Certified', '15+ Years Active', 'Pan-India Delivery'].map((l) => (
                   <span key={l} style={{ padding: '0.3rem 0.75rem', borderRadius: '100px', background: 'rgba(201,168,76,0.08)', border: '1px solid rgba(201,168,76,0.22)', fontSize: '0.72rem', fontFamily: 'var(--font-inter)', fontWeight: 600, color: 'var(--gold-deep)' }}>
                     {l}
                   </span>
                 ))}
               </div>
-              <a href="https://maps.app.goo.gl/kzyGxozpqqGEK13i6" target="_blank" rel="noopener noreferrer" className="btn-gold" style={{ width: '100%' }}>
-                View on Google Maps →
-              </a>
             </div>
           </div>
         </Reveal>
-
-        <div style={{ marginTop: '2rem' }}>
-          <SectionCta />
-        </div>
       </div>
     </section>
   );
@@ -936,15 +1102,14 @@ function FinalCta() {
                 ))}
               </ul>
               <div className="lp-cta-row" style={{ justifyContent: 'flex-start' }}>
-                <a href={`tel:${PHONE_TEL}`} className="btn-gold"><Phone size={17} /> Call {PHONE}</a>
                 <a href={WA} target="_blank" rel="noopener noreferrer" className="lp-btn-whatsapp">
-                  <MessageCircle size={17} /> WhatsApp
+                  <MessageCircle size={17} /> Prefer to Chat? WhatsApp Us
                 </a>
               </div>
             </div>
           </Reveal>
           <Reveal x={24} y={0} delay={0.1}>
-            <LeadForm heading="Claim My Free Layout + Quote" subheading="30 seconds. No obligation. Reply within 1 business hour." ctaLabel="Claim My Free Quote" />
+            <LeadForm heading="Claim Your Free Layout + Quote" subheading="30 seconds. No obligation. Reply within 1 business hour." ctaLabel="Claim Your Free Quote" />
           </Reveal>
         </div>
       </div>
@@ -965,14 +1130,8 @@ function Footer() {
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}><MapPin size={14} style={{ color: 'var(--gold)' }} /> A-347, Saraswati Gali, Mandawali, New Delhi 110092</span>
         </div>
         <div className="lp-cta-row">
-          <a href={`tel:${PHONE_TEL}`} className="btn-gold"><Phone size={16} /> Call {PHONE}</a>
-          <a href={WA} target="_blank" rel="noopener noreferrer" className="lp-btn-whatsapp">
-            <MessageCircle size={16} /> WhatsApp Us
-          </a>
+          <a href={`tel:${PHONE_TEL}`} className="btn-gold lp-cta-single"><Phone size={16} /> Call {PHONE}</a>
         </div>
-        <p style={{ fontFamily: 'var(--font-inter)', fontSize: '0.72rem', color: 'rgba(245,240,232,0.3)', marginTop: '0.5rem' }}>
-          © {new Date().getFullYear()} VSD International. All rights reserved.
-        </p>
       </div>
     </footer>
   );
@@ -982,26 +1141,33 @@ function Footer() {
 function DisclaimerSection() {
   return (
     <section style={{ background: 'var(--charcoal)', borderTop: '1px solid rgba(201,168,76,0.15)', padding: 'clamp(1.75rem, 3.5vw, 2.5rem) 0' }} aria-labelledby="lp-disclaimer-heading">
-      <div className="container" style={{ maxWidth: '64rem' }}>
+      <div className="container" style={{ maxWidth: '78rem' }}>
         <Reveal>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
             <span style={{ width: 34, height: 34, borderRadius: '9px', background: 'rgba(201,168,76,0.12)', border: '1px solid rgba(201,168,76,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
               <ShieldCheck size={17} style={{ color: 'var(--gold)' }} />
             </span>
-            <h2 id="lp-disclaimer-heading" style={{ fontFamily: 'var(--font-playfair)', fontSize: 'clamp(1.1rem, 2.2vw, 1.4rem)', color: 'var(--text-on-dark)', letterSpacing: '-0.01em' }}>
+            <h2 id="lp-disclaimer-heading" style={{ fontFamily: 'var(--font-playfair)', fontSize: 'clamp(1rem, 2vw, 1.25rem)', color: 'var(--text-on-dark)', letterSpacing: '-0.01em' }}>
               Disclaimer &amp; Privacy Policy
             </h2>
           </div>
-          <p style={{ fontFamily: 'var(--font-inter)', fontSize: '0.85rem', color: 'rgba(245,240,232,0.5)', lineHeight: 1.75 }}>
+          <p style={{ fontFamily: 'var(--font-inter)', fontSize: '0.72rem', color: 'rgba(245,240,232,0.42)', lineHeight: 1.65 }}>
             The information provided on this website is intended for general informational purposes only and may be updated or modified without prior notice. Product images, specifications, and other visuals are for illustrative purposes and may vary from the actual products.
           </p>
-          <p style={{ fontFamily: 'var(--font-inter)', fontSize: '0.85rem', color: 'rgba(245,240,232,0.5)', lineHeight: 1.75, marginTop: '0.75rem' }}>
+          <p style={{ fontFamily: 'var(--font-inter)', fontSize: '0.72rem', color: 'rgba(245,240,232,0.42)', lineHeight: 1.65, marginTop: '0.6rem' }}>
             By submitting your contact details through this website, you authorize VSD International to contact you via phone, email, SMS, or WhatsApp regarding product inquiries, quotations, order updates, and other business-related communications.
           </p>
-          <p style={{ fontFamily: 'var(--font-inter)', fontSize: '0.85rem', color: 'rgba(245,240,232,0.5)', lineHeight: 1.75, marginTop: '0.75rem' }}>
+          <p style={{ fontFamily: 'var(--font-inter)', fontSize: '0.72rem', color: 'rgba(245,240,232,0.42)', lineHeight: 1.65, marginTop: '0.6rem' }}>
             VSD International respects your privacy and is committed to safeguarding your personal information. We do not sell, rent, or disclose your personal data to third parties without your consent, except where required by law. Users are advised to independently verify product specifications and other information before making any purchase or business decision.
           </p>
         </Reveal>
+
+        {/* Copyright — final line of the page */}
+        <div style={{ borderTop: '1px solid rgba(201,168,76,0.12)', marginTop: '1.5rem', paddingTop: '1.25rem', textAlign: 'center' }}>
+          <p style={{ fontFamily: 'var(--font-inter)', fontSize: '0.75rem', color: 'rgba(245,240,232,0.4)' }}>
+            © {new Date().getFullYear()} VSD International. All rights reserved.
+          </p>
+        </div>
       </div>
     </section>
   );

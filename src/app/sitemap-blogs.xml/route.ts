@@ -7,7 +7,7 @@ export const dynamic = 'force-static';
 export async function GET() {
   const xml = buildUrlset(
     BLOG_POSTS.map((post) => ({
-      loc: `${SITE_URL}/blog/${post.slug}/`,
+      loc: `${SITE_URL}/blog/${post.slug}`,
       lastModified: post.dateModified,
       changeFrequency: 'monthly' as const,
       priority: 0.7,

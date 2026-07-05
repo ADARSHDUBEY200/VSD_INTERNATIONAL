@@ -14,7 +14,7 @@ export const dynamic = 'force-static';
 export async function GET() {
   const xml = buildUrlset(
     SERVICE_SLUGS.map((slug) => ({
-      loc: `${SITE_URL}/services/${slug}/`,
+      loc: `${SITE_URL}/services/${slug}`,
       changeFrequency: 'monthly' as const,
       priority: 0.8,
     }))

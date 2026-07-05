@@ -35,7 +35,7 @@ export default function ProductCTA({ fullName, whatsappMessage }: ProductCTAProp
 
           {/* ── Right: buttons ── */}
           <div className="pcta-actions">
-            <a href="/contact/" className="pcta-btn-primary">
+            <a href="/contact" className="pcta-btn-primary">
               Request a Quote
               <svg
                 width="14" height="14"

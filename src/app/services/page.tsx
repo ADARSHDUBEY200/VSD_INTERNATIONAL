@@ -17,9 +17,9 @@ export const metadata: Metadata = {
   title: 'Commercial Kitchen Equipment & Solutions | VSD International India',
   description:
     'VSD International delivers end-to-end commercial kitchen solutions across India — equipment supply, custom fabrication, layout design, installation, and annual maintenance. Trusted by 500+ hospitality & healthcare clients since 2009.',
-  alternates: { canonical: 'https://vsdinternational.com/' },
+  alternates: { canonical: '/services' },
   openGraph: {
-    url: 'https://vsdinternational.com/',
+    url: '/services',
     title: 'Complete Commercial Kitchen Solutions — Supply, Install & Maintain | VSD International',
     description: 'End-to-end commercial kitchen solutions for hotels, hospitals, restaurants & cloud kitchens across India. ISO 9001 certified. 500+ projects. Delhi factories.',
     images: [{ url: 'https://vsdinternational.com/VSD_LOGO.png', width: 1200, height: 630 }],
@@ -32,15 +32,15 @@ const schema = {
   '@graph': [
     {
       '@type': 'WebPage',
-      '@id': 'https://vsdinternational.com/services/#webpage',
-      url: 'https://vsdinternational.com/services/',
+      '@id': 'https://vsdinternational.com/services#webpage',
+      url: 'https://vsdinternational.com/services',
       name: 'Complete Commercial Kitchen Solutions — Supply, Install & Maintain',
       description: 'End-to-end commercial kitchen solutions across India — equipment supply, fabrication, layout design, installation, and AMC.',
       breadcrumb: {
         '@type': 'BreadcrumbList',
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Home',     item: 'https://vsdinternational.com'          },
-          { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://vsdinternational.com/services/' },
+          { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://vsdinternational.com/services' },
         ],
       },
     },

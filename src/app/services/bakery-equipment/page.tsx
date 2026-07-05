@@ -17,9 +17,9 @@ export const metadata: Metadata = {
   title: 'Commercial Bakery Equipment Supplier in India | VSD',
   description:
     'Commercial bakery equipment supplier & fabricator in Delhi — deck ovens, mixers, proofers & display counters for bakeries & cloud bakeries, pan India.',
-  alternates: { canonical: 'https://vsdinternational.com/services/bakery-equipment/' },
+  alternates: { canonical: '/services/bakery-equipment' },
   openGraph: {
-    url: 'https://vsdinternational.com/services/bakery-equipment/',
+    url: '/services/bakery-equipment',
     title: 'Commercial Bakery Equipment Supplier & Manufacturer | VSD International',
     description:
       'Commercial bakery equipment supplier & stainless-steel fabricator in Delhi. Deck ovens, mixers, proofers & custom display counters for bakeries, cafés & cloud bakeries across India.',
@@ -448,13 +448,13 @@ const schema = {
       '@type': 'BreadcrumbList',
       itemListElement: [
         { '@type': 'ListItem', position: 1, name: 'Home',  item: 'https://vsdinternational.com' },
-        { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://vsdinternational.com/services/' },
-        { '@type': 'ListItem', position: 3, name: 'Bakery Equipment', item: 'https://vsdinternational.com/services/bakery-equipment/' },
+        { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://vsdinternational.com/services' },
+        { '@type': 'ListItem', position: 3, name: 'Bakery Equipment', item: 'https://vsdinternational.com/services/bakery-equipment' },
       ],
     },
     {
       '@type': 'ItemList',
-      '@id': 'https://vsdinternational.com/services/bakery-equipment/#page-sections',
+      '@id': 'https://vsdinternational.com/services/bakery-equipment#page-sections',
       name: 'Bakery Equipment Page Sections',
       description: 'Key sections of the bakery equipment page covering supply-vs-fabricate scope, bakeries equipped, pricing, proof, brands, cloud bakery setup, FAQs and cities served.',
       numberOfItems: QUICK_LINKS.length,
@@ -462,7 +462,7 @@ const schema = {
         '@type': 'ListItem',
         position: i + 1,
         name: link.label,
-        url: `https://vsdinternational.com/services/bakery-equipment/${link.href}`,
+        url: `https://vsdinternational.com/services/bakery-equipment${link.href}`,
         description: link.sub,
       })),
     },
@@ -913,7 +913,7 @@ export default function BakeryEquipmentPage() {
             </div>
           </div>
 
-          <Link href="/projects/" className="inline-flex items-center gap-1.5" style={{ marginTop: '1.75rem', color: 'var(--gold)', fontFamily: 'var(--font-inter)', fontWeight: 700, fontSize: '0.9375rem', textDecoration: 'none' }}>
+          <Link href="/projects" className="inline-flex items-center gap-1.5" style={{ marginTop: '1.75rem', color: 'var(--gold)', fontFamily: 'var(--font-inter)', fontWeight: 700, fontSize: '0.9375rem', textDecoration: 'none' }}>
             View All Projects <ArrowRight size={14} aria-hidden="true" />
           </Link>
         </div>

@@ -48,7 +48,7 @@ export default function Breadcrumb({ product }: BreadcrumbProps) {
             itemType="https://schema.org/ListItem"
           >
             <meta itemProp="position" content="2" />
-            <Link href="/products/" itemProp="item" className="bc-link">
+            <Link href="/products" itemProp="item" className="bc-link">
               <span itemProp="name">Products</span>
             </Link>
           </li>
@@ -62,7 +62,7 @@ export default function Breadcrumb({ product }: BreadcrumbProps) {
             itemType="https://schema.org/ListItem"
           >
             <meta itemProp="position" content="3" />
-            <Link href={`/products/${product.category}/`} itemProp="item" className="bc-link">
+            <Link href={`/products/${product.category}`} itemProp="item" className="bc-link">
               <span itemProp="name">{categoryLabel}</span>
             </Link>
           </li>

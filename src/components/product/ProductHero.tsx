@@ -252,7 +252,7 @@ export default function ProductHero({ product, heroCtaId = 'hero-cta' }: Product
 
                   <a
                     id={heroCtaId}
-                    href="/contact/"
+                    href="/contact"
                     className="btn-gold ph-cta-primary"
                     aria-label={`Get price and lead time for the ${product.fullName}`}
                   >

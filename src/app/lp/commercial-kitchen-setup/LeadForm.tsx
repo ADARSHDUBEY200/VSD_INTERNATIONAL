@@ -2,32 +2,21 @@
 
 /* ───────────────────────────────────────────────────────────────────────────
    LeadForm — phone-first conversion form for the paid-ads landing page.
-   DotCom Secrets: minimal friction (only Name + Phone required) maximises
-   opt-ins; the extra City / Project-Type fields qualify the lead without
-   killing conversion. Posts to the shared /api/enquiries endpoint.
+   Four fields only — Name + Phone (required), Email + Message (optional) —
+   for minimal friction and maximum opt-ins. Posts to /api/enquiries.
    ─────────────────────────────────────────────────────────────────────────── */
 
 import { useState } from 'react';
-import { ArrowRight, CheckCircle2, ShieldCheck, Clock } from 'lucide-react';
+import { ArrowRight, ShieldCheck, Clock } from 'lucide-react';
 
-type FormState = { name: string; phone: string; city: string; service: string; email: string };
-const EMPTY: FormState = { name: '', phone: '', city: '', service: '', email: '' };
-
-const PROJECT_TYPES = [
-  'Hotel Kitchen',
-  'Restaurant Kitchen',
-  'Cloud Kitchen',
-  'Hospital / Institutional',
-  'Cafe / Bakery',
-  'Bar / Banquet',
-  'Other',
-];
+type FormState = { name: string; phone: string; email: string; message: string };
+const EMPTY: FormState = { name: '', phone: '', email: '', message: '' };
 
 export default function LeadForm({
   id,
-  heading = 'Get My Free Kitchen Quote',
+  heading = 'Get Your Free Kitchen Quote',
   subheading = 'Free layout + itemised quote. Reply within 1 business hour.',
-  ctaLabel = 'Get My Free Quote',
+  ctaLabel = 'Get a Free Quote',
 }: {
   id?: string;
   heading?: string;
@@ -36,7 +25,6 @@ export default function LeadForm({
 }) {
   const [form, setForm] = useState<FormState>(EMPTY);
   const [submitting, setSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState<Partial<FormState>>({});
 
   function validate(): boolean {
@@ -60,20 +48,22 @@ export default function LeadForm({
           name: form.name,
           phone: form.phone,
           email: form.email || undefined,
-          city: form.city || undefined,
-          service: form.service || undefined,
+          message: form.message || undefined,
           source: 'lp_commercial_kitchen',
         }),
       });
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
         setErrors({ name: data.error ?? 'Submission failed. Please call us instead.' });
+        setSubmitting(false);
         return;
       }
-      setSubmitted(true);
+      // Success → send the visitor to the dedicated thank-you page.
+      // A full-page navigation (not router.push) guarantees the redirect and
+      // lets any conversion / GTM tags on /thank-you fire on a fresh page load.
+      window.location.assign('/thank-you');
     } catch {
       setErrors({ name: 'Network error. Please call 09250346370.' });
-    } finally {
       setSubmitting(false);
     }
   }
@@ -110,52 +100,7 @@ export default function LeadForm({
         }}
       />
 
-      {submitted ? (
-        <div style={{ textAlign: 'center', padding: '1.5rem 0' }}>
-          <div
-            style={{
-              width: 64,
-              height: 64,
-              borderRadius: '50%',
-              background: 'rgba(201,168,76,0.14)',
-              border: '1.5px solid rgba(201,168,76,0.4)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              margin: '0 auto 1.25rem',
-            }}
-          >
-            <CheckCircle2 size={32} style={{ color: 'var(--gold)' }} />
-          </div>
-          <h3
-            style={{
-              fontFamily: 'var(--font-playfair)',
-              fontSize: '1.5rem',
-              color: 'var(--text-on-dark)',
-              marginBottom: '0.625rem',
-            }}
-          >
-            Request Received!
-          </h3>
-          <p
-            style={{
-              fontFamily: 'var(--font-inter)',
-              fontSize: '0.9rem',
-              color: 'rgba(245,240,232,0.55)',
-              lineHeight: 1.65,
-              maxWidth: '300px',
-              margin: '0 auto',
-            }}
-          >
-            A kitchen expert will call you within <strong style={{ color: 'var(--gold)' }}>1 business hour</strong> with
-            your free layout and quote. Prefer to talk now? Call{' '}
-            <a href="tel:+919250346370" style={{ color: 'var(--gold)', fontWeight: 600 }}>
-              09250346370
-            </a>
-            .
-          </p>
-        </div>
-      ) : (
+      {(
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -206,44 +151,26 @@ export default function LeadForm({
           />
           {errors.phone && <Err msg={errors.phone} />}
 
-          <div className="lp-form-row-2col">
-            <input
-              type="text"
-              placeholder="City"
-              value={form.city}
-              onChange={(e) => update('city', e.target.value)}
-              autoComplete="address-level2"
-              className="enquire-input"
-              aria-label="City"
-            />
-            <select
-              value={form.service}
-              onChange={(e) => update('service', e.target.value)}
-              className="enquire-input"
-              aria-label="Project type"
-              style={{ color: form.service ? 'var(--text-on-dark)' : 'rgba(245,240,232,0.28)', cursor: 'pointer' }}
-            >
-              <option value="" disabled>
-                Project type
-              </option>
-              {PROJECT_TYPES.map((t) => (
-                <option key={t} value={t} style={{ color: '#111' }}>
-                  {t}
-                </option>
-              ))}
-            </select>
-          </div>
-
           <input
             type="email"
-            placeholder="Email (optional)"
+            placeholder="Email address (optional)"
             value={form.email}
             onChange={(e) => update('email', e.target.value)}
             autoComplete="email"
             className="enquire-input"
-            aria-label="Email (optional)"
+            aria-label="Email address"
           />
           {errors.email && <Err msg={errors.email} />}
+
+          <textarea
+            placeholder="Your message — kitchen type, size or city (optional)"
+            value={form.message}
+            onChange={(e) => update('message', e.target.value)}
+            rows={4}
+            className="enquire-input"
+            aria-label="Your message"
+            style={{ resize: 'vertical', minHeight: '5.5rem' }}
+          />
 
           <button
             type="submit"

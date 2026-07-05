@@ -97,9 +97,9 @@ export const metadata: Metadata = {
     images: ['/og-image.jpg'],
   },
 
-  alternates: {
-    canonical: 'https://vsdinternational.com',
-  },
+  // NOTE: no global `alternates.canonical` here. A shared canonical is inherited
+  // by every route that doesn't set its own, silently pointing all pages at the
+  // homepage. Each page/segment must self-reference its own canonical instead.
 
   other: {
     'geo.region': 'IN-DL',
@@ -213,12 +213,12 @@ const schemaGraph = {
       '@type': 'SiteNavigationElement',
       name: ['Services', 'Industries', 'Projects', 'Brands', 'About', 'Contact'],
       url: [
-        'https://vsdinternational.com/services/',
-        'https://vsdinternational.com/industries/',
-        'https://vsdinternational.com/projects/',
-        'https://vsdinternational.com/brands/',
-        'https://vsdinternational.com/about/',
-        'https://vsdinternational.com/contact/',
+        'https://vsdinternational.com/services',
+        'https://vsdinternational.com/industries',
+        'https://vsdinternational.com/projects',
+        'https://vsdinternational.com/brands',
+        'https://vsdinternational.com/about',
+        'https://vsdinternational.com/contact',
       ],
     },
 

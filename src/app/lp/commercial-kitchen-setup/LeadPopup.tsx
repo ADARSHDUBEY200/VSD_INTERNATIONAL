@@ -80,7 +80,7 @@ export default function LeadPopup() {
         <LeadForm
           heading="Get Your Free Kitchen Quote"
           subheading="Free CAD layout + itemised quote. Takes 30 seconds."
-          ctaLabel="Get My Free Quote"
+          ctaLabel="Send the Free Quote"
         />
       </div>
     </div>

@@ -29,6 +29,7 @@ import WhatsAppFloat from '@/components/home/WhatsAppFloat';
 import MobileFooterCTA from '@/components/home/MobileFooterCTA';
 import EnquiryModal from '@/components/home/EnquiryModal';
 import LeadPopup from '@/components/home/LeadPopup';
+import LoaderIntro from '@/components/home/LoaderIntro';
 import Footer from '@/components/home/Footer';
 
 /* --- Page Metadata ------------------------------------------------------- */
@@ -596,6 +597,9 @@ const homePageSchema = {
 export default function HomePage() {
   return (
     <>
+      {/* Brand entrance animation — coin-flip logo curtain */}
+      <LoaderIntro />
+
       {/* JSON-LD Structured Data */}
       <script
         type="application/ld+json"

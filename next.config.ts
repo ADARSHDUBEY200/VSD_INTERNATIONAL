@@ -2,6 +2,9 @@ import type { NextConfig } from 'next';
 import path from 'path';
 
 const nextConfig: NextConfig = {
+  /* ── URL shape — one canonical form, no trailing slash ───────────────── */
+  trailingSlash: false,
+
   /* ── Turbopack root — suppresses multi-lockfile warning ──────────────── */
   turbopack: {
     root: path.resolve(__dirname),
@@ -37,6 +40,13 @@ const nextConfig: NextConfig = {
   /* ── Performance ─────────────────────────────────────────────────────── */
   compress: true,
   poweredByHeader: false,
+
+  /* Tree-shake barrel imports so only the used modules ship to the client.
+     lucide-react is optimized by Next by default; framer-motion (used by the
+     LP's Reveal / TiltCard animations) is not, so we opt it in here. */
+  experimental: {
+    optimizePackageImports: ['framer-motion'],
+  },
 
   /* ── Headers — security + caching ───────────────────────────────────── */
   async headers() {

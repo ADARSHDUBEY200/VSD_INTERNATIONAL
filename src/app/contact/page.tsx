@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   title: 'Contact VSD International | Free Kitchen Consultation — Delhi NCR',
   description:
     'Get in touch with VSD International for commercial kitchen equipment. Free consultation, 24-hour response. ISO 9001 certified. Call +91-9250346370 or WhatsApp us.',
-  alternates: { canonical: 'https://vsdinternational.com/contact' },
+  alternates: { canonical: '/contact' },
 };
 
 /* --- Contact channel data ------------------------------------------------- */

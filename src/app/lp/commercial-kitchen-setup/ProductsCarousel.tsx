@@ -71,7 +71,7 @@ export default function ProductsCarousel({ items }: { items: ProductItem[] }) {
         {items.map((item, i) => (
           <div className="lp-prod-card" data-prod-card key={`${item.name}-${i}`}>
             <div className="lp-prod-photo">
-              <Image src={item.image} alt={item.name} fill sizes="(max-width: 640px) 75vw, 260px" style={{ objectFit: 'contain' }} />
+              <Image src={item.image} alt={item.name} fill sizes="(max-width: 640px) 75vw, 260px" style={{ objectFit: 'cover' }} />
               <span className="lp-prod-badge">{item.category}</span>
             </div>
             <div className="lp-prod-info">

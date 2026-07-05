@@ -32,7 +32,7 @@ export const getPublishedBlogDoc = cache(async (slug: string): Promise<BlogDocLi
 });
 
 export function blogCanonicalPath(slug: string): string {
-  return `/blog/${slug}/`;
+  return `/blog/${slug}`;
 }
 
 function absoluteImage(src: string): string {
@@ -97,7 +97,7 @@ export function buildBlogJsonLd(doc: BlogDocLike): Record<string, unknown> {
         '@type': 'BreadcrumbList',
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
-          { '@type': 'ListItem', position: 2, name: 'Blog', item: `${SITE_URL}/blog/` },
+          { '@type': 'ListItem', position: 2, name: 'Blog', item: `${SITE_URL}/blog` },
           { '@type': 'ListItem', position: 3, name: doc.title, item: canonicalUrl },
         ],
       },

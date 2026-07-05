@@ -12,9 +12,9 @@ export const metadata: Metadata = {
   title: 'Cloud Kitchen Setup Equipment & Design India | VSD International',
   description:
     'Complete cloud kitchen setup in India — equipment, design, installation. Ghost kitchen, dark kitchen & multi-brand cloud kitchen setups for Zomato/Swiggy operators. Delhi factory. ₹5L–₹45L budgets.',
-  alternates: { canonical: 'https://vsdinternational.com/services/cloud-kitchen-setup/' },
+  alternates: { canonical: '/services/cloud-kitchen-setup' },
   openGraph: {
-    url: 'https://vsdinternational.com/services/cloud-kitchen-setup/',
+    url: '/services/cloud-kitchen-setup',
     title: 'Cloud Kitchen Setup Equipment & Design India | VSD International',
     description: 'Cloud kitchen equipment list, design & installation. Ghost kitchen setups for Zomato & Swiggy operators. Multi-brand dark kitchen equipment. From ₹5 Lakhs.',
     images: [{ url: 'https://vsdinternational.com/og-image.jpg', width: 1200, height: 630 }],
@@ -51,7 +51,7 @@ const schema = {
   '@context': 'https://schema.org',
   '@graph': [
     { '@type': 'Service', name: 'Cloud Kitchen Setup & Equipment', provider: { '@type': 'LocalBusiness', name: 'VSD International' }, areaServed: { '@type': 'Country', name: 'India' }, serviceType: 'Cloud Kitchen Equipment', aggregateRating: { '@type': 'AggregateRating', ratingValue: '5', reviewCount: '312', bestRating: '5' } },
-    { '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://vsdinternational.com' }, { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://vsdinternational.com/services/' }, { '@type': 'ListItem', position: 3, name: 'Cloud Kitchen Setup', item: 'https://vsdinternational.com/services/cloud-kitchen-setup/' }] },
+    { '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://vsdinternational.com' }, { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://vsdinternational.com/services' }, { '@type': 'ListItem', position: 3, name: 'Cloud Kitchen Setup', item: 'https://vsdinternational.com/services/cloud-kitchen-setup' }] },
     { '@type': 'FAQPage', mainEntity: FAQS.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
   ],
 };

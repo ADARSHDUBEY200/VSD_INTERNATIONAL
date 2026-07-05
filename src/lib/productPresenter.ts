@@ -48,7 +48,7 @@ export interface ProductDocLike {
 }
 
 export function canonicalProductPath(doc: Pick<ProductDocLike, 'category' | 'slug'>): string {
-  return `/products/${doc.category}/${doc.slug}/`;
+  return `/products/${doc.category}/${doc.slug}`;
 }
 
 /** Builds the exact `Product` shape the page-1.tsx render tree expects, sourced from a DB document. */
@@ -176,8 +176,8 @@ function buildProductSchema(
       '@type': 'BreadcrumbList',
       itemListElement: [
         { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
-        { '@type': 'ListItem', position: 2, name: 'Products', item: `${SITE_URL}/products/` },
-        { '@type': 'ListItem', position: 3, name: categoryLabel(doc.category), item: `${SITE_URL}/products/${doc.category}/` },
+        { '@type': 'ListItem', position: 2, name: 'Products', item: `${SITE_URL}/products` },
+        { '@type': 'ListItem', position: 3, name: categoryLabel(doc.category), item: `${SITE_URL}/products/${doc.category}` },
         { '@type': 'ListItem', position: 4, name: doc.fullName, item: url },
       ],
     },

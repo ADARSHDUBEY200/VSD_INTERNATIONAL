@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   title: 'About Us — VSD International | ISO 9001 Kitchen Equipment Manufacturer Since 2009',
   description:
     'Learn about VSD International — ISO 9001 certified commercial kitchen equipment manufacturer in Delhi since 2009. Trusted by Hyatt, Radisson & ITC. 15+ years, 200+ clients, pan-India service.',
-  alternates: { canonical: 'https://vsdinternational.com/about' },
+  alternates: { canonical: '/about' },
 };
 
 /* --- Timeline milestones -------------------------------------------------- */

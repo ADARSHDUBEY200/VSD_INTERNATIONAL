@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return doc ? buildBlogMetadata(doc) : {};
   }
 
-  const canonicalUrl = `https://vsdinternational.com/blog/${post.slug}/`;
+  const canonicalUrl = `https://vsdinternational.com/blog/${post.slug}`;
   return {
     title: post.headline,
     description: post.metaDescription,
@@ -120,7 +120,7 @@ export default async function BlogPostPage({ params }: Props) {
     return <DynamicBlogPost slug={slug} />;
   }
 
-  const canonicalUrl = `https://vsdinternational.com/blog/${post.slug}/`;
+  const canonicalUrl = `https://vsdinternational.com/blog/${post.slug}`;
   const relatedPosts = getPostsByCategory(post.category).filter((p) => RELATED_POSTS_SLUGS.includes(p.slug));
 
   /* ── JSON-LD Schema @graph ──────────────────────────────────────────────── */
@@ -177,7 +177,7 @@ export default async function BlogPostPage({ params }: Props) {
         '@type': 'BreadcrumbList',
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://vsdinternational.com' },
-          { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://vsdinternational.com/blog/' },
+          { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://vsdinternational.com/blog' },
           { '@type': 'ListItem', position: 3, name: post.title, item: canonicalUrl },
         ],
       },
@@ -224,7 +224,7 @@ export default async function BlogPostPage({ params }: Props) {
             <span>Home</span>
           </Link>
           <ChevronRight size={11} style={{ color: 'rgba(201,168,76,0.35)' }} aria-hidden="true" />
-          <Link href="/blog/" style={{ color: 'rgba(245,240,232,0.45)', fontSize: '0.8125rem', fontFamily: 'var(--font-inter)' }}>Blog</Link>
+          <Link href="/blog" style={{ color: 'rgba(245,240,232,0.45)', fontSize: '0.8125rem', fontFamily: 'var(--font-inter)' }}>Blog</Link>
           <ChevronRight size={11} style={{ color: 'rgba(201,168,76,0.35)' }} aria-hidden="true" />
           <span style={{ color: 'var(--gold)', fontSize: '0.8125rem', fontFamily: 'var(--font-inter)', fontWeight: 600, maxWidth: '280px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} aria-current="page" title={post.title}>
             {post.title}
@@ -943,7 +943,7 @@ export default async function BlogPostPage({ params }: Props) {
                 {relatedPosts.map((related) => (
                   <Link
                     key={related.slug}
-                    href={`/blog/${related.slug}/`}
+                    href={`/blog/${related.slug}`}
                     className="card-lift group block rounded-xl overflow-hidden border"
                     style={{ borderColor: 'var(--border)', background: '#FFFFFF', textDecoration: 'none' }}
                   >

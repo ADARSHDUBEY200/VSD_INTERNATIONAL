@@ -31,7 +31,9 @@ export default function Reveal({
   style?: CSSProperties;
 }) {
   const visible = { opacity: 1, y: 0, x: 0 };
-  const hidden = { opacity: 0, y, x };
+  // For `immediate` (hero) keep opacity:1 in SSR so the h1 is LCP-eligible from first paint.
+  // Scroll-triggered reveals stay hidden (opacity:0) until they enter the viewport.
+  const hidden = immediate ? { opacity: 1, y, x } : { opacity: 0, y, x };
 
   return (
     <motion.div

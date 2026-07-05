@@ -19,9 +19,9 @@ export const metadata: Metadata = {
   title: 'Hotel Kitchen Equipment Manufacturer & Supplier | VSD',
   description:
     'ISO 9001:2015 hotel kitchen equipment manufacturer & supplier. Turnkey hotel kitchens — design, supply, install. Trusted by Hyatt, Radisson & ITC.',
-  alternates: { canonical: 'https://vsdinternational.com/services/hotel-kitchen-equipment/' },
+  alternates: { canonical: '/services/hotel-kitchen-equipment' },
   openGraph: {
-    url: 'https://vsdinternational.com/services/hotel-kitchen-equipment/',
+    url: '/services/hotel-kitchen-equipment',
     title: 'Hotel Kitchen Equipment Manufacturer & Supplier | VSD International',
     description:
       'ISO 9001:2015 hotel kitchen equipment manufacturer & supplier. Turnkey 5-star, business & boutique hotel kitchens — design, supply, install. Trusted by Hyatt & Radisson.',
@@ -69,31 +69,31 @@ const HOTEL_TYPES = [
     icon: Hotel,
     label: 'Luxury & 5-Star Hotels',
     desc: 'Banquet-scale production, fine-dining, bar and staff kitchens built to brand-standard specifications.',
-    href: '/industries/hotels/',
+    href: '/industries/hotels',
   },
   {
     icon: Building2,
     label: 'Business & 4-Star Hotels',
     desc: 'Efficient multi-cuisine kitchens that balance output against operating cost.',
-    href: '/industries/hotels/',
+    href: '/industries/hotels',
   },
   {
     icon: Award,
     label: 'Boutique & Heritage Hotels',
     desc: 'Compact, character-fit kitchens within constrained or heritage-listed spaces.',
-    href: '/industries/hotels/',
+    href: '/industries/hotels',
   },
   {
     icon: Users,
     label: 'Resorts',
     desc: 'Multi-outlet kitchens (all-day dining, specialty, banquet) often in remote locations that demand reliable supply and service.',
-    href: '/industries/hotels/',
+    href: '/industries/hotels',
   },
   {
     icon: UtensilsCrossed,
     label: 'Banquet & Convention Venues',
     desc: 'High-volume bulk cooking and hot-holding for large covers.',
-    href: '/industries/hotels/',
+    href: '/industries/hotels',
   },
 ];
 
@@ -447,13 +447,13 @@ const schema = {
       '@type': 'BreadcrumbList',
       itemListElement: [
         { '@type': 'ListItem', position: 1, name: 'Home',  item: 'https://vsdinternational.com' },
-        { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://vsdinternational.com/services/' },
-        { '@type': 'ListItem', position: 3, name: 'Hotel Kitchen Equipment', item: 'https://vsdinternational.com/services/hotel-kitchen-equipment/' },
+        { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://vsdinternational.com/services' },
+        { '@type': 'ListItem', position: 3, name: 'Hotel Kitchen Equipment', item: 'https://vsdinternational.com/services/hotel-kitchen-equipment' },
       ],
     },
     {
       '@type': 'ItemList',
-      '@id': 'https://vsdinternational.com/services/hotel-kitchen-equipment/#page-sections',
+      '@id': 'https://vsdinternational.com/services/hotel-kitchen-equipment#page-sections',
       name: 'Hotel Kitchen Equipment Page Sections',
       description: 'Key sections of the hotel kitchen equipment page covering equipment zones, hotel types served, pricing, projects, brands, reviews, FAQs and cities served.',
       numberOfItems: QUICK_LINKS.length,
@@ -461,7 +461,7 @@ const schema = {
         '@type': 'ListItem',
         position: i + 1,
         name: link.label,
-        url: `https://vsdinternational.com/services/hotel-kitchen-equipment/${link.href}`,
+        url: `https://vsdinternational.com/services/hotel-kitchen-equipment${link.href}`,
         description: link.sub,
       })),
     },
@@ -1208,7 +1208,7 @@ export default function HotelKitchenEquipmentPage() {
                 }}
               >
                 <Link
-                  href="/projects/"
+                  href="/projects"
                   style={{ color: 'var(--text-dark)', textDecoration: 'none' }}
                 >
                   Hyatt Regency Delhi — Bhikaji Cama Place
@@ -1259,7 +1259,7 @@ export default function HotelKitchenEquipmentPage() {
           </div>
 
           <Link
-            href="/projects/"
+            href="/projects"
             className="inline-flex items-center gap-1.5"
             style={{ color: 'var(--gold)', fontFamily: 'var(--font-inter)', fontWeight: 700, fontSize: '0.9375rem', textDecoration: 'none' }}
           >

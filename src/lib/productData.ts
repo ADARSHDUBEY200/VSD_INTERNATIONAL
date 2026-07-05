@@ -369,7 +369,7 @@ export const mockProduct: Product = {
     title: 'Rational iCombi Pro 10-1/1 Price & Specs | VSD',
     metaDescription:
       'Rational iCombi Pro 10-1/1 combi oven — 18.6 kW, 10-tray, CE certified. Authorised dealer in India. Indicative price ₹4.5L–₹6L. Free installation & commissioning. WhatsApp VSD International.',
-    canonicalSlug: '/products/combi-ovens/rational-icombi-pro-10-1-1/',
+    canonicalSlug: '/products/combi-ovens/rational-icombi-pro-10-1-1',
   },
 
   schema: {
@@ -377,7 +377,7 @@ export const mockProduct: Product = {
     '@graph': [
       {
         '@type': 'Product',
-        '@id': `${SITE_URL}/products/combi-ovens/rational-icombi-pro-10-1-1/#product`,
+        '@id': `${SITE_URL}/products/combi-ovens/rational-icombi-pro-10-1-1#product`,
         name: 'Rational iCombi Pro 10-1/1 Combi Oven',
         brand: { '@type': 'Brand', name: 'Rational', sameAs: 'https://www.rational-online.com' },
         category: 'Commercial Combi Oven',
@@ -426,7 +426,7 @@ export const mockProduct: Product = {
             priceCurrency: 'INR',
           },
           seller: { '@id': ORG_ID },
-          url: `${SITE_URL}/products/combi-ovens/rational-icombi-pro-10-1-1/`,
+          url: `${SITE_URL}/products/combi-ovens/rational-icombi-pro-10-1-1`,
         },
       },
       {
@@ -437,19 +437,19 @@ export const mockProduct: Product = {
             '@type': 'ListItem',
             position: 2,
             name: 'Products',
-            item: `${SITE_URL}/products/`,
+            item: `${SITE_URL}/products`,
           },
           {
             '@type': 'ListItem',
             position: 3,
             name: 'Combi Ovens',
-            item: `${SITE_URL}/products/combi-ovens/`,
+            item: `${SITE_URL}/products/combi-ovens`,
           },
           {
             '@type': 'ListItem',
             position: 4,
             name: 'Rational iCombi Pro 10-1/1',
-            item: `${SITE_URL}/products/combi-ovens/rational-icombi-pro-10-1-1/`,
+            item: `${SITE_URL}/products/combi-ovens/rational-icombi-pro-10-1-1`,
           },
         ],
       },

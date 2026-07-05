@@ -17,9 +17,9 @@ export const metadata: Metadata = {
   title: 'Restaurant Kitchen Setup & Equipment Supplier | VSD',
   description:
     'Restaurant kitchen setup in India — design, fabrication, equipment supply & installation for restaurants, QSR & cafés. ISO 9001:2015 certified.',
-  alternates: { canonical: 'https://vsdinternational.com/services/restaurant-kitchen-setup/' },
+  alternates: { canonical: '/services/restaurant-kitchen-setup' },
   openGraph: {
-    url: 'https://vsdinternational.com/services/restaurant-kitchen-setup/',
+    url: '/services/restaurant-kitchen-setup',
     title: 'Restaurant Kitchen Setup & Equipment — Design, Supply & Install | VSD International',
     description:
       'Turnkey restaurant kitchen setup in India — design, custom fabrication, equipment supply and installation for restaurants, QSR chains and cafés. ISO 9001:2015 certified.',
@@ -484,13 +484,13 @@ const schema = {
       '@type': 'BreadcrumbList',
       itemListElement: [
         { '@type': 'ListItem', position: 1, name: 'Home',  item: 'https://vsdinternational.com' },
-        { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://vsdinternational.com/services/' },
-        { '@type': 'ListItem', position: 3, name: 'Restaurant Kitchen Setup', item: 'https://vsdinternational.com/services/restaurant-kitchen-setup/' },
+        { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://vsdinternational.com/services' },
+        { '@type': 'ListItem', position: 3, name: 'Restaurant Kitchen Setup', item: 'https://vsdinternational.com/services/restaurant-kitchen-setup' },
       ],
     },
     {
       '@type': 'ItemList',
-      '@id': 'https://vsdinternational.com/services/restaurant-kitchen-setup/#page-sections',
+      '@id': 'https://vsdinternational.com/services/restaurant-kitchen-setup#page-sections',
       name: 'Restaurant Kitchen Setup Page Sections',
       description: 'Key sections of the restaurant kitchen setup page covering stations, process, restaurants served, QSR/café lane, design, pricing, proof, brands, FAQs and cities served.',
       numberOfItems: QUICK_LINKS.length,
@@ -498,7 +498,7 @@ const schema = {
         '@type': 'ListItem',
         position: i + 1,
         name: link.label,
-        url: `https://vsdinternational.com/services/restaurant-kitchen-setup/${link.href}`,
+        url: `https://vsdinternational.com/services/restaurant-kitchen-setup${link.href}`,
         description: link.sub,
       })),
     },
@@ -1029,7 +1029,7 @@ export default function RestaurantKitchenSetupPage() {
             </div>
           </div>
 
-          <Link href="/projects/" className="inline-flex items-center gap-1.5" style={{ marginTop: '1.75rem', color: 'var(--gold)', fontFamily: 'var(--font-inter)', fontWeight: 700, fontSize: '0.9375rem', textDecoration: 'none' }}>
+          <Link href="/projects" className="inline-flex items-center gap-1.5" style={{ marginTop: '1.75rem', color: 'var(--gold)', fontFamily: 'var(--font-inter)', fontWeight: 700, fontSize: '0.9375rem', textDecoration: 'none' }}>
             View All Projects <ArrowRight size={14} aria-hidden="true" />
           </Link>
         </div>

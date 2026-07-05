@@ -41,7 +41,7 @@ export default function ProductRelated({ relatedProducts }: ProductRelatedProps)
           {relatedProducts.map((related) => (
             <Link
               key={related.slug}
-              href={`/products/${related.category}/${related.slug}/`}
+              href={`/products/${related.category}/${related.slug}`}
               style={{ textDecoration: 'none', display: 'block' }}
             >
               <article

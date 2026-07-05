@@ -112,7 +112,7 @@ export default function ProductComparison({
           {comparisonModels.map((m) => (
             <Link
               key={m.slug}
-              href={`/products/${category}/${m.slug}/`}
+              href={`/products/${category}/${m.slug}`}
               className="pcmp-link"
             >
               {m.name}

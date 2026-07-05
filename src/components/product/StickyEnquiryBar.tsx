@@ -122,7 +122,7 @@ export default function StickyEnquiryBar({
 
           {/* Primary CTA button */}
           <a
-            href="/contact/"
+            href="/contact"
             style={{
               display: 'inline-flex',
               alignItems: 'center',

@@ -7,9 +7,9 @@ export const metadata: Metadata = {
   title: 'Commercial Kitchen Blog — Insights & Guides | VSD International',
   description:
     'Expert guides on cloud kitchen costs, hotel kitchen equipment, hospital kitchen compliance, and commercial kitchen buying guides. Real project figures from VSD International.',
-  alternates: { canonical: 'https://vsdinternational.com/blog/' },
+  alternates: { canonical: '/blog' },
   openGraph: {
-    url: 'https://vsdinternational.com/blog/',
+    url: '/blog',
     title: 'Commercial Kitchen Blog — Insights & Guides | VSD International',
     description:
       'Expert guides on cloud kitchen setup, hotel kitchen equipment, NABH hospital kitchens, and more. Written by VSD International — 400+ projects delivered across India.',
@@ -22,26 +22,26 @@ const schemaGraph = {
   '@graph': [
     {
       '@type': 'Blog',
-      '@id': 'https://vsdinternational.com/blog/#blog',
+      '@id': 'https://vsdinternational.com/blog#blog',
       name: 'VSD International — Commercial Kitchen Insights',
       description:
         'Expert guides on cloud kitchen costs, hotel kitchen equipment, hospital kitchen compliance, and commercial kitchen buying decisions — written by the team behind 400+ kitchen installations across India.',
-      url: 'https://vsdinternational.com/blog/',
+      url: 'https://vsdinternational.com/blog',
       publisher: { '@id': 'https://vsdinternational.com/#organization' },
       inLanguage: 'en-IN',
     },
     {
       '@type': 'CollectionPage',
-      '@id': 'https://vsdinternational.com/blog/#collectionpage',
+      '@id': 'https://vsdinternational.com/blog#collectionpage',
       name: 'VSD International Blog',
-      url: 'https://vsdinternational.com/blog/',
+      url: 'https://vsdinternational.com/blog',
       description: 'All commercial kitchen guides and insights from VSD International.',
       mainEntity: {
         '@type': 'ItemList',
         itemListElement: BLOG_POSTS.map((post, i) => ({
           '@type': 'ListItem',
           position: i + 1,
-          url: `https://vsdinternational.com/blog/${post.slug}/`,
+          url: `https://vsdinternational.com/blog/${post.slug}`,
           name: post.title,
         })),
       },
@@ -49,7 +49,7 @@ const schemaGraph = {
         '@type': 'BreadcrumbList',
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://vsdinternational.com' },
-          { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://vsdinternational.com/blog/' },
+          { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://vsdinternational.com/blog' },
         ],
       },
     },
@@ -225,7 +225,7 @@ export default function BlogIndexPage() {
               </div>
 
               <Link
-                href={`/blog/${FEATURED_POST.slug}/`}
+                href={`/blog/${FEATURED_POST.slug}`}
                 className="btn-gold"
               >
                 Read the full guide <ArrowRight size={15} aria-hidden="true" />
@@ -249,7 +249,7 @@ export default function BlogIndexPage() {
             {RECENT_POSTS.map((post) => (
               <Link
                 key={post.slug}
-                href={`/blog/${post.slug}/`}
+                href={`/blog/${post.slug}`}
                 className="card-lift group block rounded-xl overflow-hidden border"
                 style={{ borderColor: 'var(--border)', background: '#FFFFFF', textDecoration: 'none' }}
               >

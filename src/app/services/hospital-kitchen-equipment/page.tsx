@@ -12,9 +12,9 @@ export const metadata: Metadata = {
   title: 'Hospital Kitchen Equipment Supplier India — NABH Compliant | VSD International',
   description:
     'NABH & FSSAI compliant hospital kitchen equipment for dietary kitchens, patient floor kitchens & healthcare institutions across India. DRDO, ESIC, Metro Hospitals. ISO 9001 certified. Zero competition vertical.',
-  alternates: { canonical: 'https://vsdinternational.com/services/hospital-kitchen-equipment/' },
+  alternates: { canonical: '/services/hospital-kitchen-equipment' },
   openGraph: {
-    url: 'https://vsdinternational.com/services/hospital-kitchen-equipment/',
+    url: '/services/hospital-kitchen-equipment',
     title: 'Hospital Kitchen Equipment — NABH Compliant | VSD International India',
     description: 'Hospital dietary kitchen equipment meeting NABH standards. Government hospitals, private healthcare chains & institutional kitchens. Trusted by Metro Hospitals, DRDO, ESIC.',
     images: [{ url: 'https://vsdinternational.com/og-image.jpg', width: 1200, height: 630 }],
@@ -50,7 +50,7 @@ const schema = {
   '@context': 'https://schema.org',
   '@graph': [
     { '@type': 'Service', name: 'Hospital Kitchen Equipment Supply & Installation', provider: { '@type': 'LocalBusiness', name: 'VSD International' }, areaServed: { '@type': 'Country', name: 'India' }, serviceType: 'Hospital Kitchen Equipment', aggregateRating: { '@type': 'AggregateRating', ratingValue: '5', reviewCount: '312', bestRating: '5' } },
-    { '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://vsdinternational.com' }, { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://vsdinternational.com/services/' }, { '@type': 'ListItem', position: 3, name: 'Hospital Kitchen Equipment', item: 'https://vsdinternational.com/services/hospital-kitchen-equipment/' }] },
+    { '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://vsdinternational.com' }, { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://vsdinternational.com/services' }, { '@type': 'ListItem', position: 3, name: 'Hospital Kitchen Equipment', item: 'https://vsdinternational.com/services/hospital-kitchen-equipment' }] },
     { '@type': 'FAQPage', mainEntity: FAQS.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
   ],
 };

@@ -94,7 +94,7 @@ export default function ProductProof({ projectProof, fullName }: ProductProofPro
           <span className="pproof-footer-text">
             {projectProof.length} verified installations &middot; pan-India supply &amp; commissioning
           </span>
-          <a href="/projects/" className="pproof-footer-link">
+          <a href="/projects" className="pproof-footer-link">
             View all projects
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <line x1="5" y1="12" x2="19" y2="12"/>
