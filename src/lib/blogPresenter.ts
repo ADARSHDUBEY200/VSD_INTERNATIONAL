@@ -4,6 +4,17 @@ import { connectDB } from '@/lib/mongodb';
 import Blog from '@/lib/models/Blog';
 import { SITE_URL, ORG_ID } from '@/lib/config';
 
+export interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+export interface RecommendationItem {
+  image: string;
+  title: string;
+  url: string;
+}
+
 export interface BlogDocLike {
   _id: unknown;
   title: string;
@@ -11,8 +22,12 @@ export interface BlogDocLike {
   category: string;
   excerpt: string;
   content: string;
+  quickAnswer: string;
+  keyTakeaways: string[];
   mainImage: string;
-  childImages: string[];
+  mainImageAlt: string;
+  faqs: FaqItem[];
+  recommendations: RecommendationItem[];
   metaTitle: string;
   metaDescription: string;
   schemaTitle: string;
@@ -31,6 +46,43 @@ export const getPublishedBlogDoc = cache(async (slug: string): Promise<BlogDocLi
   return doc as unknown as BlogDocLike | null;
 });
 
+/** Lightweight shape used by the blog archive listing and sitemap. */
+export interface BlogCard {
+  slug: string;
+  title: string;
+  excerpt: string;
+  category: string;
+  author: string;
+  mainImage: string;
+  publishedAt: string;
+  readTime: string;
+}
+
+/** Estimate reading time from the raw HTML body at ~200 words/min. */
+function readingTime(html: string): string {
+  const words = html.replace(/<[^>]+>/g, ' ').trim().split(/\s+/).filter(Boolean).length;
+  return `${Math.max(1, Math.round(words / 200))} min read`;
+}
+
+/** All published posts, newest first — sourced from the CMS (no static data). */
+export const listPublishedBlogs = cache(async (): Promise<BlogCard[]> => {
+  await connectDB();
+  const docs = await Blog.find({ status: 'published' })
+    .sort({ publishedAt: -1, createdAt: -1 })
+    .lean();
+
+  return (docs as unknown as BlogDocLike[]).map((d) => ({
+    slug: d.slug,
+    title: d.title,
+    excerpt: d.excerpt,
+    category: d.category,
+    author: d.author,
+    mainImage: d.mainImage || '',
+    publishedAt: (d.publishedAt ? new Date(d.publishedAt) : new Date(d.createdAt)).toISOString(),
+    readTime: readingTime(d.content),
+  }));
+});
+
 export function blogCanonicalPath(slug: string): string {
   return `/blog/${slug}`;
 }
@@ -44,6 +96,7 @@ export function buildBlogMetadata(doc: BlogDocLike): Metadata {
   const title = doc.metaTitle || doc.title;
   const description = doc.metaDescription || doc.excerpt;
   const image = doc.mainImage ? absoluteImage(doc.mainImage) : undefined;
+  const imageAlt = doc.mainImageAlt || title;
   const publishedTime = doc.publishedAt ? new Date(doc.publishedAt).toISOString() : undefined;
   const modifiedTime = new Date(doc.updatedAt).toISOString();
 
@@ -56,7 +109,7 @@ export function buildBlogMetadata(doc: BlogDocLike): Metadata {
       url: canonicalUrl,
       title,
       description,
-      images: image ? [{ url: image, width: 1200, height: 630, alt: title }] : undefined,
+      images: image ? [{ url: image, width: 1200, height: 630, alt: imageAlt }] : undefined,
       publishedTime,
       modifiedTime,
       authors: [doc.author],
@@ -88,6 +141,20 @@ export function buildBlogJsonLd(doc: BlogDocLike): Record<string, unknown> {
     ...(image ? { image: { '@type': 'ImageObject', url: image } } : {}),
   };
 
+  const validFaqs = (doc.faqs ?? []).filter((f) => f.question?.trim() && f.answer?.trim());
+  const faqNode =
+    validFaqs.length > 0
+      ? {
+          '@type': 'FAQPage',
+          '@id': `${canonicalUrl}#faqpage`,
+          mainEntity: validFaqs.map((f) => ({
+            '@type': 'Question',
+            name: f.question,
+            acceptedAnswer: { '@type': 'Answer', text: f.answer },
+          })),
+        }
+      : null;
+
   return {
     '@context': 'https://schema.org',
     '@graph': [
@@ -101,6 +168,7 @@ export function buildBlogJsonLd(doc: BlogDocLike): Record<string, unknown> {
           { '@type': 'ListItem', position: 3, name: doc.title, item: canonicalUrl },
         ],
       },
+      ...(faqNode ? [faqNode] : []),
     ],
   };
 }

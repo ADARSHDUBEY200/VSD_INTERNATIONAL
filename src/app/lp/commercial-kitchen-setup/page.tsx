@@ -12,7 +12,6 @@ import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import {
   Phone,
-  MessageCircle,
   Sparkles,
   CheckCircle2,
   XCircle,
@@ -41,6 +40,7 @@ import AnimatedStars from './AnimatedStars';
 import GoogleIcon from './GoogleIcon';
 import type { Review } from './TestimonialSlider';
 import CertificateGallery from './CertificateGallery';
+import WhatsAppIcon from './WhatsAppIcon';
 
 /* ─── Dynamically loaded heavy below-fold components ───────────────────────── */
 const TestimonialSlider = dynamic(() => import('./TestimonialSlider'), {
@@ -56,7 +56,7 @@ const WoodFireCarousel = dynamic(() => import('./WoodFireCarousel'), {
 const PHONE = '09250346370';
 const PHONE_TEL = '+919250346370';
 const WA = `https://wa.me/919250346370?text=${encodeURIComponent(
-  "Hi VSD, I'd like a free quote for my commercial kitchen setup.",
+  "Hi VSD International! I'm looking for commercial kitchen equipment. Please share your best quote.",
 )}`;
 
 /* ─── Shared section CTA — a persuasive hook + a single channel button.
@@ -83,7 +83,7 @@ function SectionCta({
       <p className="lp-section-cta-hook">{hook}</p>
       {channel === 'whatsapp' ? (
         <a href={WA} target="_blank" rel="noopener noreferrer" className="lp-btn-whatsapp lp-cta-single">
-          <MessageCircle size={18} /> {label}
+          <WhatsAppIcon size={18} /> {label}
         </a>
       ) : (
         <a href={`tel:${PHONE_TEL}`} className="btn-gold lp-cta-single">
@@ -371,7 +371,7 @@ function Hero() {
                   <Phone size={17} /> Call {PHONE}
                 </a>
                 <a href={WA} target="_blank" rel="noopener noreferrer" className="lp-btn-whatsapp" style={{ justifyContent: 'center' }}>
-                  <MessageCircle size={17} /> WhatsApp Us
+                  <WhatsAppIcon size={17} /> WhatsApp Us
                 </a>
               </div>
             </Reveal>
@@ -477,7 +477,7 @@ function CtaBand({ eyebrow, title, sub, channel, label }: { eyebrow: string; tit
           <div className="lp-cta-row">
             {channel === 'whatsapp' ? (
               <a href={WA} target="_blank" rel="noopener noreferrer" className="lp-btn-whatsapp lp-cta-single" style={{ fontSize: '0.95rem' }}>
-                <MessageCircle size={17} /> {label}
+                <WhatsAppIcon size={17} /> {label}
               </a>
             ) : (
               <a href={`tel:${PHONE_TEL}`} className="btn-gold lp-cta-single" style={{ fontSize: '0.95rem' }}>
@@ -1104,7 +1104,7 @@ function FinalCta() {
               </ul>
               <div className="lp-cta-row" style={{ justifyContent: 'flex-start' }}>
                 <a href={WA} target="_blank" rel="noopener noreferrer" className="lp-btn-whatsapp">
-                  <MessageCircle size={17} /> Prefer to Chat? WhatsApp Us
+                  <WhatsAppIcon size={17} /> Prefer to Chat? WhatsApp Us
                 </a>
               </div>
             </div>
@@ -1182,7 +1182,7 @@ function MobileCtaBar() {
         <Phone size={17} /> Call Now
       </a>
       <a href={WA} target="_blank" rel="noopener noreferrer" className="mob-cta-solid" style={{ flex: 1, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '0.45rem', padding: '0.95rem', background: 'linear-gradient(135deg, #34E07B 0%, #25D366 55%, #128C7E 100%)', color: '#fff', fontFamily: 'var(--font-inter)', fontWeight: 700, fontSize: '0.9rem', textDecoration: 'none', borderLeft: '1px solid rgba(255,255,255,0.12)' }}>
-        <MessageCircle size={17} /> WhatsApp
+        <WhatsAppIcon size={17} /> WhatsApp
       </a>
     </div>
   );

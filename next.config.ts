@@ -41,6 +41,10 @@ const nextConfig: NextConfig = {
   compress: true,
   poweredByHeader: false,
 
+  /* Keep server-only Node libraries out of the bundler. mammoth (used by the
+     blog FAQ .docx import route) relies on dynamic requires / Node built-ins. */
+  serverExternalPackages: ['mammoth'],
+
   /* Tree-shake barrel imports so only the used modules ship to the client.
      lucide-react is optimized by Next by default; framer-motion (used by the
      LP's Reveal / TiltCard animations) is not, so we opt it in here. */

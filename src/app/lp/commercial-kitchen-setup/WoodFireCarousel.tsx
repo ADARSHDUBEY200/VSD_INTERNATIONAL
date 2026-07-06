@@ -10,7 +10,8 @@
 import Image from 'next/image';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { ChevronLeft, ChevronRight, Flame, Phone, MessageCircle, Check } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Flame, Phone, Check } from 'lucide-react';
+import WhatsAppIcon from './WhatsAppIcon';
 
 export type OvenItem = {
   src: string;
@@ -22,7 +23,7 @@ export type OvenItem = {
 
 const PHONE_TEL = '+919250346370';
 const WA = `https://wa.me/919250346370?text=${encodeURIComponent(
-  "Hi VSD, I'm interested in your Wood Fire Pizza Oven. Please share details and pricing.",
+  "Hi VSD International! I'm looking for commercial kitchen equipment. Please share your best quote.",
 )}`;
 
 const INFO_VARIANTS = {
@@ -160,7 +161,7 @@ export default function WoodFireCarousel({ items }: { items: OvenItem[] }) {
                   <Phone size={14} /> Call for Price
                 </a>
                 <a href={WA} target="_blank" rel="noopener noreferrer" className="wfp-btn-wa">
-                  <MessageCircle size={14} /> WhatsApp
+                  <WhatsAppIcon size={14} /> WhatsApp
                 </a>
               </div>
             </motion.div>

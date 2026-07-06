@@ -6,6 +6,7 @@ import {
   List, ListOrdered, Link2, Image as ImageIcon,
   AlignLeft, Quote, Eye, EyeOff,
 } from 'lucide-react';
+import { cleanPastedHtml } from '@/lib/sanitizeWordHtml';
 
 interface Props {
   value: string;
@@ -22,29 +23,40 @@ type ToolbarBtn = {
 
 export default function RichEditor({ value, onChange, placeholder = 'Start writing…', minHeight = 420 }: Props) {
   const editorRef = useRef<HTMLDivElement>(null);
-  const initialized = useRef(false);
+  const skipSync = useRef(false); // true when the latest `value` came from our own edit
   const [preview, setPreview] = useState(false);
 
+  // Keep the editable DOM in sync with `value` for EXTERNAL changes — draft
+  // restore/discard, or returning from preview. Changes originating from the
+  // user's own typing/toolbar/paste set `skipSync`, so we don't rewrite the DOM
+  // (which would reset the caret or drop the freshest keystrokes mid-typing).
   useEffect(() => {
-    if (editorRef.current && !initialized.current) {
-      editorRef.current.innerHTML = value || '';
-      initialized.current = true;
+    if (preview) return;
+    if (skipSync.current) { skipSync.current = false; return; }
+    const el = editorRef.current;
+    if (el && el.innerHTML !== (value || '')) {
+      el.innerHTML = value || '';
     }
-  }, [value]);
+  }, [value, preview]);
+
+  const emitChange = useCallback(() => {
+    skipSync.current = true;
+    onChange(editorRef.current?.innerHTML ?? '');
+  }, [onChange]);
 
   const exec = useCallback((cmd: string, val?: string) => {
     if (preview) return;
     editorRef.current?.focus();
     document.execCommand(cmd, false, val ?? undefined);
-    onChange(editorRef.current?.innerHTML ?? '');
-  }, [onChange, preview]);
+    emitChange();
+  }, [emitChange, preview]);
 
   const insertHTML = useCallback((html: string) => {
     if (preview) return;
     editorRef.current?.focus();
     document.execCommand('insertHTML', false, html);
-    onChange(editorRef.current?.innerHTML ?? '');
-  }, [onChange, preview]);
+    emitChange();
+  }, [emitChange, preview]);
 
   const promptLink = useCallback(() => {
     const url = window.prompt('Enter URL:', 'https://');
@@ -128,13 +140,21 @@ export default function RichEditor({ value, onChange, placeholder = 'Start writi
       ) : (
         <div
           ref={editorRef}
+          className="rich-editor-area"
           contentEditable
           suppressContentEditableWarning
-          onInput={() => onChange(editorRef.current?.innerHTML ?? '')}
+          onInput={emitChange}
           onPaste={e => {
             e.preventDefault();
-            const text = e.clipboardData.getData('text/plain');
-            document.execCommand('insertText', false, text);
+            const html = e.clipboardData.getData('text/html');
+            const cleaned = html ? cleanPastedHtml(html) : '';
+            if (cleaned) {
+              document.execCommand('insertHTML', false, cleaned);
+            } else {
+              // No rich clipboard data — fall back to plain text.
+              document.execCommand('insertText', false, e.clipboardData.getData('text/plain'));
+            }
+            emitChange();
           }}
           data-placeholder={placeholder}
           style={{
@@ -155,6 +175,19 @@ export default function RichEditor({ value, onChange, placeholder = 'Start writi
           color: #94A3B8;
           pointer-events: none;
         }
+        .rich-editor-area h1 { font-size: 1.5rem; font-weight: 700; margin: 1rem 0 0.5rem; }
+        .rich-editor-area h2 { font-size: 1.375rem; font-weight: 700; margin: 1rem 0 0.5rem; }
+        .rich-editor-area h3 { font-size: 1.125rem; font-weight: 700; margin: 0.875rem 0 0.375rem; }
+        .rich-editor-area h4, .rich-editor-area h5, .rich-editor-area h6 { font-size: 1rem; font-weight: 700; margin: 0.75rem 0 0.375rem; }
+        .rich-editor-area ul { list-style: disc; padding-left: 1.5rem; margin: 0.5rem 0; }
+        .rich-editor-area ol { list-style: decimal; padding-left: 1.5rem; margin: 0.5rem 0; }
+        .rich-editor-area blockquote { border-left: 3px solid #2563EB; padding-left: 1rem; color: #475569; font-style: italic; margin: 0.75rem 0; }
+        .rich-editor-area a { color: #2563EB; text-decoration: underline; }
+        .rich-editor-area img { max-width: 100%; border-radius: 8px; margin: 0.5rem 0; }
+        .rich-editor-area table, .rich-preview table { border-collapse: collapse; width: 100%; margin: 0.75rem 0; font-size: 13px; }
+        .rich-editor-area th, .rich-editor-area td, .rich-preview th, .rich-preview td { border: 1px solid #CBD5E1; padding: 0.4rem 0.6rem; text-align: left; vertical-align: top; }
+        .rich-editor-area th, .rich-preview th { background: #F1F5F9; font-weight: 700; }
+        .rich-preview h1 { font-size: 1.5rem; font-weight: 700; margin: 1rem 0 0.5rem; }
         .rich-preview h2 { font-size: 1.375rem; font-weight: 700; margin: 1rem 0 0.5rem; }
         .rich-preview h3 { font-size: 1.125rem; font-weight: 700; margin: 0.875rem 0 0.375rem; }
         .rich-preview p  { margin: 0.5rem 0; }

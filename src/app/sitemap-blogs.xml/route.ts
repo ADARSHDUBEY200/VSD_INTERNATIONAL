@@ -1,14 +1,16 @@
-import { BLOG_POSTS } from '@/lib/blog';
+import { listPublishedBlogs } from '@/lib/blogPresenter';
 import { SITE_URL } from '@/lib/config';
 import { buildUrlset, XML_HEADERS } from '@/lib/sitemap';
 
-export const dynamic = 'force-static';
+// Sourced from the CMS, so it can't be statically generated at build time.
+export const dynamic = 'force-dynamic';
 
 export async function GET() {
+  const posts = await listPublishedBlogs();
   const xml = buildUrlset(
-    BLOG_POSTS.map((post) => ({
+    posts.map((post) => ({
       loc: `${SITE_URL}/blog/${post.slug}`,
-      lastModified: post.dateModified,
+      lastModified: post.publishedAt,
       changeFrequency: 'monthly' as const,
       priority: 0.7,
     }))
