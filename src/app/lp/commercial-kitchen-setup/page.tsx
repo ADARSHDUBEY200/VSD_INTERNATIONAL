@@ -213,8 +213,8 @@ export default function CommercialKitchenLP() {
       <main style={{ background: 'var(--charcoal)', overflowX: 'hidden' }}>
         <Hero />
         <Clients />
-        <OurServices />
         <OurProducts />
+        <OurServices />
         <Certificates />
         <WoodFireOvens />
         <WhyUs />
@@ -504,11 +504,13 @@ function OurServices() {
     { img: '/landingPageServices/Annual_Maintenance_Contract.webp', n: '08', title: 'Annual Maintenance Contract', body: 'Optional AMC plans for breakdown-free running, backed by 80+ active AMC clients across India.' },
   ];
   return (
-    <section style={{ background: 'var(--surface-alt)', padding: 'clamp(2.25rem, 4.5vw, 3.5rem) 0' }} aria-labelledby="lp-services-heading">
-      <div className="container">
+    <section style={{ background: 'var(--charcoal-light)', padding: 'clamp(2.25rem, 4.5vw, 3.5rem) 0', position: 'relative', overflow: 'hidden' }} aria-labelledby="lp-services-heading">
+      {/* Subtle gold bloom for depth on the dark backdrop */}
+      <div aria-hidden="true" style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse 70% 100% at 50% 0%, rgba(201,168,76,0.10) 0%, transparent 60%)', pointerEvents: 'none' }} />
+      <div className="container" style={{ position: 'relative' }}>
         <div style={{ textAlign: 'center', marginBottom: '2.75rem' }}>
           <span className="section-label">Our Services</span>
-          <RevealTitle id="lp-services-heading" style={{ fontFamily: 'var(--font-playfair)', fontSize: 'clamp(1.75rem, 3.4vw, 2.6rem)', color: 'var(--text-dark)', letterSpacing: '-0.02em', margin: '0.75rem 0 0' }} text="Everything Your Kitchen Needs, One Team" />
+          <RevealTitle id="lp-services-heading" style={{ fontFamily: 'var(--font-playfair)', fontSize: 'clamp(1.75rem, 3.4vw, 2.6rem)', color: 'var(--text-on-dark)', letterSpacing: '-0.02em', margin: '0.75rem 0 0' }} text="Everything Your Kitchen Needs, One Team" />
           <span className="gold-divider lp-divider-glow" style={{ marginTop: '1rem' }} />
         </div>
 
@@ -532,7 +534,7 @@ function OurServices() {
 
         <div style={{ marginTop: '2.5rem' }}>
           <SectionCta
-            tone="light"
+            tone="dark"
             channel="whatsapp"
             hook="Not sure which of these your kitchen actually needs?"
             label="Ask a Kitchen Expert Free"
@@ -694,6 +696,8 @@ function WoodFireOvens() {
 
 /* ─── Our Products — equipment carousel ────────────────────────────────────── */
 const OUR_PRODUCTS: { name: string; spec: string; image: string; category: string }[] = [
+  { category: 'Refrigeration', name: 'Commercial Ice Cube Machine', spec: 'Gas · Size Customised', image: 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1783448495/Commercial_ice_cube_d7evwq.webp' },
+  { category: 'Cooking', name: 'Commercial Hood Type Dishwasher', spec: 'Gas · Size Customised', image: 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1783448482/Hood_Type_Dishwasher_ttju81.webp'},
   { category: 'Cooking', name: 'Combi Oven', spec: 'Gas · Size Customised', image: 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1783229972/combi_oven_hftsyx.webp' },
   { category: 'Cooking', name: 'Pizza Oven', spec: 'Gas · Size Customised', image: 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1783230473/ChatGPT_Image_Jul_5_2026_11_16_24_AM_rsz66q.webp' },
   { category: 'Cooking', name: 'Single Burner Range', spec: 'Gas · Size Customised', image: 'https://res.cloudinary.com/dvft1rn6j/image/upload/v1783225769/sgf99gvyydqhs9iwmqdr_mygsws.webp' },
@@ -715,22 +719,28 @@ const OUR_PRODUCTS: { name: string; spec: string; image: string; category: strin
 
 function OurProducts() {
   return (
-    <section style={{ background: 'var(--charcoal)', padding: 'clamp(2.25rem, 4.5vw, 3.5rem) 0', position: 'relative', overflow: 'hidden' }} aria-labelledby="lp-products-heading">
-      <div aria-hidden="true" style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse 65% 100% at 50% 0%, rgba(201,168,76,0.12) 0%, transparent 65%)', pointerEvents: 'none' }} />
+    <section style={{ background: 'var(--surface)', padding: 'clamp(2.25rem, 4.5vw, 3.5rem) 0', position: 'relative', overflow: 'hidden' }} aria-labelledby="lp-products-heading">
+      {/* Warm gold bloom — keeps the light backdrop premium under the dark cards */}
+      <div aria-hidden="true" style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse 70% 90% at 50% 0%, rgba(201,168,76,0.08) 0%, transparent 62%)', pointerEvents: 'none' }} />
       <div className="container" style={{ position: 'relative' }}>
         <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
           <span className="section-label">Our Products</span>
-          <RevealTitle id="lp-products-heading" style={{ fontFamily: 'var(--font-playfair)', fontSize: 'clamp(1.75rem, 3.4vw, 2.6rem)', color: 'var(--text-on-dark)', letterSpacing: '-0.02em', margin: '0.75rem 0 0' }} text="Commercial Kitchen Equipment We Supply" />
+          <RevealTitle id="lp-products-heading" style={{ fontFamily: 'var(--font-playfair)', fontSize: 'clamp(1.75rem, 3.4vw, 2.6rem)', color: 'var(--text-dark)', letterSpacing: '-0.02em', margin: '0.75rem 0 0' }} text="Commercial Kitchen Equipment We Supply" />
           <span className="gold-divider lp-divider-glow" style={{ marginTop: '1rem' }} />
         </div>
+      </div>
 
+      {/* Wide shell — breaks out of the 80rem container so more cards fit per view */}
+      <div className="lp-prod-wide">
         <Reveal>
           <ProductsCarousel items={OUR_PRODUCTS} />
         </Reveal>
+      </div>
 
+      <div className="container" style={{ position: 'relative' }}>
         <div style={{ marginTop: '1.5rem' }}>
           <SectionCta
-            tone="dark"
+            tone="light"
             channel="phone"
             hook="Want the best factory-direct price on any equipment above?"
             label="Call for Today's Price"

@@ -10,8 +10,14 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
 import { useEffect, useRef } from 'react';
+import WhatsAppIcon from './WhatsAppIcon';
 
 export type ProductItem = { name: string; spec: string; image: string; category: string };
+
+/* Shared WhatsApp deep link — same generic prefill used across the landing page */
+const WA = `https://wa.me/919250346370?text=${encodeURIComponent(
+  "Hi VSD International! I'm looking for commercial kitchen equipment. Please share your best quote.",
+)}`;
 
 export default function ProductsCarousel({ items }: { items: ProductItem[] }) {
   const trackRef = useRef<HTMLDivElement>(null);
@@ -32,6 +38,10 @@ export default function ProductsCarousel({ items }: { items: ProductItem[] }) {
   useEffect(() => {
     const track = trackRef.current;
     if (!track) return;
+
+    // Always open on the first product — guard against scroll restoration / autoplay races
+    track.scrollLeft = 0;
+
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     let paused = false;
@@ -72,11 +82,24 @@ export default function ProductsCarousel({ items }: { items: ProductItem[] }) {
           <div className="lp-prod-card" data-prod-card key={`${item.name}-${i}`}>
             <div className="lp-prod-photo">
               <Image src={item.image} alt={item.name} fill sizes="(max-width: 640px) 75vw, 260px" style={{ objectFit: 'cover' }} />
-              <span className="lp-prod-badge">{item.category}</span>
             </div>
             <div className="lp-prod-info">
-              <h3>{item.name}</h3>
-              <p>{item.spec}</p>
+              <div className="lp-prod-info-head">
+                <h3>{item.name}</h3>
+                <p>{item.spec}</p>
+              </div>
+              <div className="lp-prod-cta">
+                <span className="lp-prod-cta-hook">Get today&apos;s best price →</span>
+                <a
+                  href={WA}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="lp-prod-wa"
+                  aria-label={`Enquire about ${item.name} on WhatsApp`}
+                >
+                  <WhatsAppIcon size={16} /> WhatsApp for Price
+                </a>
+              </div>
             </div>
           </div>
         ))}
