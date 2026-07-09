@@ -4,7 +4,7 @@ export interface IEnquiry extends Document {
   name: string;
   email?: string;
   phone: string;
-  source: 'home_form' | 'contact_form' | 'lp_commercial_kitchen' | 'lead_popup' | 'enquiry_modal' | 'cta_banner' | 'product_callback';
+  source: 'home_form' | 'contact_form' | 'lp_commercial_kitchen' | 'lp_commercial_ice_cube_machine' | 'lead_popup' | 'enquiry_modal' | 'cta_banner' | 'product_callback';
   company?: string;
   city?: string;
   service?: string;
@@ -20,7 +20,7 @@ const EnquirySchema = new Schema<IEnquiry>(
     name:    { type: String, required: true, trim: true },
     email:   { type: String, trim: true, lowercase: true },
     phone:   { type: String, required: true, trim: true },
-    source:  { type: String, enum: ['home_form', 'contact_form', 'lp_commercial_kitchen', 'lead_popup', 'enquiry_modal', 'cta_banner', 'product_callback'], default: 'home_form' },
+    source:  { type: String, enum: ['home_form', 'contact_form', 'lp_commercial_kitchen', 'lp_commercial_ice_cube_machine', 'lead_popup', 'enquiry_modal', 'cta_banner', 'product_callback'], default: 'home_form' },
     company: { type: String, trim: true },
     city:    { type: String, trim: true },
     service: { type: String, trim: true },
