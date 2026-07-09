@@ -18,6 +18,7 @@ export default function LeadForm({
   subheading = 'Free layout + itemised quote. Reply within 1 business hour.',
   ctaLabel = 'Get a Free Quote',
   compact = false,
+  source = 'lp_commercial_kitchen',
 }: {
   id?: string;
   heading?: string;
@@ -25,6 +26,8 @@ export default function LeadForm({
   ctaLabel?: string;
   /** compact = only Name + Phone (used in the mobile hero) */
   compact?: boolean;
+  /** enquiry source tag — lets each landing page attribute its own leads */
+  source?: string;
 }) {
   const [form, setForm] = useState<FormState>(EMPTY);
   const [submitting, setSubmitting] = useState(false);
@@ -52,7 +55,7 @@ export default function LeadForm({
           phone: form.phone,
           email: form.email || undefined,
           message: form.message || undefined,
-          source: 'lp_commercial_kitchen',
+          source,
         }),
       });
       if (!res.ok) {

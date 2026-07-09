@@ -1335,6 +1335,14 @@ section[id] {
 @media (min-width: 960px) {
   .lp-hero-title { font-size: clamp(1.9rem, 3.1vw, 2.5rem); }
 }
+
+/* Ice-machine LP — its headline is longer than the kitchen LP's, so shrink it on
+   phones & tablets to keep it to 3 lines without truncating any word. Laptop
+   sizing is left identical. Page-scoped modifier — no effect on other LPs. */
+.lp-hero-title--ice { font-size: clamp(1.45rem, 6.2vw, 3.5rem); }
+@media (min-width: 960px) {
+  .lp-hero-title--ice { font-size: clamp(1.9rem, 3.1vw, 2.5rem); }
+}
 .lp-gold-text {
   background: linear-gradient(100deg, var(--gold-light) 0%, var(--gold-bright) 45%, var(--gold-light) 70%, var(--gold-deep) 100%);
   background-size: 200% auto;
@@ -1350,6 +1358,78 @@ section[id] {
   font-size: clamp(1rem, 1.6vw, 1.2rem);
   line-height: 1.6;
   color: rgba(245, 240, 232, 0.66);
+}
+/* Ice-machine LP — nudge the sub down a touch on phones so it stays balanced
+   under the smaller headline. Page-scoped; no effect on other LPs. */
+.lp-hero-sub--ice { font-size: clamp(0.82rem, 1.3vw, 0.98rem); line-height: 1.55; }
+
+/* ── Ice-machine LP — horizontal card rails (HScroll component) ───────────────
+   Phones/tablets scroll horizontally; ≥900px reverts to the standard 4-up grid.
+   ──────────────────────────────────────────────────────────────────────────── */
+
+/* Manual swipe carousel — "How It Works" */
+.lphs-scroll {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 78%;
+  gap: 1.1rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  margin: 0 -24px;
+  padding: 0.35rem 24px 0.85rem;
+}
+.lphs-scroll::-webkit-scrollbar { display: none; }
+.lphs-scroll > .lphs-item { scroll-snap-align: center; }
+
+/* Infinite auto-scroll marquee — "Find Your Fit" */
+.lphs-marquee { overflow: hidden; margin: 0 -24px; }
+.lphs-track {
+  display: flex;
+  gap: 1.1rem;
+  width: max-content;
+  padding: 0.35rem 24px 0.85rem;
+  animation: lphs-drift 30s linear infinite;
+  will-change: transform;
+}
+.lphs-marquee:hover .lphs-track,
+.lphs-marquee:focus-within .lphs-track,
+.lphs-marquee:active .lphs-track { animation-play-state: paused; }
+.lphs-track > .lphs-item { flex: 0 0 76vw; max-width: 300px; }
+@keyframes lphs-drift {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lphs-track { animation: none; }
+}
+
+/* Shared card-rail item — let the card inside fill the rail height */
+.lphs-item { display: flex; }
+.lphs-item > * { width: 100%; }
+
+/* Desktop: both rails become the normal static 4-up grid */
+@media (min-width: 900px) {
+  .lphs-scroll {
+    grid-auto-flow: row;
+    grid-auto-columns: auto;
+    grid-template-columns: repeat(4, 1fr);
+    overflow: visible;
+    margin: 0;
+    padding: 0;
+  }
+  .lphs-marquee { overflow: visible; margin: 0; }
+  .lphs-track {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    width: auto;
+    animation: none;
+    padding: 0;
+  }
+  .lphs-track > .lphs-item { flex: none; max-width: none; }
+  .lphs-dup { display: none; }
 }
 
 /* outline gold CTA used next to the primary button */
